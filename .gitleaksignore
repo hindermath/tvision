@@ -1,0 +1,6 @@
+# Synthetic security-guidance examples imported from the managed Level-2 baseline.
+# These exact findings document patterns that must not be shared with AI systems;
+# they are not credentials. Keep the allowlist fingerprint-specific.
+920e18af75c21fe840485770dca104d05c64cff9:docs/secure-development/mitgeltende-dokumente/Leitlinie_Sichere-Programmierung.md:generic-api-key:38
+920e18af75c21fe840485770dca104d05c64cff9:docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md:private-key:694
+920e18af75c21fe840485770dca104d05c64cff9:docs/secure-development/Checklistensammelband_Sichere-Entwicklung.md:private-key:10081
