@@ -1,0 +1,253 @@
+# GEMINI.md — tvision
+
+**Workspace**: ~/CLionProjects
+**Projekt / Project**: tvision
+
+---
+
+## Überblick / Overview
+
+Diese Datei gibt Antigravity CLI Anweisungen für die Arbeit in diesem Projekt.
+
+This file provides Antigravity CLI with instructions for working in this project.
+
+---
+
+## Projektkontext / Project Context
+
+**Projektname / Project Name**: tvision
+**Workspace**: ~/CLionProjects
+**Sprache / Language**: C++14 mit CMake / C++14 with CMake
+
+### Level-0- und Home-Sync-Grenze / Level-0 and Home Sync Boundary
+
+- Der persönliche Fork `~/home-baseline-source` bleibt die versionierte
+  Level-0-Quelle und wird nach dem ersten Sync nicht gelöscht.
+- `~/` ist nur die manifestgesteuerte lokale Betriebskopie. Vor einem echten
+  Home-Sync `--check-only` / `-CheckOnly` verwenden und Konflikte nicht ohne
+  Prüfung mit `--force` / `-Force` überschreiben.
+- In Containern und insbesondere der ABS-DD-Sandbox die eingebundene
+  Level-0-Referenz direkt verwenden; schreibende Home-Sync-Laeufe gehoeren auf
+  den Host.
+
+*Keep the personal fork `~/home-baseline-source` as the versioned level-0 source.
+`~/` is only the manifest-managed local runtime copy. Check before syncing and
+use force only after reviewing conflicts. In containers, especially the
+ABS-DD sandbox, use the mounted level-0 reference directly and run writing Home
+sync operations on the host.*
+
+---
+
+## Verwendung / Usage
+
+### Konventionen / Conventions
+
+Dieses Repository folgt dem **Workspace Homogeneity Guardian**-Standard:
+
+- Zweisprachige Dokumentation (DE/EN, CEFR B2)
+- Whitelist-`.gitignore` — keine Secrets werden getrackt
+- Pre-Push-Hook für Secret-Erkennung aktiv
+
+This repository follows the **Workspace Homogeneity Guardian** standard:
+
+- Bilingual documentation (DE/EN, CEFR B2)
+- Whitelist `.gitignore` — no secrets are tracked
+- Pre-push hook for secret detection active
+
+---
+
+## Einrichtung / Setup
+
+### Voraussetzungen / Prerequisites
+
+- `git` ≥ 2.x
+- `ripgrep` (`rg`)
+- Antigravity CLI: `agy` (interaktiv / interactive)
+
+### Schnellstart / Quickstart
+
+```bash
+cd ~/CLionProjects/tvision && agy
+```
+
+---
+
+## Statistik-Pflege / Statistics Maintenance
+
+- Führe `docs/project-statistics.md` als lebendes Statistik-Ledger dieses Projekts.
+- Aktualisiere die Datei nach jeder abgeschlossenen Spec-Kit-Implementierungsphase, nach jedem abgeschlossenen Feature oder wenn explizit angefordert.
+- Im `## Fortschreibungsprotokoll`-Abschnitt gilt: ältester Eintrag oben, neuester Eintrag unten.
+- Halte `## Gesamtstatistik` immer als letzten Top-Level-Abschnitt der Datei.
+- `docs/project-statistics.config.json` und der markierte Profil-2-Block sind der verbindliche Vertrag; mit `render-project-statistics.*` aktualisieren.
+- Profil 2 zeigt KPI, Artefaktmix, 52-Wochen-Tagesaktivität, Wochen- und kumulatives Volumen, Phasen- oder Monatsvolumen, Speedup-Gauges und den manuellen Vergleich.
+- Nur ASCII verwenden: Heatmap `0..4`, `-` für noch nicht abgelaufene Tage und Gauges `#`/`.`; keine Unicode-Blöcke, Farbcodierung oder `\ | /` als Intensitätsskala.
+- Phasenslots stabil halten, in 16er-Blöcke teilen und ohne belastbare Phasenwerte Monatsvolumen zeigen.
+- Diagramme bleiben höchstens 100 Zeichen breit und erhalten genaue Werte sowie eine CEFR-B2-Textalternative in DE zuerst, EN danach.
+- Methodik v2 nutzt Git-getrackten Text und Bruttoänderungen aus Nicht-Merge-Commits; Ledger, `STATS.md` und Binärdaten bleiben ausgeschlossen.
+- Manuelle Referenz-Basiswerte: `80` Zeilen/Arbeitstag (konservativ) + projektspezifischer Thorsten-Solo-Wert, konsistent dokumentiert in `AGENTS.md`, `CLAUDE.md`, `GEMINI.md` und `.github/copilot-instructions.md`.
+- Für diesen C++-Kompatibilitätsfork gilt konservativ `80` Zeilen/Arbeitstag auch als Thorsten-Solo-Referenz; ein eigener C++-Speedup wird erst nach einer begründeten Neufestlegung behauptet.
+- Umrechnung in Stunden: `7.8 h` (`7h 48m`) pro Arbeitstag (TVöD). Monate: `21.5` AT/Monat; 30 Urlaubstage bis Ende 2026, ab 2027 dann 31.
+- Beschleunigungsfaktoren = blended repository speedup — Lieferdichte gegen manuelle Referenz, keine Stoppuhrzeit.
+- Wenn Statistikmethodik oder gemeinsame Guidance geändert wird: alle fünf Agentenflächen einschließlich `.github/agents/copilot-instructions.md` zusammen aktualisieren.
+
+*Maintain the living statistics ledger and render Profile 2 from its JSON configuration. Use ASCII `0..4`, `-`, and `#`/`.` gauges, exact values, bilingual text alternatives, stable phase slots in blocks of 16, and a 100-character chart limit. Methodology v2 excludes the ledger, `STATS.md`, and binaries. Acceleration remains delivery density, not stopwatch time.*
+
+## Hinweise / Notes
+
+- Keine ANSI-Farbcodes in Ausgaben
+- Heading-Hierarchie ohne Lücken
+- `Programmierung #include<everyone>` gilt für alle nutzerseitigen Artefakte: CLI-Ausgaben, Doku, HTML, UI und generierte Templates.
+- WCAG 2.2 Level AA ist die Standard-Basis, sobald die Kriterien auf das Artefakt anwendbar sind.
+- Shared guidance wird immer gemeinsam in `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md` und `.github/agents/copilot-instructions.md` gepflegt.
+
+- No ANSI color codes in output
+- Heading hierarchy without gaps
+- `Programmierung #include<everyone>` applies to all user-facing artefacts: CLI output, docs, HTML, UI, and generated templates.
+- WCAG 2.2 Level AA is the default baseline wherever the criteria apply.
+- Keep shared guidance synchronized across `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, and `.github/agents/copilot-instructions.md`.
+
+## GitHub/GitLab CLI First / GitHub/GitLab CLI zuerst
+
+Für GitHub-Repositories zuerst die authentifizierte `gh` CLI für mögliche Schreibaktionen und Live-Repository-Operationen verwenden, einschließlich PR-/Issue-Kommentaren, PR-Statusprüfungen, Review-Follow-up, Workflow-Prüfung und Merge-/Statusabfragen. GitHub-Connector-Tools hauptsächlich für strukturierte Read-only-Inspektion oder Fälle nutzen, in denen die CLI nicht geeignet ist.
+
+Für GitLab-Repositories die authentifizierte `glab` CLI zuerst für gleichwertige Aktionen verwenden. Bekanntermaßen fehlschlagende Connector-Schreibwege nicht wiederholt versuchen, wenn `gh`/`glab` die Aufgabe direkt erledigen kann.
+
+For GitHub repositories, use the authenticated `gh` CLI first for feasible write actions and live repository operations, including PR/issue comments, PR status checks, review follow-up, workflow inspection, and merge/status queries. Use GitHub connector tools mainly for structured read-only inspection or when the CLI is not suitable.
+
+For GitLab repositories, use the authenticated `glab` CLI first for equivalent actions. Do not repeatedly try connector write paths that are known to fail when `gh`/`glab` can perform the task directly.
+
+
+## Skriptreferenz und Quellpfad / Script Reference and Source Path
+
+Die Skriptinventur steht unter `docs/scripts/`. Vor schreibenden Laeufen Hilfe
+und Preview verwenden. Die Level-0-Quelle ueber den gemeinsamen Resolver
+ermitteln und nicht als absoluten Pfad fest eincodieren.
+
+*The script inventory lives under `docs/scripts/`. Read help and preview before
+writing. Resolve Level 0 through the shared contract; do not hard-code it.*
+
+## Dokumentationsauswirkung / Documentation Impact
+
+Jede Änderung erhält genau eine Entscheidung: `UpdateRequired`,
+`NoUpdateRequired`, `GeneratedUpdate` oder `FollowUp`. Quelle, Owner,
+Dokumente und Evidence richten sich nach `docs/documentation-governance.md`.
+`FollowUp` benötigt Owner, Risiko, Frist, Trigger, Evidence und Scope-Grund.
+
+*Every change records exactly one Documentation Impact decision. Follow the
+source, ownership, generated-output, and evidence contract in
+`docs/documentation-governance.md`.*
+
+## Lernreihen-Governance / Learning Series Governance
+
+Neue Lernreihen fuer Fachinformatiker*innen und weitere IT-Ausbildungsberufe werden zuerst in `docs/learning-units/` als Level-0-Quelle vorbereitet. Der `Lernreihen-Blueprint`, das `Lernreihen-Register`, das IT-Berufe-Mapping und die Vorlagen unter `docs/learning-units/templates/` sind verbindlich, bevor eine konkrete Level-1-/Level-2-Struktur gespiegelt wird. KI-Agenten duerfen Lernreihen, Lastenhefte, Berufsbild-Mappings, Reihenfolgen und ZIP-Paketierung vorbereiten, starten aber keine Spec-Kit-Laeufe fuer Lernende ohne ausdruecklichen Auftrag. Spec-Kit-Laeufe sind begleitende SDD-Aufgaben und ersetzen nicht Berufsschule, betriebliche Ausbildung, Rahmenlehrplan, Ausbilderentscheidung oder Pruefungsvorbereitung.
+
+*New learning series for IT specialist apprentices and additional IT training occupations are prepared first in `docs/learning-units/` as the level-0 source. The Learning Series Blueprint, Learning Series Register, IT occupation mapping, and templates under `docs/learning-units/templates/` are binding before a concrete level-1/level-2 structure is mirrored. AI agents may prepare learning series, intake files, occupation mappings, ordering, and ZIP packaging, but must not start learner Spec Kit runs without an explicit instruction. Spec Kit runs are companion SDD tasks and do not replace vocational school, workplace training, the curriculum, instructor decisions, or exam preparation.*
+
+
+## Agentische Toolchain-Wartung / Agentic Toolchain Maintenance
+
+- Wiederkehrende Toolchain-Wartungsrunden sind im README unter `Wiederkehrende agentische Toolchain-Wartung / Recurring Agentic Toolchain Maintenance` dokumentiert.
+- Wenn ein bekannter KI-Agent in `~` oder `~/home-baseline-source` startet und keine strengere Read-only-Aufgabe im Vordergrund steht, fragt er einmal nach: nur pruefen, pruefen und fehlende Required-Tools installieren, vollstaendig inklusive GSDB-Preflight vorbereiten oder ueberspringen.
+- macOS/Linux nutzen `scripts/maintain-agentic-brew-apps.sh` und `scripts/config/brew-apps-registry.json`; Windows nutzt `scripts/maintain-agentic-winget-apps.ps1` und `scripts/config/winget-apps-registry.json`; VS-Code-Extensions werden ueber `scripts/config/vscode-extensions-registry.json`, Required-CLI-Pruefungen ueber `scripts/config/required-cli-tools-registry.json`, npm-Agenten-CLIs ueber `scripts/config/npm-agent-cli-registry.json` gepflegt.
+- PSScriptAnalyzer `1.25.0` ist ein Required-PowerShell-Modul aus `scripts/config/powershell-modules-registry.json`; alle getrackten repo-eigenen `.ps1`, `.psm1` und `.psd1` muessen den gemeinsamen Analyselauf bestehen. Nur die dort begruendet dokumentierten, von GitHub Spec Kit erzeugten Upstream-Pfade sind ausgenommen. / PSScriptAnalyzer `1.25.0` is a required module; every tracked, repository-owned PowerShell file must pass the shared analysis run. Only generated GitHub Spec Kit upstream paths documented there with a rationale are excluded.
+- Level-0 unter `~/home-baseline-source` ist die kanonische Quelle fuer diese Wartungsdateien. Bestehende Level-1-/Level-2-Kopien mit `propagate-agentic-toolchain-maintenance.*` zuerst als Vorschau, danach schreibend und abschliessend mit `--check-only` / `-CheckOnly` synchronisieren; das Werkzeug commitet oder pusht nicht.
+- VS Code ist der grafische Required-Editor fuer Auszubildende; Helix (`hx`) ist der Required-A11Y-/CLI-Editor. Fuer die sechs MSL-Pfade C#, Go, Java, Python, Rust und Swift sind die offiziellen minimalen VS-Code-Extensions required; Microsoft Container Tools ist zusaetzlich required fuer Podman-Workflows.
+- Podman CLI und Compose-Unterstuetzung sowie die sechs MSL-CLI-Toolchains `.NET`, Go, Java/Javac, Python, Rust/Cargo und Swift sind Required; `syft` fuer SBOM-Nachweise und GitHub Spec Kit (`specify`) fuer SDD sind ebenfalls Required. `specify` wird bei Bedarf ueber `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` installiert.
+- Die Agenten-CLI-Oberflaechen `codex`, `claude` und `copilot` sind plattformuebergreifend Required und nutzen bei Bedarf die npm-Registry als Fallback. Google Antigravity ersetzt Gemini CLI; `agy` ist plattformuebergreifend Required: macOS nutzt Homebrew, Windows `Google.AntigravityCLI` per WinGet und Linux den pruefsummengeprueften offiziellen Installer.
+- Standardlaeufe installieren nur `required`; `optional` dient als dokumentierter Komfort-/Projektkontext. `xquartz` bleibt bewusst aus der Brew-Registry ausgeschlossen.
+- Fehlende Required-Programme aus `--compare-only` / `-CompareOnly` werden bei freigegebener Wartung installiert; optionale Tools nur nach ausdruecklicher Zustimmung.
+- `gitleaks`, `syft`, `specify`, die MSL-CLI-Toolchains und die Required-Agenten-CLIs muessen nach Paketmanager-Wartung pruefbar sein.
+- Zweitgeraete ueber `mac-test.sh`, `linux-test.sh` und `windows-test.ps1` vergleichen; bewusst installierte Top-Level-Tools danach in die passende Registry uebernehmen.
+
+*Recurring toolchain maintenance rounds are documented in the README section `Wiederkehrende agentische Toolchain-Wartung / Recurring Agentic Toolchain Maintenance`. macOS/Linux use `scripts/maintain-agentic-brew-apps.sh` with `scripts/config/brew-apps-registry.json`; Windows uses `scripts/maintain-agentic-winget-apps.ps1` with `scripts/config/winget-apps-registry.json`; VS Code extensions are maintained through `scripts/config/vscode-extensions-registry.json`, required CLI checks through `scripts/config/required-cli-tools-registry.json`, and npm agent CLIs through `scripts/config/npm-agent-cli-registry.json`. VS Code is the required graphical editor for apprentices; Helix (`hx`) is the required A11Y/CLI editor. The official minimal VS Code extensions are required for the six MSL paths C#, Go, Java, Python, Rust, and Swift; Microsoft Container Tools is also required for Podman workflows. Podman CLI and Compose support plus the six MSL CLI toolchains `.NET`, Go, Java/Javac, Python, Rust/Cargo, and Swift are required; `syft` for SBOM evidence and GitHub Spec Kit (`specify`) for SDD are required as well. The `codex`, `claude`, and `copilot` agent CLI surfaces are required across platforms and use the npm registry as a fallback when needed. Google Antigravity replaces Gemini CLI; `agy` is required cross-platform: macOS uses Homebrew, Windows uses `Google.AntigravityCLI` through WinGet, and Linux uses the checksum-verified official installer. `specify` is installed through `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git` when missing. Default runs install only `required`; `optional` records convenience/project context. `xquartz` stays intentionally excluded from the Brew registry. `gitleaks`, `syft`, `specify`, the MSL CLI toolchains, and the required agent CLIs must be verifiable after package-manager maintenance; compare second machines through the platform test scripts and then update the matching registry for intentional top-level tools.*
+
+*Level-0 under `~/home-baseline-source` is the canonical source for these maintenance files. Synchronize existing Level-1/Level-2 copies with `propagate-agentic-toolchain-maintenance.*`: preview first, apply second, and finish with `--check-only` / `-CheckOnly`. The tool performs no commits or pushes.*
+
+*At startup in `~` or `~/home-baseline-source`, known AI agents ask once whether to check only, check and install missing required tools, prepare full maintenance including GSDB preflight, or skip. Missing required tools from compare mode may be installed after approval; optional tools require explicit approval.*
+
+
+## Secure-Development-Hardening Intake / Secure Development Hardening Intake
+
+- Level-2-Repositories SOLLEN die zentrale sichere-Entwicklung-Basis aus `docs/secure-development/` enthalten; MSL-Status ist ein Pruefpunkt, aber keine Voraussetzung fuer die RL-SE-/Checklist-Selbstpruefung.
+- Dazu gehoeren Richtlinie, Checklisten, Sammelband, `docs/secure-development/mitgeltende-dokumente/` und die zentrale Verzahnungsdatei `docs/secure-development/mitgeltende-dokumente/Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md`.
+- `docs/secure-development/baseline-manifest.json` ist die kanonische Dateiliste fuer Basis 3.1.0; die Einzelchecklisten sind Quelle und der Sammelband wird mit `build-secure-development-docs.*` erzeugt und geprueft.
+- Projektnachweise liegen getrennt unter `docs/security/secure-development/<datum>-<scope>/`; Sicherheit beginnt ab dem ersten Ausbildungs- und Entwicklungsauftrag gemaess dem Lernpfad Lehrjahr 1 bis 3.
+- Neue Level-2-Projekte koennen diese Basis beim Bootstrap ueber `bootstrap-project.* --primary-language <Sprache>` / `-PrimaryLanguage <Sprache>` erhalten. Level-2-Repos werden standardmaessig unabhaengig vom MSL-Status als GSDB-pflichtig mit dem Acht-Preset-Profil in der lokalen Registry `~/.home-baseline/level2-repository-registry.json` registriert; begruendete Ausnahmen muessen explizit gesetzt werden. Bei Lern-Sprachrepos gilt die vorgesehene Sprache aus dem eindeutigen Repo-Suffix oder einem expliziten Sprachparameter bereits vor dem Runtime-Scaffold.
+- Fuer GSDB-Zielmengen zuerst diese lokale Registry lesen; manuelle Repo-Listen sind nur ein bewusster Override. Bestehende Repos koennen mit `register-level2-repository.*` nachgetragen werden.
+- Wiederkehrende Wartung prueft GSDB-Registry-Drift mit `register-level2-repository.* --scan-root` / `-ScanRoot` zuerst im Trockenlauf. Wartungsscans duerfen bekannte Sprach-, MSL-, GSDB- oder Preset-Metadaten nicht auf `unknown`, `false` oder `none` herabstufen; neu erkannte Level-2-Repositories werden nach Bestaetigung in der lokalen Registry gemerkt.
+- Bestehende Level-2-Projekte werden registry-basiert mit `prepare-rl-se-checklist-selbstpruefung.*` vor der Haertung und mit `prepare-secure-development-hardening.*` fuer den spaeteren Haertungs-Intake vorbereitet; zuerst `--dry-run` / `-WhatIf` nutzen.
+- Die Vorbereitung erzeugt nur Intake- und Ordnungsartefakte: `docs/secure-development/`, `Lastenheft_RL-SE-Checklist-Selbstpruefung.md`, `Lastenheft_Secure-Development-Hardening.md` und `Lastenheft_Abarbeitungsreihenfolge.md`.
+- `Lastenheft_RL-SE-Checklist-Selbstpruefung.md` verlangt getrennt Anwendbarkeit (`Applicable`, `N/A`, `Open`) und Umsetzung (`Fulfilled`, `Partly Fulfilled`, `Not Fulfilled`, `Not Assessed`) sowie Begruendung, Evidenzpfad, Owner, Follow-up, Re-Evaluation-Trigger und Restrisiko.
+- Das Suchmuster fuer die automatische Reihenfolge ist strikt `Lastenheft*.md`; `Lastenheft_Abarbeitungsreihenfolge.md` wird selbst nicht als Arbeitspaket einsortiert.
+- Vorhandene Reihenfolge-Dateien werden geschuetzt: nur der markierte generierte Abschnitt wird aktualisiert; manuelle Begruendungen bleiben erhalten.
+- `check-gsdb-self-assessment.*` prueft die GSDB ohne Spec-Kit-Lauf als Self-Assessment/Preflight. `--check-only` / `-CheckOnly` bleibt rein lesend. Ein normaler Lauf schreibt `docs/security/gsdb-self-assessment.md`, erzeugt oder aktualisiert `Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md` und nimmt dieses Lastenheft in `Lastenheft_Abarbeitungsreihenfolge.md` auf.
+- Diese Vorbereitung startet keinen Spec-Kit-Lauf, erzeugt keinen Feature-Branch und befuellt ausser dem GSDB-Preflight-Bericht keine weiteren `docs/security/`-Nachweise. Die eigentlichen Haertungs- und Intensivpruefungslaeufe werden separat gestartet.
+
+*Level-2 repositories SHOULD contain the central secure-development baseline from `docs/secure-development/`, including guideline, checklists, compendium, `docs/secure-development/mitgeltende-dokumente/`, and the related-documents alignment file `docs/secure-development/mitgeltende-dokumente/Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md`. MSL status is a checkpoint, not a prerequisite for GSDB scope. Level-2 repositories default to GSDB-required with the eight-preset profile; justified exceptions must be explicit. A learning-language repository's intended language is valid from its unambiguous suffix or an explicit parameter before a runtime scaffold exists. Maintenance scans must not downgrade known language, MSL, GSDB, or preset metadata to `unknown`, `false`, or `none`. Existing projects are prepared with `prepare-rl-se-checklist-selbstpruefung.*` before hardening and with `prepare-secure-development-hardening.*` for the later hardening intake; use `--dry-run` / `-WhatIf` first. Read the local registry before using manual target lists. `check-gsdb-self-assessment.*` performs a GSDB preflight without starting Spec Kit, can run read-only with `--check-only` / `-CheckOnly`, and in normal mode writes `docs/security/gsdb-self-assessment.md`, creates or updates `Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md`, and updates `Lastenheft_Abarbeitungsreihenfolge.md`. The generated intake is for a later manually started Spec Kit run; the preflight itself does not create a feature branch or claim formal hardening.*
+
+*Secure-development baseline 3.1.0 is controlled by `docs/secure-development/baseline-manifest.json`; individual checklists are canonical and the compendium is generated. Project evidence stays under `docs/security/secure-development/<date>-<scope>/`. Every item uses separate applicability and implementation axes. Security learning starts with the first training and development task. Registry-based baseline-only propagation does not modify Lastenhefte or start Spec Kit.*
+
+*Recurring maintenance checks GSDB registry drift with `register-level2-repository.* --scan-root` / `-ScanRoot` first as a dry run. Newly detected level-2 repositories are remembered after confirmation without downgrading stronger existing metadata.*
+
+## Spec-Kit-Modell-Routing / Spec Kit Model Routing
+
+- Modellwahl ist operative Agenten-Routing-Guidance, keine Feature-Anforderung. Modellnamen nicht in `spec.md`, `plan.md`, `tasks.md` oder einzelne Feature-Specs schreiben; diese Artefakte muessen reproduzierbar bleiben, auch wenn Modellnamen wechseln oder ein anderer KI-Agent verwendet wird.
+- Der jeweilige Agent soll diese Empfehlungen auf seine aktuell verfuegbaren Modelle abbilden; keine feste Anbieter- oder Modellbindung ableiten.
+- Fuer Spec-Kit-Spezifikation, Klaerung, Planung, Tasks und Analyse (`/speckit-specify`, `/speckit-clarify`, `/speckit-plan`, `/speckit-tasks`, `/speckit-analyze`; je nach Agent auch `/speckit.specify` usw.) das staerkste verfuegbare Frontier-Reasoning-/Coding-Modell bevorzugen.
+- Fuer vollstaendige, lang laufende `/speckit-implement`-Laeufe das staerkste verfuegbare Long-Running-Agent-Modell bevorzugen; das Frontier-Modell nutzen, wenn maximale Urteilsguete wichtiger ist als Laufzeitstabilitaet.
+- Fuer fokussierte Reviews oder CI-Fixes ein coding-optimiertes Modell bevorzugen.
+- Fuer triviale Bereinigung, Formatierung oder risikoarme mechanische Edits ist ein schnelles kleines Coding-Modell akzeptabel.
+- Die stabilen operativen Rollen heissen `frontier-reasoning`, `long-running-implementation`, `coding-review`, `fast-mechanical` und `script-only`. Installierte Presets deklarieren ihre Kommandos in `model-routing.json`; bei mehreren Wrappern gewinnt die staerkste Rolle.
+- Intake-Create/Update/Delete, Intake-Review/Repair, Sequencing-Create/Update/Delete sowie Specify/Clarify/Plan/Tasks/Analyze verwenden `frontier-reasoning`. Read/Status/Next duerfen `fast-mechanical` verwenden; Stop und deterministische Validatoren bleiben `script-only`.
+- Ein nicht-paralleler autonomer Lauf darf Modelle nur an einer validierten Phasengrenze wechseln. Jede Phase startet einen neuen Prozess, bindet ihr Handoff per SHA-256 und schreibt Profil, Modell und Reasoning-Aufwand in den Run-State.
+- Lokale Runner-Profile muessen `fail-closed` arbeiten. Fehlendes Profil, Modell, Reasoning oder erfolgreicher Preflight fuehrt zu `Blocked`; kein stiller Fallback.
+
+*Model choice is operational agent-routing guidance, not a feature requirement. Do not pin model names in `spec.md`, `plan.md`, `tasks.md`, or individual feature specs. Stable roles are `frontier-reasoning`, `long-running-implementation`, `coding-review`, `fast-mechanical`, and `script-only`. Installed presets declare command roles in `model-routing.json`; the strongest applicable wrapper role wins. Semantic intake and Spec-Kit decisions use frontier reasoning, read/status/next may use fast mechanical routing, and stop plus deterministic validators remain script-only. A non-parallel autonomous run changes models only at a validated phase boundary through a new process and SHA-256-bound handoff. Local profiles fail closed: missing profile, model, effort, or successful preflight results in `Blocked`, never a silent fallback.*
+
+## Spec-Kit-Presets / Spec Kit Presets
+
+- Standard-Preset-Set: `security-governance` v0.6.2 prio 10, `architecture-governance` v0.5.2 prio 20, `isaqb-architecture-governance` v0.2.2 prio 30, `a11y-governance` v0.4.3 prio 40, `cross-platform-governance` v0.2.2 prio 50, `agent-parity-governance` v0.4.2 prio 60, `autonomous-run-governance` v0.3.6 prio 70, `parallel-autonomous-run-governance` v0.2.6 prio 80.
+- Optionale Presets: `model-routing-governance` v0.1.4 prio 61 sowie Intake Authoring v0.3.1 prio 64, Intake Review v0.2.1 prio 65 und Intake Sequencing v0.2.3 prio 66 bleiben ausserhalb der Standard-Achtermatrix. Thorstens verwaltete Flotte installiert alle vier ueber `model-routing-twelve-governance-presets`; bestehende Neun-, Zehn- und Elf-Preset-Profile bleiben kompatibel, ersetzen aber nicht das Zwölfer-Flottenprofil. Konkrete Modelle werden pro Rechner erkannt und nie aus einem Remote-Repository uebernommen. *Optional Model Routing v0.1.4 and the three Intake Governance presets remain outside the standard eight. Thorsten's managed fleet installs all four through `model-routing-twelve-governance-presets`; compatible nine-, ten-, and eleven-preset profiles do not replace that fleet profile. Concrete models are discovered per machine and never copied from a remote repository.*
+- Intake Authoring trennt Create, Read, Update und logisches Delete, beschraenkt URL-Quellen auf oeffentliches HTTPS und publiziert mehrere Intakes erst nach einem vollstaendigen, ausdruecklich genehmigten Series-Vorschlag. Archive, Tombstones und Receipts bleiben hashgebunden. Review oder Ausfuehrung startet nie automatisch. *Intake Authoring separates CRUD, bounds public HTTPS sources, requires explicit series approval, and never starts downstream review or execution.*
+- Intake Review akzeptiert bei aktiver Projekt- oder Kampagnenpolicy nur aktuelle `Ready`- oder menschlich akzeptierte `ReadyWithAcceptedRisks`-Ergebnisse; Critical/High, offene materielle Fragen, Hash-Drift oder fehlende Worker-Coverage blockieren. Review und Status sind read-only, Repair benoetigt ausdrueckliche Aenderungsautoritaet. Series-Reviews verwenden Schema 1.1, binden den normalisierten Request-Hash und pruefen exakte Zielreihenfolge, explizite Roots sowie einen azyklischen Graphen; nicht belegbare Vorgaengerbeziehungen fuehren zu `NeedsClarification`. *Series reviews use schema 1.1, bind the normalized request hash, and verify exact target order, explicit roots, and an acyclic graph; unprovable predecessor relations result in `NeedsClarification`.*
+- Intake Sequencing verwaltet nur Reihenfolge und Lifecycle bereits vorhandener Intakes. Create/Update/Delete benoetigen ausdrueckliche aktuelle Autoritaet; Read/Status/Next bleiben read-only. `next` meldet startfaehige Ziele oder konkrete Blocker und startet keine Folgeaktion. *Intake Sequencing manages only order and lifecycle, requires explicit write authority, and never starts downstream work.*
+- Community-Katalog-Einreichungen an `github/spec-kit` strikt einzeln erstellen und aktivieren: erst den erzeugten PR pruefen und mergen lassen sowie das Issue abschliessen, dann das naechste Issue einreichen. Bei einer bereits vorhandenen Warteschlange nur den naechsten Kandidaten fuer `preset-submission` benennen; keine neuen Batch-Issues oder parallelen Label-Anfragen. Grundlage ist der Maintainer-Hinweis in `github/spec-kit#3679`; der Betriebsvertrag steht in `docs/maintenance/Preset-and-Fleet-Operations-Lessons-Learned.md`. *Submit and activate `github/spec-kit` community catalog updates strictly one at a time. Complete the generated PR and issue before filing the next issue; for an existing queue, name only the next label candidate. Do not create new batch issues or parallel label requests.*
+- `autonomous-run-governance` v0.3.6 prio 70 ist Teil der Standard-Achtermatrix. Ein vollständiger autonomer Lauf bleibt ausdrücklich delegationspflichtig; die Installation allein erteilt weder Ausführungsberechtigung noch Remote-, Merge-, Bypass- oder Provider-Rechte und `LocalImplementation` bleibt Default. Dokumentations-, Status-, Schema- oder Evidence-Änderungen gelten erst dann als testfrei, wenn keine ausführbaren Validatoren die geänderten Pfade, Marker, Schemas oder Zustandswerte konsumieren. Vor autorisierten Commits wird der exakt beabsichtigte Kandidat mit `git diff --cached --check` und Statusabgleich geprüft; fremde Änderungen bleiben unberührt. Vor einem Merge wird jeder Acceptance-Gate dem tatsächlich ausgeführten Workflow, Job, Runner beziehungsweise der Plattform und dem Befehl zugeordnet; grüne Namen oder ein Bypass ersetzen keinen technischen Nachweis. Bewusst pausierte Läufe werden als `PausedByUser` gespeichert und nur über `speckit.autonomous-resume` fortgesetzt; `speckit.autonomous-stop` wirkt kooperativ am nächsten sicheren Grenzpunkt, und ein gespeicherter Delivery-Modus ist keine aktuelle Berechtigung. Nach Preset- oder Governance-Drift werden neue zwingende Korrektheits-, Sicherheits-, Berechtigungs- und Evidenzregeln minimal mit akzeptierten Plan-, Task- und Checklist-Artefakten abgeglichen; reine Effizienzpräferenzen lösen keine rückwirkende Neugenerierung aus. Die lesbare Skill-Überschrift `Deliver` ist kein Run-State-Wert; für Remote-Closeout gelten ausschließlich `Publish`, `Review` oder `MergeAndSync`.
+- `parallel-autonomous-run-governance` v0.2.6 prio 80 ist Teil der Standard-Achtermatrix. Die Installation startet keine Kampagne und erteilt keine zusaetzlichen Remote-, Merge-, Bypass-, Abbruch-, Secret- oder Provider-Rechte. Kampagnen bleiben ausdruecklich delegationspflichtig, verwenden getrennte Worktrees und maximal drei gleichzeitig aktive Worker. Schema 1.1 erlaubt ein `runnerProfile` je Worker mit Kampagnen-Fallback; Modell und Reasoning-Stufe sind optionale, nicht geheime Metadaten und werden ohne Deklaration nicht erraten. Konsolidierung verlangt exakten Head, aktuelle Review- und Check-Evidenz, ist nach Teilmerges fortsetzbar und setzt `Completed` erst nach Synchronisation, manifestdeklarierten idempotenten Post-Merge-Aktionen und Abschlussvalidierung.
+- Reale Preset-8-Kampagnen setzen in jedem Worker-Repository ein installiertes und aktiviertes `autonomous-run-governance >=0.2.2` voraus. Preset 7 mit Prioritaet `70` liefert Lebenszyklus, Evidenz und Berechtigungsgrenzen; Preset 8 mit Prioritaet `80` koordiniert die Kampagne. Fehlt Preset 7, ist es deaktiviert oder zu alt, endet der Preflight vor dem Worker-Start. `requireAutonomousPreset: false` bleibt auf isolierte interne Fixtures begrenzt und ist kein Produktionsmodus. *Real Preset 8 campaigns require installed and enabled `autonomous-run-governance >=0.2.2` in every worker repository. Preset 7 at priority `70` supplies lifecycle, evidence, and authority boundaries; Preset 8 at priority `80` coordinates the campaign. Missing, disabled, or outdated Preset 7 fails preflight before worker start. `requireAutonomousPreset: false` remains limited to isolated internal fixtures and is not a production mode.*
+- `a11y-governance` v0.4.3 ergaenzt didaktische Inline-Code-Kommentar-Governance fuer neue oder geaenderte nicht-triviale Logik.
+- `security-governance` v0.6.2 fuehrt `AI-SBOM` weiter als bedingt anwendbare Supply-Chain-Evidenz, ergaenzt sprachspezifische Secure-Coding-Profile und ergaenzt regulatorische Anwendbarkeit fuer NIS2, CRA, EU AI Act und DORA. Reine Entwicklungswerkzeug-Nutzung bleibt `N/A`; KI-Runtime-/Produktkomponenten benoetigen Evidenz nach G7/BSI AI-SBOM-Clustern; private Ausbildungsprojekte dokumentieren regulatorische Nichtanwendbarkeit mit kurzer Begruendung.
+- `architecture-governance` v0.5.2 ergaenzt `BSI C3A` als bedingte Cloud-Autonomie-Evidenz und `BSI C5` als bedingte Cloud-Compliance-Assurance-Evidenz fuer Cloud-Service-Auswahl, Provider-Abhaengigkeiten, Audit-/Nachweisstand, Shared Responsibility und Betriebsnachweise.
+- Alle acht Presets enthalten audit-ready Spec-Kit-Run-Evidenz: `Applicable` / `N/A` / `Open`, Begruendung, Evidenzpfad, Reviewer, Restrisiko und Follow-up werden fuer den aktuellen Spec-Kit-Lauf dokumentiert.
+- Die ursprünglichen sechs Presets sind seit 2026-05-04 und `autonomous-run-governance` v0.2.2 ist seit 2026-07-17 im `github/spec-kit` Community-Katalog enthalten.
+- `parallel-autonomous-run-governance` v0.2.6 ist eigenstaendig veroeffentlicht; v0.2.2 wurde mit `github/spec-kit#3591` fuer den Community-Katalog eingereicht.
+- Registrierte Level-0-, Level-1- und Level-2-Repositories installieren bei vorhandener Spec-Kit-Integration standardmäßig alle acht Presets aus `scripts/config/spec-kit-governance-presets.json`, sofern keine begründete Ausnahme dokumentiert ist.
+- Flotten-Rollouts erfassen Level-0, Level-1 und Level-2 explizit und verfolgen Installation, exakte Matrixvalidierung, Commit, Push und Remote-Synchronisation.
+- Generierte Preset-/Agentenpfade werden vor dem Staging vom gesamten Arbeitsbaum und von fremden Aenderungen abgegrenzt.
+- Normative Sechs-/Siebenerangaben werden migriert; historische Statistik-, Changelog-, Feldnachweis- und Kompatibilitaetsangaben bleiben erhalten.
+- Provider-Ablehnung, technischer Gate-Fehler und bestandener Gate sind getrennte Ergebnisse; ein Bypass ersetzt keine technische Evidenz.
+- `.specify/presets/` und erzeugte Agenten-/Command-Dateien committen, wenn Presets Projekt-Policy sind; `.specify/presets/.cache/` nie committen.
+- Nach Installation oder Update prüfen: `specify preset list`, mindestens ein `specify preset info <id>`, bei Template-Fragen zusätzlich `specify preset resolve <template>`.
+- Bei jeder Preset-Version oder Prioritätsänderung zuerst `scripts/config/spec-kit-governance-presets.json` aktualisieren und danach README-Tabellen, Constitution, Agenten-Dateien, `scripts/templates/speckit-workflow-section.md` und Agenten-Templates gemeinsam prüfen.
+
+*The original six governance presets and `autonomous-run-governance` v0.2.2 are available through the `github/spec-kit` community catalog. `parallel-autonomous-run-governance` v0.2.6 is published independently; v0.2.2 was submitted to the community catalog as `github/spec-kit#3591`. `architecture-governance` v0.5.2 adds conditional `BSI C3A` cloud-autonomy evidence and `BSI C5` cloud-compliance assurance evidence for cloud-service selection, provider dependencies, audit/assurance status, shared responsibility, and operational evidence. All eight presets now include audit-ready Spec-Kit run evidence: `Applicable` / `N/A` / `Open`, rationale, evidence path, reviewer, residual risk, and follow-up are documented for the current Spec-Kit run. `security-governance` v0.6.2 keeps conditional `AI-SBOM` evidence, language-specific secure-coding profiles, and regulatory applicability screening for NIS2, CRA, EU AI Act, and DORA: development-tool-only AI usage is `N/A`, AI runtime/product components require G7/BSI AI-SBOM cluster evidence, and private training projects record regulatory `N/A` when no regulated scope exists. Registered level-0, level-1, and level-2 repositories with Spec Kit default to all eight presets from `scripts/config/spec-kit-governance-presets.json` unless a justified exception is documented. Use `install-spec-kit-governance-presets.*` so preset versions stay centralized in the matrix. Commit `.specify/presets/` and generated agent command files when presets are project policy, but never commit `.specify/presets/.cache/`. Verify installs with `specify preset list`, `specify preset info`, and where relevant `specify preset resolve`. For every preset version or priority change, update the central matrix, README tables/install snippets, constitution, agent guidance files, `scripts/templates/speckit-workflow-section.md`, and agent templates together.*
+
+<!-- learner-a11y-baseline:start -->
+## Hinweise zur Lernenden- und A11Y-Basis / Notes on the Learner and A11Y Baseline
+
+- Inhalte richten sich ab dem ersten Ausbildungsjahr an Fachinformatiker*innen,
+  Kaufleute für IT-System-Management und Kaufleute für
+  Digitalisierungsmanagement.
+- Sie müssen Deutsch zuerst und Englisch danach, ohne Spec-Kit-Vorkenntnisse,
+  auf CEFR-B2-Niveau und ohne ausschließlich visuelle
+  Abhängigkeitsdarstellung verständlich sein. Fachbegriffe werden beim ersten
+  Auftreten erklärt; WCAG 2.2 Level AA ist die anwendbare Prüfbasis.
+
+*Content targets IT specialist apprentices and both IT management occupations
+from their first training year. It is German-first/English-second at CEFR B2,
+explains technical terms at first use, assumes no prior Spec Kit experience,
+never relies on visual-only dependency information, and uses WCAG 2.2 Level AA
+as the applicable review baseline.*
+<!-- learner-a11y-baseline:end -->
+
+<!-- EN: GEMINI.md contains bilingual Gemini guidance for this level-2 project. -->

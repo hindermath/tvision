@@ -437,7 +437,7 @@ The following are new features not available in Borland's release of Turbo Visio
 
 ## Screenshots
 
-You will find some screenshots [here](https://github.com/magiblot/tvision/issues/7). Feel free to add your own!
+You will find some [screenshots in issue #7](https://github.com/magiblot/tvision/issues/7). Feel free to add your own!
 
 ## Contributing
 
@@ -1234,3 +1234,44 @@ The code above still works just like it did originally. It's only non-BIOS color
 ```
 
 Nothing prevents you from using different variables for palette indices and color attributes, which is what should actually be done. The point of backward-compatibility is the ability to support new features without changing the program's logic, that is to say, minimizing the risk of increasing code complexity or introducing bugs.
+
+## Barrierefreiheit / Accessibility
+
+Lokale Governance-Ergänzungen und neue nutzerseitige Abläufe bleiben mit
+Tastatur, Screenreader, Braille-Zeile und Textbrowser nutzbar. WCAG 2.2
+Level AA ist die Prüfbasis, soweit die Kriterien anwendbar sind. Bestehende
+englische Upstream-Dokumentation bleibt erhalten.
+
+*Local governance additions and new user-facing flows remain usable with a
+keyboard, screen reader, Braille display, and text browser. WCAG 2.2 Level AA
+is the review baseline wherever applicable. Existing English upstream
+documentation is preserved.*
+
+## Spec-kit Workflow / Spec Kit Workflow
+
+Dieses Level-2-Repository ist für Specification-Driven Development mit Spec
+Kit vorbereitet. Die installierten zwölf Governance-Presets definieren
+Prüfungen und Nachweise, starten aber keinen Lauf und erteilen keine
+Remote-, Merge- oder Bypass-Berechtigung. Der sichere nächste Schritt ist
+zuerst eine Status- oder Read-Operation; ein fachlicher Lauf benötigt einen
+ausdrücklichen Auftrag.
+
+*This level-2 repository is prepared for specification-driven development with
+Spec Kit. The twelve installed governance presets define checks and evidence,
+but start no run and grant no remote, merge, or bypass authority. The safe next
+step is a status or read operation; functional work requires an explicit
+instruction.*
+
+## Für Azubis und Auszubildende / For Apprentices
+
+Das Projekt kann als reales C++14-/CMake-Beispiel für plattformübergreifende
+Terminalsoftware gelesen werden. Beginne mit dieser README, führe danach
+`cmake -S . -B build -DCMAKE_BUILD_TYPE=Release` aus und aktiviere Tests nur,
+wenn GoogleTest installiert ist. Fachbegriffe, Zustände und Abhängigkeiten
+müssen auch ohne ausschließlich visuelle Darstellung verständlich bleiben.
+
+*The project can be studied as a real C++14/CMake example of cross-platform
+terminal software. Start with this README, then run
+`cmake -S . -B build -DCMAKE_BUILD_TYPE=Release`, and enable tests only when
+GoogleTest is installed. Technical terms, states, and dependencies must remain
+understandable without a visual-only representation.*

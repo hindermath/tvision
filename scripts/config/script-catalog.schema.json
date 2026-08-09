@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Home Baseline script catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "updated", "canonicalRoot", "categories", "excluded"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "updated": { "type": "string", "format": "date" },
+    "canonicalRoot": { "const": "scripts" },
+    "categories": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "titleDe", "titleEn", "patterns", "purposeDe", "purposeEn"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "titleDe": { "type": "string", "minLength": 1 },
+          "titleEn": { "type": "string", "minLength": 1 },
+          "patterns": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "purposeDe": { "type": "string", "minLength": 1 },
+          "purposeEn": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "excluded": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^scripts/" }
+    }
+  }
+}

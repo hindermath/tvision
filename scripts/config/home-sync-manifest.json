@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 2,
+  "retiredPathPolicy": "preserve",
+  "homeRuntime": {
+    "rootFiles": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "GEMINI.md",
+      "README.md",
+      "constitution.md",
+      ".gitignore"
+    ],
+    "rootGlobs": [],
+    "trackedPrefixes": [
+      "scripts/"
+    ],
+    "trackedGlobs": [
+      ".agents/skills/speckit-*/**",
+      ".claude/commands/speckit.*.md",
+      ".claude/skills/speckit-*/**",
+      ".opencode/command/speckit.*.md",
+      ".github/copilot-instructions.md",
+      ".github/agents/copilot-instructions.md",
+      ".specify/memory/constitution.md"
+    ],
+    "excludePaths": [
+      ".agents/.skill-lock.json",
+      ".claude/settings.local.json"
+    ],
+    "excludePrefixes": [
+      ".agents/skills/microsoft-foundry/",
+      ".specify/presets/",
+      ".specify/integrations/.cache/"
+    ],
+    "excludeGlobs": [
+      "**/.DS_Store",
+      "**/.git/**",
+      "**/__pycache__/**"
+    ]
+  },
+  "sourceOnly": {
+    "rootFiles": [
+      "CHANGELOG.md",
+      "LICENSE"
+    ],
+    "rootGlobs": [
+      "Lastenheft*.md"
+    ],
+    "trackedPrefixes": [
+      "docs/",
+      "specs/",
+      ".specify/",
+      ".github/"
+    ],
+    "trackedGlobs": [],
+    "excludePaths": [],
+    "excludePrefixes": [],
+    "excludeGlobs": []
+  },
+  "machineLocal": {
+    "rootFiles": [
+      "STATS.md"
+    ],
+    "rootGlobs": [],
+    "trackedPrefixes": [
+      ".specify/presets/",
+      ".specify/integrations/.cache/"
+    ],
+    "trackedGlobs": [
+      ".agents/.skill-lock.json",
+      ".claude/settings.local.json"
+    ],
+    "excludePaths": [],
+    "excludePrefixes": [],
+    "excludeGlobs": []
+  },
+  "legacyCleanupPaths": [
+    "scripts/templates/gemini-statusline.toml",
+    "scripts/config/level2-repository-registry.json",
+    "scripts/setup-gemini-settings.sh",
+    "scripts/setup-gemini-settings.ps1",
+    "docs/man/setup-gemini-settings.1.md",
+    ".specify/integrations/gemini.manifest.json"
+  ]
+}

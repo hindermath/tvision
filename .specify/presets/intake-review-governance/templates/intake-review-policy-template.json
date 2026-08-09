@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0",
+  "required": false,
+  "acceptedStatuses": ["Ready", "ReadyWithAcceptedRisks"],
+  "resultPath": "specs/intake-review-result.json",
+  "profiles": ["generic-markdown"],
+  "requireHumanRiskAcceptance": true
+  ,
+  "requirementsGovernance": {
+    "configPath": "requirements/intake-governance-config.json",
+    "acceptedSchemaVersions": [
+      "2.0"
+    ],
+    "requireCurrentHashes": true,
+    "requireExactlyOneEligibleCandidate": true
+  }
+}

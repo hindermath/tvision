@@ -1,0 +1,19 @@
+name: Homogeneity Check
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  homogeneity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ripgrep
+        run: sudo apt-get install -y ripgrep
+      - name: Run homogeneity check
+        run: bash scripts/check-homogeneity.sh --json --fail-fast .
+        env:
+          CONSTITUTION_VERSION: "v1.20.2"

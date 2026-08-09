@@ -1,0 +1,94 @@
+# {{PROJECT_NAME}}
+
+**Workspace**: {{WORKSPACE}}
+
+---
+
+## Überblick / Overview
+
+Kurze Beschreibung des Projekts **{{PROJECT_NAME}}**.
+
+Brief description of the **{{PROJECT_NAME}}** project.
+
+---
+
+## Voraussetzungen / Prerequisites
+
+### Werkzeuge / Tools
+
+| Tool | Version | Installation |
+|------|---------|-------------|
+| `git` | ≥ 2.x | vorinstalliert / pre-installed |
+| `bash` | ≥ 5.x | macOS: `brew install bash` · Linux: vorinstalliert |
+| `ripgrep` | aktuell | `brew install ripgrep` / `sudo apt install ripgrep` |
+| .NET SDK | ≥ 6.x | [dotnet.microsoft.com](https://dotnet.microsoft.com) |
+
+---
+
+## Einrichtung / Setup
+
+### Schnellstart / Quickstart
+
+```bash
+# Repository klonen / Clone repository
+git clone <repo-url>
+cd {{PROJECT_NAME}}
+
+# Hooks installieren / Install hooks
+bash ~/scripts/install-hooks.sh
+
+# Compliance prüfen / Check compliance
+bash ~/scripts/check-homogeneity.sh ~/
+```
+
+---
+
+## Verwendung / Usage
+
+Beschreibe hier die Hauptverwendung des Projekts.
+
+Describe the main usage of the project here.
+
+```bash
+# Beispiel / Example
+dotnet run --project src/{{PROJECT_NAME}}
+```
+
+---
+
+## Für Azubis / For Apprentices
+
+Willkommen im Projekt! Folge diesen Schritten:
+
+1. **Voraussetzungen installieren** (siehe Tabelle oben)
+2. **Repository klonen** und in das Verzeichnis wechseln
+3. **Hooks installieren**: `bash ~/scripts/install-hooks.sh`
+4. **Compliance prüfen**: `bash ~/scripts/check-homogeneity.sh ~/`
+5. **WARNs beheben**: Lies die Ausgabe und beheibe fehlende Dateien
+6. **Fragen?** Frag deinen Senior oder schau ins interne Wiki
+
+Welcome to the project! Follow these steps:
+
+1. **Install prerequisites** (see table above)
+2. **Clone repository** and change into the directory
+3. **Install hooks**: `bash ~/scripts/install-hooks.sh`
+4. **Check compliance**: `bash ~/scripts/check-homogeneity.sh ~/`
+5. **Fix WARNs**: Read the output and fix missing files
+6. **Questions?** Ask your senior or check the internal wiki
+
+### Typische Fehler / Common Errors
+
+| Fehler / Error | Lösung / Solution |
+|----------------|------------------|
+| `rg: command not found` | `sudo apt install ripgrep` |
+| `bash: bad version` | `brew install bash` (macOS) |
+| `Permission denied` | `chown -R $USER .` |
+| `git: command not found` | `sudo apt install git` |
+
+---
+
+## Hinweise / Notes
+
+- Keine ANSI-Farbcodes in Skript-Output / No ANSI color codes in script output
+- Heading-Hierarchie ohne Lücken / Heading hierarchy without gaps
+- Pre-Push-Hook prüft Secrets / Pre-push hook checks secrets

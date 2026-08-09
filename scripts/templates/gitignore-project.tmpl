@@ -1,0 +1,103 @@
+# .gitignore für Level-2-Projekte / For Level-2 Projects
+# Whitelist-Modell: alles ignorieren, nur explizit erlaubtes tracken
+
+# --- Alles ignorieren ---
+/*
+/.*
+
+# --- Pflichtdateien: KI-Agenten / Required: AI Agent files ---
+!AGENTS.md
+!CLAUDE.md
+!GEMINI.md
+
+# --- Pflichtdateien: Dokumentation / Required: Documentation ---
+!README.md
+!STATS.md
+!constitution.md
+!Lastenheft*.md
+
+# --- Pflichtdateien: Git-Konfiguration / Required: Git config ---
+!.gitignore
+!.gitconfig
+
+# --- GitHub / GitHub ---
+!.github/
+!.github/copilot-instructions.md
+!.github/agents/
+!.github/agents/**
+!.github/prompts/
+!.github/prompts/**
+!.github/workflows/
+!.github/workflows/**
+
+# --- Quellcode / Source code ---
+!src/
+!tests/
+!docs/
+!scripts/
+!specs/
+
+# --- Build-Artefakte ignorieren / Build artifacts to ignore ---
+# Diese sind durch '/*' bereits ignoriert, hier zur Dokumentation:
+# bin/
+# obj/
+# *.user
+# *.suo
+# packages/
+# .vs/
+
+# --- C# / .NET spezifisch ---
+# (bereits durch '/*' ignoriert)
+# *.nupkg
+# *.snupkg
+# project.lock.json
+# project.fragment.lock.json
+# artifacts/
+
+# --- Spec-kit Konfiguration / Spec-kit configuration ---
+!.specify/
+!.specify/extensions.yml
+!.specify/integration.json
+!.specify/init-options.json
+!.specify/extensions/
+!.specify/extensions/**
+!.specify/integrations/
+!.specify/integrations/**
+!.specify/memory/
+!.specify/memory/**
+!.specify/scripts/
+!.specify/scripts/**
+!.specify/templates/
+!.specify/templates/**
+!.specify/presets/
+!.specify/presets/**
+.specify/presets/.cache/
+.specify/presets/.cache/**
+!.specify/workflows/
+!.specify/workflows/**
+
+# --- Claude Spec-Kit Commands ---
+!.claude/
+.claude/*
+!.claude/commands/
+!.claude/commands/**
+!.claude/skills/
+!.claude/skills/**
+
+# --- Antigravity/Codex Spec-Kit Skills ---
+!.agents/
+.agents/*
+!.agents/skills/
+!.agents/skills/**
+
+# --- OpenCode Spec-Kit Commands ---
+!.opencode/
+.opencode/*
+!.opencode/command/
+!.opencode/command/**
+
+# --- Release Please ---
+!release-please-config.json
+!.release-please-manifest.json
+!CHANGELOG.md
+!version.txt

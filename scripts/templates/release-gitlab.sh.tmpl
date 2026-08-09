@@ -1,0 +1,303 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+release_dry_run="${RELEASE_DRY_RUN:-false}"
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+cd "$repo_root"
+
+default_branch="${CI_DEFAULT_BRANCH:-}"
+if [ -z "$default_branch" ]; then
+  default_branch="$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null | sed 's@^origin/@@' || true)"
+fi
+if [ -z "$default_branch" ]; then
+  default_branch="$(git branch --show-current)"
+fi
+
+current_branch="${CI_COMMIT_REF_NAME:-}"
+if [ -z "$current_branch" ]; then
+  current_branch="$(git branch --show-current)"
+fi
+if [ "$current_branch" != "$default_branch" ] && [ "$release_dry_run" != "true" ]; then
+  echo "Release job must run on ${default_branch}, current branch is ${current_branch}." >&2
+  exit 1
+fi
+
+if [ "${CI:-}" = "true" ]; then
+  git fetch origin "$default_branch" --tags
+  git checkout "$default_branch"
+  git reset --hard "origin/$default_branch"
+else
+  git fetch origin --tags >/dev/null 2>&1 || true
+fi
+
+latest_tag="$(git tag --list 'v*' --sort=-version:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1 || true)"
+if [ -n "$latest_tag" ]; then
+  range_spec="${latest_tag}..HEAD"
+else
+  range_spec="HEAD"
+fi
+
+temp_dir="$(mktemp -d)"
+trap 'rm -rf "$temp_dir"' EXIT
+
+breaking_file="${temp_dir}/breaking.md"
+features_file="${temp_dir}/features.md"
+fixes_file="${temp_dir}/fixes.md"
+perf_file="${temp_dir}/perf.md"
+refactors_file="${temp_dir}/refactors.md"
+reverts_file="${temp_dir}/reverts.md"
+
+touch "$breaking_file" "$features_file" "$fixes_file" "$perf_file" "$refactors_file" "$reverts_file"
+
+bump="none"
+release_commit_count=0
+
+while IFS= read -r -d $'\x1e' entry; do
+  [ -n "$entry" ] || continue
+  entry="${entry#$'\n'}"
+  entry="${entry%$'\n'}"
+
+  commit_sha="${entry%%$'\x1f'*}"
+  remainder="${entry#*$'\x1f'}"
+  subject="${remainder%%$'\x1f'*}"
+  body="${remainder#*$'\x1f'}"
+  if [ "$body" = "$remainder" ]; then
+    body=""
+  fi
+  short_sha="$(printf '%s' "$commit_sha" | cut -c1-7)"
+
+  type="$(printf '%s' "$subject" | sed -nE 's/^([a-z]+)(\([^)]+\))?!?:.*/\1/p')"
+  is_breaking="false"
+  if printf '%s' "$subject" | grep -Eq '^[a-z]+(\([^)]+\))?!:'; then
+    is_breaking="true"
+  fi
+  if printf '%s' "$body" | grep -q 'BREAKING CHANGE:'; then
+    is_breaking="true"
+  fi
+
+  clean_subject="$(printf '%s' "$subject" | sed -E 's/^[a-z]+(\([^)]+\))?!?:[[:space:]]*//')"
+  if [ "$clean_subject" = "$subject" ]; then
+    clean_subject="$subject"
+  fi
+
+  if [ "$is_breaking" = "true" ]; then
+    bump="major"
+    release_commit_count=$((release_commit_count + 1))
+    printf -- '- %s (`%s`)\n' "$clean_subject" "$short_sha" >> "$breaking_file"
+    continue
+  fi
+
+  case "$type" in
+    feat)
+      if [ "$bump" != "major" ]; then
+        bump="minor"
+      fi
+      release_commit_count=$((release_commit_count + 1))
+      printf -- '- %s (`%s`)\n' "$clean_subject" "$short_sha" >> "$features_file"
+      ;;
+    fix)
+      if [ "$bump" = "none" ]; then
+        bump="patch"
+      fi
+      release_commit_count=$((release_commit_count + 1))
+      printf -- '- %s (`%s`)\n' "$clean_subject" "$short_sha" >> "$fixes_file"
+      ;;
+    perf)
+      if [ "$bump" = "none" ]; then
+        bump="patch"
+      fi
+      release_commit_count=$((release_commit_count + 1))
+      printf -- '- %s (`%s`)\n' "$clean_subject" "$short_sha" >> "$perf_file"
+      ;;
+    refactor)
+      if [ "$bump" = "none" ]; then
+        bump="patch"
+      fi
+      release_commit_count=$((release_commit_count + 1))
+      printf -- '- %s (`%s`)\n' "$clean_subject" "$short_sha" >> "$refactors_file"
+      ;;
+    revert)
+      if [ "$bump" = "none" ]; then
+        bump="patch"
+      fi
+      release_commit_count=$((release_commit_count + 1))
+      printf -- '- %s (`%s`)\n' "$clean_subject" "$short_sha" >> "$reverts_file"
+      ;;
+  esac
+done < <(git log --format='%H%x1f%s%x1f%b%x1e' "$range_spec")
+
+if [ "$release_commit_count" -eq 0 ]; then
+  echo "No release-worthy conventional commits found since ${latest_tag:-repository start}."
+  exit 0
+fi
+
+base_major=0
+base_minor=0
+base_patch=0
+if [ -n "$latest_tag" ]; then
+  version_core="${latest_tag#v}"
+  base_major="$(printf '%s' "$version_core" | cut -d. -f1)"
+  base_minor="$(printf '%s' "$version_core" | cut -d. -f2)"
+  base_patch="$(printf '%s' "$version_core" | cut -d. -f3)"
+fi
+
+case "$bump" in
+  major)
+    if [ -n "$latest_tag" ]; then
+      next_version="$((base_major + 1)).0.0"
+    else
+      next_version="1.0.0"
+    fi
+    ;;
+  minor)
+    if [ -n "$latest_tag" ]; then
+      next_version="${base_major}.$((base_minor + 1)).0"
+    else
+      next_version="0.1.0"
+    fi
+    ;;
+  patch)
+    if [ -n "$latest_tag" ]; then
+      next_version="${base_major}.${base_minor}.$((base_patch + 1))"
+    else
+      next_version="0.0.1"
+    fi
+    ;;
+  *)
+    echo "Unsupported bump level: ${bump}" >&2
+    exit 1
+    ;;
+esac
+
+today="$(date -u +%Y-%m-%d)"
+notes_file="${temp_dir}/release-notes.md"
+
+{
+  printf '## v%s - %s\n\n' "$next_version" "$today"
+
+  if [ -s "$breaking_file" ]; then
+    printf '### Breaking Changes\n'
+    cat "$breaking_file"
+    printf '\n'
+  fi
+
+  if [ -s "$features_file" ]; then
+    printf '### Features\n'
+    cat "$features_file"
+    printf '\n'
+  fi
+
+  if [ -s "$fixes_file" ]; then
+    printf '### Fixes\n'
+    cat "$fixes_file"
+    printf '\n'
+  fi
+
+  if [ -s "$perf_file" ]; then
+    printf '### Performance\n'
+    cat "$perf_file"
+    printf '\n'
+  fi
+
+  if [ -s "$refactors_file" ]; then
+    printf '### Refactors\n'
+    cat "$refactors_file"
+    printf '\n'
+  fi
+
+  if [ -s "$reverts_file" ]; then
+    printf '### Reverts\n'
+    cat "$reverts_file"
+    printf '\n'
+  fi
+} > "$notes_file"
+
+if [ ! -f CHANGELOG.md ]; then
+  cat > CHANGELOG.md <<'EOF'
+# Changelog
+
+Alle veroeffentlichten Aenderungen dieses Repositories.
+All released changes for this repository.
+EOF
+fi
+
+changelog_tmp="${temp_dir}/CHANGELOG.md"
+existing_body="${temp_dir}/CHANGELOG.body.md"
+filtered_body="${temp_dir}/CHANGELOG.body.filtered.md"
+
+if [ "$(wc -l < CHANGELOG.md)" -gt 4 ]; then
+  tail -n +5 CHANGELOG.md > "$existing_body"
+else
+  : > "$existing_body"
+fi
+
+# Refresh the current version block instead of keeping a stale pre-created draft.
+awk -v version="v${next_version}" '
+  BEGIN { skip = 0 }
+  $0 ~ ("^## " version " -") { skip = 1; next }
+  skip && $0 ~ /^## / { skip = 0 }
+  !skip { print }
+' "$existing_body" > "$filtered_body"
+
+{
+  sed -n '1,4p' CHANGELOG.md
+  printf '\n'
+  cat "$notes_file"
+  if [ -s "$filtered_body" ]; then
+    printf '\n'
+    sed '/./,$!d' "$filtered_body"
+  fi
+} > "$changelog_tmp"
+mv "$changelog_tmp" CHANGELOG.md
+
+echo "Next version: v${next_version}"
+echo "Bump level: ${bump}"
+echo "Release-worthy commits: ${release_commit_count}"
+
+if [ "$release_dry_run" = "true" ]; then
+  echo ""
+  cat "$notes_file"
+  exit 0
+fi
+
+if [ -z "${CI_JOB_TOKEN:-}" ] || [ -z "${CI_PROJECT_ID:-}" ] || [ -z "${CI_API_V4_URL:-}" ]; then
+  echo "CI_JOB_TOKEN, CI_PROJECT_ID and CI_API_V4_URL are required for a real release run." >&2
+  exit 1
+fi
+
+git config user.name "${RELEASE_GIT_NAME:-GitLab Release Bot}"
+git config user.email "${RELEASE_GIT_EMAIL:-gitlab-release-bot@users.noreply.local}"
+
+if ! git diff --quiet -- CHANGELOG.md; then
+  git add CHANGELOG.md
+  git commit -m "chore(release): v${next_version} [skip ci]"
+  push_url="https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+  git push "$push_url" HEAD:"${default_branch}"
+fi
+
+release_ref="$(git rev-parse HEAD)"
+release_payload="${temp_dir}/release.json"
+jq -n \
+  --arg name "v${next_version}" \
+  --arg tag_name "v${next_version}" \
+  --arg ref "$release_ref" \
+  --arg description "$(cat "$notes_file")" \
+  --arg tag_message "Release v${next_version}" \
+  '{name: $name, tag_name: $tag_name, ref: $ref, description: $description, tag_message: $tag_message}' \
+  > "$release_payload"
+
+status_code="$(curl --silent --show-error --output "${temp_dir}/release-response.json" --write-out '%{http_code}' \
+  --request POST \
+  --header "JOB-TOKEN: ${CI_JOB_TOKEN}" \
+  --header 'Content-Type: application/json' \
+  --data @"${release_payload}" \
+  "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/releases")"
+
+if [ "$status_code" != "201" ] && [ "$status_code" != "409" ]; then
+  cat "${temp_dir}/release-response.json" >&2
+  echo "Release API call failed with HTTP ${status_code}." >&2
+  exit 1
+fi
+
+echo "Release v${next_version} published."

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0",
+  "manifestRoot": "specs/intake-series",
+  "archiveRoot": "specs/intake-series-archive",
+  "requireExplicitWriteAuthority": true,
+  "allowPhysicalPurge": false,
+  "allowedEdgeTypes": [
+    "RequirementsGovernanceGate",
+    "HardCompletionGate",
+    "AssessmentBaseline",
+    "AssuranceAuditBaseline",
+    "PublishedPresetBaseline",
+    "SandboxBaseline",
+    "SecureDevelopmentBaseline",
+    "DocumentationSurfaceBaseline",
+    "CommentSurfaceBaseline",
+    "FinalAuditInput",
+    "PreferredSerialOrder",
+    "SharedWriterSerialization"
+  ],
+  "nextCommandStartsWork": false,
+  "languagePolicy": "RepositoryPolicy",
+  "accessibilityBaseline": "WCAG22AAWhereApplicable"
+}

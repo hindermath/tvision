@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hindermath/home-baseline/schemas/agentic-workspace-fleet.schema.json",
+  "title": "Agentic Workspace Fleet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "targets"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "level", "path", "active", "maintenanceClass"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "kind": { "enum": ["git-repository", "collection"] },
+          "level": { "enum": [1, 2] },
+          "path": { "type": "string", "minLength": 1 },
+          "active": { "type": "boolean" },
+          "maintenanceClass": { "enum": ["canonical-fleet", "preset"] },
+          "remote": { "type": "string", "minLength": 1 },
+          "forge": { "enum": ["github", "gitlab", "codeberg", "forgejo", "generic-git"] },
+          "defaultBranch": { "type": "string", "minLength": 1 },
+          "memberDiscovery": { "const": "declared-targets" }
+        }
+      }
+    }
+  }
+}

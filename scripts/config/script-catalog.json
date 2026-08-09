@@ -1,0 +1,126 @@
+{
+  "$schema": "./script-catalog.schema.json",
+  "schemaVersion": 1,
+  "updated": "2026-07-28",
+  "canonicalRoot": "scripts",
+  "categories": [
+    {
+      "id": "workspace",
+      "titleDe": "Workspace-Lebenszyklus",
+      "titleEn": "Workspace lifecycle",
+      "patterns": ["bootstrap-*", "migrate-workspace.*", "teardown-workspace.*", "sync-home.*"],
+      "purposeDe": "Erstellt, migriert, synchronisiert oder entfernt verwaltete Arbeitsumgebungen.",
+      "purposeEn": "Creates, migrates, synchronizes, or removes managed workspaces."
+    },
+    {
+      "id": "maintenance",
+      "titleDe": "Wartung und Toolchain",
+      "titleEn": "Maintenance and toolchain",
+      "patterns": ["maintain-*", "propagate-agentic-toolchain-maintenance.*", "invoke-psscriptanalyzer.ps1"],
+      "purposeDe": "Prueft und wartet die plattformgerechte Entwicklungs- und Agenten-Toolchain.",
+      "purposeEn": "Checks and maintains the platform-specific development and agent toolchain."
+    },
+    {
+      "id": "governance",
+      "titleDe": "Governance und Spec Kit",
+      "titleEn": "Governance and Spec Kit",
+      "patterns": ["install-spec-kit-*", "resolve-model-routing.*", "update-spec-kit.*", "sync-constitution.*", "register-level2-*", "check-gsdb-*"],
+      "purposeDe": "Installiert und prueft Spec-Kit-, Constitution- und Repository-Governance.",
+      "purposeEn": "Installs and checks Spec Kit, constitution, and repository governance."
+    },
+    {
+      "id": "security",
+      "titleDe": "Sicherheit und Audit",
+      "titleEn": "Security and audit",
+      "patterns": ["audit-*", "scan-agent-secrets.*", "prepare-secure-*", "build-secure-*", "propagate-security-*"],
+      "purposeDe": "Prueft Geheimnisse, Agentenaenderungen und sichere Entwicklungsartefakte.",
+      "purposeEn": "Checks secrets, agent changes, and secure-development artifacts."
+    },
+    {
+      "id": "quality",
+      "titleDe": "Qualitaetspruefungen",
+      "titleEn": "Quality checks",
+      "patterns": ["check-homogeneity.*", "test-homogeneity-runtime-closure.*", "check-learning-package.*", "install-hooks.*", "hooks/*", "tests/*"],
+      "purposeDe": "Fuehrt reproduzierbare Repository-, Paket- und Git-Hook-Pruefungen aus.",
+      "purposeEn": "Runs reproducible repository, package, and Git-hook checks."
+    },
+    {
+      "id": "statistics",
+      "titleDe": "Statistik",
+      "titleEn": "Statistics",
+      "patterns": ["init-stats.*", "render-project-statistics.*", "test-render-project-statistics.ps1"],
+      "purposeDe": "Initialisiert, rendert und testet das ASCII-Statistikprofil.",
+      "purposeEn": "Initializes, renders, and tests the ASCII statistics profile."
+    },
+    {
+      "id": "learning",
+      "titleDe": "Lernreihen",
+      "titleEn": "Learning series",
+      "patterns": ["package-learning-series.*", "prepare-rl-*", "propagate-learning-series.*", "rename-lastenheft.*"],
+      "purposeDe": "Prueft, paketiert und pflegt bilinguale Lernreihenartefakte.",
+      "purposeEn": "Checks, packages, and maintains bilingual learning-series artifacts."
+    },
+    {
+      "id": "agent-setup",
+      "titleDe": "Agenten-Einrichtung",
+      "titleEn": "Agent setup",
+      "patterns": ["setup-antigravity-*", "setup-claude-*", "setup-codex-*", "setup-copilot-*"],
+      "purposeDe": "Erzeugt sichere, plattformgerechte lokale Einstellungen fuer KI-Agenten.",
+      "purposeEn": "Creates secure, platform-appropriate local settings for AI agents."
+    },
+    {
+      "id": "hosting",
+      "titleDe": "Git und Hosting",
+      "titleEn": "Git and hosting",
+      "patterns": ["setup-git-*", "setup-gitlab-*"],
+      "purposeDe": "Konfiguriert Git-Identitaet und Hosting-spezifische Release-Automation.",
+      "purposeEn": "Configures Git identity and hosting-specific release automation."
+    },
+    {
+      "id": "platform-tests",
+      "titleDe": "Plattformtests",
+      "titleEn": "Platform tests",
+      "patterns": ["mac-test.sh", "linux-test.sh", "windows-test.ps1"],
+      "purposeDe": "Fuehrt den dokumentierten Plattformtest aus und publiziert dessen Ergebnis.",
+      "purposeEn": "Runs the documented platform test and publishes its result."
+    },
+    {
+      "id": "internal",
+      "titleDe": "Interne Bibliotheken",
+      "titleEn": "Internal libraries",
+      "patterns": ["lib/*"],
+      "purposeDe": "Stellt wiederverwendbare interne Funktionen fuer die oeffentlichen Skripte bereit.",
+      "purposeEn": "Provides reusable internal functions for public scripts."
+    },
+    {
+      "id": "templates",
+      "titleDe": "Ausfuehrbare Vorlagen",
+      "titleEn": "Executable templates",
+      "patterns": ["templates/*.sh", "templates/*.ps1"],
+      "purposeDe": "Dient als ausfuehrbare Vorlage, die durch Setup-Werkzeuge installiert wird.",
+      "purposeEn": "Acts as an executable template installed by setup tools."
+    },
+    {
+      "id": "source-migration",
+      "titleDe": "Level-0-Quellmigration",
+      "titleEn": "Level 0 source migration",
+      "patterns": ["migrate-level0-source-checkout.*"],
+      "purposeDe": "Prueft und migriert den dauerhaften Level-0-Checkout ohne Verlust lokaler Konfiguration.",
+      "purposeEn": "Checks and migrates the permanent Level 0 checkout without losing local configuration."
+    },
+    {
+      "id": "documentation",
+      "titleDe": "Skriptdokumentation",
+      "titleEn": "Script documentation",
+      "patterns": [
+        "render-script-reference.*",
+        "test-script-reference.ps1",
+        "validate-documentation-impact.*",
+        "test-documentation-impact.*"
+      ],
+      "purposeDe": "Validiert den Skriptbestand und erzeugt die zentrale Referenz.",
+      "purposeEn": "Validates the script inventory and renders the central reference."
+    }
+  ],
+  "excluded": []
+}

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.1",
+  "profiles": {
+    "codex-local": {
+      "routingRole": null,
+      "agentFamily": "Codex",
+      "model": null,
+      "reasoningEffort": null,
+      "executable": "codex",
+      "arguments": [
+        "exec",
+        "--cd",
+        "{worktree}",
+        "--add-dir",
+        "{resultDirectory}",
+        "--sandbox",
+        "workspace-write",
+        "{prompt}"
+      ]
+    },
+    "claude-code-local": {
+      "routingRole": null,
+      "agentFamily": "Claude Code",
+      "model": null,
+      "reasoningEffort": null,
+      "executable": "claude",
+      "arguments": [
+        "--print",
+        "--permission-mode",
+        "acceptEdits",
+        "{prompt}"
+      ]
+    },
+    "github-copilot-cli-local": {
+      "routingRole": null,
+      "agentFamily": "GitHub Copilot CLI",
+      "model": null,
+      "reasoningEffort": null,
+      "executable": "copilot",
+      "arguments": [
+        "--prompt",
+        "{prompt}"
+      ]
+    },
+    "google-antigravity-local": {
+      "routingRole": null,
+      "agentFamily": "Google Antigravity",
+      "model": null,
+      "reasoningEffort": null,
+      "executable": "agy",
+      "arguments": [
+        "--print",
+        "{prompt}",
+        "--mode",
+        "accept-edits",
+        "--sandbox",
+        "--add-dir",
+        "{worktree}"
+      ]
+    },
+    "opencode-local": {
+      "routingRole": null,
+      "agentFamily": "OpenCode",
+      "model": null,
+      "reasoningEffort": null,
+      "executable": "opencode",
+      "arguments": [
+        "run",
+        "--pure",
+        "--dir",
+        "{worktree}",
+        "{prompt}"
+      ]
+    },
+    "junie-local": {
+      "routingRole": null,
+      "agentFamily": "Junie",
+      "model": null,
+      "reasoningEffort": null,
+      "executable": "junie",
+      "arguments": [
+        "--project={worktree}",
+        "--task={prompt}",
+        "--output-format=json",
+        "--skip-update-check"
+      ]
+    }
+  },
+  "mergeProfiles": {},
+  "postMergeProfiles": {}
+}

@@ -1,0 +1,4 @@
+# Canonical generated documentation and its source template intentionally use
+# Markdown hard breaks. All other tracked files keep Git's whitespace checks.
+docs/scripts/reference.md -whitespace
+scripts/templates/workspace-readme-template.md -whitespace

@@ -60,3 +60,34 @@ CMakeScripts
 Makefile
 cmake_install.cmake
 compile_commands.json
+
+# Agentic Level-2 baseline: track governed source, documentation, and command
+# surfaces while keeping local caches and credentials excluded.
+!scripts/
+!scripts/**
+!docs/
+!docs/**
+
+!.specify/
+!.specify/**
+.specify/presets/.cache/
+.specify/presets/.cache/**
+.specify/integrations/.cache/
+.specify/integrations/.cache/**
+
+!.agents/
+.agents/*
+!.agents/skills/
+!.agents/skills/**
+
+!.claude/
+.claude/*
+!.claude/skills/
+!.claude/skills/**
+.claude/settings.local.json
+
+!.opencode/
+.opencode/*
+!.opencode/commands/
+!.opencode/commands/**
+.opencode/node_modules/

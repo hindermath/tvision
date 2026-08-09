@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "description": "Example registry for GSDB-relevant level-1 and level-2 repositories. Copy to ~/.home-baseline/level2-repository-registry.json and adapt paths for the local machine.",
+  "defaultPresetProfile": "model-routing-twelve-governance-presets",
+  "updatedAt": "2026-08-09",
+  "repositories": [
+    {
+      "path": "ExampleLearningSeriesProjects",
+      "level": 1,
+      "primaryLanguage": "none",
+      "mslStatus": "n/a",
+      "gsdbRequired": true,
+      "presetProfile": "standard-eight-governance-presets",
+      "role": "learning-series-coordination",
+      "source": "example",
+      "registeredAt": "2026-07-01"
+    },
+    {
+      "path": "ExampleLearningSeriesProjects/ExampleService-CSharp",
+      "level": 2,
+      "primaryLanguage": "C#",
+      "mslStatus": "msl",
+      "gsdbRequired": true,
+      "presetProfile": "standard-eight-governance-presets",
+      "role": "learning-series-reference",
+      "source": "example",
+      "registeredAt": "2026-07-01"
+    }
+  ]
+}
