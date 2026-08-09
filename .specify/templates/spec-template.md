@@ -1,11 +1,8 @@
 # Feature Specification: [FEATURE NAME]
 
 **Feature Branch**: `[###-feature-name]`
-
 **Created**: [DATE]
-
 **Status**: Draft
-
 **Input**: User description: "$ARGUMENTS"
 
 ## User Scenarios & Testing *(mandatory)*
@@ -97,6 +94,64 @@
 
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
+
+### Constitution Requirements *(mandatory)*
+
+- **CR-001**: If this feature targets a listed Level-2 project, the feature MUST
+  use the matching Level-2 Project Environment Registry entry from
+  `constitution.md` as binding project context.
+- **CR-002**: User-facing artefacts MUST identify their A11Y review path
+  (WCAG 2.2 Level AA where applicable, text-first fallback otherwise).
+  Dependencies, states, and decisions MUST remain understandable without a
+  visual-only representation.
+- **CR-003**: Learner-facing or shared guidance content MUST be DE-first,
+  EN-second unless a synchronized `.EN.md` companion is explicitly chosen.
+  It MUST target CEFR B2, explain technical terms at first use, assume no prior
+  Spec Kit experience, and be understandable from the first training year for
+  IT specialist apprentices and the two IT management occupations.
+- **CR-004**: The feature MUST state whether statistics and AI-agent guidance
+  files require synchronized updates.
+- **CR-005**: The feature MUST name its primary implementation language and
+  either confirm it is on the MSL allow-list (`constitution.md`, Principle XI)
+  or cite the documented non-MSL justification from the Level-2
+  `constitution.md`.
+- **CR-006**: The feature MUST determine the applicable security standards from
+  `constitution.md`, Principles XIV-XIX, and mark non-applicable standards
+  as `N/A` with justification. `NIST SSDF` and `CWE Top 25` are mandatory for
+  all Level-2 work.
+- **CR-007**: If the feature includes web/API/HTTP/auth-bearing services, it
+  MUST declare the selected `OWASP ASVS` level and verification scope.
+- **CR-008**: If the feature creates releasable or distributable artefacts, it
+  MUST declare the intended `SBOM` / `VEX` evidence path and any required
+  provenance / `SLSA` considerations.
+- **CR-009**: The feature MUST state whether AI is used only as a development
+  tool, absent from the released/operated system, or present as a runtime or
+  product component. If AI models, AI services, training/embedding datasets,
+  inference infrastructure, or AI runtime components are part of the released
+  or operated system, it MUST declare the intended `AI-SBOM` evidence path;
+  otherwise it MUST record `AI-SBOM` as `N/A` with a short rationale.
+- **CR-010**: If the feature changes trust boundaries, externally reachable
+  flows, or distributed/service architecture, it MUST state how `CAPEC` and
+  `Zero Trust` applicability will be handled.
+- **CR-011**: The feature MUST state whether it uses the default evidence files
+  in `docs/security/` (`asvs-verification.md`, `supply-chain-evidence.md`,
+  `zero-trust-applicability.md`, `samm-assessment.md`,
+  `cloud-autonomy-applicability.md`, `cloud-compliance-assurance.md`,
+  `regulatory-applicability.md`) or an explicitly justified equivalent
+  governance location.
+- **CR-012**: The feature MUST state which installed Spec-Kit governance
+  presets apply. Registered Level-0, Level-1, and Level-2 repositories default
+  to the exact eight-preset home-baseline matrix unless a justified exception
+  is documented.
+- **CR-013**: The feature MUST record exactly one Documentation Impact
+  decision: `UpdateRequired`, `NoUpdateRequired`, `GeneratedUpdate`, or
+  `FollowUp`. It MUST name affected audiences and documentation families.
+  It MUST also name affected reader paths, canonical source and owner,
+  navigation impact, document class, language strategy and partner,
+  platform/example proof, distribution class, Home-sync need, evidence, and
+  re-evaluation trigger.
+  `FollowUp` also requires owner, risk, due date, re-evaluation trigger,
+  evidence, and scope rationale.
 
 ### Key Entities *(include if feature involves data)*
 

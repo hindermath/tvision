@@ -43,6 +43,22 @@ Stand / As of: 2026-08-09 — *Erste Einträge nach dem initialen Arbeitspaket e
 | Repo-weiter Speedup gg. 80-Zeilen-Referenz | — |
 | Repo-weiter Speedup gg. Thorsten-Referenz | — |
 
+## Dokumentationsauswirkung / Documentation Impact
+
+Die im Fortschreibungsprotokoll erfasste Entscheidung `UpdateRequired` gilt
+für dieses Arbeitspaket.
+
+*The `UpdateRequired` decision recorded in the update log applies to this work
+package.*
+
+- Quelle und Owner / Source and owner: Benutzerauftrag und Level-0-Flottenmanifest; Owner Thorsten Hindermann.
+- Betroffene Dokumente / Affected documents: erhaltene Upstream-`README.md`, `constitution.md`, gemeinsame Agenten-Guidance, Skriptreferenz, Wartungs- und Preset-Dokumentation.
+- Zielgruppen und Leserpfad / Audiences and reader path: C++-/CLion-Nutzende und KI-Agenten starten in `README.md`, wechseln zu `constitution.md` und folgen für Automationen `docs/scripts/`.
+- Kanonische Quelle, Navigation und Dokumentklasse / Canonical source, navigation, and document class: `home-baseline-source` für Governance, `hindermath/tvision` für den Fork; verteilte Level-2-Governance mit bilingualer DE/EN-Führung.
+- Plattform- und Beispielnachweis / Platform and example evidence: macOS/Darwin, Bash-Vorschau und produktiver Lauf, C++14/CMake-Kontext sowie zwölf Presets exakt gegen die Matrix geprüft.
+- Distribution und Home-Sync / Distribution and home sync: repository distribution; kein zusätzlicher Home-Sync erforderlich.
+- Re-Evaluation / Re-evaluation: bei Änderung von C++-ABI-/Plattformzielen, Nicht-MSL-Begründung, Presetprofil oder Wartungspaket.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->

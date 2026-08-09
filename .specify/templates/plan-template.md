@@ -1,10 +1,9 @@
 # Implementation Plan: [FEATURE]
 
 **Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-
 **Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
 
-**Note**: This template is filled in by the `/speckit-plan` command; its definition describes the execution workflow.
+**Note**: This template is filled in by the `/speckit-plan` command. See `.specify/templates/plan-template.md` for the execution workflow.
 
 ## Summary
 
@@ -19,21 +18,13 @@
 -->
 
 **Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]
-
 **Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]
-
 **Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]
-
 **Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]
-
 **Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-
 **Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]
-
 **Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]
-
 **Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]
-
 **Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
 
 ## Constitution Check
@@ -41,6 +32,81 @@
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
 [Gates determined based on constitution file]
+
+- **Level-2 environment**: If this plan targets a listed Level-2 project, it
+  MUST cite the matching row from the Level-2 Project Environment Registry in
+  `constitution.md` and use its runtime, build/test, docs/A11Y, statistics, and
+  agent-surface baselines.
+- **Memory-safe languages (MSL)**: State the primary implementation language
+  and confirm it is on the MSL allow-list in `constitution.md`, Principle XI.
+  If the primary language is not an MSL (e.g. C, C++, Assembly, `cc65`), cite
+  the justification recorded in the Level-2 `constitution.md`.
+- **Secure code generation**: Confirm that AI-generated code will follow the
+  language-specific secure-coding rules in `constitution.md`, Principle XII
+  (OWASP Top 10 avoidance, parameterised queries, output encoding, quoted
+  variables, current cryptographic algorithms, no internal state exposure).
+- **Secure software architecture**: Confirm the architecture follows the
+  secure-architecture principles in `constitution.md`, Principle XIII (trust
+  boundaries, defense in depth, least privilege, fail-safe defaults, attack
+  surface reduction, separation of concerns, secure configuration, supply-chain
+  security). State how trust boundaries and layered security apply.
+- **Security documentation**: Identify which mandatory security documents apply
+  (threat model, S-ADRs, arc42 Section 8 security concepts, security checklist,
+  dependency audit, security quality scenarios). State whether `docs/security/`
+  needs new or updated documents. Templates: `.specify/templates/`.
+- **Security standards applicability**: Determine which standards from
+  `constitution.md`, Principles XIV-XIX apply. `NIST SSDF` and `CWE Top 25`
+  always apply to Level-2; add `OWASP ASVS`, `SBOM`, `VEX`, `SLSA`, `CAPEC`,
+  `AI-SBOM`, `NIST Zero Trust`, `BSI C3A`, `BSI C5`, `OWASP SAMM`,
+  regulatory applicability (`NIS2`, `CRA`, `EU AI Act`, `DORA`),
+  `OWASP Cheat Sheet Series` / `OWASP Proactive Controls`, and
+  `OpenSSF Scorecard` where relevant. Mark non-applicable standards as `N/A`
+  with justification.
+- **AI-SBOM applicability**: State whether AI is used only as a development
+  tool, absent from the released/operated system, or present as a runtime or
+  product component. If AI runtime or product components are present, plan the
+  G7/BSI AI-SBOM evidence across metadata, system-level properties, models,
+  datasets, infrastructure, security properties, and key performance
+  indicators. If not, record the `N/A` rationale.
+- **Release / supply-chain evidence**: State whether the feature requires
+  ASVS verification notes, SBOM/VEX artefacts, AI-SBOM evidence,
+  provenance/SLSA evidence, CAPEC references, Zero-Trust applicability notes,
+  BSI C3A cloud-autonomy applicability, BSI C5 cloud-compliance assurance,
+  regulatory applicability, or SAMM follow-up items, and where that evidence
+  will live.
+- **Default evidence files**: Prefer `docs/security/asvs-verification.md`,
+  `docs/security/supply-chain-evidence.md`,
+  `docs/security/zero-trust-applicability.md`,
+  `docs/security/samm-assessment.md`, and
+  `docs/security/cloud-autonomy-applicability.md`,
+  `docs/security/cloud-compliance-assurance.md`, and
+  `docs/security/regulatory-applicability.md`. If the repository uses an
+  equivalent governance location, state that path explicitly and justify the
+  deviation.
+- **Spec-Kit presets**: List installed governance presets and confirm their
+  applicability. Registered Level-0, Level-1, and Level-2 repositories default
+  to the exact eight-preset home-baseline matrix unless a justified exception
+  is documented.
+- **Security-first**: Confirm no credential files, agent state, logs, history,
+  or SQLite state are planned for tracking.
+- **Inclusion/A11Y**: Identify affected user-facing artefacts and the WCAG 2.2
+  Level AA or text-first review path. Confirm that dependencies, states, and
+  decisions do not rely on a visual-only representation.
+- **Bilingual delivery**: State how DE-first/EN-second requirements apply.
+- **Learner baseline**: State how CEFR B2, first-use explanations of technical
+  terms, no assumed Spec Kit experience, and first-training-year comprehension
+  for IT specialist apprentices and the two IT management occupations apply.
+- **Statistics**: State whether `docs/project-statistics.md` needs an update
+  and which manual/Thorsten-Solo baseline applies.
+- **Agent guidance parity**: State whether `AGENTS.md`, `CLAUDE.md`,
+  `GEMINI.md`, and `.github/copilot-instructions.md` are affected together.
+- **Documentation Impact**: Select exactly one of `UpdateRequired`,
+  `NoUpdateRequired`, `GeneratedUpdate`, or `FollowUp`. Identify source of
+  truth, owner, affected documents, generated derivations, validation, and
+  review evidence. Record audience and reader path, navigation impact, document
+  class, language partner, platform/example proof, distribution class,
+  Home-sync need, and re-evaluation trigger. A `FollowUp` needs owner, risk,
+  due date, trigger, evidence, and scope rationale.
 
 ## Project Structure
 
