@@ -116,6 +116,7 @@ Welcome! Here are your first steps:
 - Heading-Hierarchie ohne Lücken einhalten
 - `Programmierung #include<everyone>` gilt für alle nutzerseitigen Artefakte: CLI-Ausgaben, Doku, HTML, UI und generierte Templates.
 - WCAG 2.2 Level AA ist die Standard-Basis, sobald die Kriterien auf das Artefakt anwendbar sind.
+- Nach vollständig beendeten Python-Testläufen dürfen regenerierbare `__pycache__/`-Verzeichnisse und `*.pyc`-, `*.pyo`- und `*.pyd`-Dateien entfernt werden; niemals löschen, solange ein zugehöriger Python-Prozess noch läuft.
 - Shared guidance wird immer gemeinsam in `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md` und `.github/agents/copilot-instructions.md` gepflegt.
 
 - No ANSI color codes in script output
@@ -123,6 +124,7 @@ Welcome! Here are your first steps:
 - Maintain heading hierarchy without gaps
 - `Programmierung #include<everyone>` applies to all user-facing artefacts: CLI output, docs, HTML, UI, and generated templates.
 - WCAG 2.2 Level AA is the default baseline wherever the criteria apply.
+- After Python test runs have fully finished, regenerable `__pycache__/` directories and `*.pyc`, `*.pyo`, and `*.pyd` files may be removed; never delete them while a related Python process is still running.
 - Keep shared guidance synchronized across `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, and `.github/agents/copilot-instructions.md`.
 
 ## GitHub/GitLab CLI First / GitHub/GitLab CLI zuerst

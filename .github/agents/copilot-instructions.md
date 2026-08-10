@@ -16,6 +16,10 @@ It keeps the project-specific facts for agentic work concise and text-oriented.*
   Änderungen eine explizite Secure-Coding-Prüfung.
 - Bestehende englische Upstream-Dokumentation bleibt erhalten. Neue lokale
   Governance-Inhalte stehen Deutsch zuerst und Englisch danach.
+- Nach vollständig beendeten Python-Testläufen dürfen regenerierbare
+  `__pycache__/`-Verzeichnisse und `*.pyc`-, `*.pyo`- und `*.pyd`-Dateien
+  entfernt werden; niemals löschen, solange ein zugehöriger Python-Prozess
+  noch läuft.
 - Die konservative und vorläufige Thorsten-Solo-Referenz beträgt jeweils
   `80` Zeilen/Arbeitstag; ein eigener C++-Speedup braucht eine begründete
   Neufestlegung.
@@ -25,5 +29,8 @@ Borland/Turbo Vision source and ABI compatibility across Unix, Windows, and
 DOS targets. Changes require explicit secure-coding review of input, buffer
 bounds, pointer lifetimes, and terminal I/O. Existing English upstream
 documentation is preserved; new local governance content is German-first and
-English-second. Both conservative and provisional Thorsten-solo references
+English-second. After Python test runs have fully finished, regenerable
+`__pycache__/` directories and `*.pyc`, `*.pyo`, and `*.pyd` files may be
+removed; never delete them while a related Python process is still running.
+Both conservative and provisional Thorsten-solo references
 remain `80` lines per workday until a justified C++ baseline is adopted.*
