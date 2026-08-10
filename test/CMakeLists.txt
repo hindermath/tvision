@@ -9,14 +9,11 @@ if (TV_BUILD_TESTS)
     tv_add_private_includes(${PROJECT_NAME}-test)
     tv_set_warnings(${PROJECT_NAME}-test)
 
-    find_library(GTEST gtest REQUIRED)
-    tv_message(STATUS "Found 'gtest': ${GTEST}")
-    find_library(GTEST_MAIN gtest_main REQUIRED)
-    tv_message(STATUS "Found 'gtest_main': ${GTEST_MAIN}")
+    find_package(GTest REQUIRED)
     target_link_libraries(${PROJECT_NAME}-test PRIVATE
         ${PROJECT_NAME}
-        ${GTEST}
-        ${GTEST_MAIN}
+        GTest::GTest
+        GTest::Main
     )
 
     if (NOT WIN32)
