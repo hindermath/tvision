@@ -69,25 +69,25 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 200253 lines |
+| Textbasis / Text base | 200268 lines |
 | Textdateien / Text files | 1201 |
 | Beobachtbarer Zeitraum / Observable period | 2025-08-17..2026-08-10 |
 | Aktivtage / Active days | 25 |
-| Relevante Commits / Relevant commits | 51 |
-| Zeilen je Aktivtag / Lines per active day | 8010.1 |
+| Relevante Commits / Relevant commits | 52 |
+| Zeilen je Aktivtag / Lines per active day | 8010.7 |
 | Peak-Tag im Fenster / Peak day in window | 2026-08-09 / 133528 |
-| Peak-Woche im Fenster / Peak week in window | 2026-08-09 / 133667 |
+| Peak-Woche im Fenster / Peak week in window | 2026-08-09 / 133684 |
 | Laengste Serie / Longest streak | 3 days |
 | Speedup vs. 80 lines/day | 100.1x |
 | Speedup vs. 80 lines/day | 100.1x |
-| Methodik / Methodology | v2; source `8114ef2499e2` |
+| Methodik / Methodology | v2; source `c42380a41bde` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [######..............]  30.1% | 60218
 Tests                           [#...................]   4.5% | 8951
-Dokumentation / Documentation   [#########...........]  44.3% | 88766
+Dokumentation / Documentation   [#########...........]  44.3% | 88781
 Skripte / Scripts               [####................]  19.9% | 39863
 Konfiguration / Configuration   [#...................]   0.2% | 376
 Daten und Medien / Data and media [....................]   0.0% | 0
@@ -217,7 +217,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..10000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 80
-Visible repository [################....] 8010.1
+Visible repository [################....] 8010.7
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -226,9 +226,9 @@ Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schre
 
 ### Textalternative / Text Alternative
 
-DE: Das Fenster beginnt am 2025-08-17 und endet am 2026-08-10. Es enthaelt 25 aktive und 334 inaktive vergangene Tage. Peak-Tag: 2026-08-09 / 133528. Peak-Woche: 2026-08-09 / 133667. Laengste Serie: 3 Tage (2025-10-07..2025-10-09).
+DE: Das Fenster beginnt am 2025-08-17 und endet am 2026-08-10. Es enthaelt 25 aktive und 334 inaktive vergangene Tage. Peak-Tag: 2026-08-09 / 133528. Peak-Woche: 2026-08-09 / 133684. Laengste Serie: 3 Tage (2025-10-07..2025-10-09).
 
-*EN: The window starts on 2025-08-17 and ends on 2026-08-10. It contains 25 active and 334 inactive elapsed days. Peak day: 2026-08-09 / 133528. Peak week: 2026-08-09 / 133667. Longest streak: 3 days (2025-10-07..2025-10-09).*
+*EN: The window starts on 2025-08-17 and ends on 2026-08-10. It contains 25 active and 334 inactive elapsed days. Peak day: 2026-08-09 / 133528. Peak week: 2026-08-09 / 133684. Longest streak: 3 days (2025-10-07..2025-10-09).*
 
 | Monat / Month | Geaenderte Textzeilen / Changed text lines |
 |---|---:|
@@ -243,6 +243,6 @@ DE: Das Fenster beginnt am 2025-08-17 und endet am 2026-08-10. Es enthaelt 25 ak
 | 2026-05 | 190 |
 | 2026-06 | 0 |
 | 2026-07 | 0 |
-| 2026-08 | 133667 |
+| 2026-08 | 133684 |
 
 <!-- project-statistics-v2:end -->
