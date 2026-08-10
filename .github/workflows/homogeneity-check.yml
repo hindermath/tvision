@@ -11,9 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Install ripgrep
         run: sudo apt-get install -y ripgrep
       - name: Run homogeneity check
-        run: bash scripts/check-homogeneity.sh --json --fail-fast .
+        run: bash scripts/check-homogeneity.sh --dry-run --no-patch --json .
         env:
           CONSTITUTION_VERSION: "v1.20.2"

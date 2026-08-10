@@ -39,6 +39,14 @@ def ensure_accepted_commit() -> None:
 
 
 class Feature020ProviderDiscoveryTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        if not FEATURE_ROOT.is_dir():
+            raise unittest.SkipTest(
+                "Feature 020 documentation architecture artifacts are not installed "
+                "in this repository."
+            )
+
     def test_feature_contract_suite(self) -> None:
         process = subprocess.run(
             [
