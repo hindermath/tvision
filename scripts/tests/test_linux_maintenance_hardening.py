@@ -878,6 +878,7 @@ exit 2
             for label, sent_signal, exit_code, overall in cases:
                 with self.subTest(label=label):
                     report_path = root / f"{label}.json"
+                    ready_path = root / f"{label}.ready"
                     write_json(report_path, base_report(f"run-{label.lower()}"))
                     harness = root / f"{label}.sh"
                     body = (
@@ -898,6 +899,8 @@ exit 2
                         "trap 'handle_signal INT 130' INT\n"
                         "trap 'handle_signal TERM 143' TERM\n"
                     )
+                    if sent_signal:
+                        body += f": > {shlex.quote(str(ready_path))}\n"
                     body += "while :; do sleep 1; done\n" if sent_signal else "false\n"
                     write_executable(harness, body)
                     process = subprocess.Popen(
@@ -909,9 +912,35 @@ exit 2
                         start_new_session=True,
                     )
                     if sent_signal:
-                        time.sleep(0.2)
+                        deadline = time.monotonic() + 5
+                        while not ready_path.exists():
+                            if process.poll() is not None:
+                                stdout, _ = process.communicate(timeout=5)
+                                self.fail(
+                                    "signal harness exited before becoming ready:\n"
+                                    f"{stdout}"
+                                )
+                            if time.monotonic() >= deadline:
+                                try:
+                                    os.killpg(process.pid, signal.SIGKILL)
+                                except ProcessLookupError:
+                                    pass
+                                stdout, _ = process.communicate(timeout=5)
+                                self.fail(
+                                    "signal harness did not become ready within 5 seconds:\n"
+                                    f"{stdout}"
+                                )
+                            time.sleep(0.01)
                         os.killpg(process.pid, sent_signal)
-                    stdout, _ = process.communicate(timeout=5)
+                    try:
+                        stdout, _ = process.communicate(timeout=5)
+                    except subprocess.TimeoutExpired:
+                        try:
+                            os.killpg(process.pid, signal.SIGKILL)
+                        except ProcessLookupError:
+                            pass
+                        stdout, _ = process.communicate(timeout=5)
+                        self.fail(f"harness did not exit within 5 seconds:\n{stdout}")
                     self.assertEqual(process.returncode, exit_code, stdout)
                     self.assertEqual(stdout.count("ABSCHLUSS / FINAL"), 1, stdout)
                     report = json.loads(report_path.read_text(encoding="utf-8"))
