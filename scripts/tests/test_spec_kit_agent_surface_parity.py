@@ -29,12 +29,18 @@ def strip_frontmatter(text: str) -> str:
 
 def command_path(surface: str, command: str) -> Path:
     skill = command.replace(".", "-")
+    opencode_commands = REPOSITORY / ".opencode" / "commands"
     layouts = {
         "agy": REPOSITORY / ".agents" / "skills" / skill / "SKILL.md",
         "codex": REPOSITORY / ".agents" / "skills" / skill / "SKILL.md",
         "claude": REPOSITORY / ".claude" / "skills" / skill / "SKILL.md",
         "copilot": REPOSITORY / ".github" / "agents" / f"{command}.agent.md",
-        "opencode": REPOSITORY / ".opencode" / "command" / f"{command}.md",
+        "opencode": (
+            opencode_commands
+            if opencode_commands.is_dir()
+            else REPOSITORY / ".opencode" / "command"
+        )
+        / f"{command}.md",
     }
     return layouts[surface]
 
