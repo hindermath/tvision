@@ -68,6 +68,10 @@ compile_commands.json
 !docs/
 !docs/**
 
+# Regenerable Python bytecode / Regenerierbarer Python-Bytecode
+scripts/**/__pycache__/
+scripts/**/*.py[cod]
+
 !.specify/
 !.specify/**
 .specify/presets/.cache/
