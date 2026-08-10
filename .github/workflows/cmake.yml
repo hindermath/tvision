@@ -75,7 +75,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Build in container
-      uses: uraimo/run-on-arch-action@v2
+      uses: uraimo/run-on-arch-action@fd7aa8593480287702b446a273a68f788a9bad3a # v3.1.0
       with:
         arch: s390x
         distro: alpine_latest
