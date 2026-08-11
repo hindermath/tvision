@@ -15,6 +15,7 @@
 | Datum / Date | Phase / Branch | Aktivtage ges. | Zeilen ges. | Commits ges. | Hauptarbeitspakete / Main Work Packages |
 |---|---|---:|---:|---:|---|
 | 2026-08-09 | 0 — Bootstrap | 1 | — | 1 | Documentation Impact `UpdateRequired`: Level-2-Governance, C++14/CMake-Kontext, begruendete Nicht-MSL-Ausnahme, Zwölfer-Presetprofil und Wartungspaket via `bootstrap-project`; bestehende Upstream-README und Produktquellen bleiben unverändert. |
+| 2026-08-11 | Cross-platform development guide | 26 | 202979 | 53 | Documentation Impact `UpdateRequired`: ausfuehrliche bilinguale Anleitung fuer CLion, CMake-Kommandozeile und VS Code Light unter macOS, Windows und Linux; macOS Develop-First, reproduzierbares FetchContent-Pinning und 8-GB-/Small-Disk-Profil. |
 
 ---
 
@@ -46,10 +47,10 @@ Stand / As of: 2026-08-09 — *Erste Einträge nach dem initialen Arbeitspaket e
 ## Dokumentationsauswirkung / Documentation Impact
 
 Die im Fortschreibungsprotokoll erfasste Entscheidung `UpdateRequired` gilt
-für dieses Arbeitspaket.
+für das jeweilige Arbeitspaket.
 
-*The `UpdateRequired` decision recorded in the update log applies to this work
-package.*
+*The `UpdateRequired` decision recorded in each update-log entry applies to
+that work package.*
 
 - Quelle und Owner / Source and owner: Benutzerauftrag und Level-0-Flottenmanifest; Owner Thorsten Hindermann.
 - Betroffene Dokumente / Affected documents: erhaltene Upstream-`README.md`, `constitution.md`, gemeinsame Agenten-Guidance, Skriptreferenz, Wartungs- und Preset-Dokumentation.
@@ -58,6 +59,16 @@ package.*
 - Plattform- und Beispielnachweis / Platform and example evidence: macOS/Darwin, Bash-Vorschau und produktiver Lauf, C++14/CMake-Kontext sowie zwölf Presets exakt gegen die Matrix geprüft.
 - Distribution und Home-Sync / Distribution and home sync: repository distribution; kein zusätzlicher Home-Sync erforderlich.
 - Re-Evaluation / Re-evaluation: bei Änderung von C++-ABI-/Plattformzielen, Nicht-MSL-Begründung, Presetprofil oder Wartungspaket.
+
+### Cross-platform development guide 2026-08-11
+
+- Quelle und Owner / Source and owner: Benutzerauftrag, lokale CMake-Zieldefinitionen und native macOS-Validierung; Owner Thorsten Hindermann.
+- Betroffene Dokumente / Affected documents: `docs/clion-cross-platform-tvision-development.md` und dieses Statistik-Ledger.
+- Zielgruppen und Leserpfad / Audiences and reader path: Entwickler waehlen CLion, CMake-Kommandozeile oder VS Code Light und bauen danach denselben gepinnten Fork-Stand nativ auf macOS, Windows und Linux.
+- Kanonische Quelle, Navigation und Dokumentklasse / Canonical source, navigation, and document class: Level-2-CMake-Code als technische Quelle; bilingualer Entwicklerguide unter `docs/`.
+- Plattform- und Beispielnachweis / Platform and example evidence: CMake-Preset-Schema, AppleClang-FetchContent-Build und interaktiver TUI-Start auf dem 8-GB-Develop-First-Mac; Windows und Linux bleiben native Kontrollschritte.
+- Distribution und Home-Sync / Distribution and home sync: repository-spezifische Quellcode-Abhaengigkeit ueber FetchContent; kein Home-Sync.
+- Re-Evaluation / Re-evaluation: bei Aenderung von tvision-CMake-Zielen, Plattformen, CMake Presets, CLion oder den Microsoft-Erweiterungen C/C++ und CMake Tools.
 
 ## Gesamtstatistik / Overall Statistics
 
@@ -69,26 +80,26 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 200268 lines |
-| Textdateien / Text files | 1201 |
-| Beobachtbarer Zeitraum / Observable period | 2025-08-17..2026-08-10 |
-| Aktivtage / Active days | 25 |
-| Relevante Commits / Relevant commits | 52 |
-| Zeilen je Aktivtag / Lines per active day | 8010.7 |
+| Textbasis / Text base | 202979 lines |
+| Textdateien / Text files | 1202 |
+| Beobachtbarer Zeitraum / Observable period | 2025-08-17..2026-08-11 |
+| Aktivtage / Active days | 26 |
+| Relevante Commits / Relevant commits | 53 |
+| Zeilen je Aktivtag / Lines per active day | 7806.9 |
 | Peak-Tag im Fenster / Peak day in window | 2026-08-09 / 133528 |
-| Peak-Woche im Fenster / Peak week in window | 2026-08-09 / 133684 |
+| Peak-Woche im Fenster / Peak week in window | 2026-08-09 / 136395 |
 | Laengste Serie / Longest streak | 3 days |
-| Speedup vs. 80 lines/day | 100.1x |
-| Speedup vs. 80 lines/day | 100.1x |
-| Methodik / Methodology | v2; source `c42380a41bde` |
+| Speedup vs. 80 lines/day | 97.6x |
+| Speedup vs. 80 lines/day | 97.6x |
+| Methodik / Methodology | v2; source `2a8f2be64129` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
-Produktiv / Production          [######..............]  30.1% | 60218
-Tests                           [#...................]   4.5% | 8951
-Dokumentation / Documentation   [#########...........]  44.3% | 88781
-Skripte / Scripts               [####................]  19.9% | 39863
+Produktiv / Production          [######..............]  29.7% | 60218
+Tests                           [#...................]   4.4% | 8951
+Dokumentation / Documentation   [#########...........]  45.1% | 91492
+Skripte / Scripts               [####................]  19.6% | 39863
 Konfiguration / Configuration   [#...................]   0.2% | 376
 Daten und Medien / Data and media [....................]   0.0% | 0
 Sonstiger Text / Other text     [#...................]   1.0% | 2079
@@ -115,7 +126,7 @@ Sa/Sa  1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0
 Wochen / Weeks 27..52 | 2026-02-15..2026-08-15
 So/Su  0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 4
 Mo/Mo  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2
-Di/Tu  0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 -
+Di/Tu  0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 4
 Mi/We  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -
 Do/Th  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -
 Fr/Fr  0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -
@@ -202,9 +213,9 @@ Es liegen keine belastbaren Phasendaten vor. Deshalb zeigt dieses Diagramm Monat
 ### Beschleunigungsfaktoren / Acceleration Factors
 
 ```text
-Scale: 0..200x
-80 lines/day       [##########..........] 100.1x
-80 lines/day       [##########..........] 100.1x
+Scale: 0..100x
+80 lines/day       [####################] 97.6x
+80 lines/day       [####################] 97.6x
 ```
 
 Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen Referenzen. Sie messen keine Arbeitszeit.
@@ -217,7 +228,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..10000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 80
-Visible repository [################....] 8010.7
+Visible repository [################....] 7806.9
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -226,9 +237,9 @@ Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schre
 
 ### Textalternative / Text Alternative
 
-DE: Das Fenster beginnt am 2025-08-17 und endet am 2026-08-10. Es enthaelt 25 aktive und 334 inaktive vergangene Tage. Peak-Tag: 2026-08-09 / 133528. Peak-Woche: 2026-08-09 / 133684. Laengste Serie: 3 Tage (2025-10-07..2025-10-09).
+DE: Das Fenster beginnt am 2025-08-17 und endet am 2026-08-11. Es enthaelt 26 aktive und 334 inaktive vergangene Tage. Peak-Tag: 2026-08-09 / 133528. Peak-Woche: 2026-08-09 / 136395. Laengste Serie: 3 Tage (2025-10-07..2025-10-09).
 
-*EN: The window starts on 2025-08-17 and ends on 2026-08-10. It contains 25 active and 334 inactive elapsed days. Peak day: 2026-08-09 / 133528. Peak week: 2026-08-09 / 133684. Longest streak: 3 days (2025-10-07..2025-10-09).*
+*EN: The window starts on 2025-08-17 and ends on 2026-08-11. It contains 26 active and 334 inactive elapsed days. Peak day: 2026-08-09 / 133528. Peak week: 2026-08-09 / 136395. Longest streak: 3 days (2025-10-07..2025-10-09).*
 
 | Monat / Month | Geaenderte Textzeilen / Changed text lines |
 |---|---:|
@@ -243,6 +254,6 @@ DE: Das Fenster beginnt am 2025-08-17 und endet am 2026-08-10. Es enthaelt 25 ak
 | 2026-05 | 190 |
 | 2026-06 | 0 |
 | 2026-07 | 0 |
-| 2026-08 | 133684 |
+| 2026-08 | 136395 |
 
 <!-- project-statistics-v2:end -->
