@@ -1,0 +1,8 @@
+/build/
+/cmake-build-*/
+/CMakeUserPresets.json
+*.a
+*.lib
+*.exe
+*.pdb
+*.dSYM/

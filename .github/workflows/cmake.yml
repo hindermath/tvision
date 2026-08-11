@@ -238,3 +238,41 @@ jobs:
     - name: Build
       shell: bash
       run: cmake --build . -j$(sysctl -n hw.logicalcpu)
+
+  build-standalone-calculator:
+    name: Standalone Calculator (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+        - macos-latest
+        - ubuntu-latest
+        - windows-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Linux dependencies
+      if: runner.os == 'Linux'
+      run: sudo apt-get -y install libncursesw5-dev
+
+    - name: Configure stand-alone calculator
+      run: >-
+        cmake
+        -S docs/examples/tvision-calculator
+        -B build/standalone-calculator
+        -DCMAKE_BUILD_TYPE=Release
+        -DBUILD_TESTING=ON
+        "-DFETCHCONTENT_SOURCE_DIR_TVISION=${{ github.workspace }}"
+
+    - name: Build stand-alone calculator
+      run: >-
+        cmake --build build/standalone-calculator
+        --config Release
+        --parallel 2
+
+    - name: Test calculator engine
+      run: >-
+        ctest --test-dir build/standalone-calculator
+        -C Release
+        --output-on-failure
