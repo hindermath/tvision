@@ -681,6 +681,166 @@ erzeugte View.
 Buildweisen beschreibt. `CMakeUserPresets.json` bleibt lokal, wenn es absolute
 Pfade, persoenliche Compiler oder andere maschinenspezifische Werte enthaelt.
 
+#### 16.5 Vom neuen Verzeichnis zum eigenstaendigen Calculator
+
+Die Abschnitte 3 und 16 beantworten bereits den allgemeinen Fall: Ein eigenes
+Verzeichnis erhaelt ein eigenes `project()`, ein eigenes Programmziel und bindet
+den tvision-Fork ueber `FetchContent` ein. Als vollstaendig ausfuehrbares
+Lernbeispiel liegt zusaetzlich der
+[eigenstaendige tvision-Calculator](examples/tvision-calculator/README.md) vor.
+Er ist ein separates CMake-Projekt und verwendet keine internen Funktionen aus
+`examples/CMakeLists.txt` des tvision-Forks.
+
+##### 16.5.1 Leeres Projekt manuell anlegen
+
+macOS und Linux:
+
+```bash
+mkdir -p mein-tvision-calculator/src mein-tvision-calculator/tests
+cd mein-tvision-calculator
+git init
+```
+
+Windows PowerShell:
+
+```powershell
+New-Item -ItemType Directory -Force mein-tvision-calculator/src
+New-Item -ItemType Directory -Force mein-tvision-calculator/tests
+Set-Location mein-tvision-calculator
+git init
+```
+
+Danach werden die folgenden Dateien im neuen Verzeichnis angelegt:
+
+```text
+mein-tvision-calculator/
+|-- .gitignore
+|-- CMakeLists.txt
+|-- CMakePresets.json
+|-- README.md
+|-- src/
+|   |-- calculator_engine.cpp
+|   |-- calculator_engine.h
+|   `-- main.cpp
+`-- tests/
+    `-- calculator_engine_test.cpp
+```
+
+Die gleichnamigen Dateien im mitgelieferten Beispiel sind die kopierbare
+Referenz. `CMakeLists.txt` definiert das eigenstaendige Projekt
+`TvisionCalculator`, ruft den unveraenderlichen tvision-Commit ab und linkt nur
+das Ziel `tvision_calculator` gegen `tvision::tvision`. Absolute Include- oder
+Bibliothekspfade sind nicht erforderlich.
+
+##### 16.5.2 Das fertige Geruest kopieren
+
+Wer nicht jede Datei einzeln anlegen moechte, kopiert vom Wurzelverzeichnis des
+tvision-Forks aus das vollstaendige Referenzprojekt neben den Fork.
+
+macOS oder Linux:
+
+```bash
+cp -R docs/examples/tvision-calculator ../mein-tvision-calculator
+cd ../mein-tvision-calculator
+git init
+```
+
+PowerShell:
+
+```powershell
+Copy-Item -Recurse docs/examples/tvision-calculator ../mein-tvision-calculator
+Set-Location ../mein-tvision-calculator
+git init
+```
+
+Nach dem Kopieren ist `mein-tvision-calculator` ein eigenes Repository. Der
+urspruengliche lokale tvision-Klon wird fuer normale Builds nicht verwendet;
+FetchContent holt den in `GIT_TAG` festgelegten Stand in den lokalen Buildbaum
+des Calculators.
+
+##### 16.5.3 Aufbau und Bedienmodell
+
+Die neu geschriebene `calculator::Engine` enthaelt die vier Grundrechenarten,
+Ziffern, Dezimalpunkt, Gleich und Loeschen. Die tvision-Oberflaeche in
+`src/main.cpp` uebersetzt Tastatur- und Schaltflaechenereignisse in diese
+Engine und zeichnet deren Anzeige. Dadurch kann CTest die Rechenregeln ohne
+interaktives Terminal testen.
+
+Operationen werden wie bei einem einfachen Taschenrechner sofort von links
+nach rechts ausgewertet. `2 + 3 * 4 =` ergibt daher `20`. Division durch null
+zeigt `Error`; nur `C` setzt den Fehlerzustand vollstaendig zurueck. Ziffern,
+`.` sowie `+`, `-`, `*`, `/`, `=` und Enter funktionieren ohne Maus. Escape
+schliesst den Dialog ueber das normale Verhalten von `TDialog`.
+
+Der Beispielcode ist vom Bedienkonzept des TVDemo-Calculators inspiriert, aber
+neu implementiert. Historischer Borland-Quellcode wird nicht in das neue
+Stand-alone-Projekt kopiert.
+
+##### 16.5.4 Konfigurieren, bauen, testen und starten
+
+macOS:
+
+```bash
+cmake --preset macos-debug
+cmake --build --preset macos-debug
+ctest --preset macos-debug
+./build/macos-debug/tvision_calculator
+```
+
+Linux:
+
+```bash
+cmake --preset linux-debug
+cmake --build --preset linux-debug
+ctest --preset linux-debug
+./build/linux-debug/tvision_calculator
+```
+
+Windows in einer Developer PowerShell:
+
+```powershell
+cmake --preset windows-debug
+cmake --build --preset windows-debug
+ctest --preset windows-debug
+./build/windows-debug/Debug/tvision_calculator.exe
+```
+
+Ein Ein-Konfigurationsgenerator unter Windows kann die EXE stattdessen direkt
+unter `build/windows-debug/` ablegen. Die Presets verwenden bewusst den
+Standardgenerator des jeweiligen Systems und begrenzen den Build auf zwei
+parallele Jobs. Deshalb ist Ninja fuer dieses Beispiel optional. Bei hohem
+Speicherdruck wird mit einem direkten `cmake --build ... --parallel 1`
+fortgesetzt.
+
+##### 16.5.5 CLion, VS Code und lokaler tvision-Override
+
+In CLion wird `mein-tvision-calculator` als eigenes Projekt geoeffnet. Das
+passende Host-Preset wird ausgewaehlt und `tvision_calculator` als Run-Ziel in
+einem interaktiven Terminal gestartet. VS Code verwendet denselben Quellbaum:
+
+```bash
+code .
+```
+
+Danach folgen `CMake: Select Configure Preset`, `CMake: Build` und der Start im
+integrierten Terminal. Ein reines Output-Panel ist fuer eine interaktive TUI
+nicht ausreichend.
+
+Der normale Verbraucherweg bleibt der festgelegte Remote-Commit. Nur fuer
+gezielte Maintainer- und CI-Pruefungen kann CMake ohne Dateiaenderung auf einen
+lokalen tvision-Checkout zeigen:
+
+```bash
+cmake -S . -B build/local-source \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DFETCHCONTENT_SOURCE_DIR_TVISION=/vollstaendiger/pfad/zu/tvision
+cmake --build build/local-source --parallel 2
+ctest --test-dir build/local-source --output-on-failure
+```
+
+Der absolute Pfad bleibt maschinenlokal und wird weder in `CMakeLists.txt` noch
+in ein geteiltes Preset geschrieben.
+
 ### 17. Das CMake-Kommandozeilenmodell
 
 CMake trennt vier Schritte, die bei der Fehlersuche nicht vermischt werden
@@ -1568,7 +1728,8 @@ Ausgabefenster starten. Rueckgabecode und Standardfehler pruefen. Unter Unix
 - Kanonische technische Quelle: `CMakeLists.txt`, `source/CMakeLists.txt` und
   die dort definierten CMake-Ziel- und Abhaengigkeitsvertraege des
   Level-2-Repositories.
-- Dokument: diese Entwickleranleitung.
+- Dokumente: diese Entwickleranleitung sowie das eigenstaendige, kopierbare
+  Calculator-Beispiel unter `docs/examples/tvision-calculator/`.
 - Owner: Repository-Maintainer.
 - Zielgruppe und Leserpfad: Entwickler startet mit Zweck und Voraussetzungen,
   bindet den festen Commit ein, waehlt CLion, CMake-Kommandozeile oder VS Code
@@ -1576,10 +1737,11 @@ Ausgabefenster starten. Rueckgabecode und Standardfehler pruefen. Unter Unix
   aus.
 - Sprachstrategie: Deutsch primaer, inhaltlich entsprechender englischer Teil
   in derselben Datei.
-- Plattformnachweis: Die dokumentierte FetchContent-Einbindung wurde lokal mit
-  AppleClang unter macOS konfiguriert, gebaut und gestartet. Windows- und
-  Linux-Binaerergebnisse sowie Anwendungskontrollen bleiben nativ auf dem
-  jeweiligen Betriebssystem und werden nicht durch den macOS-Nachweis ersetzt.
+- Plattformnachweis: Die dokumentierte FetchContent-Einbindung und der
+  Calculator wurden lokal mit AppleClang unter macOS konfiguriert, gebaut,
+  getestet und in einem interaktiven Terminal gestartet. Ein dauerhafter
+  Matrixjob baut den Calculator und testet seine Engine zusaetzlich unter
+  macOS, Linux und Windows.
 - Repository-spezifisches Distributionsmodell: Quellcode-Abhaengigkeit ueber
   `FetchContent`; keine separate Runtime-, Installations- oder Home-Sync-Kopie.
 - Navigationseinfluss: direkter Guide unter `docs/`, dessen Pfad im Handoff
@@ -1588,12 +1750,10 @@ Ausgabefenster starten. Rueckgabecode und Standardfehler pruefen. Unter Unix
   FetchContent- oder Preset-Kompatibilitaet, der unterstuetzten Plattformen,
   der CLion-CMake-/Toolchain-Oberflaechen oder der Microsoft-C/C++- und
   CMake-Tools-Erweiterungen fuer VS Code.
-- Evidence: erfolgreicher lokaler FetchContent-Configure-, Build- und
-  Startnachweis unter macOS sowie Abgleich mit den lokalen CMake-Ziel-,
-  Installations- und Exportregeln und den verlinkten offiziellen CMake-,
-  JetBrains-, Microsoft- und VS-Code-Referenzen. Die Windows- und
-  Linux-Anwendungsbuilds bleiben Teil des beschriebenen nativen
-  Drei-Plattform-Workflows.
+- Evidence: erfolgreicher lokaler FetchContent-Configure-, Build-, CTest- und
+  Startnachweis unter macOS, der Drei-OS-Calculator-Matrixjob sowie der Abgleich
+  mit den lokalen CMake-Ziel-, Installations- und Exportregeln und den
+  verlinkten offiziellen CMake-, JetBrains-, Microsoft- und VS-Code-Referenzen.
 
 ## English
 
@@ -2199,6 +2359,62 @@ Commit `CMakePresets.json` as the shared build contract. Keep
 `CMakeUserPresets.json` local when it contains absolute paths or machine-local
 toolchains.
 
+#### 16.5 From a new directory to a stand-alone calculator
+
+Sections 3 and 16 already describe the general case: a custom directory owns
+its `project()`, executable target, and pinned FetchContent dependency. The
+[stand-alone tvision calculator](examples/tvision-calculator/README.md) adds a
+complete executable reference project. It does not depend on the internal
+helper functions from the tvision examples build.
+
+##### 16.5.1 Create or copy the project
+
+Create `mein-tvision-calculator/src` and `mein-tvision-calculator/tests` with
+the Bash or PowerShell commands from the German section, enter the new
+directory, and initialize Git if it will be versioned. Create the file tree
+shown there and use the matching files in the supplied example as the complete
+reference.
+
+Alternatively, copy `docs/examples/tvision-calculator` next to the tvision
+fork. The copied directory is an independent repository. Normal builds no
+longer depend on the original local clone: FetchContent retrieves the immutable
+commit named by `GIT_TAG` into the calculator's own build tree.
+
+##### 16.5.2 Architecture and behavior
+
+The newly written `calculator::Engine` owns digits, one decimal point, the four
+basic operations, equals, clear, display formatting, and error state. The
+tvision layer translates keyboard and button events and draws the display.
+CTest can therefore validate arithmetic without an interactive terminal.
+
+Operations use immediate left-to-right execution, so `2 + 3 * 4 =` produces
+`20`. Division by zero displays `Error`, and `C` resets that state. Digits,
+decimal point, operators, equals, and Enter work without a mouse; Escape closes
+the dialog through normal `TDialog` behavior. The interaction model is inspired
+by TVDemo, but no historical Borland calculator source is copied.
+
+##### 16.5.3 Configure, build, test, and run
+
+Use the `macos-debug`, `linux-debug`, or `windows-debug` configure, build, and
+test commands shown in the German section. The presets select the platform's
+default generator and use no more than two jobs, so Ninja remains optional.
+Reduce a direct build to `--parallel 1` under memory pressure. A Visual Studio
+multi-configuration build normally places the Windows executable under the
+`Debug` configuration subdirectory; a single-configuration generator may put
+it directly in the preset build directory.
+
+##### 16.5.4 CLion, VS Code, and a local tvision override
+
+Open the copied calculator directory itself in CLion, select the applicable
+host preset, and run `tvision_calculator` in an interactive terminal. In VS
+Code, open the same directory, select the CMake configure preset, build, and
+launch from the integrated terminal rather than an output panel.
+
+Normal consumers keep the pinned remote commit. Maintainers and CI may set
+`FETCHCONTENT_SOURCE_DIR_TVISION` to an absolute checkout for a focused local
+integration test. That machine-local path must never be committed to the
+shared CMake files or presets.
+
 ### 17. CMake command-line model
 
 CMake separates configure/generate, build, and run. The source tree is tracked;
@@ -2686,17 +2902,18 @@ macOS, Windows, and Linux checks before updating other applications.
 - Canonical technical source: `CMakeLists.txt`, `source/CMakeLists.txt`, and the
   CMake target and dependency contracts defined there for the Level 2
   repository.
-- Document: this development guide.
+- Documents: this development guide and the independent, copyable calculator
+  example under `docs/examples/tvision-calculator/`.
 - Owner: repository maintainer.
 - Audience and reader path: a developer starts with purpose and prerequisites,
   pins the commit, selects CLion, CMake command line, or VS Code Light, and then
   performs native macOS, Windows, and Linux verification.
 - Language strategy: German primary, equivalent English section in the same
   file.
-- Platform evidence: the documented FetchContent integration was configured,
-  built, and launched locally with AppleClang on macOS. Windows and Linux binary
-  outputs and application verification remain native to each operating system
-  and are not replaced by the macOS evidence.
+- Platform evidence: the documented FetchContent integration and calculator
+  were configured, built, tested, and launched in an interactive terminal with
+  AppleClang on macOS. A permanent matrix job additionally builds the
+  calculator and tests its engine on macOS, Linux, and Windows.
 - Repository-specific distribution model: source dependency through
   `FetchContent`; no separate runtime, installation, or Home sync copy.
 - Navigation impact: direct guide under `docs/`, with its path provided in the
@@ -2704,8 +2921,7 @@ macOS, Windows, and Linux checks before updating other applications.
 - Re-evaluation trigger: changes to the `tvision` CMake target, FetchContent or
   preset compatibility, supported platforms, CLion CMake/toolchain interfaces,
   or Microsoft's C/C++ and CMake Tools extensions for VS Code.
-- Evidence: successful local FetchContent configure, build, and launch on
-  macOS, plus comparison with the local CMake target, installation, and export
-  rules and the linked official CMake, JetBrains, Microsoft, and VS Code
-  references. Windows and Linux application builds remain part of the
-  documented native three-platform workflow.
+- Evidence: successful local FetchContent configure, build, CTest, and launch
+  on macOS, the three-OS calculator matrix job, and comparison with the local
+  CMake target, installation, and export rules and the linked official CMake,
+  JetBrains, Microsoft, and VS Code references.
