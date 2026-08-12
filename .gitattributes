@@ -2,3 +2,7 @@
 # Markdown hard breaks. All other tracked files keep Git's whitespace checks.
 docs/scripts/reference.md -whitespace
 scripts/templates/workspace-readme-template.md -whitespace
+
+# gitignore.io macOS requires literal CR bytes for the Finder Icon filename.
+# gitignore.io macOS benoetigt echte CR-Bytes fuer den Finder-Dateinamen Icon.
+.gitignore whitespace=-blank-at-eol

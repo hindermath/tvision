@@ -1,5 +1,7 @@
 /build/
 /cmake-build-*/
+/.idea/
+/.vs/
 /CMakeUserPresets.json
 *.a
 *.lib
