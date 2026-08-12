@@ -276,3 +276,75 @@ jobs:
         ctest --test-dir build/standalone-calculator
         -C Release
         --output-on-failure
+
+  build-standalone-calculator-visual-studio:
+    name: Standalone Calculator (${{ matrix.display_name }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - display_name: Visual Studio 2022 (v143)
+          os: windows-2022
+          generator: Visual Studio 17 2022
+          toolset: v143
+          build_directory: build/standalone-calculator-vs2022
+        - display_name: Visual Studio 2026 (v145)
+          os: windows-2025-vs2026
+          generator: Visual Studio 18 2026
+          toolset: v145
+          build_directory: build/standalone-calculator-vs2026
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Show Visual Studio and CMake versions
+      shell: pwsh
+      run: |
+        cmake --version
+        & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" `
+          -latest `
+          -products "*" `
+          -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 `
+          -property catalog_productDisplayVersion
+
+    - name: Configure stand-alone calculator
+      shell: pwsh
+      run: |
+        cmake `
+          -S docs/examples/tvision-calculator `
+          -B "${{ matrix.build_directory }}" `
+          -G "${{ matrix.generator }}" `
+          -A x64 `
+          -T "${{ matrix.toolset }}" `
+          -DBUILD_TESTING=ON `
+          "-DFETCHCONTENT_SOURCE_DIR_TVISION=${{ github.workspace }}"
+
+    - name: Verify generator, architecture, and toolset
+      shell: pwsh
+      run: |
+        $cache = Get-Content "${{ matrix.build_directory }}/CMakeCache.txt"
+        $expected = @(
+          "CMAKE_GENERATOR:INTERNAL=${{ matrix.generator }}",
+          "CMAKE_GENERATOR_PLATFORM:INTERNAL=x64",
+          "CMAKE_GENERATOR_TOOLSET:INTERNAL=${{ matrix.toolset }}"
+        )
+        foreach ($entry in $expected) {
+          if ($cache -notcontains $entry) {
+            throw "Expected CMake cache entry not found: $entry"
+          }
+          Write-Host $entry
+        }
+
+    - name: Build stand-alone calculator
+      shell: pwsh
+      run: >-
+        cmake --build "${{ matrix.build_directory }}"
+        --config Release
+        --parallel 2
+
+    - name: Test calculator engine
+      shell: pwsh
+      run: >-
+        ctest --test-dir "${{ matrix.build_directory }}"
+        -C Release
+        --output-on-failure

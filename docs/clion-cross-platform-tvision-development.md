@@ -1,4 +1,4 @@
-# Plattformuebergreifende tvision-Entwicklung mit CLion, CMake und VS Code / Cross-Platform tvision Development with CLion, CMake, and VS Code
+# Plattformuebergreifende tvision-Entwicklung mit CLion, CMake, VS Code und Visual Studio / Cross-Platform tvision Development with CLion, CMake, VS Code, and Visual Studio
 
 ## Deutsch
 
@@ -8,7 +8,8 @@ Diese Anleitung beschreibt maximal ausfuehrlich, wie der persoenliche Fork
 [`hindermath/tvision`](https://github.com/hindermath/tvision) in eigenen
 CMake-Programmen verwendet wird. Sie deckt JetBrains CLion, die reine
 CMake-Kommandozeile und Visual Studio Code als leichtere Editorvariante unter
-macOS, Windows und Linux ab.
+macOS, Windows und Linux ab. Fuer Windows wird zusaetzlich Microsoft Visual
+Studio Community 2022 und 2026 als native Voll-IDE behandelt.
 
 Die Anleitung geht von folgendem Arbeitsmodell aus:
 
@@ -22,6 +23,9 @@ Die Anleitung geht von folgendem Arbeitsmodell aus:
 - CMake auf der Kommandozeile ist der IDE-unabhaengige Referenzweg.
 - VS Code ist die leichtere grafische Alternative fuer Systeme mit wenig RAM
   oder knappem Massenspeicher.
+- Microsoft Visual Studio Community ist die optionale native Windows-Voll-IDE;
+  sie ersetzt weder den gemeinsamen CMake-Vertrag noch die
+  plattformuebergreifende Standardrolle von CLion.
 - Das MacBook Air 2023 mit 8 GB RAM ist das konkrete Low-Resource-Beispiel;
   die Angabe 8 MB waere fuer diese Toolchain technisch nicht realistisch.
 - Jedes Anwendungsprojekt bindet einen vollstaendigen, getesteten Commit des
@@ -565,7 +569,7 @@ set(TV_BUILD_USING_GPM OFF CACHE BOOL "Use GPM on Linux" FORCE)
 set(TV_LIBRARY_UNITY_BUILD OFF CACHE BOOL "Use tvision unity build" FORCE)
 
 # PCH bleibt standardmaessig an: Der erste Build benoetigt etwas Plattenplatz,
-# Folgekompilierungen werden aber meist schneller. Abschnitt 25 beschreibt die
+# Folgekompilierungen werden aber meist schneller. Abschnitt 26 beschreibt die
 # streng speichersparende Alternative.
 set(TV_OPTIMIZE_BUILD ON CACHE BOOL "Use tvision precompiled headers" FORCE)
 
@@ -665,6 +669,9 @@ erzeugte View.
 
 # Lokale CMake-Benutzervorgaben
 /CMakeUserPresets.json
+
+# Lokaler Zustand von Microsoft Visual Studio
+/.vs/
 
 # Plattformartefakte
 *.a
@@ -812,7 +819,7 @@ parallele Jobs. Deshalb ist Ninja fuer dieses Beispiel optional. Bei hohem
 Speicherdruck wird mit einem direkten `cmake --build ... --parallel 1`
 fortgesetzt.
 
-##### 16.5.5 CLion, VS Code und lokaler tvision-Override
+##### 16.5.5 CLion, VS Code, Visual Studio und lokaler tvision-Override
 
 In CLion wird `mein-tvision-calculator` als eigenes Projekt geoeffnet. Das
 passende Host-Preset wird ausgewaehlt und `tvision_calculator` als Run-Ziel in
@@ -825,6 +832,10 @@ code .
 Danach folgen `CMake: Select Configure Preset`, `CMake: Build` und der Start im
 integrierten Terminal. Ein reines Output-Panel ist fuer eine interaktive TUI
 nicht ausreichend.
+
+Unter Windows kann dasselbe Verzeichnis in Visual Studio Community mit
+`File | Open | Folder` als CMake-Projekt geoeffnet werden. Die ausfuehrliche
+Auswahl zwischen Community 2022/v143 und 2026/v145 steht in Abschnitt 22.
 
 Der normale Verbraucherweg bleibt der festgelegte Remote-Commit. Nur fuer
 gezielte Maintainer- und CI-Pruefungen kann CMake ohne Dateiaenderung auf einen
@@ -929,10 +940,13 @@ wird nicht jede Konfiguration dauerhaft aufgehoben.
 
 ### 18. Gemeinsame CMakePresets.json fuer drei Betriebssysteme
 
-Presets machen denselben Build aus CLion, VS Code und der Kommandozeile
-aufrufbar. Das folgende Beispiel verwendet Ninja und zwei parallele Jobs. Unter
-Windows muss es in einer Shell laufen, in der die gewuenschte Toolchain bereits
-aktiv ist.
+Presets machen denselben Build aus CLion, VS Code, Visual Studio und der
+Kommandozeile aufrufbar. Das folgende Beispiel laesst den Generator bewusst
+offen und verwendet zwei parallele Jobs. Dadurch kann jedes Betriebssystem
+seinen Standardgenerator waehlen; Ninja bleibt eine optionale lokale Wahl.
+Unter Windows bestimmt die aktive IDE oder Toolchain-Shell, ob MSVC oder MinGW
+verwendet wird. Eine feste Auswahl zwischen Visual Studio 2022 und 2026 gehoert
+in die lokale `CMakeUserPresets.json`, nicht in diesen gemeinsamen Vertrag.
 
 ```json
 {
@@ -946,7 +960,6 @@ aktiv ist.
     {
       "name": "common",
       "hidden": true,
-      "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
@@ -1035,36 +1048,42 @@ aktiv ist.
     {
       "name": "macos-debug",
       "configurePreset": "macos-debug",
+      "configuration": "Debug",
       "jobs": 2,
       "targets": ["mein_tvision_programm"]
     },
     {
       "name": "macos-release",
       "configurePreset": "macos-release",
+      "configuration": "Release",
       "jobs": 2,
       "targets": ["mein_tvision_programm"]
     },
     {
       "name": "linux-debug",
       "configurePreset": "linux-debug",
+      "configuration": "Debug",
       "jobs": 2,
       "targets": ["mein_tvision_programm"]
     },
     {
       "name": "linux-release",
       "configurePreset": "linux-release",
+      "configuration": "Release",
       "jobs": 2,
       "targets": ["mein_tvision_programm"]
     },
     {
       "name": "windows-debug",
       "configurePreset": "windows-debug",
+      "configuration": "Debug",
       "jobs": 2,
       "targets": ["mein_tvision_programm"]
     },
     {
       "name": "windows-release",
       "configurePreset": "windows-release",
+      "configuration": "Release",
       "jobs": 2,
       "targets": ["mein_tvision_programm"]
     }
@@ -1292,14 +1311,334 @@ Ein MSVC-Buildverzeichnis wird niemals als MinGW-Buildverzeichnis
 weiterverwendet. Bei einem Toolchainwechsel wird ein neuer, eindeutig benannter
 Buildbaum angelegt.
 
-### 22. VS Code als Light-Editor-Variante
+### 22. Microsoft Visual Studio Community 2022 und 2026
+
+Microsoft Visual Studio Community ist eine vollstaendige native Windows-IDE.
+Sie enthaelt bei passender Workload den MSVC-Compiler, CMake-Integration,
+IntelliSense, Debugger, Test Explorer und ein integriertes Terminal. In diesem
+Arbeitsmodell ist sie eine weitere Oberflaeche fuer denselben eingecheckten
+CMake-Vertrag; es wird kein separates Visual-Studio-Projekt gepflegt.
+
+#### 22.1 Einordnung neben CLion und VS Code
+
+| Werkzeug | Betriebssysteme | Rolle in diesem Arbeitsmodell |
+|---|---|---|
+| CLion | macOS, Linux, Windows | plattformuebergreifende Standard-IDE |
+| VS Code | macOS, Linux, Windows | leichte Editor- und Terminalvariante |
+| Visual Studio Community | Windows | optionale native Windows-Voll-IDE |
+| CMake-Kommandozeile | macOS, Linux, Windows | IDE-unabhaengige Referenz |
+
+Visual Studio Community aendert weder `CMakeLists.txt` noch die festgelegte
+`tvision`-SHA. Eine unter Visual Studio erzeugte `.lib` bleibt genauso
+Windows-, Architektur-, Toolset- und Konfigurations-spezifisch wie ein Build
+aus CLion oder der Developer PowerShell.
+
+#### 22.2 Versionen, Generatoren und Toolsets
+
+Stand 12. August 2026 gelten fuer die beiden hier beschriebenen Generationen:
+
+| IDE | CMake-Generator | CMake-Untergrenze fuer den Generator | Standard-Toolset |
+|---|---|---:|---|
+| Visual Studio Community 2022 | `Visual Studio 17 2022` | 3.21 | `v143` |
+| Visual Studio Community 2026 | `Visual Studio 18 2026` | 4.2 | `v145` |
+
+Die Generator-Untergrenze ist nicht mit der Mindestversion des
+Anwendungsprojekts zu verwechseln. Das Projekt kann weiterhin
+`cmake_minimum_required(VERSION 3.21)` angeben. Nur die CMake-Installation, die
+den Generator `Visual Studio 18 2026` auswaehlen soll, muss mindestens Version
+4.2 sein.
+
+Visual Studio 2022 bleibt ein sinnvoller Kompatibilitaetsweg fuer `v143` und
+wird in der Community Edition ueber den aktuellen 17.14-Kanal gepflegt. Visual
+Studio 2026 ist der aktuelle Weg fuer `v145`. Beide koennen auf einem
+unterstuetzten 64-Bit-Windows-System nebeneinander installiert sein. Jede
+Installation und jeder Updatekanal benoetigt einen eindeutigen Pfad; jeder
+CMake-Buildbaum bleibt genau einer Generatorinstanz und einem Toolset
+zugeordnet.
+
+Visual Studio 2026 unterstuetzt als IDE aktuelle 64-Bit-Ausgaben von Windows 11
+und die in den Microsoft-Systemanforderungen genannten Windows-Server-Versionen.
+Vor einer Installation auf einem aelteren Windows-System werden die aktuellen
+Anforderungen der gewaehlten Visual-Studio-Version geprueft. Eine erzeugte
+Anwendung kann je nach Windows SDK und Zielkonfiguration andere Windows-Ziele
+unterstuetzen als die IDE selbst.
+
+Offizielle Referenzen:
+
+- [Visual Studio Community und Nutzung](https://visualstudio.microsoft.com/vs/community/)
+- [C++-Unterstuetzung installieren](https://learn.microsoft.com/en-us/cpp/build/vscpp-step-0-installation?view=msvc-170)
+- [CMake-Projekte in Visual Studio](https://learn.microsoft.com/en-us/cpp/build/cmake-projects-in-visual-studio?view=msvc-170)
+- [Visual Studio 2022: Systemanforderungen](https://learn.microsoft.com/en-us/visualstudio/releases/2022/system-requirements)
+- [Visual Studio 2026: Systemanforderungen](https://learn.microsoft.com/en-us/visualstudio/releases/2026/vs-system-requirements)
+- [CMake-Generator fuer Visual Studio 2022](https://cmake.org/cmake/help/latest/generator/Visual%20Studio%2017%202022.html)
+- [CMake-Generator fuer Visual Studio 2026](https://cmake.org/cmake/help/latest/generator/Visual%20Studio%2018%202026.html)
+
+Die Community-Lizenz erlaubt einzelnen Entwicklerinnen und Entwicklern nach
+Microsofts aktueller Beschreibung eigene kostenlose oder kostenpflichtige
+Anwendungen. Fuer Nutzung innerhalb einer Organisation gelten zusaetzliche
+Bedingungen; die verlinkten aktuellen Lizenzbedingungen sind verbindlich, nicht
+diese technische Anleitung.
+
+#### 22.3 Installation mit dem Visual Studio Installer
+
+Im Visual Studio Installer wird fuer Community 2022 beziehungsweise Community
+2026 mindestens die Workload **Desktop development with C++** ausgewaehlt.
+Danach wird in den Installationsdetails geprueft, dass diese Bestandteile
+vorhanden sind:
+
+- das zur IDE gehoerende MSVC-x64/x86-Toolset (`v143` oder `v145`);
+- ein aktuelles Windows SDK;
+- die C++-CMake-Werkzeuge fuer Windows;
+- CMake mit mindestens 3.21 fuer VS 2022 beziehungsweise mindestens 4.2 fuer
+  den VS-2026-Generator;
+- optional Ninja und Git, sofern sie nicht separat bereitstehen.
+
+Es ist nicht erforderlich, jede optionale C++-Komponente, MFC, ATL, UWP oder
+Spieleentwicklung zu installieren. Eine gezielte C++-Desktopinstallation spart
+erheblich Massenspeicher. Microsoft nennt fuer typische Visual-Studio-
+Installationen etwa 20 bis 50 GB, mindestens 4 GB RAM und 16 GB RAM als
+Empfehlung fuer typische professionelle Loesungen. Auf einem kleinen
+Windows-Rechner ist deshalb VS Code oder die reine Kommandozeile oft die
+passendere Oberflaeche.
+
+Nach der Installation wird die passende **Developer PowerShell for VS 2022**
+oder **Developer PowerShell for VS 2026** einzeln geoeffnet:
+
+```powershell
+cl
+cmake --version
+cmake --help | Select-String 'Visual Studio 17 2022|Visual Studio 18 2026'
+```
+
+Die Ausgabe muss zum beabsichtigten Generator passen. Dass `cl` gefunden wird,
+beweist nur eine aktive MSVC-Umgebung; erst `CMakeCache.txt` beweist den
+tatsaechlich gewaehlten Generator, die Architektur und das Toolset.
+
+#### 22.4 Vorhandenes CMake-Projekt direkt oeffnen
+
+Der empfohlene IDE-Weg erzeugt keine `.sln`- oder `.vcxproj`-Dateien im
+Quellbaum:
+
+1. Visual Studio Community starten.
+2. `File | Open | Folder` waehlen.
+3. Den Wurzelordner des eigenen Programms oeffnen, in dem die oberste
+   `CMakeLists.txt` und `CMakePresets.json` liegen.
+4. Falls Visual Studio nach der Aktivierung von CMake fragt, diese fuer genau
+   diesen Projektordner bestaetigen.
+5. In der Konfigurationsauswahl das passende Windows-Preset waehlen.
+6. Den ersten Configure-Lauf vollstaendig abschliessen lassen. FetchContent
+   ruft dabei die festgelegte `tvision`-SHA ab.
+7. Im Solution Explorer bei Bedarf auf **CMake Targets View** wechseln.
+
+Visual Studio legt IDE-Zustand unter `.vs/` und Buildausgaben im vom Preset
+bestimmten Verzeichnis ab. Beides bleibt ungetrackt. Fuer ein CMake-Projekt sind
+`CppProperties.json` und `tasks.vs.json` nicht erforderlich. Auch eine zweite
+handgeschriebene `CMakeSettings.json` wird nicht parallel zu den verbindlichen
+Presets eingefuehrt.
+
+Nach wesentlichen CMake-Aenderungen kann `Project | Configure Cache` bewusst
+ausgefuehrt werden. Bei Generator-, Architektur- oder Toolsetwechsel wird ein
+neuer Buildbaum verwendet; ein alter Cache wird nicht in der IDE umgedeutet.
+
+#### 22.5 Bauen, testen, starten und debuggen
+
+Nach erfolgreichem Configure zeigt Visual Studio die CMake-Ziele an. Fuer den
+stand-alone Calculator gelten beispielsweise diese Schritte:
+
+1. `tvision_calculator` als Build- beziehungsweise Startup-Ziel waehlen.
+2. Debug oder Release in der aktiven CMake-Konfiguration auswaehlen.
+3. `Build | Build All` beziehungsweise `Ctrl+Shift+B` ausfuehren.
+4. Die Engine-Tests im integrierten Terminal reproduzierbar mit CTest starten.
+5. Die TUI zuerst ohne Debugger in einem echten Terminal pruefen.
+6. Danach `tvision_calculator` als Startup Item waehlen und mit `F5` debuggen.
+
+Fuer einen Visual-Studio-Multi-Config-Build lauten die terminalunabhaengigen
+Kontrollbefehle:
+
+```powershell
+cmake --build build/windows-debug `
+  --config Debug `
+  --target tvision_calculator `
+  --parallel 2
+
+ctest --test-dir build/windows-debug `
+  -C Debug `
+  --output-on-failure
+
+& .\build\windows-debug\Debug\tvision_calculator.exe
+```
+
+Der genaue EXE-Pfad folgt aus `binaryDir`, Konfiguration und Generator. Eine
+TUI wird nicht in einem reinen Output- oder Debug-Textfenster abgenommen.
+Windows Terminal, Developer PowerShell oder das vollwertige integrierte
+Terminal muessen Tastatur, Farben, Groessenaenderung und sauberes Beenden
+verarbeiten koennen.
+
+#### 22.6 Visual Studio 2022 explizit auswaehlen
+
+Dieser reproduzierbare Befehl bindet Generator, x64-Architektur und `v143` an
+einen eigenen Buildbaum:
+
+```powershell
+cmake -S . -B build/windows-vs2022 `
+  -G "Visual Studio 17 2022" `
+  -A x64 `
+  -T v143 `
+  -DBUILD_TESTING=ON
+
+cmake --build build/windows-vs2022 `
+  --config Release `
+  --target tvision_calculator `
+  --parallel 2
+
+ctest --test-dir build/windows-vs2022 `
+  -C Release `
+  --output-on-failure
+
+& .\build\windows-vs2022\Release\tvision_calculator.exe
+```
+
+Soll die von CMake erzeugte Solution ausnahmsweise sichtbar geoeffnet werden,
+liegt sie im Buildbaum. Sie ist abgeleitet, wird nicht editiert und nicht
+eingecheckt. Der kanonische IDE-Weg bleibt **Open Folder** mit den
+CMake-Quelldateien.
+
+#### 22.7 Visual Studio 2026 explizit auswaehlen
+
+Fuer Visual Studio 2026 werden CMake 4.2 oder neuer, Generator 18 und `v145`
+verwendet:
+
+```powershell
+cmake -S . -B build/windows-vs2026 `
+  -G "Visual Studio 18 2026" `
+  -A x64 `
+  -T v145 `
+  -DBUILD_TESTING=ON
+
+cmake --build build/windows-vs2026 `
+  --config Release `
+  --target tvision_calculator `
+  --parallel 2
+
+ctest --test-dir build/windows-vs2026 `
+  -C Release `
+  --output-on-failure
+
+& .\build\windows-vs2026\Release\tvision_calculator.exe
+```
+
+Ein Fehler `Could not create named generator Visual Studio 18 2026` bedeutet
+primaer, dass die aufgerufene CMake-Version zu alt ist, die VS-2026-Instanz
+nicht erkannt wird oder die erforderliche C++-Workload fehlt. Das Problem wird
+nicht durch Umbenennen eines VS-2022-Buildbaums geloest.
+
+#### 22.8 Side-by-Side-Auswahl mit CMakeUserPresets.json
+
+Sind Community 2022 und 2026 nebeneinander installiert, bleibt
+`CMakePresets.json` portabel. Die maschinenbezogene Auswahl wird lokal in der
+bereits ignorierten `CMakeUserPresets.json` getroffen:
+
+```json
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "windows-vs2022-debug",
+      "displayName": "Windows VS 2022 v143 Debug",
+      "inherits": "windows-debug",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "toolset": "v143",
+      "binaryDir": "${sourceDir}/build/windows-vs2022-debug"
+    },
+    {
+      "name": "windows-vs2026-debug",
+      "displayName": "Windows VS 2026 v145 Debug",
+      "inherits": "windows-debug",
+      "generator": "Visual Studio 18 2026",
+      "architecture": "x64",
+      "toolset": "v145",
+      "binaryDir": "${sourceDir}/build/windows-vs2026-debug"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "windows-vs2022-debug",
+      "configurePreset": "windows-vs2022-debug",
+      "configuration": "Debug",
+      "jobs": 2
+    },
+    {
+      "name": "windows-vs2026-debug",
+      "configurePreset": "windows-vs2026-debug",
+      "configuration": "Debug",
+      "jobs": 2
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "windows-vs2022-debug",
+      "configurePreset": "windows-vs2022-debug",
+      "configuration": "Debug",
+      "output": {"outputOnFailure": true}
+    },
+    {
+      "name": "windows-vs2026-debug",
+      "configurePreset": "windows-vs2026-debug",
+      "configuration": "Debug",
+      "output": {"outputOnFailure": true}
+    }
+  ]
+}
+```
+
+Danach funktionieren IDE und Kommandozeile mit denselben Namen:
+
+```powershell
+cmake --list-presets
+cmake --preset windows-vs2022-debug
+cmake --build --preset windows-vs2022-debug
+ctest --preset windows-vs2022-debug
+
+cmake --preset windows-vs2026-debug
+cmake --build --preset windows-vs2026-debug
+ctest --preset windows-vs2026-debug
+```
+
+Release-Presets werden nach demselben Muster mit eigenem `binaryDir` und
+`"configuration": "Release"` angelegt. Absolute Installationspfade oder
+`CMAKE_GENERATOR_INSTANCE` werden nur dann lokal ergaenzt, wenn CMake mehrere
+gleichnamige Instanzen nicht eindeutig zuordnen kann. Solche Rechnerpfade
+werden nie in `CMakePresets.json` oder `CMakeLists.txt` eingecheckt.
+
+#### 22.9 Typische Visual-Studio-Fehler
+
+- **Preset erscheint nicht:** Projektwurzel, gueltiges JSON und aktivierte
+  CMake-Unterstuetzung pruefen; danach Cache neu konfigurieren.
+- **Falsche IDE-Version:** `CMAKE_GENERATOR`, `CMAKE_GENERATOR_INSTANCE` und
+  `CMAKE_GENERATOR_TOOLSET` im jeweiligen `CMakeCache.txt` kontrollieren.
+- **Architektur passt nicht:** Buildbaum neu mit `-A x64` konfigurieren; nicht
+  einzelne Cachewerte von Win32 auf x64 editieren.
+- **Toolset fehlt:** Visual Studio Installer oeffnen und `v143` oder `v145`
+  innerhalb der C++-Desktopworkload nachinstallieren.
+- **Linker meldet inkompatible Dateien:** MSVC-, MinGW-, Debug-, Release-, x86-
+  und x64-Artefakte wurden wahrscheinlich vermischt. Einen frischen,
+  eindeutig benannten Buildbaum verwenden.
+- **TUI reagiert nicht:** EXE in Windows Terminal oder Developer PowerShell
+  starten und nicht das reine Visual-Studio-Outputfenster als Terminal
+  behandeln.
+- **Zu wenig RAM oder Speicherplatz:** Nur eine Community-Version und die
+  minimale C++-Desktopworkload installieren oder fuer diesen Rechner VS Code
+  beziehungsweise die Kommandozeile verwenden.
+
+### 23. VS Code als Light-Editor-Variante
 
 VS Code ersetzt weder Compiler noch CMake. Es ist in diesem Modell ein Editor
 mit integriertem Terminal und optionaler CMake-Oberflaeche. Die eigentliche
 Wahrheit bleibt der identische CMake-Aufruf, der auch ausserhalb des Editors
 funktioniert.
 
-#### 22.1 Minimales VS-Code-Profil
+#### 23.1 Minimales VS-Code-Profil
 
 Ein eigenes VS-Code-Profil verhindert, dass Erweiterungen fuer andere
 Sprachen, Container, Datenbanken oder KI-Werkzeuge auf dem kleinen Rechner
@@ -1321,7 +1660,7 @@ fuer diesen Workspace deaktiviert. `code --disable-extensions .` ist ein
 Diagnosemodus, aber nicht der normale C++-Arbeitsmodus, weil dabei auch die
 beiden benoetigten Erweiterungen ausgeschaltet werden.
 
-#### 22.2 .vscode/extensions.json
+#### 23.2 .vscode/extensions.json
 
 ```json
 {
@@ -1332,7 +1671,7 @@ beiden benoetigten Erweiterungen ausgeschaltet werden.
 }
 ```
 
-#### 22.3 Ressourcenschonende .vscode/settings.json
+#### 23.3 Ressourcenschonende .vscode/settings.json
 
 ```json
 {
@@ -1364,7 +1703,7 @@ Neu-Parsing und CPU-Zeit verursachen. Wenn die Interaktion dadurch zu langsam
 wird, wird diese Einstellung entfernt oder mit einem bewusst begrenzten Wert
 versehen. Der Build selbst wird davon nicht beeinflusst.
 
-#### 22.4 Terminal-First-Modus
+#### 23.4 Terminal-First-Modus
 
 Die leichteste und transparenteste Variante verwendet VS Code nur zum Editieren
 und das integrierte Terminal fuer die bereits dokumentierten Befehle:
@@ -1379,7 +1718,7 @@ Auf Linux und Windows werden die entsprechenden Presetnamen und Startpfade
 verwendet. Dieser Modus benoetigt keine `tasks.json` und vermeidet doppelte
 Buildlogik.
 
-#### 22.5 CMake-Tools-Modus
+#### 23.5 CMake-Tools-Modus
 
 1. Workspace als vertrauenswuerdig bestaetigen, nachdem Quelle und
    `CMakeLists.txt` geprueft wurden.
@@ -1395,7 +1734,7 @@ Fuer TUI-Anwendungen ist der Terminalstart der Standard. Ein Debug- oder
 Output-Fenster, das keine vollwertige Terminalemulation bereitstellt, ist kein
 geeigneter Funktionsnachweis fuer Farben, Tastatur, Groessenaenderung und Maus.
 
-#### 22.6 IntelliSense aus CMake beziehen
+#### 23.6 IntelliSense aus CMake beziehen
 
 Das Preset setzt `CMAKE_EXPORT_COMPILE_COMMANDS=ON`. CMake Tools kann die
 Compilerkonfiguration an die Microsoft-C/C++-Erweiterung liefern. Falls
@@ -1409,9 +1748,9 @@ Includes trotzdem rot markiert sind:
 Manuell rekursive Include-Pfade auf den ganzen `_deps`-Baum zu setzen ist auf
 einem kleinen Rechner keine gute erste Loesung.
 
-### 23. VS Code unter macOS, Linux und Windows
+### 24. VS Code unter macOS, Linux und Windows
 
-#### 23.1 macOS
+#### 24.1 macOS
 
 1. Im Terminal des Projektordners `code --profile "C++ Light" .` starten.
 2. AppleClang, CMake und Ninja im integrierten Terminal pruefen.
@@ -1423,7 +1762,7 @@ Wenn VS Code aus dem Finder gestartet wurde und einen anderen `PATH` sieht als
 Terminal.app, ist der Start mit `code .` aus der bereits funktionierenden Shell
 der einfachste Vergleich.
 
-#### 23.2 Linux
+#### 24.2 Linux
 
 1. GCC/Clang, GDB/LLDB, CMake, Ninja und ncursesw-Header pruefen.
 2. VS Code mit dem Profil `C++ Light` oeffnen.
@@ -1432,7 +1771,7 @@ der einfachste Vergleich.
 5. Darstellung zusaetzlich in einem nativen Terminal pruefen, falls die
    integrierte Terminalemulation abweicht.
 
-#### 23.3 Windows mit MSVC
+#### 24.3 Windows mit MSVC
 
 VS Code wird am zuverlaessigsten aus einer Developer PowerShell gestartet:
 
@@ -1451,13 +1790,13 @@ wird in PowerShell mit dem Call-Operator gestartet:
 & .\build\windows-debug\mein_tvision_programm.exe
 ```
 
-#### 23.4 Windows mit MinGW
+#### 24.4 Windows mit MinGW
 
 VS Code muss den gleichen MinGW-`PATH` sehen wie die getestete Shell. Das
 Preset bleibt gleich, aber der frische Buildbaum wird mit MinGW konfiguriert.
 MSVC- und MinGW-Ergebnisse bleiben in getrennten Verzeichnissen.
 
-### 24. Debugging von TUI-Programmen
+### 25. Debugging von TUI-Programmen
 
 Ein TUI veraendert waehrend der Laufzeit den Terminalzustand. Haltepunkte
 koennen deshalb einen scheinbar unvollstaendigen oder beschaedigten Bildschirm
@@ -1478,12 +1817,12 @@ Windows der zur Toolchain passende MSVC- oder GDB-Debugadapter verwendet. Die
 Debuggerwahl darf den Compiler- und ABI-Vertrag des Buildbaums nicht
 unbemerkt aendern.
 
-### 25. 8-GB-RAM- und Small-Disk-Profil
+### 26. 8-GB-RAM- und Small-Disk-Profil
 
 Das MacBook Air 2023 in diesem Szenario hat 8 GB RAM. Der Build ist damit gut
 moeglich, wenn IDE, Parallelitaet und Buildbaeume bewusst begrenzt werden.
 
-#### 25.1 Verbindlicher Startwert
+#### 26.1 Verbindlicher Startwert
 
 - maximal zwei parallele Compiler-Jobs;
 - bei Swap-Druck oder gleichzeitigem Videokonferenz-/Browserbetrieb nur ein
@@ -1494,9 +1833,10 @@ moeglich, wenn IDE, Parallelitaet und Buildbaeume bewusst begrenzt werden.
 - `TV_LIBRARY_UNITY_BUILD=OFF`;
 - nur Debug dauerhaft behalten;
 - Release nur fuer Kontrollpunkte bauen;
-- nicht CLion und VS Code gleichzeitig denselben Quellbaum indizieren lassen.
+- nicht CLion, VS Code und Visual Studio gleichzeitig denselben Quellbaum
+  indizieren lassen.
 
-#### 25.2 PCH-Entscheidung
+#### 26.2 PCH-Entscheidung
 
 `TV_OPTIMIZE_BUILD=ON` aktiviert bei geeigneter CMake-Version vorkompilierte
 Header. Das beschleunigt typischerweise Wiederholungsbuilds, benoetigt aber
@@ -1514,14 +1854,14 @@ nicht als belastbarer Groessenvergleich umkonfiguriert. Die Wahl lautet:
 - PCH **an**: besser fuer haeufige inkrementelle Builds;
 - PCH **aus**: weniger Cache-Artefakte, aber mehr Compilerarbeit.
 
-#### 25.3 Unity Build bewusst auslassen
+#### 26.3 Unity Build bewusst auslassen
 
 Unity Build kann Compile-Overhead reduzieren, fasst aber viele Quelldateien in
 groessere Uebersetzungseinheiten zusammen. Auf 8 GB RAM koennen dadurch hoehere
 Speicherspitzen entstehen. Es bleibt deshalb `OFF`, solange keine Messung auf
 dem konkreten Rechner einen Vorteil nachweist.
 
-#### 25.4 Keine parallelen IDE-Indexer
+#### 26.4 Keine parallelen IDE-Indexer
 
 Wenn CLion verwendet wird, bleibt VS Code geschlossen. Fuer einen
 ressourcenschonenden VS-Code-Tag wird CLion beendet. Browser-Tabs, Container,
@@ -1529,7 +1869,7 @@ virtuelle Maschinen und lokale KI-Modelle koennen deutlich mehr RAM als der
 eigentliche CMake-Build verbrauchen und werden bei Speicherdruck zuerst
 reduziert.
 
-#### 25.5 Build nur fuer das Anwendungsziel
+#### 26.5 Build nur fuer das Anwendungsziel
 
 ```bash
 cmake --build build/macos-debug \
@@ -1540,7 +1880,7 @@ cmake --build build/macos-debug \
 CMake baut `tvision` transitiv. Ein separates `all`, die tvision-Demos oder
 Tests werden nicht benoetigt.
 
-#### 25.6 Lokaler Orientierungsnachweis
+#### 26.6 Lokaler Orientierungsnachweis
 
 Das kopierbare Starterprojekt wurde auf dem aktuellen Apple-Silicon-Mac mit
 8 GB RAM, AppleClang, C++17 fuer die Anwendung, Debug-Konfiguration und zwei
@@ -1550,9 +1890,9 @@ darin nicht enthalten. Ein unveraenderter inkrementeller Kontrollbuild dauerte
 rund 1,6 Sekunden. Diese Werte sind Orientierung fuer genau diesen Rechner und
 kein garantierter Grenzwert fuer andere Toolchains oder spaetere Fork-Staende.
 
-### 26. Speicherplatz kontrollieren und sicher freigeben
+### 27. Speicherplatz kontrollieren und sicher freigeben
 
-#### 26.1 Belegung ansehen
+#### 27.1 Belegung ansehen
 
 macOS/Linux:
 
@@ -1572,7 +1912,7 @@ Get-ChildItem .\build -Directory |
   }
 ```
 
-#### 26.2 Leichter Clean
+#### 27.2 Leichter Clean
 
 ```bash
 cmake --build build/macos-debug --target clean
@@ -1582,7 +1922,7 @@ Dies entfernt viele Kompilate, behaelt aber CMake- und FetchContent-Struktur.
 Der naechste Build braucht deshalb weniger Netzwerkvorbereitung, muss jedoch
 neu kompilieren.
 
-#### 26.3 Vollstaendigen einzelnen Buildbaum entfernen
+#### 27.3 Vollstaendigen einzelnen Buildbaum entfernen
 
 Vorher Quellwurzel und Zielnamen kontrollieren. Danach kann CMake
 plattformuebergreifend genau den benannten Buildbaum entfernen:
@@ -1602,36 +1942,36 @@ Variable, einen unkontrollierten Platzhalter oder einen breiten rekursiven
 Loeschbefehl ersetzen. Bei Platzmangel wird zuerst ein klar benannter alter
 Release-Buildbaum entfernt.
 
-#### 26.4 FetchContent nicht nach jedem Build loeschen
+#### 27.4 FetchContent nicht nach jedem Build loeschen
 
 `build/<preset>/_deps/tvision-src` ist regenerierbar. Eine Loeschung nach jedem
 Build spart kurzfristig Platz, erzwingt aber spaeter erneuten Download,
 Configure und Vollbuild. Auf einem kleinen Rechner ist ein einzelner aktiver
 Debug-Buildbaum meist der bessere Kompromiss.
 
-### 27. CLI-, CLion- und VS-Code-Paritaet
+### 28. CLI-, CLion-, VS-Code- und Visual-Studio-Paritaet
 
-Alle drei Oberflaechen gelten nur dann als gleichwertig, wenn sie denselben
+Alle vier Oberflaechen gelten nur dann als gleichwertig, wenn sie denselben
 CMake-Vertrag verwenden:
 
-| Aspekt | CLion | Kommandozeile | VS Code Light |
-|---|---|---|---|
-| Quelle | gleicher Git-Commit | gleicher Git-Commit | gleicher Git-Commit |
-| tvision | gleiche `GIT_TAG`-SHA | gleiche SHA | gleiche SHA |
-| Configure | CMake-Profil/Presets | `cmake --preset` | CMake Tools/Terminal |
-| Build | Zielauswahl | `cmake --build` | CMake Tools/Terminal |
-| Parallelitaet | Profil/Buildtool | `--parallel 2` | Preset mit zwei Jobs |
-| TUI-Start | integriertes Terminal | natives Terminal | integriertes Terminal |
-| Buildbaum | IDE-spezifisch | `build/<preset>` | `build/<preset>` |
+| Aspekt | CLion | Kommandozeile | VS Code Light | Visual Studio Community |
+|---|---|---|---|---|
+| Quelle | gleicher Commit | gleicher Commit | gleicher Commit | gleicher Commit |
+| tvision | gleiche SHA | gleiche SHA | gleiche SHA | gleiche SHA |
+| Configure | Profil/Presets | `cmake --preset` | CMake Tools | CMake Presets |
+| Build | Zielauswahl | `cmake --build` | CMake Tools | CMake Targets |
+| Jobs | Profil/Buildtool | `--parallel 2` | zwei Jobs | zwei Jobs |
+| TUI-Start | Terminal | natives Terminal | Terminal | Terminal |
+| Buildbaum | IDE-spezifisch | `build/<preset>` | `build/<preset>` | `build/<preset>` |
 
 Ein erfolgreicher CLion-Build rechtfertigt keine handgeschriebenen abweichenden
 Compilerflags fuer VS Code. Umgekehrt ersetzt ein direkter `g++`-Einzeiler
 nicht den CMake-Vertrag, weil transitive Includes, Optionen und
 Systembibliotheken dann leicht auseinanderlaufen.
 
-### 28. Vollstaendiger persoenlicher Arbeitsablauf
+### 29. Vollstaendiger persoenlicher Arbeitsablauf
 
-#### 28.1 Neues Programm auf macOS beginnen
+#### 29.1 Neues Programm auf macOS beginnen
 
 1. Repository mit `CMakeLists.txt`, `src/main.cpp`, `.gitignore` und optionalen
    Presets anlegen.
@@ -1643,16 +1983,19 @@ Systembibliotheken dann leicht auseinanderlaufen.
 7. `macos-release` am Kontrollpunkt bauen und starten.
 8. Nur Quell- und Konfigurationsdateien committen.
 
-#### 28.2 Auf Windows pruefen
+#### 29.2 Auf Windows pruefen
 
 1. Denselben Anwendungscommit auschecken.
-2. MSVC oder MinGW bewusst auswaehlen.
-3. Frischen Windows-Buildbaum konfigurieren.
+2. MSVC oder MinGW bewusst auswaehlen; fuer MSVC optional CLion, VS Code oder
+   Visual Studio Community verwenden.
+3. Bei Visual Studio Community zusaetzlich VS 2022/v143 oder VS 2026/v145
+   bewusst waehlen und einen frischen, versionsgebundenen Buildbaum
+   konfigurieren.
 4. Debug und Release mit maximal zwei Jobs bauen.
 5. TUI in Windows Terminal oder im echten integrierten Terminal starten.
 6. Plattformkorrekturen in der Anwendung committen.
 
-#### 28.3 Auf Linux pruefen
+#### 29.3 Auf Linux pruefen
 
 1. Denselben Anwendungscommit einschliesslich Windows-Korrekturen auschecken.
 2. ncursesw-Entwicklungsdateien und Toolchain pruefen.
@@ -1661,15 +2004,15 @@ Systembibliotheken dann leicht auseinanderlaufen.
 5. TUI in einer UTF-8-Terminalumgebung pruefen.
 6. Gemeinsamen Stand erst danach als drei-plattform-faehig behandeln.
 
-#### 28.4 Nach einer Fork-Synchronisierung
+#### 29.4 Nach einer Fork-Synchronisierung
 
 Nur die `GIT_TAG`-SHA wird zunaechst in einem Pilotprojekt geaendert. Der neue
 Stand durchlaeuft macOS Debug/Release sowie die nativen Windows- und
 Linux-Kontrollen. Weitere Programme uebernehmen die SHA erst danach.
 
-### 29. Erweiterte Fehlerdiagnose fuer CMake und VS Code
+### 30. Erweiterte Fehlerdiagnose fuer CMake, VS Code und Visual Studio
 
-#### 29.1 CMake hat den falschen Compiler gewaehlt
+#### 30.1 CMake hat den falschen Compiler gewaehlt
 
 ```bash
 cmake -N -L build/macos-debug | rg 'CMAKE_(C|CXX)_COMPILER'
@@ -1679,33 +2022,33 @@ Unter Windows kann alternativ die `CMakeCache.txt` kontrolliert werden. Ist der
 Compiler falsch, wird nicht nur eine einzelne Cachezeile editiert. Die richtige
 Toolchain-Shell wird aktiviert und ein neuer Buildbaum konfiguriert.
 
-#### 29.2 Ninja fehlt
+#### 30.2 Ninja fehlt
 
 Wenn `ninja --version` scheitert, entweder Ninja installieren beziehungsweise
 in den Toolchain-Pfad aufnehmen oder einen vorhandenen Generator bewusst
 waehlen. Nur `-G Ninja` aus dem Befehl zu entfernen, waehrend ein bestehender
 Ninja-Buildbaum weiterverwendet wird, ist keine gueltige Umstellung.
 
-#### 29.3 FetchContent wiederholt den Download
+#### 30.3 FetchContent wiederholt den Download
 
 Pruefen, ob jedes Configure einen neuen Buildpfad verwendet, ein Cleanup-Tool
 `_deps` entfernt oder der Buildbaum auf einem fluechtigen Datentraeger liegt.
 Ein stabiler Debug-Buildpfad vermeidet unnoetige Abrufe.
 
-#### 29.4 VS Code zeigt Includes als Fehler, CMake baut aber erfolgreich
+#### 30.4 VS Code zeigt Includes als Fehler, CMake baut aber erfolgreich
 
 Der Compilerbuild ist kanonisch. CMake Tools als Konfigurationsprovider
 waehlen, Configure abschliessen und erst danach die IntelliSense-Datenbank
 zuruecksetzen. Keine produktiven Include-Pfade nur zur Beruhigung des Editors
 veraendern.
 
-#### 29.5 TUI startet und beendet sich sofort
+#### 30.5 TUI startet und beendet sich sofort
 
 Programm aus einem echten Terminal statt aus einem nicht interaktiven
 Ausgabefenster starten. Rueckgabecode und Standardfehler pruefen. Unter Unix
 `TERM` und Locale, unter Windows die aktive Konsole und Toolchain kontrollieren.
 
-#### 29.6 Der Rechner beginnt stark zu swappen
+#### 30.6 Der Rechner beginnt stark zu swappen
 
 1. Build abbrechen, ohne Buildbaum zu loeschen.
 2. Parallele IDE, Browser- oder Containerlast reduzieren.
@@ -1713,7 +2056,7 @@ Ausgabefenster starten. Rueckgabecode und Standardfehler pruefen. Unter Unix
 4. Unity Build ausgeschaltet lassen.
 5. Erst danach PCH aus- oder andere Buildoptionen umstellen.
 
-#### 29.7 Der Datentraeger wird knapp
+#### 30.7 Der Datentraeger wird knapp
 
 1. Groesse einzelner Buildbaeume messen.
 2. Alten Release-Buildbaum entfernen.
@@ -1722,7 +2065,17 @@ Ausgabefenster starten. Rueckgabecode und Standardfehler pruefen. Unter Unix
 5. Aktiven Debug-Buildbaum als letzten Buildcache behalten.
 6. vcpkg- und globale Compiler-Caches nur nach separater Zielpruefung anfassen.
 
-### 30. Dokumentationsauswirkung
+#### 30.8 Visual Studio verwendet die falsche Instanz
+
+Im betroffenen `CMakeCache.txt` die Werte `CMAKE_GENERATOR`,
+`CMAKE_GENERATOR_INSTANCE`, `CMAKE_GENERATOR_PLATFORM` und
+`CMAKE_GENERATOR_TOOLSET` pruefen. Danach den falschen Buildbaum nicht
+umkonfigurieren, sondern das passende lokale User-Preset mit eigenem
+`binaryDir` verwenden. Bei mehreren Instanzen derselben Generation darf
+`CMAKE_GENERATOR_INSTANCE` nur lokal auf den eindeutigen Installationspfad
+zeigen.
+
+### 31. Dokumentationsauswirkung
 
 - Entscheidung: `UpdateRequired`.
 - Kanonische technische Quelle: `CMakeLists.txt`, `source/CMakeLists.txt` und
@@ -1732,28 +2085,32 @@ Ausgabefenster starten. Rueckgabecode und Standardfehler pruefen. Unter Unix
   Calculator-Beispiel unter `docs/examples/tvision-calculator/`.
 - Owner: Repository-Maintainer.
 - Zielgruppe und Leserpfad: Entwickler startet mit Zweck und Voraussetzungen,
-  bindet den festen Commit ein, waehlt CLion, CMake-Kommandozeile oder VS Code
-  Light und fuehrt danach die nativen macOS-, Windows- und Linux-Kontrollen
-  aus.
+  bindet den festen Commit ein, waehlt CLion, CMake-Kommandozeile, VS Code Light
+  oder unter Windows Visual Studio Community und fuehrt danach die nativen
+  macOS-, Windows- und Linux-Kontrollen aus.
 - Sprachstrategie: Deutsch primaer, inhaltlich entsprechender englischer Teil
   in derselben Datei.
 - Plattformnachweis: Die dokumentierte FetchContent-Einbindung und der
   Calculator wurden lokal mit AppleClang unter macOS konfiguriert, gebaut,
   getestet und in einem interaktiven Terminal gestartet. Ein dauerhafter
   Matrixjob baut den Calculator und testet seine Engine zusaetzlich unter
-  macOS, Linux und Windows.
+  macOS, Linux und Windows. Zwei explizite Windows-Jobs weisen den
+  vollstaendigen Calculator-Build mit Visual Studio 2022/v143 und Visual Studio
+  2026/v145 nach.
 - Repository-spezifisches Distributionsmodell: Quellcode-Abhaengigkeit ueber
   `FetchContent`; keine separate Runtime-, Installations- oder Home-Sync-Kopie.
 - Navigationseinfluss: direkter Guide unter `docs/`, dessen Pfad im Handoff
   genannt wird; keine Aenderung der bestehenden englischen Upstream-README.
 - Re-Evaluation-Trigger: Aenderung des `tvision`-CMake-Ziels, der
   FetchContent- oder Preset-Kompatibilitaet, der unterstuetzten Plattformen,
-  der CLion-CMake-/Toolchain-Oberflaechen oder der Microsoft-C/C++- und
-  CMake-Tools-Erweiterungen fuer VS Code.
+  der CLion-CMake-/Toolchain-Oberflaechen, der Microsoft-C/C++- und
+  CMake-Tools-Erweiterungen fuer VS Code oder der Visual-Studio-/MSVC-/CMake-
+  Generatorvertraege.
 - Evidence: erfolgreicher lokaler FetchContent-Configure-, Build-, CTest- und
-  Startnachweis unter macOS, der Drei-OS-Calculator-Matrixjob sowie der Abgleich
-  mit den lokalen CMake-Ziel-, Installations- und Exportregeln und den
-  verlinkten offiziellen CMake-, JetBrains-, Microsoft- und VS-Code-Referenzen.
+  Startnachweis unter macOS, der Drei-OS-Calculator-Matrixjob, die expliziten
+  VS-2022-/VS-2026-Generatorjobs sowie der Abgleich mit den lokalen
+  CMake-Ziel-, Installations- und Exportregeln und den verlinkten offiziellen
+  CMake-, JetBrains-, Microsoft- und VS-Code-Referenzen.
 
 ## English
 
@@ -1762,7 +2119,9 @@ Ausgabefenster starten. Rueckgabecode und Standardfehler pruefen. Unter Unix
 This guide explains in extensive detail how to consume the personal
 [`hindermath/tvision`](https://github.com/hindermath/tvision) fork in custom
 CMake applications using JetBrains CLion, the CMake command line, and Visual
-Studio Code as a lighter editor on macOS, Windows, and Linux.
+Studio Code as a lighter editor on macOS, Windows, and Linux. On Windows, it
+also covers Microsoft Visual Studio Community 2022 and 2026 as native full
+IDEs.
 
 It assumes the following working model:
 
@@ -1776,6 +2135,9 @@ It assumes the following working model:
 - The CMake command line is the IDE-independent reference workflow.
 - VS Code is the lighter graphical alternative for machines with constrained
   memory or disk space.
+- Microsoft Visual Studio Community is the optional native full Windows IDE;
+  it does not replace the shared CMake contract or CLion's cross-platform
+  standard role.
 - The MacBook Air 2023 with 8 GB RAM is the concrete low-resource example; 8 MB
   would not be realistic for this toolchain.
 - Every application pins one complete, tested commit of the personal fork.
@@ -2345,6 +2707,7 @@ desktop; `TObject::destroy` is the matching Turbo Vision cleanup operation.
 /cmake-build-*/
 /_deps/
 /CMakeUserPresets.json
+/.vs/
 *.a
 *.lib
 *.dll
@@ -2403,12 +2766,16 @@ multi-configuration build normally places the Windows executable under the
 `Debug` configuration subdirectory; a single-configuration generator may put
 it directly in the preset build directory.
 
-##### 16.5.4 CLion, VS Code, and a local tvision override
+##### 16.5.4 CLion, VS Code, Visual Studio, and a local tvision override
 
 Open the copied calculator directory itself in CLion, select the applicable
 host preset, and run `tvision_calculator` in an interactive terminal. In VS
 Code, open the same directory, select the CMake configure preset, build, and
 launch from the integrated terminal rather than an output panel.
+
+On Windows, Visual Studio Community opens the same directory through
+`File | Open | Folder` as a CMake project. Section 22 describes the explicit
+Community 2022/v143 and 2026/v145 choices.
 
 Normal consumers keep the pinned remote commit. Maintainers and CI may set
 `FETCHCONTENT_SOURCE_DIR_TVISION` to an absolute checkout for a focused local
@@ -2474,9 +2841,12 @@ size optimization. A small disk does not need to retain every configuration.
 
 ### 18. Shared CMakePresets.json for three operating systems
 
-Presets provide the same entry points to CLion, VS Code, and the shell. The
-following file uses Ninja and limits builds to two jobs. On Windows, run it in
-a shell where the intended MSVC or MinGW environment is already active.
+Presets provide the same entry points to CLion, VS Code, Visual Studio, and the
+shell. The following file deliberately leaves the generator open and limits
+builds to two jobs. Each operating system can therefore use its default
+generator, while Ninja remains an optional local choice. On Windows, the IDE
+or active toolchain shell selects MSVC or MinGW. Pin Visual Studio 2022 or 2026
+in a local `CMakeUserPresets.json`, not in this shared contract.
 
 ```json
 {
@@ -2490,7 +2860,6 @@ a shell where the intended MSVC or MinGW environment is already active.
     {
       "name": "common",
       "hidden": true,
-      "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
@@ -2561,36 +2930,42 @@ a shell where the intended MSVC or MinGW environment is already active.
     {
       "name": "macos-debug",
       "configurePreset": "macos-debug",
+      "configuration": "Debug",
       "jobs": 2,
       "targets": ["my_tvision_application"]
     },
     {
       "name": "macos-release",
       "configurePreset": "macos-release",
+      "configuration": "Release",
       "jobs": 2,
       "targets": ["my_tvision_application"]
     },
     {
       "name": "linux-debug",
       "configurePreset": "linux-debug",
+      "configuration": "Debug",
       "jobs": 2,
       "targets": ["my_tvision_application"]
     },
     {
       "name": "linux-release",
       "configurePreset": "linux-release",
+      "configuration": "Release",
       "jobs": 2,
       "targets": ["my_tvision_application"]
     },
     {
       "name": "windows-debug",
       "configurePreset": "windows-debug",
+      "configuration": "Debug",
       "jobs": 2,
       "targets": ["my_tvision_application"]
     },
     {
       "name": "windows-release",
       "configurePreset": "windows-release",
+      "configuration": "Release",
       "jobs": 2,
       "targets": ["my_tvision_application"]
     }
@@ -2709,12 +3084,309 @@ cmake --build build/windows-mingw-debug `
 & .\build\windows-mingw-debug\my_tvision_application.exe
 ```
 
-### 22. VS Code as the light editor
+### 22. Microsoft Visual Studio Community 2022 and 2026
+
+Microsoft Visual Studio Community is a complete native Windows IDE. With the
+appropriate workload it provides MSVC, CMake integration, IntelliSense, a
+debugger, Test Explorer, and an integrated terminal. It is another interface
+to the checked-in CMake contract in this working model; the repository does
+not maintain a separate Visual Studio project.
+
+#### 22.1 Position beside CLion and VS Code
+
+| Tool | Operating systems | Role in this working model |
+|---|---|---|
+| CLion | macOS, Linux, Windows | cross-platform standard IDE |
+| VS Code | macOS, Linux, Windows | light editor and terminal option |
+| Visual Studio Community | Windows | optional native full Windows IDE |
+| CMake command line | macOS, Linux, Windows | IDE-independent reference |
+
+Visual Studio does not change `CMakeLists.txt` or the pinned `tvision` SHA. A
+generated `.lib` remains specific to Windows, architecture, toolset, and build
+configuration, just like an MSVC build produced by CLion or Developer
+PowerShell.
+
+#### 22.2 Versions, generators, and toolsets
+
+As of August 12, 2026, the relevant version contract is:
+
+| IDE | CMake generator | Generator requires CMake | Default toolset |
+|---|---|---:|---|
+| Visual Studio Community 2022 | `Visual Studio 17 2022` | 3.21 | `v143` |
+| Visual Studio Community 2026 | `Visual Studio 18 2026` | 4.2 | `v145` |
+
+The generator requirement does not force the application to raise its
+`cmake_minimum_required(VERSION 3.21)`. Only the CMake executable selecting the
+VS 2026 generator must be version 4.2 or newer.
+
+Visual Studio 2022 remains the compatibility path for `v143`; Community uses
+the current 17.14 servicing channel. Visual Studio 2026 is the current `v145`
+path. Supported versions can be installed side by side, but each installation
+and channel needs a unique location. Every build tree remains bound to exactly
+one generator instance and toolset.
+
+Visual Studio 2026 itself currently supports the documented 64-bit Windows 11
+and Windows Server versions. Check the current system requirements before
+installing either IDE on an older Windows host. The operating systems targeted
+by a compiled application also depend on its Windows SDK and target settings;
+they are not identical to the IDE host requirements.
+
+Official references:
+
+- [Visual Studio Community and usage](https://visualstudio.microsoft.com/vs/community/)
+- [Install C++ support](https://learn.microsoft.com/en-us/cpp/build/vscpp-step-0-installation?view=msvc-170)
+- [CMake projects in Visual Studio](https://learn.microsoft.com/en-us/cpp/build/cmake-projects-in-visual-studio?view=msvc-170)
+- [Visual Studio 2022 system requirements](https://learn.microsoft.com/en-us/visualstudio/releases/2022/system-requirements)
+- [Visual Studio 2026 system requirements](https://learn.microsoft.com/en-us/visualstudio/releases/2026/vs-system-requirements)
+- [Visual Studio 2022 CMake generator](https://cmake.org/cmake/help/latest/generator/Visual%20Studio%2017%202022.html)
+- [Visual Studio 2026 CMake generator](https://cmake.org/cmake/help/latest/generator/Visual%20Studio%2018%202026.html)
+
+Microsoft's current Community description permits individual developers to
+create their own free or paid applications. Additional terms apply to use in
+organizations. The linked current license terms are authoritative, not this
+technical guide.
+
+#### 22.3 Install through Visual Studio Installer
+
+Select at least the **Desktop development with C++** workload for Community
+2022 or Community 2026. In Installation details, verify:
+
+- the matching MSVC x64/x86 toolset (`v143` or `v145`);
+- a current Windows SDK;
+- C++ CMake tools for Windows;
+- CMake 3.21 or newer for VS 2022, and 4.2 or newer for the VS 2026 generator;
+- optionally Ninja and Git when they are not provided separately.
+
+MFC, ATL, UWP, game-development, and every optional C++ component are not
+required for this calculator. A focused desktop C++ installation saves disk
+space. Microsoft describes typical Visual Studio installations as roughly
+20-50 GB, with 4 GB RAM as the minimum and 16 GB recommended for typical
+professional solutions. Prefer VS Code or the command line on a constrained
+Windows machine.
+
+Open **Developer PowerShell for VS 2022** and/or **Developer PowerShell for VS
+2026** separately after installation:
+
+```powershell
+cl
+cmake --version
+cmake --help | Select-String 'Visual Studio 17 2022|Visual Studio 18 2026'
+```
+
+Finding `cl` proves that an MSVC environment is active. The generated
+`CMakeCache.txt` is the evidence for the selected generator, architecture, and
+toolset.
+
+#### 22.4 Open the existing CMake project
+
+The recommended IDE workflow does not create `.sln` or `.vcxproj` files in the
+source tree:
+
+1. Start Visual Studio Community.
+2. Select `File | Open | Folder`.
+3. Open the application root containing the top-level `CMakeLists.txt` and
+   `CMakePresets.json`.
+4. Enable CMake for that project folder if Visual Studio prompts for it.
+5. Select the appropriate Windows preset from the configuration control.
+6. Let the first configure finish; FetchContent retrieves the pinned `tvision`
+   revision.
+7. Switch Solution Explorer to **CMake Targets View** when useful.
+
+Visual Studio stores IDE state under `.vs/` and build output in the preset's
+binary directory. Both remain untracked. CMake projects do not require
+`CppProperties.json` or `tasks.vs.json`, and this workflow does not introduce a
+parallel hand-written `CMakeSettings.json`.
+
+Use `Project | Configure Cache` after material CMake changes. Select a new
+build tree when changing generator, architecture, or toolset; do not reinterpret
+an existing cache in the IDE.
+
+#### 22.5 Build, test, run, and debug
+
+After configure, Visual Studio shows the CMake targets. For the stand-alone
+calculator:
+
+1. Select `tvision_calculator` as the build/startup target.
+2. Select Debug or Release in the active CMake configuration.
+3. Run `Build | Build All` or `Ctrl+Shift+B`.
+4. Run the engine tests reproducibly with CTest in the integrated terminal.
+5. Verify the TUI without a debugger in a real terminal first.
+6. Select the calculator as Startup Item and press `F5` for debugging.
+
+The IDE-independent commands for a Visual Studio multi-config tree are:
+
+```powershell
+cmake --build build/windows-debug `
+  --config Debug `
+  --target tvision_calculator `
+  --parallel 2
+
+ctest --test-dir build/windows-debug `
+  -C Debug `
+  --output-on-failure
+
+& .\build\windows-debug\Debug\tvision_calculator.exe
+```
+
+The exact executable path follows from `binaryDir`, configuration, and
+generator. Do not accept a TUI in a plain Output or Debug text pane. Windows
+Terminal, Developer PowerShell, or a full integrated terminal must support
+keyboard input, colors, resizing, and clean shutdown.
+
+#### 22.6 Select Visual Studio 2022 explicitly
+
+Bind the generator, x64 architecture, and `v143` to a dedicated tree:
+
+```powershell
+cmake -S . -B build/windows-vs2022 `
+  -G "Visual Studio 17 2022" `
+  -A x64 `
+  -T v143 `
+  -DBUILD_TESTING=ON
+
+cmake --build build/windows-vs2022 `
+  --config Release `
+  --target tvision_calculator `
+  --parallel 2
+
+ctest --test-dir build/windows-vs2022 `
+  -C Release `
+  --output-on-failure
+
+& .\build\windows-vs2022\Release\tvision_calculator.exe
+```
+
+A generated solution may be opened from the build tree for inspection. It is
+derived, not edited or committed. **Open Folder** with the CMake source files
+remains the canonical IDE workflow.
+
+#### 22.7 Select Visual Studio 2026 explicitly
+
+Visual Studio 2026 uses CMake 4.2 or newer, generator 18, and `v145`:
+
+```powershell
+cmake -S . -B build/windows-vs2026 `
+  -G "Visual Studio 18 2026" `
+  -A x64 `
+  -T v145 `
+  -DBUILD_TESTING=ON
+
+cmake --build build/windows-vs2026 `
+  --config Release `
+  --target tvision_calculator `
+  --parallel 2
+
+ctest --test-dir build/windows-vs2026 `
+  -C Release `
+  --output-on-failure
+
+& .\build\windows-vs2026\Release\tvision_calculator.exe
+```
+
+`Could not create named generator Visual Studio 18 2026` normally means that
+the invoked CMake is too old, the VS 2026 instance is not detected, or its C++
+workload is missing. Renaming a VS 2022 build directory cannot fix it.
+
+#### 22.8 Side-by-side selection with CMakeUserPresets.json
+
+Keep `CMakePresets.json` portable when Community 2022 and 2026 are installed
+side by side. Put the machine-specific choice into the already ignored local
+`CMakeUserPresets.json`:
+
+```json
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "windows-vs2022-debug",
+      "inherits": "windows-debug",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "toolset": "v143",
+      "binaryDir": "${sourceDir}/build/windows-vs2022-debug"
+    },
+    {
+      "name": "windows-vs2026-debug",
+      "inherits": "windows-debug",
+      "generator": "Visual Studio 18 2026",
+      "architecture": "x64",
+      "toolset": "v145",
+      "binaryDir": "${sourceDir}/build/windows-vs2026-debug"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "windows-vs2022-debug",
+      "configurePreset": "windows-vs2022-debug",
+      "configuration": "Debug",
+      "jobs": 2
+    },
+    {
+      "name": "windows-vs2026-debug",
+      "configurePreset": "windows-vs2026-debug",
+      "configuration": "Debug",
+      "jobs": 2
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "windows-vs2022-debug",
+      "configurePreset": "windows-vs2022-debug",
+      "configuration": "Debug",
+      "output": {"outputOnFailure": true}
+    },
+    {
+      "name": "windows-vs2026-debug",
+      "configurePreset": "windows-vs2026-debug",
+      "configuration": "Debug",
+      "output": {"outputOnFailure": true}
+    }
+  ]
+}
+```
+
+The IDE and shell then share the preset names:
+
+```powershell
+cmake --preset windows-vs2022-debug
+cmake --build --preset windows-vs2022-debug
+ctest --preset windows-vs2022-debug
+
+cmake --preset windows-vs2026-debug
+cmake --build --preset windows-vs2026-debug
+ctest --preset windows-vs2026-debug
+```
+
+Create Release presets with distinct binary directories and
+`"configuration": "Release"`. Add absolute installation paths or
+`CMAKE_GENERATOR_INSTANCE` locally only when CMake cannot disambiguate multiple
+instances. Never commit those machine paths to `CMakePresets.json` or
+`CMakeLists.txt`.
+
+#### 22.9 Common Visual Studio failures
+
+- **Preset missing:** verify project root, valid JSON, and enabled CMake support,
+  then configure the cache again.
+- **Wrong IDE version:** inspect `CMAKE_GENERATOR`,
+  `CMAKE_GENERATOR_INSTANCE`, and `CMAKE_GENERATOR_TOOLSET` in that tree's
+  `CMakeCache.txt`.
+- **Wrong architecture:** create a fresh `-A x64` tree instead of editing Win32
+  cache values.
+- **Toolset missing:** add `v143` or `v145` through Visual Studio Installer's
+  desktop C++ workload.
+- **Incompatible linker input:** do not mix MSVC, MinGW, Debug, Release, x86,
+  and x64 artifacts.
+- **TUI does not respond:** use Windows Terminal or Developer PowerShell, not
+  the Visual Studio Output pane.
+- **Insufficient RAM or disk:** install one Community version with only the
+  required C++ workload, or use VS Code/the command line on that machine.
+
+### 23. VS Code as the light editor
 
 VS Code remains an editor with an integrated terminal. Compiler and CMake stay
 external and authoritative.
 
-#### 22.1 Minimal profile and extensions
+#### 23.1 Minimal profile and extensions
 
 ```bash
 code --profile "C++ Light" .
@@ -2726,7 +3398,7 @@ Enable only Microsoft's C/C++ and CMake Tools extensions in this profile.
 Disable unrelated extensions for the workspace. `code --disable-extensions .`
 is a diagnostic mode, not the normal C++ mode.
 
-#### 22.2 Extension recommendations
+#### 23.2 Extension recommendations
 
 ```json
 {
@@ -2737,7 +3409,7 @@ is a diagnostic mode, not the normal C++ mode.
 }
 ```
 
-#### 22.3 Resource-conscious settings
+#### 23.3 Resource-conscious settings
 
 ```json
 {
@@ -2763,24 +3435,24 @@ Manual configure avoids unexpected fetches and indexing. Disabling the
 IntelliSense disk cache saves space and writes but may increase parsing CPU;
 remove or revise the setting if interaction becomes too slow.
 
-#### 22.4 Terminal-first mode
+#### 23.4 Terminal-first mode
 
 Edit in VS Code and run the exact preset commands in its terminal. This needs
 no duplicate `tasks.json` build logic.
 
-#### 22.5 CMake Tools mode
+#### 23.5 CMake Tools mode
 
 Select the operating-system configure preset, run `CMake: Configure`, select
 `my_tvision_application` as build target, and run `CMake: Build`. Launch the TUI
 from the integrated terminal so it receives a real TTY.
 
-#### 22.6 IntelliSense provider
+#### 23.6 IntelliSense provider
 
 The presets export compile commands. Let CMake Tools provide configuration to
 the C/C++ extension. Configure successfully before resetting IntelliSense, and
 do not recursively add the whole `_deps` tree as a manual include workaround.
 
-### 23. VS Code per operating system
+### 24. VS Code per operating system
 
 On macOS, start `code --profile "C++ Light" .` from the shell whose AppleClang,
 CMake, and Ninja checks succeed. Build `macos-debug` and run the executable in
@@ -2799,7 +3471,7 @@ terminal inherits the toolchain. Build `windows-debug` and launch with:
 For MinGW, ensure VS Code sees the same MinGW `PATH` as the proven shell and
 use a separate fresh build tree.
 
-### 24. Debugging TUI applications
+### 25. Debugging TUI applications
 
 A TUI changes terminal state. A breakpoint may therefore leave an incomplete
 screen without proving a tvision defect. Run without a debugger first, verify
@@ -2807,7 +3479,7 @@ dialog, keyboard, resize, and clean exit, then debug. Prefer breakpoints before
 terminal initialization or in clear event handlers. Use LLDB on macOS,
 GDB/LLDB on Linux, and the debugger matching MSVC or MinGW on Windows.
 
-### 25. 8 GB RAM and small-disk profile
+### 26. 8 GB RAM and small-disk profile
 
 The concrete MacBook Air 2023 has 8 GB RAM. Start with:
 
@@ -2827,7 +3499,7 @@ Use a fresh build tree after changing this. PCH favors repeated builds; no PCH
 favors fewer cache artifacts. Unity build remains off because larger
 translation units can create memory peaks.
 
-#### 25.1 Local orientation evidence
+#### 26.1 Local orientation evidence
 
 The copyable starter project was fully compiled on the current Apple Silicon
 Mac with 8 GB RAM, AppleClang, C++17 for the application, Debug configuration,
@@ -2837,7 +3509,7 @@ incremental verification build took about 1.6 seconds. These values describe
 this machine only and are not guaranteed limits for other toolchains or later
 fork revisions.
 
-### 26. Measure and release disk space safely
+### 27. Measure and release disk space safely
 
 ```bash
 du -sh build/* 2>/dev/null
@@ -2854,33 +3526,34 @@ broad recursive deletion.
 Keep one active Debug `_deps` tree when possible. Deleting it after every build
 saves temporary space but forces another download, configure, and full build.
 
-### 27. CLI, CLion, and VS Code parity
+### 28. CLI, CLion, VS Code, and Visual Studio parity
 
-| Aspect | CLion | Command line | VS Code Light |
-|---|---|---|---|
-| source | same Git commit | same commit | same commit |
-| tvision | same pinned SHA | same SHA | same SHA |
-| configure | profile/preset | `cmake --preset` | CMake Tools/terminal |
-| build | selected target | `cmake --build` | CMake Tools/terminal |
-| jobs | profile/build tool | `--parallel 2` | two-job preset |
-| TUI run | terminal | native terminal | integrated terminal |
+| Aspect | CLion | Command line | VS Code Light | Visual Studio Community |
+|---|---|---|---|---|
+| source | same commit | same commit | same commit | same commit |
+| tvision | same SHA | same SHA | same SHA | same SHA |
+| configure | profile/preset | `cmake --preset` | CMake Tools | CMake Presets |
+| build | target | `cmake --build` | CMake Tools | CMake Targets |
+| jobs | build tool | `--parallel 2` | two jobs | two jobs |
+| TUI run | terminal | native terminal | terminal | terminal |
 
 Do not replace this contract with IDE-specific compiler flags or a direct
 one-line compiler invocation.
 
-### 28. Complete personal workflow
+### 29. Complete personal workflow
 
 Start on macOS with the pinned fork SHA, Debug, two jobs, and terminal runtime
 checks. Build macOS Release at a checkpoint and commit only source/configuration.
 Check out the same application commit on Windows, select MSVC or MinGW, and run
-native Debug/Release checks. Then repeat on Linux with ncursesw and a UTF-8
-terminal. Treat the revision as three-platform capable only after all native
-checks.
+native Debug/Release checks. With MSVC, optionally use CLion, VS Code, or Visual
+Studio Community; select VS 2022/v143 or VS 2026/v145 explicitly and keep a
+separate build tree. Then repeat on Linux with ncursesw and a UTF-8 terminal.
+Treat the revision as three-platform capable only after all native checks.
 
 After syncing the fork, change `GIT_TAG` in one pilot application first. Repeat
 macOS, Windows, and Linux checks before updating other applications.
 
-### 29. Extended CMake and VS Code diagnostics
+### 30. Extended CMake, VS Code, and Visual Studio diagnostics
 
 - Wrong compiler: inspect the CMake cache, activate the correct toolchain shell,
   and configure a new build tree rather than editing one cache line.
@@ -2895,8 +3568,11 @@ macOS, Windows, and Linux checks before updating other applications.
 - Swapping: stop the build, reduce other workloads, and resume with one job.
 - Low disk: measure trees, remove old Release/toolchain variants, limit the
   IntelliSense cache, and retain the active Debug tree last.
+- Wrong Visual Studio instance: inspect generator, instance, platform, and
+  toolset in `CMakeCache.txt`, then select a distinct local user preset and
+  build directory instead of rewriting the cache.
 
-### 30. Documentation impact
+### 31. Documentation impact
 
 - Decision: `UpdateRequired`.
 - Canonical technical source: `CMakeLists.txt`, `source/CMakeLists.txt`, and the
@@ -2906,22 +3582,27 @@ macOS, Windows, and Linux checks before updating other applications.
   example under `docs/examples/tvision-calculator/`.
 - Owner: repository maintainer.
 - Audience and reader path: a developer starts with purpose and prerequisites,
-  pins the commit, selects CLion, CMake command line, or VS Code Light, and then
-  performs native macOS, Windows, and Linux verification.
+  pins the commit, selects CLion, CMake command line, VS Code Light, or Visual
+  Studio Community on Windows, and then performs native macOS, Windows, and
+  Linux verification.
 - Language strategy: German primary, equivalent English section in the same
   file.
 - Platform evidence: the documented FetchContent integration and calculator
   were configured, built, tested, and launched in an interactive terminal with
   AppleClang on macOS. A permanent matrix job additionally builds the
-  calculator and tests its engine on macOS, Linux, and Windows.
+  calculator and tests its engine on macOS, Linux, and Windows. Two explicit
+  Windows jobs prove complete calculator builds with Visual Studio 2022/v143
+  and Visual Studio 2026/v145.
 - Repository-specific distribution model: source dependency through
   `FetchContent`; no separate runtime, installation, or Home sync copy.
 - Navigation impact: direct guide under `docs/`, with its path provided in the
   handoff; the existing English upstream README remains unchanged.
 - Re-evaluation trigger: changes to the `tvision` CMake target, FetchContent or
   preset compatibility, supported platforms, CLion CMake/toolchain interfaces,
-  or Microsoft's C/C++ and CMake Tools extensions for VS Code.
+  Microsoft's C/C++ and CMake Tools extensions for VS Code, or Visual Studio,
+  MSVC, and CMake generator contracts.
 - Evidence: successful local FetchContent configure, build, CTest, and launch
-  on macOS, the three-OS calculator matrix job, and comparison with the local
-  CMake target, installation, and export rules and the linked official CMake,
-  JetBrains, Microsoft, and VS Code references.
+  on macOS, the three-OS calculator matrix job, the explicit VS 2022 and VS
+  2026 generator jobs, and comparison with the local CMake target,
+  installation, and export rules and the linked official CMake, JetBrains,
+  Microsoft, and VS Code references.

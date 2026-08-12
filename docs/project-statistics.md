@@ -17,6 +17,8 @@
 | 2026-08-09 | 0 — Bootstrap | 1 | — | 1 | Documentation Impact `UpdateRequired`: Level-2-Governance, C++14/CMake-Kontext, begruendete Nicht-MSL-Ausnahme, Zwölfer-Presetprofil und Wartungspaket via `bootstrap-project`; bestehende Upstream-README und Produktquellen bleiben unverändert. |
 | 2026-08-11 | Cross-platform development guide | 26 | 202979 | 53 | Documentation Impact `UpdateRequired`: ausfuehrliche bilinguale Anleitung fuer CLion, CMake-Kommandozeile und VS Code Light unter macOS, Windows und Linux; macOS Develop-First, reproduzierbares FetchContent-Pinning und 8-GB-/Small-Disk-Profil. |
 | 2026-08-11 | Stand-alone tvision calculator | 26 | 204194 | 54 | Documentation Impact `UpdateRequired`: kopierbares Calculator-CMake-Projekt mit gepinntem FetchContent, getrennter Rechen-Engine, tastaturbedienbarer TUI, CTest und dauerhaftem macOS-/Linux-/Windows-Matrixjob. |
+| 2026-08-12 | Visual Studio Community 2022/2026 | 27 | 205024 | 55 | Documentation Impact `UpdateRequired`: bilinguale Windows-Voll-IDE-Anleitung, generatorneutrale Presets, lokale Side-by-Side-Auswahl und dauerhafte Calculator-Build-/CTest-Nachweise fuer VS 2022/v143 und VS 2026/v145. |
+| 2026-08-12 | gitignore.io IDE and tool baseline | 27 | 205680 | 55 | Documentation Impact `NoUpdateRequired`: Root-`.gitignore` um den unveraenderten gitignore.io-Block fuer den bestaetigten C++-/CMake-/IDE-/Drei-OS-Stack ergaenzt; Produkt-, Build- und Bedienungsdokumentation bleibt sachlich unveraendert. |
 
 ---
 
@@ -81,6 +83,26 @@ that work package.*
 - Distribution und Home-Sync / Distribution and home sync: eigenstaendige repository-spezifische Quellcode-Abhaengigkeit ueber gepinntes FetchContent; kein Home-Sync und keine Binaerdistribution.
 - Re-Evaluation / Re-evaluation: bei Aenderung von Calculator-Verhalten, tvision-CMake-Ziel, FetchContent-Pin, Presets, Host-Toolchains oder Drei-OS-Matrix.
 
+### Visual Studio Community 2022/2026 2026-08-12
+
+- Quelle und Owner / Source and owner: Benutzerauftrag, offizielle Microsoft- und CMake-Generatorvertraege sowie Calculator-CMake-Ziel; Owner Thorsten Hindermann.
+- Betroffene Dokumente / Affected documents: `docs/clion-cross-platform-tvision-development.md`, `docs/examples/tvision-calculator/`, `.github/workflows/cmake.yml` und dieses Statistik-Ledger.
+- Zielgruppen und Leserpfad / Audiences and reader path: Windows-Entwickler waehlen Community 2022/v143 oder 2026/v145, oeffnen das vorhandene CMake-Projekt, bauen und testen den gepinnten Fork und pruefen die TUI in einem echten Terminal.
+- Kanonische Quelle, Navigation und Dokumentklasse / Canonical source, navigation, and document class: generatorneutrale Projekt-Presets und CMake-Ziele bleiben kanonisch; maschinenbezogene Visual-Studio-Auswahl liegt nur in ignorierten User-Presets.
+- Plattform- und Beispielnachweis / Platform and example evidence: lokaler generatorneutraler AppleClang-Build mit CTest sowie dauerhafte Windows-Runner fuer `Visual Studio 17 2022`/`v143` und `Visual Studio 18 2026`/`v145` mit expliziter Cache-Evidenz.
+- Distribution und Home-Sync / Distribution and home sync: unveraenderte repository-spezifische Quellcode-Abhaengigkeit ueber gepinntes FetchContent; keine Solution-, Projekt-, Binaer- oder Home-Sync-Distribution.
+- Re-Evaluation / Re-evaluation: bei Aenderung von Visual-Studio-Systemanforderungen, Community-Lizenz, MSVC-Toolsets, CMake-Generatornamen, Runner-Labels oder Preset-Schema.
+
+### gitignore.io IDE and tool baseline 2026-08-12
+
+- Quelle und Owner / Source and owner: Benutzerauftrag und kombinierte Live-Ausgabe der gitignore.io/Toptal-API; Owner Thorsten Hindermann.
+- Gepruefter Dokumentationsbereich / Reviewed documentation area: Root-`.gitignore`, `.gitattributes`, die Ignore-Beispiele im plattformuebergreifenden Entwicklerguide und die Calculator-Dokumentation; bestehende Aussagen bleiben korrekt.
+- Zielgruppen und Leserpfad / Audiences and reader path: Entwickler verwenden weiterhin die dokumentierten CMake-, CLion-, VS-Code-, Visual-Studio- und Xcode-Wege; lokale IDE-, Build- und Betriebssystemartefakte werden automatisch ausgeschlossen.
+- Kanonische Quelle, Navigation und Dokumentklasse / Canonical source, navigation, and document class: Root-`.gitignore` als Level-2-Vertrag mit einem unveraenderten, quellenmarkierten Generatorblock; keine Navigationsaenderung.
+- Plattform- und Beispielnachweis / Platform and example evidence: kombinierte Vorlagen fuer C++, CMake, Ninja, CLion, VS Code, Visual Studio, Xcode, macOS, Linux und Windows, repraesentative `git check-ignore`-Pruefungen einschliesslich verschachtelter CLion-/VS-Code-Zustaende sowie eine pfadspezifische Git-Whitespace-Ausnahme fuer die erforderlichen Finder-Icon-CR-Bytes.
+- Distribution und Home-Sync / Distribution and home sync: repository-spezifische Quellkonfiguration; kein Home-Sync und keine Aenderung der Bibliotheksdistribution.
+- Re-Evaluation / Re-evaluation: bei Aenderung des primaeren IDE-/Build-Stacks, der gitignore.io-Vorlagen oder der Level-2-Allowlist.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
@@ -91,29 +113,29 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 204194 lines |
+| Textbasis / Text base | 205680 lines |
 | Textdateien / Text files | 1210 |
-| Beobachtbarer Zeitraum / Observable period | 2025-08-17..2026-08-11 |
-| Aktivtage / Active days | 26 |
-| Relevante Commits / Relevant commits | 54 |
-| Zeilen je Aktivtag / Lines per active day | 7853.6 |
+| Beobachtbarer Zeitraum / Observable period | 2025-08-17..2026-08-12 |
+| Aktivtage / Active days | 27 |
+| Relevante Commits / Relevant commits | 55 |
+| Zeilen je Aktivtag / Lines per active day | 7617.8 |
 | Peak-Tag im Fenster / Peak day in window | 2026-08-09 / 133528 |
-| Peak-Woche im Fenster / Peak week in window | 2026-08-09 / 137652 |
-| Laengste Serie / Longest streak | 3 days |
-| Speedup vs. 80 lines/day | 98.2x |
-| Speedup vs. 80 lines/day | 98.2x |
-| Methodik / Methodology | v2; source `bc3773f99d87` |
+| Peak-Woche im Fenster / Peak week in window | 2026-08-09 / 139376 |
+| Laengste Serie / Longest streak | 4 days |
+| Speedup vs. 80 lines/day | 95.2x |
+| Speedup vs. 80 lines/day | 95.2x |
+| Methodik / Methodology | v2; source `1b4c66edb3a9` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
-Produktiv / Production          [######..............]  29.5% | 60218
+Produktiv / Production          [######..............]  29.3% | 60218
 Tests                           [#...................]   4.4% | 9029
-Dokumentation / Documentation   [#########...........]  45.3% | 92591
-Skripte / Scripts               [####................]  19.5% | 39863
-Konfiguration / Configuration   [#...................]   0.2% | 414
+Dokumentation / Documentation   [#########...........]  45.4% | 93350
+Skripte / Scripts               [####................]  19.4% | 39863
+Konfiguration / Configuration   [#...................]   0.2% | 486
 Daten und Medien / Data and media [....................]   0.0% | 0
-Sonstiger Text / Other text     [#...................]   1.0% | 2079
+Sonstiger Text / Other text     [#...................]   1.3% | 2734
 ```
 
 Die Balken teilen die aktuelle getrackte Textbasis in stabile Kategorien. Prozent und Zeilenwert sind die genaue, textorientierte Aussage.
@@ -138,7 +160,7 @@ Wochen / Weeks 27..52 | 2026-02-15..2026-08-15
 So/Su  0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 4
 Mo/Mo  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2
 Di/Tu  0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 4
-Mi/We  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -
+Mi/We  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4
 Do/Th  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -
 Fr/Fr  0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -
 Sa/Sa  0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -
@@ -225,8 +247,8 @@ Es liegen keine belastbaren Phasendaten vor. Deshalb zeigt dieses Diagramm Monat
 
 ```text
 Scale: 0..100x
-80 lines/day       [####################] 98.2x
-80 lines/day       [####################] 98.2x
+80 lines/day       [###################.] 95.2x
+80 lines/day       [###################.] 95.2x
 ```
 
 Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen Referenzen. Sie messen keine Arbeitszeit.
@@ -239,7 +261,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..10000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 80
-Visible repository [################....] 7853.6
+Visible repository [###############.....] 7617.8
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -248,9 +270,9 @@ Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schre
 
 ### Textalternative / Text Alternative
 
-DE: Das Fenster beginnt am 2025-08-17 und endet am 2026-08-11. Es enthaelt 26 aktive und 334 inaktive vergangene Tage. Peak-Tag: 2026-08-09 / 133528. Peak-Woche: 2026-08-09 / 137652. Laengste Serie: 3 Tage (2025-10-07..2025-10-09).
+DE: Das Fenster beginnt am 2025-08-17 und endet am 2026-08-12. Es enthaelt 27 aktive und 334 inaktive vergangene Tage. Peak-Tag: 2026-08-09 / 133528. Peak-Woche: 2026-08-09 / 139376. Laengste Serie: 4 Tage (2026-08-09..2026-08-12).
 
-*EN: The window starts on 2025-08-17 and ends on 2026-08-11. It contains 26 active and 334 inactive elapsed days. Peak day: 2026-08-09 / 133528. Peak week: 2026-08-09 / 137652. Longest streak: 3 days (2025-10-07..2025-10-09).*
+*EN: The window starts on 2025-08-17 and ends on 2026-08-12. It contains 27 active and 334 inactive elapsed days. Peak day: 2026-08-09 / 133528. Peak week: 2026-08-09 / 139376. Longest streak: 4 days (2026-08-09..2026-08-12).*
 
 | Monat / Month | Geaenderte Textzeilen / Changed text lines |
 |---|---:|
@@ -265,6 +287,6 @@ DE: Das Fenster beginnt am 2025-08-17 und endet am 2026-08-11. Es enthaelt 26 ak
 | 2026-05 | 190 |
 | 2026-06 | 0 |
 | 2026-07 | 0 |
-| 2026-08 | 137652 |
+| 2026-08 | 139376 |
 
 <!-- project-statistics-v2:end -->

@@ -52,9 +52,10 @@ Standardgenerator des jeweiligen Systems, sodass Ninja optional bleibt.
 
 - macOS: Xcode Command Line Tools mit AppleClang.
 - Linux: GCC oder Clang sowie die ncursesw-Entwicklungsdateien.
-- Windows: Visual Studio 2022 Build Tools mit der Komponente
-  `Desktop development with C++`; alternativ kann eine bewusst konfigurierte
-  MinGW-Toolchain verwendet werden.
+- Windows: Visual Studio Community beziehungsweise Build Tools 2022 oder 2026
+  mit der Workload `Desktop development with C++`; alternativ kann eine
+  bewusst konfigurierte MinGW-Toolchain verwendet werden. Der explizite
+  VS-2026-Generator benoetigt CMake 4.2 oder neuer.
 
 Debian und Ubuntu stellen die Linux-Abhaengigkeiten beispielsweise so bereit:
 
@@ -144,6 +145,42 @@ ctest --test-dir build/local-debug -C Debug --output-on-failure
 ./build/local-debug/Debug/tvision_calculator.exe
 ```
 
+### Visual Studio Community 2022 und 2026
+
+Das Verzeichnis ist direkt als CMake-Projekt verwendbar. In Community 2022
+oder 2026 wird `File | Open | Folder` gewaehlt und genau dieses
+Calculator-Verzeichnis geoeffnet. Danach das Windows-Debug-Preset,
+`tvision_calculator` als Ziel und ein echtes Terminal fuer den TUI-Start
+waehlen. `.sln`- und `.vcxproj`-Dateien werden nicht im Quellbaum gepflegt.
+
+Fuer einen eindeutigen VS-2022-Nachweis in Developer PowerShell:
+
+```powershell
+cmake -S . -B build/windows-vs2022 `
+  -G "Visual Studio 17 2022" -A x64 -T v143 `
+  -DBUILD_TESTING=ON
+cmake --build build/windows-vs2022 --config Release --parallel 2
+ctest --test-dir build/windows-vs2022 -C Release --output-on-failure
+& .\build\windows-vs2022\Release\tvision_calculator.exe
+```
+
+Fuer Community 2026 muss das aufgerufene CMake mindestens Version 4.2 haben:
+
+```powershell
+cmake -S . -B build/windows-vs2026 `
+  -G "Visual Studio 18 2026" -A x64 -T v145 `
+  -DBUILD_TESTING=ON
+cmake --build build/windows-vs2026 --config Release --parallel 2
+ctest --test-dir build/windows-vs2026 -C Release --output-on-failure
+& .\build\windows-vs2026\Release\tvision_calculator.exe
+```
+
+Bei paralleler Installation erhalten beide Versionen getrennte Buildbaeume.
+Eine lokale `CMakeUserPresets.json` kann Generator, Architektur und Toolset
+festlegen; sie ist bereits ignoriert und wird nicht eingecheckt. Die
+ausfuehrliche Side-by-Side-Konfiguration, IDE-Bedienung und Fehlerdiagnose steht
+in der uebergeordneten plattformuebergreifenden Entwickleranleitung.
+
 ### Verwendung eines lokalen tvision-Checkouts
 
 Die normale Anwendung verwendet bewusst den unveraenderlichen Remote-Commit.
@@ -162,7 +199,7 @@ PowerShell verwendet denselben CMake-Parameter mit einem Windows-Pfad. Absolute
 lokale Pfade gehoeren nicht in `CMakeLists.txt` oder `CMakePresets.json` und
 werden nicht eingecheckt.
 
-### CLion und VS Code
+### CLion, VS Code und Visual Studio
 
 In CLion wird dieses Verzeichnis, nicht der uebergeordnete tvision-Fork, als
 Projekt geoeffnet. CLion erkennt die `CMakeLists.txt` und die fuer das aktuelle
@@ -174,6 +211,12 @@ In VS Code genuegen fuer den leichten Arbeitsweg die Erweiterungen C/C++ und
 CMake Tools. Nach `CMake: Select Configure Preset` wird das passende
 Debug-Preset ausgewaehlt, danach `CMake: Build`. Gestartet wird die erzeugte
 Datei im integrierten Terminal, nicht in einem reinen Ausgabefenster.
+
+In Visual Studio Community wird der Ordner als CMake-Projekt geoeffnet. Die IDE
+verwendet dieselben Presets, zeigt die CMake Targets an und kann den Calculator
+mit MSVC bauen und debuggen. Die abschliessende interaktive TUI-Pruefung erfolgt
+auch hier in Windows Terminal, Developer PowerShell oder einem vollwertigen
+integrierten Terminal.
 
 ### Aktualisieren des Fork-Commits
 
@@ -211,9 +254,10 @@ test.
 All platforms require Git, CMake, a C++17 compiler, and a native build tool.
 The presets use each platform's default generator, so Ninja remains optional.
 macOS uses AppleClang from the Xcode Command Line Tools. Linux additionally
-needs ncurses development headers. Windows uses the Visual Studio 2022 Build
-Tools workload `Desktop development with C++`, unless a deliberate MinGW
-toolchain is configured.
+needs ncurses development headers. Windows uses Visual Studio Community or
+Build Tools 2022/2026 with the `Desktop development with C++` workload, unless
+a deliberate MinGW toolchain is configured. Selecting the VS 2026 generator
+explicitly requires CMake 4.2 or newer.
 
 ### Copying into a new directory
 
@@ -234,6 +278,33 @@ Without presets, use separate source and build directories, set
 `--config Debug` plus `ctest -C Debug` to a Visual Studio multi-configuration
 build. Never reuse one build tree with another compiler or generator.
 
+### Visual Studio Community 2022 and 2026
+
+Open this calculator directory with `File | Open | Folder`, select the Windows
+Debug preset and `tvision_calculator` target, then run the TUI in a real
+terminal. Do not maintain `.sln` or `.vcxproj` files in the source tree.
+
+Use distinct build trees when proving each toolchain explicitly:
+
+```powershell
+cmake -S . -B build/windows-vs2022 `
+  -G "Visual Studio 17 2022" -A x64 -T v143 `
+  -DBUILD_TESTING=ON
+cmake --build build/windows-vs2022 --config Release --parallel 2
+ctest --test-dir build/windows-vs2022 -C Release --output-on-failure
+
+cmake -S . -B build/windows-vs2026 `
+  -G "Visual Studio 18 2026" -A x64 -T v145 `
+  -DBUILD_TESTING=ON
+cmake --build build/windows-vs2026 --config Release --parallel 2
+ctest --test-dir build/windows-vs2026 -C Release --output-on-failure
+```
+
+Keep version-specific generator, architecture, toolset, instance, and absolute
+paths in the ignored local `CMakeUserPresets.json`. See the parent cross-
+platform guide for the complete side-by-side preset, IDE, runtime, and
+troubleshooting workflow.
+
 ### Local source override
 
 Normal consumers deliberately use the immutable remote commit. Maintainers can
@@ -241,13 +312,18 @@ set `FETCHCONTENT_SOURCE_DIR_TVISION` to an absolute local checkout for a
 focused integration test. Local absolute paths must not be committed to the
 shared CMake files.
 
-### CLion and VS Code
+### CLion, VS Code, and Visual Studio
 
 Open this calculator directory itself as the project. CLion discovers the
 CMake project and applicable presets; select `tvision_calculator` as the run
 target. For a lighter VS Code workflow, install only C/C++ and CMake Tools,
 select the host preset, build, and launch the binary in the integrated terminal
 rather than a non-interactive output panel.
+
+Visual Studio Community opens the same directory as a CMake project and uses
+the same presets and targets with MSVC. Debug in the IDE after first verifying
+the TUI in Windows Terminal, Developer PowerShell, or a full integrated
+terminal.
 
 ### Updating tvision
 
