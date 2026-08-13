@@ -1,0 +1,258 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesProposal",
+  "operationId": "62649741-08e0-4c74-8c65-ba90c0a38b1b",
+  "seriesId": "4b34f409-e317-4b3d-9d4c-574043047311",
+  "slug": "tvision-examples-and-documentation",
+  "title": "Historic Turbo Vision examples and tvision documentation",
+  "status": "Proposed",
+  "createdAt": "2026-08-13T09:17:57Z",
+  "profile": "generic-markdown",
+  "languagePolicy": "GermanPrimaryEnglishSecondary",
+  "deliveryAuthority": "MergeAndSync",
+  "authorityEvidence": "Thorsten explicitly requested MergeAndSync with Admin Bypass for all ten intakes on 2026-08-13",
+  "bypassAuthority": {
+    "authorized": true,
+    "authorizer": "Thorsten",
+    "scope": "For each intake, only the concrete pull request created by that intake and only the branch-protection or ruleset restriction preventing an otherwise technically proven merge",
+    "rationale": "Permit the authorized MergeAndSync closeout when repository policy requires owner bypass",
+    "prohibitedUses": [
+      "Hiding or overriding a failed technical gate",
+      "Substituting for a missing required review",
+      "Merging a stale, wrong or insufficiently evidenced head",
+      "Cancelling unrelated checks or workflows",
+      "Changing secrets, provider settings or repository administration beyond the concrete merge bypass",
+      "Starting a successor intake without separate authority"
+    ],
+    "residualRisk": "The provider policy enforcement path is weakened for the concrete merge even though technical gates, review evidence and exact-head validation remain mandatory",
+    "revalidation": "Reconfirm current user authority, concrete PR, exact policy, technical gates, reviews, reviewed head, rationale and residual risk immediately before each bypass"
+  },
+  "sourcePolicy": {
+    "mode": "SynthesisOnly",
+    "historicalCodeReuse": false,
+    "privateAbsolutePathsInPublishedArtifacts": false,
+    "pdfContainersUsedAsTextSources": false,
+    "boundary": "Historic sources define only observable learning intent. Current tvision code, tests and public interfaces remain product truth."
+  },
+  "sources": [
+    {
+      "sourceId": "SRC001",
+      "order": 1,
+      "kind": "Inline",
+      "label": "User-approved plan and decisions",
+      "location": "Conversation",
+      "contentLength": 478,
+      "rawSha256": "4d9fc2f4d1dc93c20ff1716950c2d6fab1c0314a4d143ea28839f44256b725b3",
+      "normalizedSha256": "4d9fc2f4d1dc93c20ff1716950c2d6fab1c0314a4d143ea28839f44256b725b3",
+      "proofBoundary": "ConversationInlineSource"
+    },
+    {
+      "sourceId": "SRC002",
+      "order": 2,
+      "kind": "ExternalLocalText",
+      "label": "TuiVision:tv203s/contrib/tvision/examples/Makefile",
+      "location": "ExternalSnapshot",
+      "contentLength": 2948,
+      "rawSha256": "6e5b43e48ba7bbf64f91a92000a21e447a1be6425bb3e13e79a038a4b5f9b46f",
+      "normalizedSha256": "6e5b43e48ba7bbf64f91a92000a21e447a1be6425bb3e13e79a038a4b5f9b46f",
+      "proofBoundary": "SafeLabelAndHashOnly"
+    },
+    {
+      "sourceId": "SRC003",
+      "order": 3,
+      "kind": "ExternalLocalText",
+      "label": "TuiVision:tv203s/contrib/tvision/examples/readme.txt",
+      "location": "ExternalSnapshot",
+      "contentLength": 5474,
+      "rawSha256": "413683af88685052cf3cd1f9c80d759846c579ea0411da7c514928b568dfba94",
+      "normalizedSha256": "413683af88685052cf3cd1f9c80d759846c579ea0411da7c514928b568dfba94",
+      "proofBoundary": "SafeLabelAndHashOnly"
+    },
+    {
+      "sourceId": "SRC004",
+      "order": 4,
+      "kind": "ExternalLocalText",
+      "label": "TuiVision:TVDEMOS/TVDEMO.PAS",
+      "location": "ExternalSnapshot",
+      "contentLength": 18552,
+      "rawSha256": "9fd5044e927e3239cafd7bc1438557e372e373f15f3ef968659f5fbead0a6ff0",
+      "normalizedSha256": "7f09fc62ba73154f4c52d1c63cfd62bec6590b4fc98cc2ad4824447b56ca4545",
+      "proofBoundary": "SafeLabelAndHashOnly"
+    },
+    {
+      "sourceId": "SRC005",
+      "order": 5,
+      "kind": "ExternalLocalText",
+      "label": "TuiVision:TVDEMOS/TVEDIT.PAS",
+      "location": "ExternalSnapshot",
+      "contentLength": 4498,
+      "rawSha256": "5379591b0966a082c5aa041c27c6b8c43d77685b2e4887f38783ef840aec9fe2",
+      "normalizedSha256": "e9b777068b1a3d53a78c2622f10477229d32c247f97a679b5dda115901c94dad",
+      "proofBoundary": "SafeLabelAndHashOnly"
+    },
+    {
+      "sourceId": "SRC006",
+      "order": 6,
+      "kind": "ExternalLocalText",
+      "label": "TuiVision:TVDEMOS/TVHC.PAS",
+      "location": "ExternalSnapshot",
+      "contentLength": 32470,
+      "rawSha256": "2f514b3e48c5e2df739cc69d3cdd008c98a381d276680d6f961cf9c845d81aee",
+      "normalizedSha256": "90aad11e33df4d5b59b6f619ec72a1a0ca7942682a1585a628d92f682d8c59ee",
+      "proofBoundary": "SafeLabelAndHashOnly"
+    },
+    {
+      "sourceId": "SRC007",
+      "order": 7,
+      "kind": "ExternalLocalText",
+      "label": "TuiVision:TVDEMOS/TVRDEMO.PAS",
+      "location": "ExternalSnapshot",
+      "contentLength": 14609,
+      "rawSha256": "0138a903488ee19502984a799434cdd781acc152ed6d5363e738cf9a75dd9fc0",
+      "normalizedSha256": "77a83c55daaa0a01c2bd381fa2d92d2fa4ae731eeb471e942bf5c5ace986ed04",
+      "proofBoundary": "SafeLabelAndHashOnly"
+    },
+    {
+      "sourceId": "SRC008",
+      "order": 8,
+      "kind": "ExternalLocalText",
+      "label": "TuiVision:TVDEMOS/GENRDEMO.PAS",
+      "location": "ExternalSnapshot",
+      "contentLength": 9032,
+      "rawSha256": "1947ddb28fe3ca4c938774524c95dc0f63a0bf2edc7f2d4b51a89e9fcc6a0f92",
+      "normalizedSha256": "1089b6794005d8bdd85f70befa2b7c8db40692f41543cbb9be2b65ebf0988776",
+      "proofBoundary": "SafeLabelAndHashOnly"
+    },
+    {
+      "sourceId": "SRC009",
+      "order": 9,
+      "kind": "ExternalLocalText",
+      "label": "TuiVision:TVFM/TVFM.PAS",
+      "location": "ExternalSnapshot",
+      "contentLength": 5521,
+      "rawSha256": "cb609290c39b620ce3d9975909bcb7d6d1fe225578fd821a5db48b1ff70356d5",
+      "normalizedSha256": "8e8da1b47d1d43e8835c98d82a9bc4cfc461d56d934080d75b60985703b15d0a",
+      "proofBoundary": "SafeLabelAndHashOnly"
+    },
+    {
+      "sourceId": "SRC010",
+      "order": 10,
+      "kind": "ExternalLocalText",
+      "label": "TuiVision:TVFM/MAKERES.PAS",
+      "location": "ExternalSnapshot",
+      "contentLength": 14552,
+      "rawSha256": "20f841a0f8b6bb818d18c88dc098b7d95620efee8d1e5b6480e1cb4d0fc79b53",
+      "normalizedSha256": "7543c7a0f471893b208e5ab46dcacbff5f4a175d267ae55519386f3d228e2197",
+      "proofBoundary": "SafeLabelAndHashOnly"
+    },
+    {
+      "sourceId": "SRC011",
+      "order": 11,
+      "kind": "ExternalLocalText",
+      "label": "TuiVision:TVDocs/Borland-Turbo-Vision-for-C-User-s-Guide.txt",
+      "location": "ExternalSnapshot",
+      "contentLength": 720765,
+      "rawSha256": "2fe8e2383afbb000efcccbb56c872f7b7a3d3e0dafa458be27632fd65cdaa7e4",
+      "normalizedSha256": "2fe8e2383afbb000efcccbb56c872f7b7a3d3e0dafa458be27632fd65cdaa7e4",
+      "proofBoundary": "OCRCompanionForOutlineOnly"
+    },
+    {
+      "sourceId": "SRC012",
+      "order": 12,
+      "kind": "ExternalLocalText",
+      "label": "TuiVision:TVDocs/Turbo_Vision_Version_2.0_Programming_Guide_1992.txt",
+      "location": "ExternalSnapshot",
+      "contentLength": 1073471,
+      "rawSha256": "fbded1ac785b8cf0258bdeadeb5303e07a253760be0e35ccd0632b9aa720ffc5",
+      "normalizedSha256": "fbded1ac785b8cf0258bdeadeb5303e07a253760be0e35ccd0632b9aa720ffc5",
+      "proofBoundary": "OCRCompanionForOutlineOnly"
+    },
+    {
+      "sourceId": "SRC013",
+      "order": 13,
+      "kind": "Inline",
+      "label": "User authority for MergeAndSync with Admin Bypass",
+      "location": "Conversation",
+      "contentLength": 60,
+      "rawSha256": "bcaa63c768c109db08ac6f9397a4832cd3d456900c1b8e1ba2b6ea2531c948f9",
+      "normalizedSha256": "bcaa63c768c109db08ac6f9397a4832cd3d456900c1b8e1ba2b6ea2531c948f9",
+      "proofBoundary": "ConversationInlineSource"
+    }
+  ],
+  "decisions": [
+    {"decisionId": "IAD001", "decision": "The existing RL-SE self-assessment stays visibly first but is independent and is not a binding series predecessor."},
+    {"decisionId": "IAD002", "decision": "Deduplicate by learning intent and behavior, not only by file name."},
+    {"decisionId": "IAD003", "decision": "Deliver all sensibly portable gaps in staged, independently reviewable waves."},
+    {"decisionId": "IAD004", "decision": "Use clean-room reimplementation; do not copy historic source code, prose, illustrations or resources."},
+    {"decisionId": "IAD005", "decision": "Deliver TVFM first inside a generated temporary sandbox and only later for an explicitly selected user root."},
+    {"decisionId": "IAD006", "decision": "Deliver HTML documentation first as a CI artifact and publish through GitHub Pages only in a later intake."},
+    {"decisionId": "IAD007", "decision": "Deliver documentation infrastructure and a bilingual core path before completing the full handbook."},
+    {"decisionId": "IAD008", "decision": "Every intake Autonomous prompt uses MergeAndSync. Thorsten authorizes a narrowly scoped Admin Bypass only for the concrete intake pull request and merge policy after technical gates, required reviews and exact-head evidence pass."}
+  ],
+  "orderedTargets": [
+    {"intakeId": "d9e56ccf-d805-4041-b574-d53c4bdc2fd0", "order": 1, "role": "Root", "path": "intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md", "receiptPath": "specs/intake-authoring-receipts/turbo-vision-example-inventory-and-reimplementation-boundary.json", "title": "Turbo Vision example inventory and reimplementation boundary"},
+    {"intakeId": "2b68cf1e-d6e8-4aae-b589-35acdcefaedb", "order": 2, "role": "OrderedMember", "path": "intakes/tvision-core-learning-examples.md", "receiptPath": "specs/intake-authoring-receipts/tvision-core-learning-examples.json", "title": "tvision core learning examples"},
+    {"intakeId": "704417a9-9239-44f4-b898-8f49ccebe0e7", "order": 3, "role": "OrderedMember", "path": "intakes/tvision-example-local-controls.md", "receiptPath": "specs/intake-authoring-receipts/tvision-example-local-controls.json", "title": "tvision example-local controls"},
+    {"intakeId": "96dfcd17-f5d0-4988-b6a3-eb6b50c365d1", "order": 4, "role": "OrderedMember", "path": "intakes/tvision-dialog-designer-example.md", "receiptPath": "specs/intake-authoring-receipts/tvision-dialog-designer-example.json", "title": "tvision dialog designer example"},
+    {"intakeId": "f33215c1-4990-46ca-a9d6-fe51c829e380", "order": 5, "role": "OrderedMember", "path": "intakes/tvision-file-manager-sandbox.md", "receiptPath": "specs/intake-authoring-receipts/tvision-file-manager-sandbox.json", "title": "tvision file manager sandbox"},
+    {"intakeId": "74ca2deb-8c9e-41fc-a8b2-fe9469021ec0", "order": 6, "role": "OrderedMember", "path": "intakes/tvision-file-manager-user-roots.md", "receiptPath": "specs/intake-authoring-receipts/tvision-file-manager-user-roots.json", "title": "tvision file manager user roots"},
+    {"intakeId": "f27184d9-b26c-4193-933d-17bc10c07d19", "order": 7, "role": "OrderedMember", "path": "intakes/tvision-documentation-toolchain-and-ci-artifact.md", "receiptPath": "specs/intake-authoring-receipts/tvision-documentation-toolchain-and-ci-artifact.json", "title": "tvision documentation toolchain and CI artifact"},
+    {"intakeId": "e75cdd02-f802-4102-83b6-e5b44a377492", "order": 8, "role": "OrderedMember", "path": "intakes/tvision-bilingual-core-handbook.md", "receiptPath": "specs/intake-authoring-receipts/tvision-bilingual-core-handbook.json", "title": "tvision bilingual core handbook"},
+    {"intakeId": "4a9bf38c-36a3-4945-8a18-be07f004c0e6", "order": 9, "role": "OrderedMember", "path": "intakes/tvision-complete-handbook-and-github-pages.md", "receiptPath": "specs/intake-authoring-receipts/tvision-complete-handbook-and-github-pages.json", "title": "tvision complete handbook and GitHub Pages"},
+    {"intakeId": "bfb2e7a3-fcb3-4096-a7fa-69a21679c569", "order": 10, "role": "OrderedMember", "path": "intakes/tvision-example-documentation-final-audit.md", "receiptPath": "specs/intake-authoring-receipts/tvision-example-documentation-final-audit.json", "title": "tvision example and documentation final audit"}
+  ],
+  "roots": ["d9e56ccf-d805-4041-b574-d53c4bdc2fd0"],
+  "edges": [
+    {"from": "d9e56ccf-d805-4041-b574-d53c4bdc2fd0", "to": "2b68cf1e-d6e8-4aae-b589-35acdcefaedb", "kind": "HardCompletionGate", "binding": true},
+    {"from": "2b68cf1e-d6e8-4aae-b589-35acdcefaedb", "to": "704417a9-9239-44f4-b898-8f49ccebe0e7", "kind": "HardCompletionGate", "binding": true},
+    {"from": "704417a9-9239-44f4-b898-8f49ccebe0e7", "to": "96dfcd17-f5d0-4988-b6a3-eb6b50c365d1", "kind": "HardCompletionGate", "binding": true},
+    {"from": "2b68cf1e-d6e8-4aae-b589-35acdcefaedb", "to": "f33215c1-4990-46ca-a9d6-fe51c829e380", "kind": "HardCompletionGate", "binding": true},
+    {"from": "96dfcd17-f5d0-4988-b6a3-eb6b50c365d1", "to": "f33215c1-4990-46ca-a9d6-fe51c829e380", "kind": "SharedWriterSerialization", "binding": false},
+    {"from": "f33215c1-4990-46ca-a9d6-fe51c829e380", "to": "74ca2deb-8c9e-41fc-a8b2-fe9469021ec0", "kind": "SandboxBaseline", "binding": true},
+    {"from": "d9e56ccf-d805-4041-b574-d53c4bdc2fd0", "to": "f27184d9-b26c-4193-933d-17bc10c07d19", "kind": "DocumentationSurfaceBaseline", "binding": true},
+    {"from": "74ca2deb-8c9e-41fc-a8b2-fe9469021ec0", "to": "f27184d9-b26c-4193-933d-17bc10c07d19", "kind": "PreferredSerialOrder", "binding": false},
+    {"from": "2b68cf1e-d6e8-4aae-b589-35acdcefaedb", "to": "e75cdd02-f802-4102-83b6-e5b44a377492", "kind": "HardCompletionGate", "binding": true},
+    {"from": "704417a9-9239-44f4-b898-8f49ccebe0e7", "to": "e75cdd02-f802-4102-83b6-e5b44a377492", "kind": "HardCompletionGate", "binding": true},
+    {"from": "f33215c1-4990-46ca-a9d6-fe51c829e380", "to": "e75cdd02-f802-4102-83b6-e5b44a377492", "kind": "HardCompletionGate", "binding": true},
+    {"from": "f27184d9-b26c-4193-933d-17bc10c07d19", "to": "e75cdd02-f802-4102-83b6-e5b44a377492", "kind": "DocumentationSurfaceBaseline", "binding": true},
+    {"from": "96dfcd17-f5d0-4988-b6a3-eb6b50c365d1", "to": "4a9bf38c-36a3-4945-8a18-be07f004c0e6", "kind": "HardCompletionGate", "binding": true},
+    {"from": "74ca2deb-8c9e-41fc-a8b2-fe9469021ec0", "to": "4a9bf38c-36a3-4945-8a18-be07f004c0e6", "kind": "HardCompletionGate", "binding": true},
+    {"from": "e75cdd02-f802-4102-83b6-e5b44a377492", "to": "4a9bf38c-36a3-4945-8a18-be07f004c0e6", "kind": "DocumentationSurfaceBaseline", "binding": true},
+    {"from": "4a9bf38c-36a3-4945-8a18-be07f004c0e6", "to": "bfb2e7a3-fcb3-4096-a7fa-69a21679c569", "kind": "FinalAuditInput", "binding": true}
+  ],
+  "coverage": [
+    {"sourceId": "SRC001", "topic": "Approved scope, decisions, order and delivery boundary", "intakeIds": ["d9e56ccf-d805-4041-b574-d53c4bdc2fd0", "2b68cf1e-d6e8-4aae-b589-35acdcefaedb", "704417a9-9239-44f4-b898-8f49ccebe0e7", "96dfcd17-f5d0-4988-b6a3-eb6b50c365d1", "f33215c1-4990-46ca-a9d6-fe51c829e380", "74ca2deb-8c9e-41fc-a8b2-fe9469021ec0", "f27184d9-b26c-4193-933d-17bc10c07d19", "e75cdd02-f802-4102-83b6-e5b44a377492", "4a9bf38c-36a3-4945-8a18-be07f004c0e6", "bfb2e7a3-fcb3-4096-a7fa-69a21679c569"], "disposition": "Covered"},
+    {"sourceId": "SRC002", "topic": "Historic C and C++ executable inventory", "intakeIds": ["d9e56ccf-d805-4041-b574-d53c4bdc2fd0"], "disposition": "Covered"},
+    {"sourceId": "SRC003", "topic": "Historic C and C++ example intent and license notes", "intakeIds": ["d9e56ccf-d805-4041-b574-d53c4bdc2fd0", "2b68cf1e-d6e8-4aae-b589-35acdcefaedb", "704417a9-9239-44f4-b898-8f49ccebe0e7", "96dfcd17-f5d0-4988-b6a3-eb6b50c365d1"], "disposition": "Covered"},
+    {"sourceId": "SRC004", "topic": "Pascal TVDemo program entry", "intakeIds": ["d9e56ccf-d805-4041-b574-d53c4bdc2fd0", "2b68cf1e-d6e8-4aae-b589-35acdcefaedb"], "disposition": "Covered"},
+    {"sourceId": "SRC005", "topic": "Pascal TVEdit program entry", "intakeIds": ["d9e56ccf-d805-4041-b574-d53c4bdc2fd0"], "disposition": "Covered"},
+    {"sourceId": "SRC006", "topic": "Pascal TVHC program entry", "intakeIds": ["d9e56ccf-d805-4041-b574-d53c4bdc2fd0"], "disposition": "Covered"},
+    {"sourceId": "SRC007", "topic": "Pascal resource demo program entry", "intakeIds": ["d9e56ccf-d805-4041-b574-d53c4bdc2fd0"], "disposition": "Covered"},
+    {"sourceId": "SRC008", "topic": "Pascal resource generator program entry", "intakeIds": ["d9e56ccf-d805-4041-b574-d53c4bdc2fd0"], "disposition": "Covered"},
+    {"sourceId": "SRC009", "topic": "Pascal TVFM program entry and learning intent", "intakeIds": ["d9e56ccf-d805-4041-b574-d53c4bdc2fd0", "f33215c1-4990-46ca-a9d6-fe51c829e380", "74ca2deb-8c9e-41fc-a8b2-fe9469021ec0"], "disposition": "Covered"},
+    {"sourceId": "SRC010", "topic": "Pascal TVFM resource generator entry", "intakeIds": ["d9e56ccf-d805-4041-b574-d53c4bdc2fd0", "f33215c1-4990-46ca-a9d6-fe51c829e380"], "disposition": "Covered"},
+    {"sourceId": "SRC011", "topic": "Historic C++ guide outline used only as documentation inspiration", "intakeIds": ["f27184d9-b26c-4193-933d-17bc10c07d19", "e75cdd02-f802-4102-83b6-e5b44a377492", "4a9bf38c-36a3-4945-8a18-be07f004c0e6"], "disposition": "Covered"},
+    {"sourceId": "SRC012", "topic": "Historic Pascal guide outline used only as documentation inspiration", "intakeIds": ["f27184d9-b26c-4193-933d-17bc10c07d19", "e75cdd02-f802-4102-83b6-e5b44a377492", "4a9bf38c-36a3-4945-8a18-be07f004c0e6"], "disposition": "Covered"},
+    {"sourceId": "SRC013", "topic": "Explicit MergeAndSync and narrow Admin Bypass authority", "intakeIds": ["d9e56ccf-d805-4041-b574-d53c4bdc2fd0", "2b68cf1e-d6e8-4aae-b589-35acdcefaedb", "704417a9-9239-44f4-b898-8f49ccebe0e7", "96dfcd17-f5d0-4988-b6a3-eb6b50c365d1", "f33215c1-4990-46ca-a9d6-fe51c829e380", "74ca2deb-8c9e-41fc-a8b2-fe9469021ec0", "f27184d9-b26c-4193-933d-17bc10c07d19", "e75cdd02-f802-4102-83b6-e5b44a377492", "4a9bf38c-36a3-4945-8a18-be07f004c0e6", "bfb2e7a3-fcb3-4096-a7fa-69a21679c569"], "disposition": "Covered"}
+  ],
+  "overlapDecisions": [
+    {"decisionId": "OVL001", "decision": "demo, TVDemo, TVEdit, TVHC, helpdemo, videomode, TVRDemo, GenRDemo, MakeRes, dyntxt, inplis, listvi and msgcls are mapped to existing current examples and do not create duplicate executables."},
+    {"decisionId": "OVL002", "decision": "progba and tprogb become one progress example; sdlg and sdlg2 become one scrolldlg example."},
+    {"decisionId": "OVL003", "decision": "cyrillic and the safe display intent of fonts become the unicode successor; host font and keymap mutation are excluded."},
+    {"decisionId": "OVL004", "decision": "Shared CMake, example catalog and documentation surfaces are serialized by series order without inventing unnecessary functional dependencies."}
+  ],
+  "reviewHandoff": {
+    "mode": "Series",
+    "schemaVersion": "1.1",
+    "requestPath": "specs/intake-authoring-series/tvision-examples-and-documentation/intake-review-request.json",
+    "startsReview": false
+  },
+  "approval": {
+    "required": true,
+    "approved": false,
+    "approvedBy": "N/A",
+    "approvedAt": "N/A",
+    "evidence": "N/A"
+  },
+  "nextAction": "Approve or reject this exact proposal by normalized SHA-256 before any active intake is published"
+}

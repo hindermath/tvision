@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeOperation",
+  "operationId": "62649741-08e0-4c74-8c65-ba90c0a38b1b",
+  "type": "CreateSeries",
+  "status": "Completed",
+  "createdAt": "2026-08-13T09:17:57Z",
+  "authorityEvidence": "Thorsten explicitly requested MergeAndSync with a narrowly scoped Admin Bypass for all ten intakes on 2026-08-13",
+  "proposalPath": "specs/intake-authoring-operations/62649741-08e0-4c74-8c65-ba90c0a38b1b/proposal.json",
+  "proposalNormalizedSha256": "a0d6141f40344ea8f03dd78e5bd3fc91f16b8df2562ce1591d4e21154ff0fb2f",
+  "approval": {
+    "approved": true,
+    "approvedBy": "Thorsten",
+    "approvedAt": "2026-08-13T18:54:26Z",
+    "evidence": "User explicitly approved revised proposal SHA-256 a0d6141f40344ea8f03dd78e5bd3fc91f16b8df2562ce1591d4e21154ff0fb2f"
+  },
+  "stagingDirectory": "specs/intake-authoring-operations/62649741-08e0-4c74-8c65-ba90c0a38b1b/staging",
+  "intendedTargets": [
+    "intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md",
+    "intakes/tvision-core-learning-examples.md",
+    "intakes/tvision-example-local-controls.md",
+    "intakes/tvision-dialog-designer-example.md",
+    "intakes/tvision-file-manager-sandbox.md",
+    "intakes/tvision-file-manager-user-roots.md",
+    "intakes/tvision-documentation-toolchain-and-ci-artifact.md",
+    "intakes/tvision-bilingual-core-handbook.md",
+    "intakes/tvision-complete-handbook-and-github-pages.md",
+    "intakes/tvision-example-documentation-final-audit.md"
+  ],
+  "validatedTargets": [
+    "intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md",
+    "intakes/tvision-core-learning-examples.md",
+    "intakes/tvision-example-local-controls.md",
+    "intakes/tvision-dialog-designer-example.md",
+    "intakes/tvision-file-manager-sandbox.md",
+    "intakes/tvision-file-manager-user-roots.md",
+    "intakes/tvision-documentation-toolchain-and-ci-artifact.md",
+    "intakes/tvision-bilingual-core-handbook.md",
+    "intakes/tvision-complete-handbook-and-github-pages.md",
+    "intakes/tvision-example-documentation-final-audit.md"
+  ],
+  "publishedTargets": [
+    "intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md",
+    "intakes/tvision-core-learning-examples.md",
+    "intakes/tvision-example-local-controls.md",
+    "intakes/tvision-dialog-designer-example.md",
+    "intakes/tvision-file-manager-sandbox.md",
+    "intakes/tvision-file-manager-user-roots.md",
+    "intakes/tvision-documentation-toolchain-and-ci-artifact.md",
+    "intakes/tvision-bilingual-core-handbook.md",
+    "intakes/tvision-complete-handbook-and-github-pages.md",
+    "intakes/tvision-example-documentation-final-audit.md"
+  ],
+  "rollbackBoundary": "No active intake or receipt is published before proposal approval and successful validation of the complete staged series",
+  "failure": {
+    "class": "N/A",
+    "message": "N/A"
+  },
+  "nextAction": "$speckit-intake-review specs/intake-authoring-series/tvision-examples-and-documentation/intake-review-request.json"
+}

@@ -15,3 +15,39 @@ Diese Tabelle wird aus `Lastenheft*.md` im Repository-Root erzeugt. Sie ist eine
 |---:|---|---|---|
 | 1 | `Lastenheft_RL-SE-Checklist-Selbstpruefung.md` | RL-SE-/Checklist-Selbstpruefung | aktiv / active |
 <!-- secure-development-hardening-order:end -->
+
+## Manuelle Intake-Serie: tvision-Beispiele und Dokumentation / Manual Intake Series: tvision Examples and Documentation
+
+Der vorhandene RL-SE-/Checklist-Selbstpruefungs-Intake bleibt in der sichtbaren
+Gesamtreihenfolge zuerst. Er ist gemaess Entscheidung `IAD001` kein bindender
+Vorgaenger dieser neuen Serie. Die folgenden Ziele stehen auf
+`ReadyForReview`; diese Tabelle startet weder Intake Review noch Specify,
+Autonomous oder Implementierung.
+
+*The existing RL-SE/checklist self-assessment intake remains first in the
+visible overall order. Under decision `IAD001`, it is not a binding predecessor
+of this new series. The following targets are `ReadyForReview`; this table does
+not start Intake Review, Specify, Autonomous, or implementation.*
+
+| Rang | Intake | Rolle | Status |
+|---:|---|---|---|
+| 1 | `intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md` | Root / Grundlage | `ReadyForReview` |
+| 2 | `intakes/tvision-core-learning-examples.md` | Kernbeispiele | `ReadyForReview` |
+| 3 | `intakes/tvision-example-local-controls.md` | Beispieleigene Controls | `ReadyForReview` |
+| 4 | `intakes/tvision-dialog-designer-example.md` | Dialogdesigner | `ReadyForReview` |
+| 5 | `intakes/tvision-file-manager-sandbox.md` | Sichere Sandbox | `ReadyForReview` |
+| 6 | `intakes/tvision-file-manager-user-roots.md` | Benutzerwurzeln | `ReadyForReview` |
+| 7 | `intakes/tvision-documentation-toolchain-and-ci-artifact.md` | Dokumentationswerkzeuge | `ReadyForReview` |
+| 8 | `intakes/tvision-bilingual-core-handbook.md` | Kernhandbuch | `ReadyForReview` |
+| 9 | `intakes/tvision-complete-handbook-and-github-pages.md` | Vollstaendiges Handbuch und Pages | `ReadyForReview` |
+| 10 | `intakes/tvision-example-documentation-final-audit.md` | Abschlusspruefung | `ReadyForReview` |
+
+Die maschinenpruefbare Reihenfolge, Quellenabdeckung und der DAG stehen unter
+`specs/intake-authoring-series/tvision-examples-and-documentation/`. Ein
+operatives Sequencing-Manifest wird erst nach einem separat beauftragten und
+erfolgreichen Series Review angelegt.
+
+*The machine-checkable order, source coverage, and DAG live under
+`specs/intake-authoring-series/tvision-examples-and-documentation/`. An
+operational sequencing manifest is created only after a separately authorized
+and successful Series Review.*

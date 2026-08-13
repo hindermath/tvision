@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeReceipt",
+  "receiptId": "e339e709-e282-41df-8214-468a67eb54e2",
+  "intakeId": "74ca2deb-8c9e-41fc-a8b2-fe9469021ec0",
+  "generator": {
+    "preset": "intake-authoring-governance",
+    "version": "0.3.1"
+  },
+  "createdAt": "2026-08-13T18:46:06Z",
+  "operation": {
+    "operationId": "62649741-08e0-4c74-8c65-ba90c0a38b1b",
+    "type": "Create",
+    "authorityEvidence": "Thorsten explicitly authorized MergeAndSync with a narrowly scoped Admin Bypass for all ten intakes on 2026-08-13"
+  },
+  "status": "ReadyForReview",
+  "target": {
+    "path": "intakes/tvision-file-manager-user-roots.md",
+    "normalizedSha256": "e5eb61d26d6a3c1ce1a4d133d6ac4cfefb0bd8a62fdead5707ca518984d2402b"
+  },
+  "sources": [
+    {
+      "sourceId": "SRC001",
+      "order": 1,
+      "kind": "Inline",
+      "label": "User-approved plan and decisions",
+      "location": "SnapshotOnly",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "4d9fc2f4d1dc93c20ff1716950c2d6fab1c0314a4d143ea28839f44256b725b3",
+      "gitBlob": "N/A",
+      "proofBoundary": "ConversationInlineSource"
+    },
+    {
+      "sourceId": "SRC009",
+      "order": 2,
+      "kind": "File",
+      "label": "TuiVision:TVFM/TVFM.PAS",
+      "location": "ExternalSnapshot",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "8e8da1b47d1d43e8835c98d82a9bc4cfc461d56d934080d75b60985703b15d0a",
+      "gitBlob": "N/A",
+      "proofBoundary": "SafeLabelAndHashOnly"
+    },
+    {
+      "sourceId": "SRC013",
+      "order": 3,
+      "kind": "Inline",
+      "label": "User authority for MergeAndSync with Admin Bypass",
+      "location": "SnapshotOnly",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "bcaa63c768c109db08ac6f9397a4832cd3d456900c1b8e1ba2b6ea2531c948f9",
+      "gitBlob": "N/A",
+      "proofBoundary": "ConversationInlineSource"
+    }
+  ],
+  "profile": "generic-markdown",
+  "languagePolicy": "GermanPrimaryEnglishSecondary",
+  "decisions": [
+    {
+      "id": "IAD001",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD001?",
+      "answer": "The existing RL-SE self-assessment stays visibly first but is independent and is not a binding series predecessor.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD002",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD002?",
+      "answer": "Deduplicate by learning intent and behavior, not only by file name.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD003",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD003?",
+      "answer": "Deliver all sensibly portable gaps in staged, independently reviewable waves.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD004",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD004?",
+      "answer": "Use clean-room reimplementation; do not copy historic source code, prose, illustrations or resources.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD005",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD005?",
+      "answer": "Deliver TVFM first inside a generated temporary sandbox and only later for an explicitly selected user root.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD006",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD006?",
+      "answer": "Deliver HTML documentation first as a CI artifact and publish through GitHub Pages only in a later intake.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD007",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD007?",
+      "answer": "Deliver documentation infrastructure and a bilingual core path before completing the full handbook.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD008",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD008?",
+      "answer": "Every intake Autonomous prompt uses MergeAndSync. Thorsten authorizes a narrowly scoped Admin Bypass only for the concrete intake pull request and merge policy after technical gates, required reviews and exact-head evidence pass.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    }
+  ],
+  "openDecisionIds": [],
+  "questionCount": 0,
+  "agentSurface": {
+    "specifyCanonicalId": "speckit.specify",
+    "specifyInvocation": "$speckit-specify",
+    "autonomousCanonicalId": "speckit.autonomous",
+    "autonomousInvocation": "$speckit-autonomous"
+  },
+  "deliveryAuthority": "MergeAndSync",
+  "authorityEvidence": "Thorsten explicitly authorized MergeAndSync with a narrowly scoped Admin Bypass for all ten intakes on 2026-08-13; bypass remains narrow and must be revalidated for the concrete pull request and policy",
+  "promptState": "Enabled",
+  "provenanceMode": "New",
+  "supersedes": {
+    "receiptPath": "N/A",
+    "targetNormalizedSha256": "N/A",
+    "archiveTargetPath": "N/A",
+    "archiveReceiptPath": "N/A"
+  },
+  "legacyAdoption": {
+    "evidenceType": "N/A",
+    "priorTargetNormalizedSha256": "N/A",
+    "priorGitBlob": "N/A"
+  },
+  "updateAuthorized": false,
+  "updateAuthorityEvidence": "N/A",
+  "series": {
+    "seriesId": "4b34f409-e317-4b3d-9d4c-574043047311",
+    "manifestPath": "specs/intake-authoring-series/tvision-examples-and-documentation/series.json",
+    "order": 6,
+    "role": "OrderedMember",
+    "supersedesIntakeIds": []
+  },
+  "nextAction": "$speckit-intake-review intakes/tvision-file-manager-user-roots.md"
+}

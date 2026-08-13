@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeReceipt",
+  "receiptId": "398d0027-f3f6-434c-918a-99217103395e",
+  "intakeId": "4a9bf38c-36a3-4945-8a18-be07f004c0e6",
+  "generator": {
+    "preset": "intake-authoring-governance",
+    "version": "0.3.1"
+  },
+  "createdAt": "2026-08-13T18:46:06Z",
+  "operation": {
+    "operationId": "62649741-08e0-4c74-8c65-ba90c0a38b1b",
+    "type": "Create",
+    "authorityEvidence": "Thorsten explicitly authorized MergeAndSync with a narrowly scoped Admin Bypass for all ten intakes on 2026-08-13"
+  },
+  "status": "ReadyForReview",
+  "target": {
+    "path": "intakes/tvision-complete-handbook-and-github-pages.md",
+    "normalizedSha256": "5c6d11be79c0e6a22a917894f0a66bba6722df3d809348789044f17df8612ee1"
+  },
+  "sources": [
+    {
+      "sourceId": "SRC001",
+      "order": 1,
+      "kind": "Inline",
+      "label": "User-approved plan and decisions",
+      "location": "SnapshotOnly",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "4d9fc2f4d1dc93c20ff1716950c2d6fab1c0314a4d143ea28839f44256b725b3",
+      "gitBlob": "N/A",
+      "proofBoundary": "ConversationInlineSource"
+    },
+    {
+      "sourceId": "SRC011",
+      "order": 2,
+      "kind": "File",
+      "label": "TuiVision:TVDocs/Borland-Turbo-Vision-for-C-User-s-Guide.txt",
+      "location": "ExternalSnapshot",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "2fe8e2383afbb000efcccbb56c872f7b7a3d3e0dafa458be27632fd65cdaa7e4",
+      "gitBlob": "N/A",
+      "proofBoundary": "OCRCompanionForOutlineOnly"
+    },
+    {
+      "sourceId": "SRC012",
+      "order": 3,
+      "kind": "File",
+      "label": "TuiVision:TVDocs/Turbo_Vision_Version_2.0_Programming_Guide_1992.txt",
+      "location": "ExternalSnapshot",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "fbded1ac785b8cf0258bdeadeb5303e07a253760be0e35ccd0632b9aa720ffc5",
+      "gitBlob": "N/A",
+      "proofBoundary": "OCRCompanionForOutlineOnly"
+    },
+    {
+      "sourceId": "SRC013",
+      "order": 4,
+      "kind": "Inline",
+      "label": "User authority for MergeAndSync with Admin Bypass",
+      "location": "SnapshotOnly",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "bcaa63c768c109db08ac6f9397a4832cd3d456900c1b8e1ba2b6ea2531c948f9",
+      "gitBlob": "N/A",
+      "proofBoundary": "ConversationInlineSource"
+    }
+  ],
+  "profile": "generic-markdown",
+  "languagePolicy": "GermanPrimaryEnglishSecondary",
+  "decisions": [
+    {
+      "id": "IAD001",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD001?",
+      "answer": "The existing RL-SE self-assessment stays visibly first but is independent and is not a binding series predecessor.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD002",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD002?",
+      "answer": "Deduplicate by learning intent and behavior, not only by file name.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD003",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD003?",
+      "answer": "Deliver all sensibly portable gaps in staged, independently reviewable waves.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD004",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD004?",
+      "answer": "Use clean-room reimplementation; do not copy historic source code, prose, illustrations or resources.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD005",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD005?",
+      "answer": "Deliver TVFM first inside a generated temporary sandbox and only later for an explicitly selected user root.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD006",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD006?",
+      "answer": "Deliver HTML documentation first as a CI artifact and publish through GitHub Pages only in a later intake.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD007",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD007?",
+      "answer": "Deliver documentation infrastructure and a bilingual core path before completing the full handbook.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD008",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD008?",
+      "answer": "Every intake Autonomous prompt uses MergeAndSync. Thorsten authorizes a narrowly scoped Admin Bypass only for the concrete intake pull request and merge policy after technical gates, required reviews and exact-head evidence pass.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    }
+  ],
+  "openDecisionIds": [],
+  "questionCount": 0,
+  "agentSurface": {
+    "specifyCanonicalId": "speckit.specify",
+    "specifyInvocation": "$speckit-specify",
+    "autonomousCanonicalId": "speckit.autonomous",
+    "autonomousInvocation": "$speckit-autonomous"
+  },
+  "deliveryAuthority": "MergeAndSync",
+  "authorityEvidence": "Thorsten explicitly authorized MergeAndSync with a narrowly scoped Admin Bypass for all ten intakes on 2026-08-13; bypass remains narrow and must be revalidated for the concrete pull request and policy",
+  "promptState": "Enabled",
+  "provenanceMode": "New",
+  "supersedes": {
+    "receiptPath": "N/A",
+    "targetNormalizedSha256": "N/A",
+    "archiveTargetPath": "N/A",
+    "archiveReceiptPath": "N/A"
+  },
+  "legacyAdoption": {
+    "evidenceType": "N/A",
+    "priorTargetNormalizedSha256": "N/A",
+    "priorGitBlob": "N/A"
+  },
+  "updateAuthorized": false,
+  "updateAuthorityEvidence": "N/A",
+  "series": {
+    "seriesId": "4b34f409-e317-4b3d-9d4c-574043047311",
+    "manifestPath": "specs/intake-authoring-series/tvision-examples-and-documentation/series.json",
+    "order": 9,
+    "role": "OrderedMember",
+    "supersedesIntakeIds": []
+  },
+  "nextAction": "$speckit-intake-review intakes/tvision-complete-handbook-and-github-pages.md"
+}

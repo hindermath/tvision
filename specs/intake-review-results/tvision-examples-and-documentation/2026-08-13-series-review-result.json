@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "53ece253-a367-45e7-ab5c-1f565984f613",
+  "mode": "Series",
+  "status": "NeedsRemediation",
+  "policy": "generic-markdown",
+  "reviewedAt": "2026-08-13T19:04:49Z",
+  "repository": {
+    "root": ".",
+    "head": "1504519399427af89308c71045d7e32785e9dba8"
+  },
+  "requestEvidence": {
+    "path": "specs/intake-authoring-series/tvision-examples-and-documentation/intake-review-request.json",
+    "normalizedSha256": "5839dc534813c9e05d2fd06804efa0d20a42bc3136852fa857c49756e323be76"
+  },
+  "targets": [
+    {
+      "path": "intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md",
+      "role": "Primary",
+      "normalizedSha256": "250c076fe22204b27f3ef6f8a69e12a00f14779d30b713852d63c33a7a42d194",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "intakes/tvision-core-learning-examples.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "f6eb13192b5b08aa5c3989c6ec4b338f80349cb6195c721d58dace7ff8a10550",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "intakes/tvision-example-local-controls.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "a348de21ee2b60ee62e975103c00a3dfbbcfb95b11a29c41db9786ceedb629b8",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "intakes/tvision-dialog-designer-example.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "2de5c6124a5ee4d68fa4c3d27bd52d84c38d337d1a899ab2dbb018a728616367",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "intakes/tvision-file-manager-sandbox.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "eecd105c5986ca65d866e6108f2d8e13b73f32f8252709e15af7dc92285f9b84",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "intakes/tvision-file-manager-user-roots.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "e5eb61d26d6a3c1ce1a4d133d6ac4cfefb0bd8a62fdead5707ca518984d2402b",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "intakes/tvision-documentation-toolchain-and-ci-artifact.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "0c0b96d109487ec0aee8dfe3d6f77150d364dc24195ed4592aaf5d1913961f89",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "intakes/tvision-bilingual-core-handbook.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "27a700270f179e45dde5baae457f1df4d0a243c3eecc9cbca02e14f28426c240",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "intakes/tvision-complete-handbook-and-github-pages.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "5c6d11be79c0e6a22a917894f0a66bba6722df3d809348789044f17df8612ee1",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "intakes/tvision-example-documentation-final-audit.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "5b1c251cea1fe875da49ab58213e2fca41dc788f7bfc5a183e7285ee37d1263c",
+      "gitBlob": "N/A"
+    }
+  ],
+  "findings": [
+    {
+      "id": "IR001",
+      "severity": "High",
+      "category": "Series handoff and dependency enforcement",
+      "target": "All ten reviewed intakes",
+      "disposition": "Require every downstream prompt to verify the current accepted series review, a current valid sequencing manifest or series status, eligibility through series-next, and Completed state for all binding predecessors before Specify or Autonomous execution starts.",
+      "owner": "Intake author and project owner",
+      "evidence": "Each intake's copy-ready prompts treat its own file as the sole binding intake and require only a current successful intake review, while the request declares 16 binding dependency edges and the prose states that series order alone grants no execution authority.",
+      "reevaluationTrigger": "All ten prompts and their execution assumptions explicitly fail closed on current series eligibility and predecessor completion, followed by a fresh full-series review."
+    },
+    {
+      "id": "IR002",
+      "severity": "High",
+      "category": "Delivery authority and Admin Bypass freshness",
+      "target": "All ten reviewed intakes",
+      "disposition": "Distinguish the stored MergeAndSync and Admin Bypass intent from current execution authority; require a fresh user grant before remote delivery and a separate current bypass authorization after the concrete pull request and applicable policy are known, otherwise stop before the privileged boundary.",
+      "owner": "Intake author and human authority owner",
+      "evidence": "The intakes persist MergeAndSync plus Admin Bypass and instruct autonomous delivery, but they do not explicitly require a fresh current grant immediately before commit, push, pull request, merge, or the concrete bypass boundary. Repository governance states that a persisted delivery mode is not continuing authority.",
+      "reevaluationTrigger": "All ten authority sections and prompts contain the fail-closed freshness checks, and the material wording change has explicit human approval before re-review."
+    },
+    {
+      "id": "IR003",
+      "severity": "Medium",
+      "category": "Learner readability and terminology",
+      "target": "All ten reviewed intakes",
+      "disposition": "Add concise bilingual first-use explanations or a stable local glossary reference for workflow and specialist terms used by the learner-facing audience.",
+      "owner": "Intake author",
+      "evidence": "The declared audience includes C++ learners without Spec Kit experience, while terms such as Intake, Series, DAG, CI, TUI, CLI, WCAG, A11Y, SHA-256, OCR, PTY, ABI, exact head, and ruleset are used without consistent first-use explanations.",
+      "reevaluationTrigger": "A readability pass confirms that all non-obvious workflow and specialist terms are explained on first use or resolved through an immediately reachable bilingual glossary."
+    },
+    {
+      "id": "IR004",
+      "severity": "Medium",
+      "category": "Privacy and supply-chain applicability",
+      "target": "All ten reviewed intakes",
+      "disposition": "Record an explicit per-intake privacy and supply-chain applicability decision, including protection of private absolute paths and evidence plus review and pinning expectations for new tools, actions, and dependencies where applicable.",
+      "owner": "Intake author and security reviewer",
+      "evidence": "The common quality sections cover C++14, accessibility, language, historical-source boundaries, documentation impact, and secret changes, but do not explicitly decide privacy, telemetry, data retention, or supply-chain applicability. File-manager work may expose user paths, and documentation work may add Python tooling or CI actions.",
+      "reevaluationTrigger": "Every intake has explicit Applicable or Not Applicable decisions with rationale and measurable acceptance criteria for privacy and supply-chain concerns, followed by a fresh full-series review."
+    }
+  ],
+  "questions": [],
+  "acceptedRisks": [],
+  "operatorExceptions": [],
+  "coverage": {
+    "individual": [
+      "intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md",
+      "intakes/tvision-core-learning-examples.md",
+      "intakes/tvision-example-local-controls.md",
+      "intakes/tvision-dialog-designer-example.md",
+      "intakes/tvision-file-manager-sandbox.md",
+      "intakes/tvision-file-manager-user-roots.md",
+      "intakes/tvision-documentation-toolchain-and-ci-artifact.md",
+      "intakes/tvision-bilingual-core-handbook.md",
+      "intakes/tvision-complete-handbook-and-github-pages.md",
+      "intakes/tvision-example-documentation-final-audit.md"
+    ],
+    "series": [
+      "Identity and target-role coverage",
+      "Normalized request and target hashes",
+      "Exact order, one root, and acyclic dependency graph",
+      "Gaps, overlap, terminology, invariants, and handoffs",
+      "Future scope and delivery-authority boundaries",
+      "Learner readability and bilingual applicability",
+      "Security, privacy, accessibility, platform, and supply-chain applicability"
+    ],
+    "workers": []
+  },
+  "summary": {
+    "critical": 0,
+    "high": 2,
+    "medium": 2,
+    "low": 0
+  },
+  "supersedes": "N/A"
+}
