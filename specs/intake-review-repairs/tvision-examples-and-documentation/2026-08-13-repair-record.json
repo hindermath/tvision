@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeReviewRepairRecord",
+  "repairOperationId": "d56149d3-8eac-4761-b27a-c033629f23b3",
+  "authorizedAt": "2026-08-13T19:17:22Z",
+  "authorityEvidence": "$speckit-intake-repair specs/intake-review-results/tvision-examples-and-documentation/2026-08-13-series-review-result.json",
+  "sourceReview": {
+    "path": "specs/intake-review-results/tvision-examples-and-documentation/2026-08-13-series-review-result.json",
+    "reviewId": "53ece253-a367-45e7-ab5c-1f565984f613",
+    "normalizedSha256": "dbf8b3439aaa437410c05c1c740fc7cf88bdf8d0945f6d0773b75691c75563f7",
+    "status": "NeedsRemediation"
+  },
+  "resolvedFindings": [
+    {
+      "findingId": "IR001",
+      "authorization": "Explicit repair invocation covers the documented series handoff and dependency-enforcement remediation",
+      "change": "Added a binding Series and start gate plus explicit gate checks to both copy-ready prompts in all ten targets"
+    },
+    {
+      "findingId": "IR002",
+      "authorization": "Explicit repair invocation follows the prior explanation that material delivery-authority wording required human approval",
+      "change": "Separated stored delivery intent from current execution authority and required a distinct fresh Admin Bypass grant at the concrete boundary"
+    },
+    {
+      "findingId": "IR003",
+      "authorization": "Explicit repair invocation covers the documented learner-readability remediation",
+      "change": "Added a bilingual terminology section to all ten targets"
+    },
+    {
+      "findingId": "IR004",
+      "authorization": "Explicit repair invocation follows the prior explanation that privacy and supply-chain decisions required human approval",
+      "change": "Added explicit Applicable decisions and measurable privacy and supply-chain controls to all ten targets"
+    }
+  ],
+  "targets": [
+    {
+      "path": "intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md",
+      "oldNormalizedSha256": "250c076fe22204b27f3ef6f8a69e12a00f14779d30b713852d63c33a7a42d194",
+      "newNormalizedSha256": "7103b67485ef9275cd5bce9c18a279346a3d59cec24509d17f9170cc3125431c"
+    },
+    {
+      "path": "intakes/tvision-core-learning-examples.md",
+      "oldNormalizedSha256": "f6eb13192b5b08aa5c3989c6ec4b338f80349cb6195c721d58dace7ff8a10550",
+      "newNormalizedSha256": "3b1e9053c2ce4ad8938cefd47e68c26ddc2e98ae75735ba9515dd0269411b4a6"
+    },
+    {
+      "path": "intakes/tvision-example-local-controls.md",
+      "oldNormalizedSha256": "a348de21ee2b60ee62e975103c00a3dfbbcfb95b11a29c41db9786ceedb629b8",
+      "newNormalizedSha256": "35ec1bcd2a7f7042e5daa2d79e2c21a8fa8d0c7c361bd532599ba3336819f9b7"
+    },
+    {
+      "path": "intakes/tvision-dialog-designer-example.md",
+      "oldNormalizedSha256": "2de5c6124a5ee4d68fa4c3d27bd52d84c38d337d1a899ab2dbb018a728616367",
+      "newNormalizedSha256": "108029769b633d28c5ddf023b5056911b39f1f08eb4273756625db5ffe6c0dd0"
+    },
+    {
+      "path": "intakes/tvision-file-manager-sandbox.md",
+      "oldNormalizedSha256": "eecd105c5986ca65d866e6108f2d8e13b73f32f8252709e15af7dc92285f9b84",
+      "newNormalizedSha256": "aa110ef0922f8cf4141955d7e82ddef8d5efe350f2671f5fda3f216b57bcc0e5"
+    },
+    {
+      "path": "intakes/tvision-file-manager-user-roots.md",
+      "oldNormalizedSha256": "e5eb61d26d6a3c1ce1a4d133d6ac4cfefb0bd8a62fdead5707ca518984d2402b",
+      "newNormalizedSha256": "043e62f23a07de4402960cdf8b076212e3f88f69a1c1e952a86a980dfad67f54"
+    },
+    {
+      "path": "intakes/tvision-documentation-toolchain-and-ci-artifact.md",
+      "oldNormalizedSha256": "0c0b96d109487ec0aee8dfe3d6f77150d364dc24195ed4592aaf5d1913961f89",
+      "newNormalizedSha256": "c3df8b0982fb915cdf40088d9832a7c5fd3cb7058f82ed409c99c977451d71f9"
+    },
+    {
+      "path": "intakes/tvision-bilingual-core-handbook.md",
+      "oldNormalizedSha256": "27a700270f179e45dde5baae457f1df4d0a243c3eecc9cbca02e14f28426c240",
+      "newNormalizedSha256": "a58ff371088c6da9666222576577ce9e74910694cdbb9ecb987a66f84a45debb"
+    },
+    {
+      "path": "intakes/tvision-complete-handbook-and-github-pages.md",
+      "oldNormalizedSha256": "5c6d11be79c0e6a22a917894f0a66bba6722df3d809348789044f17df8612ee1",
+      "newNormalizedSha256": "590d7478076aa8eb71d8dbf09dd9748657611ea1c5997c4e0684968d1a50df54"
+    },
+    {
+      "path": "intakes/tvision-example-documentation-final-audit.md",
+      "oldNormalizedSha256": "5b1c251cea1fe875da49ab58213e2fca41dc788f7bfc5a183e7285ee37d1263c",
+      "newNormalizedSha256": "cebd2f12155d48c9349514117f001dd8ee76f2de98824d5dad23e565125c2d79"
+    }
+  ],
+  "newReview": {
+    "path": "specs/intake-review-results/tvision-examples-and-documentation/2026-08-13-series-review-result-v2.json",
+    "reviewId": "55ec7a0d-851f-4d58-9034-1880bc50bc21",
+    "normalizedSha256": "59990c932abadf052bfc7b67ea85c8282473db2eef4803580ae63e2952771dc4",
+    "status": "Ready"
+  }
+}

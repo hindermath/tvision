@@ -5,7 +5,7 @@
 > Generated from `scripts/config/script-catalog.json` and the Git index. Do not edit manually.
 
 Stand / Updated: 2026-07-28
-Kanonische Skriptdateien / Canonical script files: 127
+Kanonische Skriptdateien / Canonical script files: 131
 
 ## Workspace-Lebenszyklus / Workspace lifecycle
 
@@ -207,6 +207,30 @@ bash scripts/maintain-agentic-workspace.sh --dry-run  # falls angeboten / when s
 ```text
 Get-Help ./scripts/maintain-powershell-modules.ps1 -Full
 pwsh -NoProfile -File scripts/maintain-powershell-modules.ps1 -WhatIf  # falls SupportsShouldProcess angeboten wird / when supported
+```
+
+### `scripts/maintain-workspace-storage.ps1`
+
+- **Rolle / Role:** oeffentliches Kommando / public command
+- **Kurzbeschreibung / Summary:** Inventarisiert und bereinigt sicheren Workspace-Speicher.
+- **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
+- **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
+
+```text
+Get-Help ./scripts/maintain-workspace-storage.ps1 -Full
+pwsh -NoProfile -File scripts/maintain-workspace-storage.ps1 -WhatIf  # falls SupportsShouldProcess angeboten wird / when supported
+```
+
+### `scripts/maintain-workspace-storage.sh`
+
+- **Rolle / Role:** oeffentliches Kommando / public command
+- **Kurzbeschreibung / Summary:** Safely inventory and reclaim generated Level-2 workspace storage.
+- **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
+- **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
+
+```text
+bash scripts/maintain-workspace-storage.sh --help
+bash scripts/maintain-workspace-storage.sh --dry-run  # falls angeboten / when supported
 ```
 
 ### `scripts/propagate-agentic-toolchain-maintenance.ps1`
@@ -741,6 +765,17 @@ python3 scripts/tests/test_sync_home_cli.py --help
 
 ```text
 python3 scripts/tests/test_windows_maintenance_hardening.py --help
+```
+
+### `scripts/tests/test_workspace_storage_maintenance.py`
+
+- **Rolle / Role:** oeffentliches Kommando / public command
+- **Kurzbeschreibung / Summary:** Siehe Quelltext und Hilfe. / See source and help.
+- **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
+- **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
+
+```text
+python3 scripts/tests/test_workspace_storage_maintenance.py --help
 ```
 
 ## Statistik / Statistics
@@ -1437,6 +1472,18 @@ Do not invoke directly; it is loaded by public scripts.
 
 - **Rolle / Role:** intern oder installiert / internal or installed
 - **Kurzbeschreibung / Summary:** Shared helpers for secure-development hardening intake preparation.
+- **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
+- **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
+
+```text
+Nicht direkt aufrufen; wird von oeffentlichen Skripten geladen.
+Do not invoke directly; it is loaded by public scripts.
+```
+
+### `scripts/lib/workspace_storage_maintenance.py`
+
+- **Rolle / Role:** intern oder installiert / internal or installed
+- **Kurzbeschreibung / Summary:** Siehe Quelltext und Hilfe. / See source and help.
 - **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
 - **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
 

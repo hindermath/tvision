@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesProposalApprovalHistory",
+  "operationId": "62649741-08e0-4c74-8c65-ba90c0a38b1b",
+  "entries": [
+    {
+      "proposalNormalizedSha256": "0de4511a36d573cf38ddcc620b89610ac95cbe94aa14421343f03044699508d1",
+      "approved": true,
+      "approvedBy": "Thorsten",
+      "approvalEvidence": "User explicitly approved the displayed proposal SHA-256 on 2026-08-13",
+      "supersededByMaterialDecision": "IAD008 changes delivery authority from the prior intake-authoring-only boundary to MergeAndSync with narrow Admin Bypass"
+    },
+    {
+      "proposalNormalizedSha256": "a0d6141f40344ea8f03dd78e5bd3fc91f16b8df2562ce1591d4e21154ff0fb2f",
+      "approved": true,
+      "approvedBy": "Thorsten",
+      "approvedAt": "2026-08-13T18:54:26Z",
+      "approvalEvidence": "User explicitly approved the displayed revised proposal SHA-256 on 2026-08-13",
+      "supersededByMaterialDecision": "N/A"
+    }
+  ]
+}

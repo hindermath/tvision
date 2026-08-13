@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeReceipt",
+  "receiptId": "ae2a5b3d-6a64-4559-8630-8fbb9e1a06d3",
+  "intakeId": "f27184d9-b26c-4193-933d-17bc10c07d19",
+  "generator": {
+    "preset": "intake-authoring-governance",
+    "version": "0.3.1"
+  },
+  "createdAt": "2026-08-13T19:17:22Z",
+  "operation": {
+    "operationId": "d56149d3-8eac-4761-b27a-c033629f23b3",
+    "type": "Update",
+    "authorityEvidence": "Thorsten explicitly invoked $speckit-intake-repair for review 53ece253-a367-45e7-ab5c-1f565984f613 on 2026-08-13, authorizing repair of IR001 through IR004 for all ten targets"
+  },
+  "status": "ReadyForReview",
+  "target": {
+    "path": "intakes/tvision-documentation-toolchain-and-ci-artifact.md",
+    "normalizedSha256": "c3df8b0982fb915cdf40088d9832a7c5fd3cb7058f82ed409c99c977451d71f9"
+  },
+  "sources": [
+    {
+      "sourceId": "SRC001",
+      "order": 1,
+      "kind": "Inline",
+      "label": "User-approved plan and decisions",
+      "location": "SnapshotOnly",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "4d9fc2f4d1dc93c20ff1716950c2d6fab1c0314a4d143ea28839f44256b725b3",
+      "gitBlob": "N/A",
+      "proofBoundary": "ConversationInlineSource"
+    },
+    {
+      "sourceId": "SRC011",
+      "order": 2,
+      "kind": "File",
+      "label": "TuiVision:TVDocs/Borland-Turbo-Vision-for-C-User-s-Guide.txt",
+      "location": "ExternalSnapshot",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "2fe8e2383afbb000efcccbb56c872f7b7a3d3e0dafa458be27632fd65cdaa7e4",
+      "gitBlob": "N/A",
+      "proofBoundary": "OCRCompanionForOutlineOnly"
+    },
+    {
+      "sourceId": "SRC012",
+      "order": 3,
+      "kind": "File",
+      "label": "TuiVision:TVDocs/Turbo_Vision_Version_2.0_Programming_Guide_1992.txt",
+      "location": "ExternalSnapshot",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "fbded1ac785b8cf0258bdeadeb5303e07a253760be0e35ccd0632b9aa720ffc5",
+      "gitBlob": "N/A",
+      "proofBoundary": "OCRCompanionForOutlineOnly"
+    },
+    {
+      "sourceId": "SRC013",
+      "order": 4,
+      "kind": "Inline",
+      "label": "User authority for MergeAndSync with Admin Bypass",
+      "location": "SnapshotOnly",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "bcaa63c768c109db08ac6f9397a4832cd3d456900c1b8e1ba2b6ea2531c948f9",
+      "gitBlob": "N/A",
+      "proofBoundary": "ConversationInlineSource"
+    }
+  ],
+  "profile": "generic-markdown",
+  "languagePolicy": "GermanPrimaryEnglishSecondary",
+  "decisions": [
+    {
+      "id": "IAD001",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD001?",
+      "answer": "The existing RL-SE self-assessment stays visibly first but is independent and is not a binding series predecessor.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD002",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD002?",
+      "answer": "Deduplicate by learning intent and behavior, not only by file name.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD003",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD003?",
+      "answer": "Deliver all sensibly portable gaps in staged, independently reviewable waves.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD004",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD004?",
+      "answer": "Use clean-room reimplementation; do not copy historic source code, prose, illustrations or resources.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD005",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD005?",
+      "answer": "Deliver TVFM first inside a generated temporary sandbox and only later for an explicitly selected user root.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD006",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD006?",
+      "answer": "Deliver HTML documentation first as a CI artifact and publish through GitHub Pages only in a later intake.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD007",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD007?",
+      "answer": "Deliver documentation infrastructure and a bilingual core path before completing the full handbook.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+    },
+    {
+      "id": "IAD008",
+      "status": "Answered",
+      "question": "What is the binding decision for IAD008?",
+      "answer": "The intended delivery mode remains MergeAndSync. Stored authority is historical evidence only: every commit, push, pull request, merge, and synchronization boundary needs a current scoped human grant, and Admin Bypass needs a separate current grant after the concrete pull request, policy, checks, reviews, exact head, blocker, and residual risk are known.",
+      "evidence": "Review finding IR002 and Thorsten's explicit $speckit-intake-repair invocation on 2026-08-13"
+    }
+  ],
+  "openDecisionIds": [],
+  "questionCount": 0,
+  "agentSurface": {
+    "specifyCanonicalId": "speckit.specify",
+    "specifyInvocation": "$speckit-specify",
+    "autonomousCanonicalId": "speckit.autonomous",
+    "autonomousInvocation": "$speckit-autonomous"
+  },
+  "deliveryAuthority": "MergeAndSync",
+  "authorityEvidence": "Thorsten selected MergeAndSync as intended delivery mode and explicitly authorized repair on 2026-08-13; current scoped human grants remain mandatory at execution and bypass boundaries",
+  "promptState": "Enabled",
+  "provenanceMode": "Supersession",
+  "supersedes": {
+    "receiptPath": "specs/intake-authoring-archive/d56149d3-8eac-4761-b27a-c033629f23b3/tvision-documentation-toolchain-and-ci-artifact/receipt.json",
+    "targetNormalizedSha256": "0c0b96d109487ec0aee8dfe3d6f77150d364dc24195ed4592aaf5d1913961f89",
+    "archiveTargetPath": "specs/intake-authoring-archive/d56149d3-8eac-4761-b27a-c033629f23b3/tvision-documentation-toolchain-and-ci-artifact/target.md",
+    "archiveReceiptPath": "specs/intake-authoring-archive/d56149d3-8eac-4761-b27a-c033629f23b3/tvision-documentation-toolchain-and-ci-artifact/receipt.json"
+  },
+  "legacyAdoption": {
+    "evidenceType": "N/A",
+    "priorTargetNormalizedSha256": "N/A",
+    "priorGitBlob": "N/A"
+  },
+  "updateAuthorized": true,
+  "updateAuthorityEvidence": "Thorsten explicitly invoked $speckit-intake-repair for review 53ece253-a367-45e7-ab5c-1f565984f613 on 2026-08-13, authorizing repair of IR001 through IR004 for all ten targets",
+  "series": {
+    "seriesId": "4b34f409-e317-4b3d-9d4c-574043047311",
+    "manifestPath": "specs/intake-authoring-series/tvision-examples-and-documentation/series.json",
+    "order": 7,
+    "role": "OrderedMember",
+    "supersedesIntakeIds": []
+  },
+  "nextAction": "Run $speckit-intake-review specs/intake-authoring-series/tvision-examples-and-documentation/intake-review-request-v2.json for intakes/tvision-documentation-toolchain-and-ci-artifact.md"
+}

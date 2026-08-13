@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "55ec7a0d-851f-4d58-9034-1880bc50bc21",
+  "supersedesReviewId": "53ece253-a367-45e7-ab5c-1f565984f613",
+  "repairOperationId": "d56149d3-8eac-4761-b27a-c033629f23b3",
+  "mode": "Series",
+  "policy": "generic-markdown",
+  "targets": [
+    {
+      "path": "intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md",
+      "role": "Primary"
+    },
+    {
+      "path": "intakes/tvision-core-learning-examples.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/tvision-example-local-controls.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/tvision-dialog-designer-example.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/tvision-file-manager-sandbox.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/tvision-file-manager-user-roots.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/tvision-documentation-toolchain-and-ci-artifact.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/tvision-bilingual-core-handbook.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/tvision-complete-handbook-and-github-pages.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/tvision-example-documentation-final-audit.md",
+      "role": "OrderedMember"
+    }
+  ],
+  "series": {
+    "orderedTargetPaths": [
+      "intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md",
+      "intakes/tvision-core-learning-examples.md",
+      "intakes/tvision-example-local-controls.md",
+      "intakes/tvision-dialog-designer-example.md",
+      "intakes/tvision-file-manager-sandbox.md",
+      "intakes/tvision-file-manager-user-roots.md",
+      "intakes/tvision-documentation-toolchain-and-ci-artifact.md",
+      "intakes/tvision-bilingual-core-handbook.md",
+      "intakes/tvision-complete-handbook-and-github-pages.md",
+      "intakes/tvision-example-documentation-final-audit.md"
+    ],
+    "roots": [
+      "intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md"
+    ],
+    "dependencies": [
+      {
+        "from": "intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md",
+        "to": "intakes/tvision-core-learning-examples.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/tvision-core-learning-examples.md",
+        "to": "intakes/tvision-example-local-controls.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/tvision-example-local-controls.md",
+        "to": "intakes/tvision-dialog-designer-example.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/tvision-core-learning-examples.md",
+        "to": "intakes/tvision-file-manager-sandbox.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/tvision-dialog-designer-example.md",
+        "to": "intakes/tvision-file-manager-sandbox.md",
+        "kind": "SharedWriterSerialization",
+        "binding": false
+      },
+      {
+        "from": "intakes/tvision-file-manager-sandbox.md",
+        "to": "intakes/tvision-file-manager-user-roots.md",
+        "kind": "SandboxBaseline",
+        "binding": true
+      },
+      {
+        "from": "intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md",
+        "to": "intakes/tvision-documentation-toolchain-and-ci-artifact.md",
+        "kind": "DocumentationSurfaceBaseline",
+        "binding": true
+      },
+      {
+        "from": "intakes/tvision-file-manager-user-roots.md",
+        "to": "intakes/tvision-documentation-toolchain-and-ci-artifact.md",
+        "kind": "PreferredSerialOrder",
+        "binding": false
+      },
+      {
+        "from": "intakes/tvision-core-learning-examples.md",
+        "to": "intakes/tvision-bilingual-core-handbook.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/tvision-example-local-controls.md",
+        "to": "intakes/tvision-bilingual-core-handbook.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/tvision-file-manager-sandbox.md",
+        "to": "intakes/tvision-bilingual-core-handbook.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/tvision-documentation-toolchain-and-ci-artifact.md",
+        "to": "intakes/tvision-bilingual-core-handbook.md",
+        "kind": "DocumentationSurfaceBaseline",
+        "binding": true
+      },
+      {
+        "from": "intakes/tvision-dialog-designer-example.md",
+        "to": "intakes/tvision-complete-handbook-and-github-pages.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/tvision-file-manager-user-roots.md",
+        "to": "intakes/tvision-complete-handbook-and-github-pages.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/tvision-bilingual-core-handbook.md",
+        "to": "intakes/tvision-complete-handbook-and-github-pages.md",
+        "kind": "DocumentationSurfaceBaseline",
+        "binding": true
+      },
+      {
+        "from": "intakes/tvision-complete-handbook-and-github-pages.md",
+        "to": "intakes/tvision-example-documentation-final-audit.md",
+        "kind": "FinalAuditInput",
+        "binding": true
+      }
+    ]
+  },
+  "campaign": {
+    "manifestPath": "N/A",
+    "workers": [],
+    "operatorExceptions": []
+  }
+}

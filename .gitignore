@@ -11,6 +11,11 @@
 !source/**/
 !test/
 !test/**/
+!intakes/
+!intakes/**/
+!specs/
+!specs/**/
+specs/intake-authoring-operations/**/staging/
 !.github/
 !.github/**/
 
