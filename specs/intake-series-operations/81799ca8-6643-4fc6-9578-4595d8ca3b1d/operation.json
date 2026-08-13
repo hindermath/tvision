@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesOperation",
+  "operationId": "81799ca8-6643-4fc6-9578-4595d8ca3b1d",
+  "seriesId": "ea9bdc08-97fd-40e5-aaef-74d030f8c6a7",
+  "type": "Create",
+  "status": "Completed",
+  "authorityEvidence": "Thorsten explicitly invoked $speckit-intake-series-create with these ten ordered intake paths on 2026-08-13",
+  "proposalNormalizedSha256": "443d79aa3bf35d685e74d909e520cf0ab1751f980dabf8ccbf9f318fa5deca59",
+  "preparedPaths": [
+    "specs/intake-series-operations/81799ca8-6643-4fc6-9578-4595d8ca3b1d/proposal.json",
+    "specs/intake-series-operations/81799ca8-6643-4fc6-9578-4595d8ca3b1d/prepared/manifest.json",
+    "specs/intake-series-operations/81799ca8-6643-4fc6-9578-4595d8ca3b1d/prepared/receipt.json",
+    "specs/intake-series-operations/81799ca8-6643-4fc6-9578-4595d8ca3b1d/prepared/order.md"
+  ],
+  "preparedEvidence": {
+    "manifestNormalizedSha256": "cd45bce18f8026c4683dfec54c6103ae0db8458cd71521e2801228cd3cfaee35",
+    "orderNormalizedSha256": "1614887afe49ada9ba86a18960eb0464688c5c2c7f083e4ed59856c959cd9044"
+  },
+  "validation": {
+    "bash": "Passed: prepared and active manifest and receipt",
+    "powerShell": "Passed: prepared and active manifest and receipt"
+  },
+  "documentationImpact": {
+    "decision": "GeneratedUpdate",
+    "source": "specs/intake-series/tvision-examples-and-documentation/manifest.json",
+    "owner": "Intake Sequencing Governance",
+    "document": "specs/intake-series/tvision-examples-and-documentation/order.md",
+    "evidence": "Bash and PowerShell manifest and receipt validation"
+  },
+  "publication": {
+    "status": "Published",
+    "publishedAt": "2026-08-13T20:01:38Z",
+    "publishedPaths": [
+      "specs/intake-series/tvision-examples-and-documentation/manifest.json",
+      "specs/intake-series/tvision-examples-and-documentation/receipt.json",
+      "specs/intake-series/tvision-examples-and-documentation/order.md"
+    ],
+    "manifestNormalizedSha256": "cd45bce18f8026c4683dfec54c6103ae0db8458cd71521e2801228cd3cfaee35",
+    "receiptNormalizedSha256": "e3ebc28369093e68a55d04cffdb5d0c42c68ab04163656ead05b22fc72423bd8",
+    "orderNormalizedSha256": "1614887afe49ada9ba86a18960eb0464688c5c2c7f083e4ed59856c959cd9044"
+  }
+}
