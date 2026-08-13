@@ -1,22 +1,22 @@
 {
   "schemaVersion": "2.0",
   "documentType": "IntakeReceipt",
-  "receiptId": "9dcd9177-4a21-49a4-9b76-3080be63168f",
-  "intakeId": "bfb2e7a3-fcb3-4096-a7fa-69a21679c569",
+  "receiptId": "d79a94e2-9277-410e-9ee5-13517b041f56",
+  "intakeId": "d9e56ccf-d805-4041-b574-d53c4bdc2fd0",
   "generator": {
     "preset": "intake-authoring-governance",
     "version": "0.3.1"
   },
-  "createdAt": "2026-08-13T19:17:22Z",
+  "createdAt": "2026-08-13T18:46:06Z",
   "operation": {
-    "operationId": "d56149d3-8eac-4761-b27a-c033629f23b3",
-    "type": "Update",
-    "authorityEvidence": "Thorsten explicitly invoked $speckit-intake-repair for review 53ece253-a367-45e7-ab5c-1f565984f613 on 2026-08-13, authorizing repair of IR001 through IR004 for all ten targets"
+    "operationId": "62649741-08e0-4c74-8c65-ba90c0a38b1b",
+    "type": "Create",
+    "authorityEvidence": "Thorsten explicitly authorized MergeAndSync with a narrowly scoped Admin Bypass for all ten intakes on 2026-08-13"
   },
   "status": "ReadyForReview",
   "target": {
-    "path": "intakes/tvision-example-documentation-final-audit.md",
-    "normalizedSha256": "cebd2f12155d48c9349514117f001dd8ee76f2de98824d5dad23e565125c2d79"
+    "path": "intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md",
+    "normalizedSha256": "250c076fe22204b27f3ef6f8a69e12a00f14779d30b713852d63c33a7a42d194"
   },
   "sources": [
     {
@@ -230,50 +230,8 @@
       "proofBoundary": "SafeLabelAndHashOnly"
     },
     {
-      "sourceId": "SRC011",
-      "order": 11,
-      "kind": "File",
-      "label": "TuiVision:TVDocs/Borland-Turbo-Vision-for-C-User-s-Guide.txt",
-      "location": "ExternalSnapshot",
-      "path": "N/A",
-      "requestedUrl": "N/A",
-      "finalUrl": "N/A",
-      "retrievedAt": "N/A",
-      "httpStatus": "N/A",
-      "contentType": "N/A",
-      "contentLength": "N/A",
-      "etag": "N/A",
-      "lastModified": "N/A",
-      "redirectChain": [],
-      "rawSha256": "N/A",
-      "normalizedSha256": "2fe8e2383afbb000efcccbb56c872f7b7a3d3e0dafa458be27632fd65cdaa7e4",
-      "gitBlob": "N/A",
-      "proofBoundary": "OCRCompanionForOutlineOnly"
-    },
-    {
-      "sourceId": "SRC012",
-      "order": 12,
-      "kind": "File",
-      "label": "TuiVision:TVDocs/Turbo_Vision_Version_2.0_Programming_Guide_1992.txt",
-      "location": "ExternalSnapshot",
-      "path": "N/A",
-      "requestedUrl": "N/A",
-      "finalUrl": "N/A",
-      "retrievedAt": "N/A",
-      "httpStatus": "N/A",
-      "contentType": "N/A",
-      "contentLength": "N/A",
-      "etag": "N/A",
-      "lastModified": "N/A",
-      "redirectChain": [],
-      "rawSha256": "N/A",
-      "normalizedSha256": "fbded1ac785b8cf0258bdeadeb5303e07a253760be0e35ccd0632b9aa720ffc5",
-      "gitBlob": "N/A",
-      "proofBoundary": "OCRCompanionForOutlineOnly"
-    },
-    {
       "sourceId": "SRC013",
-      "order": 13,
+      "order": 11,
       "kind": "Inline",
       "label": "User authority for MergeAndSync with Admin Bypass",
       "location": "SnapshotOnly",
@@ -349,8 +307,8 @@
       "id": "IAD008",
       "status": "Answered",
       "question": "What is the binding decision for IAD008?",
-      "answer": "The intended delivery mode remains MergeAndSync. Stored authority is historical evidence only: every commit, push, pull request, merge, and synchronization boundary needs a current scoped human grant, and Admin Bypass needs a separate current grant after the concrete pull request, policy, checks, reviews, exact head, blocker, and residual risk are known.",
-      "evidence": "Review finding IR002 and Thorsten's explicit $speckit-intake-repair invocation on 2026-08-13"
+      "answer": "Every intake Autonomous prompt uses MergeAndSync. Thorsten authorizes a narrowly scoped Admin Bypass only for the concrete intake pull request and merge policy after technical gates, required reviews and exact-head evidence pass.",
+      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
     }
   ],
   "openDecisionIds": [],
@@ -362,28 +320,28 @@
     "autonomousInvocation": "$speckit-autonomous"
   },
   "deliveryAuthority": "MergeAndSync",
-  "authorityEvidence": "Thorsten selected MergeAndSync as intended delivery mode and explicitly authorized repair on 2026-08-13; current scoped human grants remain mandatory at execution and bypass boundaries",
+  "authorityEvidence": "Thorsten explicitly authorized MergeAndSync with a narrowly scoped Admin Bypass for all ten intakes on 2026-08-13; bypass remains narrow and must be revalidated for the concrete pull request and policy",
   "promptState": "Enabled",
-  "provenanceMode": "Supersession",
+  "provenanceMode": "New",
   "supersedes": {
-    "receiptPath": "specs/intake-authoring-archive/d56149d3-8eac-4761-b27a-c033629f23b3/tvision-example-documentation-final-audit/receipt.json",
-    "targetNormalizedSha256": "5b1c251cea1fe875da49ab58213e2fca41dc788f7bfc5a183e7285ee37d1263c",
-    "archiveTargetPath": "specs/intake-authoring-archive/d56149d3-8eac-4761-b27a-c033629f23b3/tvision-example-documentation-final-audit/target.md",
-    "archiveReceiptPath": "specs/intake-authoring-archive/d56149d3-8eac-4761-b27a-c033629f23b3/tvision-example-documentation-final-audit/receipt.json"
+    "receiptPath": "N/A",
+    "targetNormalizedSha256": "N/A",
+    "archiveTargetPath": "N/A",
+    "archiveReceiptPath": "N/A"
   },
   "legacyAdoption": {
     "evidenceType": "N/A",
     "priorTargetNormalizedSha256": "N/A",
     "priorGitBlob": "N/A"
   },
-  "updateAuthorized": true,
-  "updateAuthorityEvidence": "Thorsten explicitly invoked $speckit-intake-repair for review 53ece253-a367-45e7-ab5c-1f565984f613 on 2026-08-13, authorizing repair of IR001 through IR004 for all ten targets",
+  "updateAuthorized": false,
+  "updateAuthorityEvidence": "N/A",
   "series": {
     "seriesId": "4b34f409-e317-4b3d-9d4c-574043047311",
     "manifestPath": "specs/intake-authoring-series/tvision-examples-and-documentation/series.json",
-    "order": 10,
-    "role": "OrderedMember",
+    "order": 1,
+    "role": "Root",
     "supersedesIntakeIds": []
   },
-  "nextAction": "Run $speckit-intake-review specs/intake-authoring-series/tvision-examples-and-documentation/intake-review-request-v2.json for intakes/tvision-example-documentation-final-audit.md"
+  "nextAction": "$speckit-intake-review intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md"
 }

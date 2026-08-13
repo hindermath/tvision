@@ -1,22 +1,22 @@
 {
   "schemaVersion": "2.0",
   "documentType": "IntakeReceipt",
-  "receiptId": "398d0027-f3f6-434c-918a-99217103395e",
+  "receiptId": "dd920c91-0292-4436-8007-4e3f954a027a",
   "intakeId": "4a9bf38c-36a3-4945-8a18-be07f004c0e6",
   "generator": {
     "preset": "intake-authoring-governance",
     "version": "0.3.1"
   },
-  "createdAt": "2026-08-13T18:46:06Z",
+  "createdAt": "2026-08-13T19:17:22Z",
   "operation": {
-    "operationId": "62649741-08e0-4c74-8c65-ba90c0a38b1b",
-    "type": "Create",
-    "authorityEvidence": "Thorsten explicitly authorized MergeAndSync with a narrowly scoped Admin Bypass for all ten intakes on 2026-08-13"
+    "operationId": "d56149d3-8eac-4761-b27a-c033629f23b3",
+    "type": "Update",
+    "authorityEvidence": "Thorsten explicitly invoked $speckit-intake-repair for review 53ece253-a367-45e7-ab5c-1f565984f613 on 2026-08-13, authorizing repair of IR001 through IR004 for all ten targets"
   },
   "status": "ReadyForReview",
   "target": {
     "path": "intakes/tvision-complete-handbook-and-github-pages.md",
-    "normalizedSha256": "5c6d11be79c0e6a22a917894f0a66bba6722df3d809348789044f17df8612ee1"
+    "normalizedSha256": "590d7478076aa8eb71d8dbf09dd9748657611ea1c5997c4e0684968d1a50df54"
   },
   "sources": [
     {
@@ -160,8 +160,8 @@
       "id": "IAD008",
       "status": "Answered",
       "question": "What is the binding decision for IAD008?",
-      "answer": "Every intake Autonomous prompt uses MergeAndSync. Thorsten authorizes a narrowly scoped Admin Bypass only for the concrete intake pull request and merge policy after technical gates, required reviews and exact-head evidence pass.",
-      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+      "answer": "The intended delivery mode remains MergeAndSync. Stored authority is historical evidence only: every commit, push, pull request, merge, and synchronization boundary needs a current scoped human grant, and Admin Bypass needs a separate current grant after the concrete pull request, policy, checks, reviews, exact head, blocker, and residual risk are known.",
+      "evidence": "Review finding IR002 and Thorsten's explicit $speckit-intake-repair invocation on 2026-08-13"
     }
   ],
   "openDecisionIds": [],
@@ -173,22 +173,22 @@
     "autonomousInvocation": "$speckit-autonomous"
   },
   "deliveryAuthority": "MergeAndSync",
-  "authorityEvidence": "Thorsten explicitly authorized MergeAndSync with a narrowly scoped Admin Bypass for all ten intakes on 2026-08-13; bypass remains narrow and must be revalidated for the concrete pull request and policy",
+  "authorityEvidence": "Thorsten selected MergeAndSync as intended delivery mode and explicitly authorized repair on 2026-08-13; current scoped human grants remain mandatory at execution and bypass boundaries",
   "promptState": "Enabled",
-  "provenanceMode": "New",
+  "provenanceMode": "Supersession",
   "supersedes": {
-    "receiptPath": "N/A",
-    "targetNormalizedSha256": "N/A",
-    "archiveTargetPath": "N/A",
-    "archiveReceiptPath": "N/A"
+    "receiptPath": "specs/intake-authoring-archive/d56149d3-8eac-4761-b27a-c033629f23b3/tvision-complete-handbook-and-github-pages/receipt.json",
+    "targetNormalizedSha256": "5c6d11be79c0e6a22a917894f0a66bba6722df3d809348789044f17df8612ee1",
+    "archiveTargetPath": "specs/intake-authoring-archive/d56149d3-8eac-4761-b27a-c033629f23b3/tvision-complete-handbook-and-github-pages/target.md",
+    "archiveReceiptPath": "specs/intake-authoring-archive/d56149d3-8eac-4761-b27a-c033629f23b3/tvision-complete-handbook-and-github-pages/receipt.json"
   },
   "legacyAdoption": {
     "evidenceType": "N/A",
     "priorTargetNormalizedSha256": "N/A",
     "priorGitBlob": "N/A"
   },
-  "updateAuthorized": false,
-  "updateAuthorityEvidence": "N/A",
+  "updateAuthorized": true,
+  "updateAuthorityEvidence": "Thorsten explicitly invoked $speckit-intake-repair for review 53ece253-a367-45e7-ab5c-1f565984f613 on 2026-08-13, authorizing repair of IR001 through IR004 for all ten targets",
   "series": {
     "seriesId": "4b34f409-e317-4b3d-9d4c-574043047311",
     "manifestPath": "specs/intake-authoring-series/tvision-examples-and-documentation/series.json",
@@ -196,5 +196,5 @@
     "role": "OrderedMember",
     "supersedesIntakeIds": []
   },
-  "nextAction": "$speckit-intake-review intakes/tvision-complete-handbook-and-github-pages.md"
+  "nextAction": "Run $speckit-intake-review specs/intake-authoring-series/tvision-examples-and-documentation/intake-review-request-v2.json for intakes/tvision-complete-handbook-and-github-pages.md"
 }

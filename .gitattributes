@@ -7,6 +7,7 @@ scripts/templates/workspace-readme-template.md -whitespace
 # intentionally uses hard breaks. / Intake-Authoring bindet das exakt erzeugte
 # Markdown, dessen Metadatenkopf absichtlich Hardbreaks verwendet.
 intakes/*.md -whitespace
+specs/intake-authoring-archive/**/target.md -whitespace
 
 # gitignore.io macOS requires literal CR bytes for the Finder Icon filename.
 # gitignore.io macOS benoetigt echte CR-Bytes fuer den Finder-Dateinamen Icon.

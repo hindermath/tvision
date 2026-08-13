@@ -1,22 +1,22 @@
 {
   "schemaVersion": "2.0",
   "documentType": "IntakeReceipt",
-  "receiptId": "d79a94e2-9277-410e-9ee5-13517b041f56",
+  "receiptId": "3159cdd7-5b6d-41b4-81d8-a0ac286a37c7",
   "intakeId": "d9e56ccf-d805-4041-b574-d53c4bdc2fd0",
   "generator": {
     "preset": "intake-authoring-governance",
     "version": "0.3.1"
   },
-  "createdAt": "2026-08-13T18:46:06Z",
+  "createdAt": "2026-08-13T19:17:22Z",
   "operation": {
-    "operationId": "62649741-08e0-4c74-8c65-ba90c0a38b1b",
-    "type": "Create",
-    "authorityEvidence": "Thorsten explicitly authorized MergeAndSync with a narrowly scoped Admin Bypass for all ten intakes on 2026-08-13"
+    "operationId": "d56149d3-8eac-4761-b27a-c033629f23b3",
+    "type": "Update",
+    "authorityEvidence": "Thorsten explicitly invoked $speckit-intake-repair for review 53ece253-a367-45e7-ab5c-1f565984f613 on 2026-08-13, authorizing repair of IR001 through IR004 for all ten targets"
   },
   "status": "ReadyForReview",
   "target": {
     "path": "intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md",
-    "normalizedSha256": "250c076fe22204b27f3ef6f8a69e12a00f14779d30b713852d63c33a7a42d194"
+    "normalizedSha256": "7103b67485ef9275cd5bce9c18a279346a3d59cec24509d17f9170cc3125431c"
   },
   "sources": [
     {
@@ -307,8 +307,8 @@
       "id": "IAD008",
       "status": "Answered",
       "question": "What is the binding decision for IAD008?",
-      "answer": "Every intake Autonomous prompt uses MergeAndSync. Thorsten authorizes a narrowly scoped Admin Bypass only for the concrete intake pull request and merge policy after technical gates, required reviews and exact-head evidence pass.",
-      "evidence": "User-approved proposal and explicit follow-up authority in the 2026-08-13 conversation"
+      "answer": "The intended delivery mode remains MergeAndSync. Stored authority is historical evidence only: every commit, push, pull request, merge, and synchronization boundary needs a current scoped human grant, and Admin Bypass needs a separate current grant after the concrete pull request, policy, checks, reviews, exact head, blocker, and residual risk are known.",
+      "evidence": "Review finding IR002 and Thorsten's explicit $speckit-intake-repair invocation on 2026-08-13"
     }
   ],
   "openDecisionIds": [],
@@ -320,22 +320,22 @@
     "autonomousInvocation": "$speckit-autonomous"
   },
   "deliveryAuthority": "MergeAndSync",
-  "authorityEvidence": "Thorsten explicitly authorized MergeAndSync with a narrowly scoped Admin Bypass for all ten intakes on 2026-08-13; bypass remains narrow and must be revalidated for the concrete pull request and policy",
+  "authorityEvidence": "Thorsten selected MergeAndSync as intended delivery mode and explicitly authorized repair on 2026-08-13; current scoped human grants remain mandatory at execution and bypass boundaries",
   "promptState": "Enabled",
-  "provenanceMode": "New",
+  "provenanceMode": "Supersession",
   "supersedes": {
-    "receiptPath": "N/A",
-    "targetNormalizedSha256": "N/A",
-    "archiveTargetPath": "N/A",
-    "archiveReceiptPath": "N/A"
+    "receiptPath": "specs/intake-authoring-archive/d56149d3-8eac-4761-b27a-c033629f23b3/turbo-vision-example-inventory-and-reimplementation-boundary/receipt.json",
+    "targetNormalizedSha256": "250c076fe22204b27f3ef6f8a69e12a00f14779d30b713852d63c33a7a42d194",
+    "archiveTargetPath": "specs/intake-authoring-archive/d56149d3-8eac-4761-b27a-c033629f23b3/turbo-vision-example-inventory-and-reimplementation-boundary/target.md",
+    "archiveReceiptPath": "specs/intake-authoring-archive/d56149d3-8eac-4761-b27a-c033629f23b3/turbo-vision-example-inventory-and-reimplementation-boundary/receipt.json"
   },
   "legacyAdoption": {
     "evidenceType": "N/A",
     "priorTargetNormalizedSha256": "N/A",
     "priorGitBlob": "N/A"
   },
-  "updateAuthorized": false,
-  "updateAuthorityEvidence": "N/A",
+  "updateAuthorized": true,
+  "updateAuthorityEvidence": "Thorsten explicitly invoked $speckit-intake-repair for review 53ece253-a367-45e7-ab5c-1f565984f613 on 2026-08-13, authorizing repair of IR001 through IR004 for all ten targets",
   "series": {
     "seriesId": "4b34f409-e317-4b3d-9d4c-574043047311",
     "manifestPath": "specs/intake-authoring-series/tvision-examples-and-documentation/series.json",
@@ -343,5 +343,5 @@
     "role": "Root",
     "supersedesIntakeIds": []
   },
-  "nextAction": "$speckit-intake-review intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md"
+  "nextAction": "Run $speckit-intake-review specs/intake-authoring-series/tvision-examples-and-documentation/intake-review-request-v2.json for intakes/turbo-vision-example-inventory-and-reimplementation-boundary.md"
 }
