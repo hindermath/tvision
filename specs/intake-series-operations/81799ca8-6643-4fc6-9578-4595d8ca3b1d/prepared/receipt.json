@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "6cfeea20-da0c-4c7c-acea-e071164f1904",
+  "seriesId": "ea9bdc08-97fd-40e5-aaef-74d030f8c6a7",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.3"
+  },
+  "createdAt": "2026-08-13T19:56:42Z",
+  "operation": {
+    "operationId": "81799ca8-6643-4fc6-9578-4595d8ca3b1d",
+    "type": "Create",
+    "authorityEvidence": "Thorsten explicitly invoked $speckit-intake-series-create with these ten ordered intake paths on 2026-08-13"
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series-operations/81799ca8-6643-4fc6-9578-4595d8ca3b1d/prepared/manifest.json",
+    "normalizedSha256": "cd45bce18f8026c4683dfec54c6103ae0db8458cd71521e2801228cd3cfaee35"
+  },
+  "supersedes": {
+    "receiptPath": "N/A",
+    "receiptNormalizedSha256": "N/A",
+    "manifestArchivePath": "N/A",
+    "manifestArchiveSha256": "N/A"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status specs/intake-series/tvision-examples-and-documentation/manifest.json"
+}
