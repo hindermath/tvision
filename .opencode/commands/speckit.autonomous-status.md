@@ -1,10 +1,7 @@
 ---
-description: Inspect the active autonomous Spec Kit run without changing repository
-  state.
+description: Inspect the active autonomous Spec Kit run without changing repository state.
 ---
 
-
-<!-- Source: autonomous-run-governance -->
 ## User Input
 
 ```text

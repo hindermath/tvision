@@ -2,8 +2,6 @@
 description: Gracefully pause an autonomous Spec Kit run at a safe orchestration boundary.
 ---
 
-
-<!-- Source: autonomous-run-governance -->
 ## User Input
 
 ```text
