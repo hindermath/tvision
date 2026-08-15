@@ -12,13 +12,20 @@ Change their respective canonical source first, then propagate the result.*
 
 | Pfad / Path | Bereich / Area |
 |---|---|
+| `.specify/presets/autonomous-run-governance/scripts/autonomous-evidence-core.py` | `.specify` |
 | `.specify/presets/autonomous-run-governance/scripts/invoke-autonomous-model-phase.ps1` | `.specify` |
 | `.specify/presets/autonomous-run-governance/scripts/invoke-autonomous-model-phase.sh` | `.specify` |
+| `.specify/presets/autonomous-run-governance/scripts/validate-autonomous-delivery-set.ps1` | `.specify` |
+| `.specify/presets/autonomous-run-governance/scripts/validate-autonomous-delivery-set.sh` | `.specify` |
 | `.specify/presets/autonomous-run-governance/scripts/validate-autonomous-gate-evidence.ps1` | `.specify` |
 | `.specify/presets/autonomous-run-governance/scripts/validate-autonomous-gate-evidence.sh` | `.specify` |
+| `.specify/presets/autonomous-run-governance/scripts/validate-autonomous-phase-result.ps1` | `.specify` |
+| `.specify/presets/autonomous-run-governance/scripts/validate-autonomous-phase-result.sh` | `.specify` |
 | `.specify/presets/autonomous-run-governance/scripts/validate-autonomous-run-state.ps1` | `.specify` |
 | `.specify/presets/autonomous-run-governance/scripts/validate-autonomous-run-state.sh` | `.specify` |
 | `.specify/presets/autonomous-run-governance/tests/fixture-model-runner.ps1` | `.specify` |
+| `.specify/presets/autonomous-run-governance/tests/test-autonomous-evidence-integrity.ps1` | `.specify` |
+| `.specify/presets/autonomous-run-governance/tests/test-autonomous-evidence-integrity.sh` | `.specify` |
 | `.specify/presets/autonomous-run-governance/tests/test-model-routing.ps1` | `.specify` |
 | `.specify/presets/autonomous-run-governance/tests/test-model-routing.sh` | `.specify` |
 | `.specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-artifact.ps1` | `.specify` |

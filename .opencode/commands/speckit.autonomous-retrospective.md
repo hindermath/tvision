@@ -1,10 +1,7 @@
 ---
-description: Extract, validate, and classify reusable learning from a completed autonomous
-  Spec Kit run.
+description: Extract, validate, and classify reusable learning from a completed autonomous Spec Kit run.
 ---
 
-
-<!-- Source: autonomous-run-governance -->
 ## User Input
 
 ```text
