@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesProposalApprovalHistory",
+  "operationId": "4c432d35-d31a-4131-a513-737af0a9b678",
+  "entries": [
+    {
+      "proposalNormalizedSha256": "a9bd41daed626c9027e65c150aba39ca8bcffc9488572f749a6f77c7b0e3db71",
+      "approved": true,
+      "approvedBy": "Thorsten",
+      "approvedAt": "2026-08-17T20:29:15Z",
+      "approvalEvidence": "User explicitly approved the displayed proposal SHA-256 on 2026-08-17",
+      "supersededByMaterialDecision": "N/A"
+    }
+  ]
+}

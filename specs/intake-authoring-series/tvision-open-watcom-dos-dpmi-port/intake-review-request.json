@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "584079f3-2ece-4360-968d-4ae9a08d34e0",
+  "supersedesReviewId": "N/A",
+  "repairOperationId": "N/A",
+  "mode": "Series",
+  "policy": "generic-markdown",
+  "targets": [
+    {
+      "path": "intakes/tvision-open-watcom-dos-dpmi-feasibility.md",
+      "role": "Primary"
+    },
+    {
+      "path": "intakes/tvision-open-watcom-dos-dpmi-ci-migration.md",
+      "role": "OrderedMember"
+    }
+  ],
+  "series": {
+    "orderedTargetPaths": [
+      "intakes/tvision-open-watcom-dos-dpmi-feasibility.md",
+      "intakes/tvision-open-watcom-dos-dpmi-ci-migration.md"
+    ],
+    "roots": [
+      "intakes/tvision-open-watcom-dos-dpmi-feasibility.md"
+    ],
+    "dependencies": [
+      {
+        "from": "intakes/tvision-open-watcom-dos-dpmi-feasibility.md",
+        "to": "intakes/tvision-open-watcom-dos-dpmi-ci-migration.md",
+        "kind": "AssessmentBaseline",
+        "binding": true
+      }
+    ]
+  },
+  "campaign": {
+    "manifestPath": "N/A",
+    "workers": [],
+    "operatorExceptions": []
+  }
+}

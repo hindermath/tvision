@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeries",
+  "seriesId": "9ae09950-20d7-46e3-8d53-9e64ead9afd7",
+  "version": 1,
+  "status": "ReadyForReview",
+  "operationId": "4c432d35-d31a-4131-a513-737af0a9b678",
+  "proposalNormalizedSha256": "a9bd41daed626c9027e65c150aba39ca8bcffc9488572f749a6f77c7b0e3db71",
+  "approval": {
+    "approved": true,
+    "approvedBy": "Thorsten",
+    "approvedAt": "2026-08-17T20:29:15Z",
+    "evidence": "User explicitly approved proposal SHA-256 a9bd41daed626c9027e65c150aba39ca8bcffc9488572f749a6f77c7b0e3db71"
+  },
+  "orderedIntakeIds": [
+    "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+    "181055f6-4d55-462e-8aa8-c8051a5aafea"
+  ],
+  "roots": [
+    "3760b34c-7e5f-4138-ab49-8fe1cf261758"
+  ],
+  "members": [
+    {
+      "intakeId": "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+      "path": "intakes/tvision-open-watcom-dos-dpmi-feasibility.md",
+      "receiptPath": "specs/intake-authoring-receipts/tvision-open-watcom-dos-dpmi-feasibility.json",
+      "title": "tvision Open Watcom DOS/DPMI feasibility",
+      "role": "Root",
+      "order": 1,
+      "normalizedSha256": "da4dd384c11b672f1eedd13f2add001835560718999ce1cbc5a121f93aed0e13",
+      "supersedesIntakeIds": []
+    },
+    {
+      "intakeId": "181055f6-4d55-462e-8aa8-c8051a5aafea",
+      "path": "intakes/tvision-open-watcom-dos-dpmi-ci-migration.md",
+      "receiptPath": "specs/intake-authoring-receipts/tvision-open-watcom-dos-dpmi-ci-migration.json",
+      "title": "tvision Open Watcom DOS/DPMI CI migration",
+      "role": "OrderedMember",
+      "order": 2,
+      "normalizedSha256": "fdd16af5f844175740dbe5358a3bb4a7678fcf0225d9226585b1cde0e62f1d07",
+      "supersedesIntakeIds": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+      "to": "181055f6-4d55-462e-8aa8-c8051a5aafea",
+      "kind": "AssessmentBaseline",
+      "binding": true
+    }
+  ],
+  "coverage": [
+    {
+      "sourceId": "SRC001",
+      "topic": "Approved split, downstream order, quality boundary and local-only delivery authority",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC002",
+      "topic": "Broken BCC32 installation path, CI identity and output artifacts",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC003",
+      "topic": "DOS32 aggregate build dispatch",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC004",
+      "topic": "Library compiler, assembler, linker, librarian and TV32.LIB contract",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC005",
+      "topic": "TVDemo DOS32 build and executable acceptance surface",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC006",
+      "topic": "TVEdit DOS32 build and executable acceptance surface",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC007",
+      "topic": "TVHC DOS32 build and executable acceptance surface",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC008",
+      "topic": "Official license snapshot and later license-assessment boundary",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC009",
+      "topic": "Official current release metadata, assets and upstream digests",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    }
+  ],
+  "overlapDecisions": [
+    {
+      "decisionId": "OVL001",
+      "decision": "The feasibility intake may create disposable proof-of-concept evidence but may not modify production CI owned by the migration intake."
+    },
+    {
+      "decisionId": "OVL002",
+      "decision": "Shared toolchain and build evidence is deliberate; only migration owns durable integration and cutover."
+    }
+  ],
+  "reviewRequestPath": "specs/intake-authoring-series/tvision-open-watcom-dos-dpmi-port/intake-review-request.json",
+  "nextAction": "$speckit-intake-review specs/intake-authoring-series/tvision-open-watcom-dos-dpmi-port/intake-review-request.json"
+}

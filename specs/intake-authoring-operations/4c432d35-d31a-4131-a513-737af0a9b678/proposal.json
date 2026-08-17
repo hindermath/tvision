@@ -1,0 +1,298 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesProposal",
+  "operationId": "4c432d35-d31a-4131-a513-737af0a9b678",
+  "seriesId": "9ae09950-20d7-46e3-8d53-9e64ead9afd7",
+  "slug": "tvision-open-watcom-dos-dpmi-port",
+  "title": "tvision Open Watcom DOS/DPMI feasibility and conditional CI migration",
+  "status": "Proposed",
+  "createdAt": "2026-08-17T20:24:34Z",
+  "profile": "generic-markdown",
+  "languagePolicy": "GermanPrimaryEnglishSecondary",
+  "deliveryAuthority": "LocalImplementation",
+  "authorityEvidence": "Default: the user authorized intake creation but granted no current remote delivery authority",
+  "sourcePolicy": {
+    "mode": "SynthesisOnly",
+    "historicToolchainReuse": false,
+    "privateAbsolutePathsInPublishedArtifacts": false,
+    "binaryContainersUsedAsTextSources": false,
+    "boundary": "Repository files and official Open Watcom snapshots establish the present evidence boundary. They do not authorize implementation, select a release, or prove Borland ABI compatibility."
+  },
+  "sources": [
+    {
+      "sourceId": "SRC001",
+      "order": 1,
+      "kind": "Inline",
+      "label": "User-approved plan and authoring decisions",
+      "location": "SnapshotOnly",
+      "contentLength": 617,
+      "rawSha256": "bff35fb68bd8907392fe723aa41267ee6b78592ddd8e9322a966811e4499f6ea",
+      "normalizedSha256": "bff35fb68bd8907392fe723aa41267ee6b78592ddd8e9322a966811e4499f6ea",
+      "proofBoundary": "ConversationInlineSource"
+    },
+    {
+      "sourceId": "SRC002",
+      "order": 2,
+      "kind": "File",
+      "label": "Current BCC32 DPMI32 CI workflow",
+      "location": "Repository",
+      "path": ".github/workflows/cmake.yml",
+      "contentLength": 9966,
+      "rawSha256": "9bf5c9fe4dd90c997a0c1ae52db275b1ecd44d4ec1a71d7c9a021394004393f6",
+      "normalizedSha256": "9bf5c9fe4dd90c997a0c1ae52db275b1ecd44d4ec1a71d7c9a021394004393f6",
+      "gitBlob": "6a80468368b1eb193374a92e3a1799c4de749c80",
+      "proofBoundary": "RepositorySourceAtCurrentHead"
+    },
+    {
+      "sourceId": "SRC003",
+      "order": 3,
+      "kind": "File",
+      "label": "Borland project build dispatcher",
+      "location": "Repository",
+      "path": "project/makefile",
+      "contentLength": 1476,
+      "rawSha256": "9d3e0c582cbc4863033564ee0abd27a1f4da0b7bfb8623ed6a9c6a62fa14f3ed",
+      "normalizedSha256": "9d3e0c582cbc4863033564ee0abd27a1f4da0b7bfb8623ed6a9c6a62fa14f3ed",
+      "gitBlob": "0bdde4aa5b84e1f57ec5dd08f2d8a364d0459ee7",
+      "proofBoundary": "RepositorySourceAtCurrentHead"
+    },
+    {
+      "sourceId": "SRC004",
+      "order": 4,
+      "kind": "File",
+      "label": "Borland Turbo Vision library makefile",
+      "location": "Repository",
+      "path": "source/tvision/makefile",
+      "contentLength": 7971,
+      "rawSha256": "2f1da4534b5b7ba3c44031f605892558f9809eb7a41ae75497bf300be3e5b8bb",
+      "normalizedSha256": "30b0e8d8b807e6380bfe134544672ae0d5def99e4486430ad1418269bac604ea",
+      "gitBlob": "871e1d851db68c203f8f428daea2437aaf87d490",
+      "proofBoundary": "RepositorySourceAtCurrentHead"
+    },
+    {
+      "sourceId": "SRC005",
+      "order": 5,
+      "kind": "File",
+      "label": "Borland TVDemo makefile",
+      "location": "Repository",
+      "path": "examples/tvdemo/makefile",
+      "contentLength": 4571,
+      "rawSha256": "80075a2a1dc7f2eb988002d59c7543eab76d2e5e03756c922d90b7c500430abf",
+      "normalizedSha256": "be6c6060662c40d69e6d80ffa8dacaf94e41f975107b7a5525fa4044b10c5f28",
+      "gitBlob": "97584a659e4acbe13f5162114001d388795be05e",
+      "proofBoundary": "RepositorySourceAtCurrentHead"
+    },
+    {
+      "sourceId": "SRC006",
+      "order": 6,
+      "kind": "File",
+      "label": "Borland TVEdit makefile",
+      "location": "Repository",
+      "path": "examples/tvedit/makefile",
+      "contentLength": 4388,
+      "rawSha256": "d5e3e5137e48655ba5a491cff98e131f16959b13aa0f0bd3e636db628f2abaed",
+      "normalizedSha256": "8aa5d2fe7f9e7feced2f899d534775d0ce40df991b3b2d4fbe40b0838fdbe7d1",
+      "gitBlob": "b2d3b5f59df3c2b05dc2fb9493b796ebcc8c838c",
+      "proofBoundary": "RepositorySourceAtCurrentHead"
+    },
+    {
+      "sourceId": "SRC007",
+      "order": 7,
+      "kind": "File",
+      "label": "Borland TVHC makefile",
+      "location": "Repository",
+      "path": "examples/tvhc/makefile",
+      "contentLength": 4004,
+      "rawSha256": "1b5d8523005bdbd5f2454b8909f67201aff53e9d5ede946c9521697214f3e83a",
+      "normalizedSha256": "cf284b67d42fe83078b83a086a11543a60c4091a06c5263a1e9f470eb2bf8d69",
+      "gitBlob": "940c00fb8681b0f2a48bf28a7ef9478cf541fdb1",
+      "proofBoundary": "RepositorySourceAtCurrentHead"
+    },
+    {
+      "sourceId": "SRC008",
+      "order": 8,
+      "kind": "Url",
+      "label": "Official Open Watcom v2 license snapshot",
+      "location": "RemoteSnapshot",
+      "requestedUrl": "https://raw.githubusercontent.com/open-watcom/open-watcom-v2/master/license.txt",
+      "finalUrl": "https://raw.githubusercontent.com/open-watcom/open-watcom-v2/master/license.txt",
+      "retrievedAt": "2026-08-17T20:25:06Z",
+      "httpStatus": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "contentLength": 20778,
+      "etag": "\"be7fded686ab2be2631df28890c3f95d6d4dcfa5a1cda87f7770b2651064b618\"",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "b5e6676779126951c3bf84547b577ec7370b073791ca6072aa5568c62a2d7aef",
+      "normalizedSha256": "b5e6676779126951c3bf84547b577ec7370b073791ca6072aa5568c62a2d7aef",
+      "proofBoundary": "RemoteSnapshot"
+    },
+    {
+      "sourceId": "SRC009",
+      "order": 9,
+      "kind": "Url",
+      "label": "Official Open Watcom v2 Current-build release metadata snapshot",
+      "location": "RemoteSnapshot",
+      "requestedUrl": "https://api.github.com/repos/open-watcom/open-watcom-v2/releases/tags/Current-build",
+      "finalUrl": "https://api.github.com/repos/open-watcom/open-watcom-v2/releases/tags/Current-build",
+      "retrievedAt": "2026-08-17T20:25:06Z",
+      "httpStatus": 200,
+      "contentType": "application/json; charset=utf-8",
+      "contentLength": 32283,
+      "etag": "W/\"b1d3ef00bf500640d6a55e114cf5c35a1d78076e5c553d2cab9f8066ba5a3747\"",
+      "lastModified": "Mon, 17 Aug 2026 03:19:58 GMT",
+      "redirectChain": [],
+      "rawSha256": "ed69bc041b7ad808ed53595e10c0a6a5dc2d96df9304727703ba34dd0955f912",
+      "normalizedSha256": "ed69bc041b7ad808ed53595e10c0a6a5dc2d96df9304727703ba34dd0955f912",
+      "proofBoundary": "RemoteSnapshot"
+    }
+  ],
+  "decisions": [
+    {
+      "decisionId": "IAD001",
+      "decision": "Create two independently reviewable intakes: feasibility first, conditional CI migration second."
+    },
+    {
+      "decisionId": "IAD002",
+      "decision": "Keep the project downstream of the existing active examples-and-documentation series and do not change or activate operational sequencing now."
+    }
+  ],
+  "questionCount": 2,
+  "openDecisionIds": [],
+  "orderedTargets": [
+    {
+      "intakeId": "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+      "order": 1,
+      "role": "Root",
+      "path": "intakes/tvision-open-watcom-dos-dpmi-feasibility.md",
+      "receiptPath": "specs/intake-authoring-receipts/tvision-open-watcom-dos-dpmi-feasibility.json",
+      "title": "tvision Open Watcom DOS/DPMI feasibility"
+    },
+    {
+      "intakeId": "181055f6-4d55-462e-8aa8-c8051a5aafea",
+      "order": 2,
+      "role": "OrderedMember",
+      "path": "intakes/tvision-open-watcom-dos-dpmi-ci-migration.md",
+      "receiptPath": "specs/intake-authoring-receipts/tvision-open-watcom-dos-dpmi-ci-migration.json",
+      "title": "tvision Open Watcom DOS/DPMI CI migration"
+    }
+  ],
+  "roots": [
+    "3760b34c-7e5f-4138-ab49-8fe1cf261758"
+  ],
+  "edges": [
+    {
+      "from": "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+      "to": "181055f6-4d55-462e-8aa8-c8051a5aafea",
+      "kind": "AssessmentBaseline",
+      "binding": true
+    }
+  ],
+  "coverage": [
+    {
+      "sourceId": "SRC001",
+      "topic": "Approved split, downstream order, quality boundary and local-only delivery authority",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC002",
+      "topic": "Broken BCC32 installation path, current CI job identity and output artifacts",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC003",
+      "topic": "Current DOS32 build dispatch and aggregate build boundary",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC004",
+      "topic": "BCC32, TASM32, TLIB, TLINK32, DPMI32 and TV32.LIB compatibility inventory",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC005",
+      "topic": "TVDemo DOS32 build and executable acceptance surface",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC006",
+      "topic": "TVEdit DOS32 build and executable acceptance surface",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC007",
+      "topic": "TVHC DOS32 build and executable acceptance surface",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC008",
+      "topic": "Official license snapshot for later legal and redistribution assessment without legal advice",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    },
+    {
+      "sourceId": "SRC009",
+      "topic": "Official current release metadata, available DOS and Windows assets, and upstream SHA-256 digests",
+      "intakeIds": [
+        "3760b34c-7e5f-4138-ab49-8fe1cf261758",
+        "181055f6-4d55-462e-8aa8-c8051a5aafea"
+      ],
+      "disposition": "Covered"
+    }
+  ],
+  "overlapDecisions": [
+    {
+      "decisionId": "OVL001",
+      "decision": "The feasibility intake may create disposable proof-of-concept evidence but may not modify the production CI path owned by the migration intake."
+    },
+    {
+      "decisionId": "OVL002",
+      "decision": "Both intakes share toolchain and build-source evidence deliberately; only the migration intake owns durable build integration and cutover."
+    }
+  ],
+  "reviewHandoff": {
+    "mode": "Series",
+    "schemaVersion": "1.1",
+    "requestPath": "specs/intake-authoring-series/tvision-open-watcom-dos-dpmi-port/intake-review-request.json",
+    "startsReview": false
+  },
+  "approval": {
+    "required": true,
+    "approved": false,
+    "approvedBy": "N/A",
+    "approvedAt": "N/A",
+    "evidence": "N/A"
+  },
+  "nextAction": "Approve or reject this exact proposal by normalized SHA-256 before any active intake is published"
+}

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeOperation",
+  "operationId": "4c432d35-d31a-4131-a513-737af0a9b678",
+  "type": "CreateSeries",
+  "status": "Completed",
+  "createdAt": "2026-08-17T20:24:34Z",
+  "authorityEvidence": "The user explicitly requested implementation of the approved two-intake downstream authoring plan",
+  "proposalPath": "specs/intake-authoring-operations/4c432d35-d31a-4131-a513-737af0a9b678/proposal.json",
+  "proposalNormalizedSha256": "a9bd41daed626c9027e65c150aba39ca8bcffc9488572f749a6f77c7b0e3db71",
+  "approval": {
+    "approved": true,
+    "approvedBy": "Thorsten",
+    "approvedAt": "2026-08-17T20:29:15Z",
+    "evidence": "User explicitly approved proposal SHA-256 a9bd41daed626c9027e65c150aba39ca8bcffc9488572f749a6f77c7b0e3db71"
+  },
+  "stagingDirectory": "specs/intake-authoring-operations/4c432d35-d31a-4131-a513-737af0a9b678/staging",
+  "intendedTargets": [
+    "intakes/tvision-open-watcom-dos-dpmi-feasibility.md",
+    "intakes/tvision-open-watcom-dos-dpmi-ci-migration.md"
+  ],
+  "validatedTargets": [
+    "intakes/tvision-open-watcom-dos-dpmi-feasibility.md",
+    "intakes/tvision-open-watcom-dos-dpmi-ci-migration.md"
+  ],
+  "publishedTargets": [
+    "intakes/tvision-open-watcom-dos-dpmi-feasibility.md",
+    "intakes/tvision-open-watcom-dos-dpmi-ci-migration.md"
+  ],
+  "rollbackBoundary": "No active intake, receipt, authoring series, review request, order entry, or statistics update is published before exact proposal-hash approval and successful validation of the complete staged series",
+  "failure": {
+    "class": "N/A",
+    "message": "N/A"
+  },
+  "nextAction": "$speckit-intake-review specs/intake-authoring-series/tvision-open-watcom-dos-dpmi-port/intake-review-request.json"
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.1",
+  "feature": "Open Watcom DOS/DPMI downstream intake authoring series",
+  "entries": [
+    {
+      "changeId": "CHG001",
+      "scope": "Two new intake requirements, their authoring-series handoff, visible downstream order, and statistics ledger",
+      "decision": "UpdateRequired",
+      "rationale": "The repository gains a new maintainer reader path and a durable future work contract; the intake texts, order document, and statistics ledger must describe that state together.",
+      "documents": [
+        "intakes/tvision-open-watcom-dos-dpmi-feasibility.md",
+        "intakes/tvision-open-watcom-dos-dpmi-ci-migration.md",
+        "Lastenheft_Abarbeitungsreihenfolge.md",
+        "docs/project-statistics.md"
+      ],
+      "owner": "Thorsten Hindermann",
+      "audiences": [
+        "Maintainers",
+        "Build and CI owners",
+        "Contributors and learners"
+      ],
+      "readerPaths": [
+        "Lastenheft_Abarbeitungsreihenfolge.md to feasibility intake to conditional migration intake",
+        "Authoring series review request to both exact target hashes"
+      ],
+      "canonicalSource": "specs/intake-authoring-series/tvision-open-watcom-dos-dpmi-port/series.json",
+      "navigationImpact": "Adds one downstream manual section at the end of the existing requirements order without changing the active sequencing series.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and English second in each intake and in the visible order section at CEFR B2.",
+      "languagePartners": [],
+      "platformAndExampleProof": "The intake evidence binds the current Windows BCC32/DPMI32 workflow, the DOS32 library makefile, and TVDemo, TVEdit, and TVHC makefiles; no runtime or CI migration is performed in this authoring change.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "specs/intake-authoring-operations/4c432d35-d31a-4131-a513-737af0a9b678/proposal.json",
+      "risk": "N/A",
+      "criticality": "Normal",
+      "reevaluationTrigger": "The active examples-and-documentation series completes, an official Open Watcom source snapshot drifts, or operational sequencing is explicitly requested."
+    }
+  ]
+}
