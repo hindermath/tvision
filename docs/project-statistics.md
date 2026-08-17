@@ -19,6 +19,7 @@
 | 2026-08-11 | Stand-alone tvision calculator | 26 | 204194 | 54 | Documentation Impact `UpdateRequired`: kopierbares Calculator-CMake-Projekt mit gepinntem FetchContent, getrennter Rechen-Engine, tastaturbedienbarer TUI, CTest und dauerhaftem macOS-/Linux-/Windows-Matrixjob. |
 | 2026-08-12 | Visual Studio Community 2022/2026 | 27 | 205024 | 55 | Documentation Impact `UpdateRequired`: bilinguale Windows-Voll-IDE-Anleitung, generatorneutrale Presets, lokale Side-by-Side-Auswahl und dauerhafte Calculator-Build-/CTest-Nachweise fuer VS 2022/v143 und VS 2026/v145. |
 | 2026-08-12 | gitignore.io IDE and tool baseline | 27 | 205680 | 55 | Documentation Impact `NoUpdateRequired`: Root-`.gitignore` um den unveraenderten gitignore.io-Block fuer den bestaetigten C++-/CMake-/IDE-/Drei-OS-Stack ergaenzt; Produkt-, Build- und Bedienungsdokumentation bleibt sachlich unveraendert. |
+| 2026-08-17 | Open Watcom DOS/DPMI intake authoring | 29 | 220447 | 61 | Documentation Impact `UpdateRequired`: zweistufige, nachgelagerte Authoring-Serie aus Machbarkeitspruefung und bedingter CI-Migration mit Schema-2.0-Receipts, offizieller Lizenz-/Release-Provenienz und unveraenderter aktiver Sequencing-Serie. |
 
 ---
 
@@ -103,6 +104,17 @@ that work package.*
 - Distribution und Home-Sync / Distribution and home sync: repository-spezifische Quellkonfiguration; kein Home-Sync und keine Aenderung der Bibliotheksdistribution.
 - Re-Evaluation / Re-evaluation: bei Aenderung des primaeren IDE-/Build-Stacks, der gitignore.io-Vorlagen oder der Level-2-Allowlist.
 
+### Open Watcom DOS/DPMI intake authoring 2026-08-17
+
+- Quelle und Owner / Source and owner: genehmigter Intake-Series-Vorschlag, aktueller BCC32-/DPMI32-Workflow, Borland-DOS32-Makefiles sowie offizielle Open-Watcom-Lizenz- und Release-Snapshots; Owner Thorsten Hindermann.
+- Betroffene Dokumente / Affected documents: zwei neue Intakes, deren Schema-2.0-Receipts und Authoring-Serie, `Lastenheft_Abarbeitungsreihenfolge.md` sowie dieses Statistik-Ledger.
+- Zielgruppen und Leserpfad / Audiences and reader path: Maintainer sowie Build-/CI-Verantwortliche beginnen in der sichtbaren Reihenfolge, pruefen zuerst die Machbarkeit und duerfen die bedingte Migration nur nach dokumentiertem `Go` betrachten.
+- Kanonische Quelle, Navigation und Dokumentklasse / Canonical source, navigation, and document class: die hashgebundene Authoring-Serie unter `specs/intake-authoring-series/tvision-open-watcom-dos-dpmi-port/`; aktiver semantischer Intake-Vertrag mit nachgelagertem Reader Path.
+- Sprachpartner und A11Y / Language partners and accessibility: kurze Dokumente enthalten Deutsch zuerst und Englisch danach, CEFR B2, erklaeren Fachbegriffe und stellen Reihenfolge, Status, Blocker und naechste Aktion textorientiert dar; keine getrennten Sprachpartner.
+- Plattform- und Beispielnachweis / Platform and example evidence: Windows-BCC32-/DPMI32-Workflow, DOS32-Bibliotheksbuild sowie TVDemo-, TVEdit- und TVHC-Makefiles sind hashgebundene Quellen; diese Authoring-Aenderung fuehrt noch keinen Build oder CI-Cutover aus.
+- Distribution und Home-Sync / Distribution and home sync: repository-spezifische `sourceOnly`-Artefakte; kein Home-Sync, keine Toolchain- oder Binaerdistribution.
+- Re-Evaluation / Re-evaluation: beim Abschluss der aktiven Beispiel-/Dokumentationsserie, Drift offizieller Open-Watcom-Snapshots oder ausdruecklichem Auftrag fuer Review beziehungsweise operative Sequenzierung.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
@@ -113,29 +125,29 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 219007 lines |
-| Textdateien / Text files | 1285 |
+| Textbasis / Text base | 220447 lines |
+| Textdateien / Text files | 1295 |
 | Beobachtbarer Zeitraum / Observable period | 2025-08-24..2026-08-17 |
 | Aktivtage / Active days | 29 |
 | Relevante Commits / Relevant commits | 61 |
-| Zeilen je Aktivtag / Lines per active day | 7552.0 |
+| Zeilen je Aktivtag / Lines per active day | 7601.6 |
 | Peak-Tag im Fenster / Peak day in window | 2026-08-09 / 133528 |
 | Peak-Woche im Fenster / Peak week in window | 2026-08-09 / 152754 |
 | Laengste Serie / Longest streak | 5 days |
-| Speedup vs. 80 lines/day | 94.4x |
-| Speedup vs. 80 lines/day | 94.4x |
+| Speedup vs. 80 lines/day | 95.0x |
+| Speedup vs. 80 lines/day | 95.0x |
 | Methodik / Methodology | v2; source `ed3f92b94adf` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
-Produktiv / Production          [#####...............]  27.5% | 60218
+Produktiv / Production          [#####...............]  27.3% | 60218
 Tests                           [#...................]   4.3% | 9464
-Dokumentation / Documentation   [#########...........]  44.6% | 97639
-Skripte / Scripts               [####................]  19.2% | 42129
-Konfiguration / Configuration   [#...................]   3.1% | 6812
+Dokumentation / Documentation   [#########...........]  44.4% | 97977
+Skripte / Scripts               [####................]  19.1% | 42129
+Konfiguration / Configuration   [#...................]   3.6% | 7914
 Daten und Medien / Data and media [....................]   0.0% | 0
-Sonstiger Text / Other text     [#...................]   1.3% | 2745
+Sonstiger Text / Other text     [#...................]   1.2% | 2745
 ```
 
 Die Balken teilen die aktuelle getrackte Textbasis in stabile Kategorien. Prozent und Zeilenwert sind die genaue, textorientierte Aussage.
@@ -247,8 +259,8 @@ Es liegen keine belastbaren Phasendaten vor. Deshalb zeigt dieses Diagramm Monat
 
 ```text
 Scale: 0..100x
-80 lines/day       [###################.] 94.4x
-80 lines/day       [###################.] 94.4x
+80 lines/day       [###################.] 95.0x
+80 lines/day       [###################.] 95.0x
 ```
 
 Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen Referenzen. Sie messen keine Arbeitszeit.
@@ -261,7 +273,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..10000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 80
-Visible repository [###############.....] 7552.0
+Visible repository [###############.....] 7601.6
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.

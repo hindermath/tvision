@@ -51,3 +51,37 @@ erfolgreichen Series Review angelegt.
 `specs/intake-authoring-series/tvision-examples-and-documentation/`. An
 operational sequencing manifest is created only after a separately authorized
 and successful Series Review.*
+
+## Nachgelagertes Open-Watcom-DOS/DPMI-Portierungsprojekt / Downstream Open Watcom DOS/DPMI Porting Project
+
+Dieses Vorhaben ist als eigene Authoring-Serie am Ende der sichtbaren
+Reihenfolge vorgemerkt. Beide Intakes stehen auf `ReadyForReview`; ihre
+operative Aktivierung bleibt `Pending`, bis die aktive Serie
+`tvision-examples-and-documentation` abgeschlossen ist. Diese Einordnung
+aendert deren Manifest, Receipt, Root, Kanten oder `Eligible`-Ziel nicht und
+startet weder Review noch Specify, Autonomous oder Implementierung.
+
+*This project is recorded as a separate authoring series at the end of the
+visible order. Both intakes are `ReadyForReview`; operational activation stays
+`Pending` until the active `tvision-examples-and-documentation` series is
+complete. This placement changes none of that series' manifest, receipt, root,
+edges, or `Eligible` target and starts no review, Specify, Autonomous, or
+implementation.*
+
+| Rang | Intake | Rolle | Authoring-Status | Operativer Status |
+|---:|---|---|---|---|
+| 1 | `intakes/tvision-open-watcom-dos-dpmi-feasibility.md` | Root / Machbarkeitspruefung | `ReadyForReview` | `Pending` |
+| 2 | `intakes/tvision-open-watcom-dos-dpmi-ci-migration.md` | OrderedMember / bedingte Migration | `ReadyForReview` | `Pending`, durch `AssessmentBaseline` und dokumentiertes `Go` blockiert |
+
+Die Authoring-Serie, Quellenabdeckung und bindende Kante stehen unter
+`specs/intake-authoring-series/tvision-open-watcom-dos-dpmi-port/`. Ein
+spaeteres Sequencing-Manifest darf erst nach Series Review, Abschluss der
+aktiven Vorgaengerserie und ausdruecklicher Sequencing-Autoritaet entstehen.
+
+*The authoring series, source coverage, and binding edge live under
+`specs/intake-authoring-series/tvision-open-watcom-dos-dpmi-port/`. A later
+sequencing manifest requires Series review, completion of the active preceding
+series, and explicit sequencing authority.*
+
+**Naechste Aktion / Next action:**
+`$speckit-intake-review specs/intake-authoring-series/tvision-open-watcom-dos-dpmi-port/intake-review-request.json`
