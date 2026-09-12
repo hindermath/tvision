@@ -8,7 +8,7 @@
 
 | Ebene | Aktueller Wert | Bedeutung |
 |---|---|---|
-| Preset-Release | `v0.4.2` | Veroeffentlichtes Paket und ZIP |
+| Preset-Release | `v0.4.4` | Veroeffentlichtes Paket und ZIP |
 | Quellkandidat | `N/A` | Kein neuer unveroeffentlichter Kandidat |
 | `preset.yml`-Schema | `schema_version: "1.0"` | Spec-Kit-Presetmanifest |
 | Run-State-Vertrag | `schemaVersion: "1.1"` | Autonomer Lifecycle und Closeout |
@@ -16,6 +16,17 @@
 Diese Werte duerfen nicht miteinander verwechselt werden. Ein
 Presetmanifest-Schema `1.0` bedeutet nicht, dass der Run-State ebenfalls
 Schema `1.0` verwendet.
+
+### Upgrade auf `v0.4.4`
+
+`v0.4.4` bindet Pfadinventar, regulaere Dateimodi und Bytes im Staged-Modus
+direkt an den Git-Index. Fuer das physische Inventar ist die Rename-Erkennung
+deaktiviert, sodass `--intended` sowohl den geloeschten Quellpfad als auch den
+hinzugefuegten Zielpfad enthalten muss. Symlinks, Gitlinks, Konflikteintraege
+und andere nicht regulaere Indexmodi scheitern auch dann, wenn der Pfad im
+Arbeitsbaum ersetzt oder entfernt wurde. Die Regeln fuer historische
+Whitespace-Ausnahmen aus v0.4.3 und alle anderen Fehler aus
+`git diff --cached --check` bleiben blockierend.
 
 ### Upgrade auf `v0.4.2`
 
@@ -77,7 +88,7 @@ den No-Delta-Befund.
 
 `parallel-autonomous-run-governance` benoetigt in jedem realen
 Worker-Repository mindestens Preset 7 `v0.2.2`. Die gemeinsam getestete
-aktuelle Kombination ist Preset 7 `v0.4.2` mit Preset 8 `v0.2.6`.
+aktuelle Kombination ist Preset 7 `v0.4.4` mit Preset 8 `v0.2.6`.
 
 ## English
 
@@ -85,13 +96,23 @@ aktuelle Kombination ist Preset 7 `v0.4.2` mit Preset 8 `v0.2.6`.
 
 | Layer | Current value | Meaning |
 |---|---|---|
-| Preset release | `v0.4.2` | Published package and ZIP |
+| Preset release | `v0.4.4` | Published package and ZIP |
 | Source candidate | `N/A` | No newer unpublished candidate |
 | `preset.yml` schema | `schema_version: "1.0"` | Spec Kit preset manifest |
 | Run-state contract | `schemaVersion: "1.1"` | Autonomous lifecycle and closeout |
 
 Do not confuse these values. Preset-manifest schema `1.0` does not imply
 run-state schema `1.0`.
+
+### Upgrade to `v0.4.4`
+
+`v0.4.4` binds staged path inventory, regular-file modes, and bytes directly to
+the Git index. Rename detection is disabled for the physical inventory so a
+rename requires both its deleted source and added target in `--intended`.
+Symlinks, gitlinks, conflicted entries, and other non-regular index modes fail
+closed even when the worktree path was replaced or removed. The v0.4.3
+historical-whitespace rules and all other `git diff --cached --check` failures
+remain blocking.
 
 ### Upgrade to `v0.4.2`
 
@@ -142,5 +163,5 @@ result.
 ### Relationship with Preset 8
 
 `parallel-autonomous-run-governance` requires at least Preset 7 `v0.2.2` in
-every real worker repository. The currently tested pair is Preset 7 `v0.4.2`
+every real worker repository. The currently tested pair is Preset 7 `v0.4.4`
 with Preset 8 `v0.2.6`.
