@@ -1,7 +1,10 @@
 ---
-description: Resume a paused or interrupted autonomous Spec Kit run after a full drift and authority audit.
+description: Resume a paused or interrupted autonomous Spec Kit run after a full drift
+  and authority audit.
 ---
 
+
+<!-- Source: autonomous-run-governance -->
 ## User Input
 
 ```text
