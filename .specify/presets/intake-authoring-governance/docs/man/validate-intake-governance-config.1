@@ -1,4 +1,4 @@
-.TH VALIDATE-INTAKE-GOVERNANCE-CONFIG 1 "2026-07-28" "0.3.1"
+.TH VALIDATE-INTAKE-GOVERNANCE-CONFIG 1 "2026-09-13" "0.3.2"
 .SH NAME
 validate-intake-governance-config \- validate language-aware requirements governance
 .SH SYNOPSIS
@@ -20,3 +20,14 @@ or Blocked. Eligibility is an ordering result and grants no delivery authority.
 .SH EXIT STATUS
 Zero means Aligned or a valid journal. One means migration or clarification is
 required. Two means blocked or invalid input.
+.SH LIFECYCLE
+Completed members must be archived. Non-completed members must be active.
+Completed series retain their archived members with no eligible candidate.
+SeriesManifest accepts an absent empty active directory; DirectoryStrict does not.
+activeIntakeCount counts physical matching active files; activeSeriesTargetCount
+counts active series members. RIG017 reports lifecycle mismatches, without writes.
+
+.SH PHYSICAL PATH BOUNDARIES
+Collection roots must resolve to distinct locations inside the repository. Active
+targets cannot resolve into the archive. Unknown series and target states return
+RIG017; aliased roots return RIG007 and repository escapes return RIG004.

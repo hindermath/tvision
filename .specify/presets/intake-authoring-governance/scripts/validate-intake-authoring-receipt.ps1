@@ -60,12 +60,16 @@ function Test-IntakeAuthoringReceipt {
     }
 
     function Test-HBRelativePath([string]$Value) {
-        if ([IO.Path]::IsPathRooted($Value)) { return $false }
+        if ([IO.Path]::IsPathRooted($Value) -or $Value -match '^[A-Za-z]:|\\') { return $false }
         return -not ($Value -split '[\\/]' | Where-Object { $_ -eq '..' })
     }
 
     function Get-HBNormalizedText([string]$Path) {
-        $Bytes = [IO.File]::ReadAllBytes($Path)
+        # DE: Den aufgeloesten, geprueften Pfad lesen, nicht erneut dem Link folgen.
+        # EN: Read the checked resolved path rather than following the original link again.
+        $Resolved = & python3 (Join-Path $PSScriptRoot 'resolve-intake-repository-file.py') --repo $RepoRoot --file $Path
+        if ($LASTEXITCODE -ne 0) { throw 'path resolves outside the repository' }
+        $Bytes = [IO.File]::ReadAllBytes(($Resolved | ConvertFrom-Json).path)
         $Offset = if ($Bytes.Length -ge 3 -and $Bytes[0] -eq 0xEF -and $Bytes[1] -eq 0xBB -and $Bytes[2] -eq 0xBF) { 3 } else { 0 }
         $Utf8 = [Text.UTF8Encoding]::new($false, $true)
         $Text = $Utf8.GetString($Bytes, $Offset, $Bytes.Length - $Offset)
@@ -225,7 +229,7 @@ function Test-IntakeAuthoringReceipt {
     } elseif ($SchemaVersion -eq '1.1') {
         @('0.1.1')
     } elseif ($SchemaVersion -eq '2.0') {
-        @('0.2.0', '0.2.1', '0.3.0', '0.3.1')
+        @('0.2.0', '0.2.1', '0.3.0', '0.3.1', '0.3.2')
     } else {
         @()
     })
@@ -257,6 +261,16 @@ function Test-IntakeAuthoringReceipt {
     }
     $TargetPath = Join-Path $RepoRoot $TargetPathText
     $TargetText = ''
+    if ($TargetPathText -and (Test-HBRelativePath $TargetPathText) -and -not (Test-Path -LiteralPath $TargetPath -PathType Leaf)) {
+        # DE: Nur die Leseposition wechselt; historische Pfade und Prompts bleiben unveraendert.
+        # EN: Only the read location changes; historical paths and prompts remain unchanged.
+        $Resolution = & python3 (Join-Path $PSScriptRoot 'resolve-intake-archive-target.py') --receipt $Receipt --repo $RepoRoot
+        if ($LASTEXITCODE -eq 0) {
+            $TargetPath = Join-Path $RepoRoot ($Resolution | ConvertFrom-Json).resolvedTarget
+        } else {
+            $Errors.Add('RIG018: archive successor resolution failed')
+        }
+    }
     if ($TargetPathText -and -not (Test-Path -LiteralPath $TargetPath -PathType Leaf)) {
         $Errors.Add("target missing: $TargetPathText")
     } elseif ($TargetPathText) {
@@ -348,6 +362,14 @@ function Test-IntakeAuthoringReceipt {
             $SourcePath = Join-Path $RepoRoot $PathText
             if ([IO.Path]::GetExtension($SourcePath).ToLowerInvariant() -in $BlockedExtensions) {
                 $Errors.Add("${Label}.path uses a known binary/document extension")
+            }
+            if (-not (Test-Path -LiteralPath $SourcePath -PathType Leaf)) {
+                $Resolution = & python3 (Join-Path $PSScriptRoot 'resolve-intake-archive-target.py') --receipt $Receipt --repo $RepoRoot --source-index $Index
+                if ($LASTEXITCODE -eq 0) {
+                    $SourcePath = Join-Path $RepoRoot ($Resolution | ConvertFrom-Json).resolvedTarget
+                } else {
+                    $Errors.Add('RIG018: archive successor resolution failed')
+                }
             }
             if (-not (Test-Path -LiteralPath $SourcePath -PathType Leaf)) {
                 $Errors.Add("source missing: $PathText")

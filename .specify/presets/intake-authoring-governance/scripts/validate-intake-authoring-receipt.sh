@@ -18,7 +18,7 @@ while [ "$#" -gt 0 ]; do
 done
 [ -n "$receipt" ] || { printf 'ERROR: --receipt is required\n' >&2; exit 2; }
 
-python3 - "$receipt" "$repo" <<'PY'
+python3 - "$receipt" "$repo" "$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)" <<'PY'
 import hashlib
 import json
 import re
@@ -27,7 +27,7 @@ import sys
 import uuid
 import ipaddress
 from datetime import datetime
-from pathlib import Path, PurePosixPath
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from urllib.parse import urlsplit
 
 receipt_path = Path(sys.argv[1])
@@ -43,10 +43,15 @@ def required_text(obj, key, label):
 
 def relative(value):
     path = PurePosixPath(value)
-    return not path.is_absolute() and ".." not in path.parts
+    return not path.is_absolute() and not PureWindowsPath(value).drive and "\\" not in value and ".." not in path.parts
 
 def normalized_bytes(path):
-    raw = path.read_bytes()
+    # DE: Auch vorhandene Ziele und Quellen duerfen die Repo-Grenze nicht verlassen.
+    # EN: Existing targets and sources must also remain inside the repository.
+    resolved = path.resolve()
+    if not resolved.is_relative_to(repo):
+        raise ValueError("path resolves outside the repository")
+    raw = resolved.read_bytes()
     if raw.startswith(b"\xef\xbb\xbf"):
         raw = raw[3:]
     try:
@@ -156,7 +161,7 @@ generator_version = required_text(generator, "version", "generator")
 accepted_generators = {
     "1.0": {"0.1.0"},
     "1.1": {"0.1.1"},
-    "2.0": {"0.2.0", "0.2.1", "0.3.0", "0.3.1"},
+    "2.0": {"0.2.0", "0.2.1", "0.3.0", "0.3.1", "0.3.2"},
 }.get(schema_version, set())
 if accepted_generators and generator_version not in accepted_generators:
     errors.append(
@@ -187,6 +192,16 @@ if target_path_text and not relative(target_path_text):
     errors.append("target.path must be repository-relative")
 target_path = repo / target_path_text
 target_text = ""
+if target_path_text and relative(target_path_text) and not target_path.is_file():
+    resolution = subprocess.run(
+        [sys.executable, str(Path(sys.argv[3]) / "resolve-intake-archive-target.py"),
+         "--receipt", str(receipt_path), "--repo", str(repo)],
+        capture_output=True, text=True, check=False,
+    )
+    if resolution.returncode == 0:
+        target_path = repo / json.loads(resolution.stdout)["resolvedTarget"]
+    else:
+        errors.append("RIG018: archive successor resolution failed")
 if target_path_text and not target_path.is_file():
     errors.append(f"target missing: {target_path_text}")
 elif target_path_text:
@@ -292,6 +307,16 @@ for index, source in enumerate(sources):
         source_path = repo / path_text
         if source_path.suffix.lower() in blocked_extensions:
             errors.append(f"{label}.path uses a known binary/document extension")
+        if not source_path.is_file():
+            resolution = subprocess.run(
+                [sys.executable, str(Path(sys.argv[3]) / "resolve-intake-archive-target.py"),
+                 "--receipt", str(receipt_path), "--repo", str(repo), "--source-index", str(index)],
+                capture_output=True, text=True, check=False,
+            )
+            if resolution.returncode == 0:
+                source_path = repo / json.loads(resolution.stdout)["resolvedTarget"]
+            else:
+                errors.append("RIG018: archive successor resolution failed")
         if not source_path.is_file():
             errors.append(f"source missing: {path_text}")
         else:

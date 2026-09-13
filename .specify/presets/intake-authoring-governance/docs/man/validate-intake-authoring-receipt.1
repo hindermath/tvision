@@ -1,4 +1,4 @@
-.TH VALIDATE-INTAKE-AUTHORING-RECEIPT 1 "July 2026" "intake-authoring-governance 0.3.1"
+.TH VALIDATE-INTAKE-AUTHORING-RECEIPT 1 "July 2026" "intake-authoring-governance 0.3.4"
 .SH NAME
 validate-intake-authoring-receipt \- validate intake source and output provenance read-only
 .SH SYNOPSIS
@@ -33,3 +33,9 @@ prompt contract.
 bash scripts/validate-intake-authoring-receipt.sh \
   --receipt specs/intake-authoring-receipts/example.json --repo .
 .fi
+
+.SH ARCHIVED TARGETS
+Missing active targets require exactly one completed archive successor matching
+name, manifest, and normalized hash. Historical standalone N/A binding remains
+valid; foreign series binding fails. No receipt is rewritten. The archive resolver
+requires python3 in both shells and reports RIG018 on invalid archive evidence.
