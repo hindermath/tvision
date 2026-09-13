@@ -27,3 +27,6 @@
   Vorhandene Validatoren und erforderliche CI-Gates werden trotzdem geprueft.
 - Restrisiko / residual risk: Agenten muessen den Bericht tatsächlich anzeigen;
   versionierte Regeln sind keine automatische UI-Ausfuehrung / guidance is not a UI execution hook.
+
+Profilbindung / profile binding: Kein lokales Authoring-Profil konfiguriert; Agent-Guidance sowie Spec-/Plan-/Tasks-Vorlagen binden die Regel. / No local authoring profile configured; agent guidance and spec/plan/tasks templates bind the rule.
+Bootstrap-Quellen / bootstrap sources: alle vorhandenen lokalen Agent-Templates tragen dieselbe Regel; lokale Erweiterungen erhalten. / Existing local agent source templates contain the same rule; extensions preserved.
