@@ -28,6 +28,7 @@ Change their respective canonical source first, then propagate the result.*
 | `.specify/presets/autonomous-run-governance/tests/test-autonomous-evidence-integrity.sh` | `.specify` |
 | `.specify/presets/autonomous-run-governance/tests/test-model-routing.ps1` | `.specify` |
 | `.specify/presets/autonomous-run-governance/tests/test-model-routing.sh` | `.specify` |
+| `.specify/presets/intake-authoring-governance/scripts/resolve-intake-archive-target.py` | `.specify` |
 | `.specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-artifact.ps1` | `.specify` |
 | `.specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-artifact.sh` | `.specify` |
 | `.specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.ps1` | `.specify` |
