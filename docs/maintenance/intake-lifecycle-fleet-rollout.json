@@ -1,0 +1,635 @@
+{
+  "unrelatedPresetsPreserved": true,
+  "status": "LocalChecksPassedPendingCi",
+  "date": "2026-09-13",
+  "presets": [
+    {
+      "version": "0.3.2",
+      "enabled": true,
+      "priority": 64,
+      "previous": "0.3.1",
+      "release": {
+        "name": "authoring",
+        "version": "0.3.2",
+        "testedCommit": "3db1801f1722c674cbe19442efe9a56bed7167ce",
+        "mergeCommit": "c2427c3ecb5e2d1ae381167da14be2956c1c2c8a",
+        "tree": "b69c023debc44c89b4e6b312717d924d4eb83317",
+        "release": "https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/releases/tag/v0.3.2",
+        "sourceAssetSha256": "90710b2ad342d121d2f9424cc043e4f03f3a20e00520a3b0d1150e3048c1c075",
+        "archiveUrl": "https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/archive/refs/tags/v0.3.2.zip",
+        "tagZipSha256": "6d31a4ae74e5590d53407ef3ff0623433e4799a989050863af32bc442dcad889",
+        "verifiedFileCount": 38
+      },
+      "id": "intake-authoring-governance",
+      "overlays": []
+    },
+    {
+      "version": "0.2.2",
+      "enabled": true,
+      "priority": 65,
+      "previous": "0.2.1",
+      "release": {
+        "name": "review",
+        "version": "0.2.2",
+        "testedCommit": "a38f61048edf3803d2b550489adda77133fef117",
+        "mergeCommit": "59bb2e66e250723f1ef99a8eddc1c4725b3f1579",
+        "tree": "9779ebeec677b920631391e335bcfedc54e935d2",
+        "release": "https://github.com/hindermath/spec-kit-preset-intake-review-governance/releases/tag/v0.2.2",
+        "sourceAssetSha256": "6e6664f09631cda8d1e3210a30eea1b20b98eb5f7b31028391daa689e514e2e5",
+        "archiveUrl": "https://github.com/hindermath/spec-kit-preset-intake-review-governance/archive/refs/tags/v0.2.2.zip",
+        "tagZipSha256": "e2be3945de58503565e3743b9ad102104fbcb3bd658be7d0304294799eff8a97",
+        "verifiedFileCount": 29
+      },
+      "id": "intake-review-governance",
+      "overlays": []
+    },
+    {
+      "version": "0.2.4",
+      "enabled": true,
+      "priority": 66,
+      "previous": "0.2.3",
+      "release": {
+        "name": "sequencing",
+        "version": "0.2.4",
+        "testedCommit": "45486b1d4d635dd93acd2ef6bb70fd355efc36b1",
+        "mergeCommit": "0d334415c76a5fdce4fa003cd7a2d1b9c9c73ed6",
+        "tree": "f8c73fad84d904b4c9a2e7a2527f7f5e5692a6bc",
+        "release": "https://github.com/hindermath/spec-kit-preset-intake-sequencing-governance/releases/tag/v0.2.4",
+        "sourceAssetSha256": "01ee9cf199bbb9ffb366a1d759dbdeb184155741da152a905f2896e24f989a1a",
+        "archiveUrl": "https://github.com/hindermath/spec-kit-preset-intake-sequencing-governance/archive/refs/tags/v0.2.4.zip",
+        "tagZipSha256": "81ede6e18a8273e68da8d7be2d8e69572d0c492aa67307ea6322c5884022d11e",
+        "verifiedFileCount": 39
+      },
+      "id": "intake-sequencing-governance",
+      "overlays": []
+    }
+  ],
+  "schemaVersion": 1,
+  "validation": {
+    "packages": [
+      {
+        "files": [
+          {
+            "localExtension": false,
+            "sha256": "15d6155002ae45c30bf0add2d236ac02421024f8b1674a1449f4d7a292bc29dd",
+            "path": "LICENSE"
+          },
+          {
+            "localExtension": false,
+            "sha256": "6dd4fcb070b58cfe76c8f781ff2642e2f086ed9c14161148264f464ecb780e0f",
+            "path": "model-routing.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "61107a6a8141a5df1f5088f21ef458d34b3f97f127dc399dfbf3c7ff6947b338",
+            "path": "preset.yml"
+          },
+          {
+            "localExtension": false,
+            "sha256": "d1ec1304a77d6cce383b0788fef283a81951caeae572543ef0197cbb8cd06f18",
+            "path": "README.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "c460a077aa07f144fb5162c5fc79e1d093521b9510babacb3b82da92b353ac60",
+            "path": "tests/test-intake-authoring-lifecycle.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "e71bc69306fac6d41b4cb76260b672e6c423b4d0ad26619ec36f0fb8c4f98af9",
+            "path": "tests/test-intake-authoring-validator.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "9c4359e8d216c9d69bcd5934b7d5d9c7915cc1bebceb31ed868d024badd3cb58",
+            "path": "tests/test-intake-governance-config.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "c238ac5d3d0fb67177c014f70078f9b2b76458412c1624ff58b8cd5d7a63115a",
+            "path": "docs/completed-series-lifecycle.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "d0bc4067ba5b4b6ba3ae8f7a0b26fd6b4cdb046c5b97370475897a8a163ba6af",
+            "path": "docs/README.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "1306f7b5c2cc14f73e9fe5c8a0a07869e3a02ee4484bbea57e03125de85a3674",
+            "path": "docs/man/validate-intake-authoring-artifact.1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "5772d38963c6d8348f2be6266a757264b1984e4440bab1d4e4be9e9b73e9518d",
+            "path": "docs/man/validate-intake-authoring-receipt.1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "898e9c6085e02db9a08013c9326e280272d92b1aed5cdb94e012c827ab54f5d8",
+            "path": "docs/man/validate-intake-governance-config.1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "b44309c8ec122eeb0a9052578aa8c20b39e3b0a7db8e432795a9bdda3c7380e5",
+            "path": "scripts/resolve-intake-archive-target.py"
+          },
+          {
+            "localExtension": false,
+            "sha256": "e0b0f5939477308792fd6f7e3c7ef2c435ada3d04b2cd89025103c0d08bb0732",
+            "path": "scripts/validate-intake-authoring-artifact.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "0a529bc855321464e1392e207d6b4fbb9bde58876d561ad9271be32742743b4e",
+            "path": "scripts/validate-intake-authoring-artifact.sh"
+          },
+          {
+            "localExtension": false,
+            "sha256": "f1e9c7198f425cd659c5d08409c3c0df2b1f030293ee175c0177a212c00151b4",
+            "path": "scripts/validate-intake-authoring-receipt.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "b77845f0aa6f8d88523798d0457b627fe88fb4b2c99dfbd13f4cf1c79e15bd9d",
+            "path": "scripts/validate-intake-authoring-receipt.sh"
+          },
+          {
+            "localExtension": false,
+            "sha256": "c14349c5f03c67a04a78eab16d3876269e16b03911e7035fe2c4dbc87bcd3e22",
+            "path": "scripts/validate-intake-governance-config.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "5285b4e3ef3d2bed1af27d8b0803838668fa7e1897238840aad09ef4e6d2aabc",
+            "path": "scripts/validate-intake-governance-config.py"
+          },
+          {
+            "localExtension": false,
+            "sha256": "65883402020f36416c652437999cf646ead4eae1a40a73012db7d4136ac7cf3d",
+            "path": "scripts/validate-intake-governance-config.sh"
+          },
+          {
+            "localExtension": false,
+            "sha256": "ae163e4590580e389943c997cac514e8b7195776539ce5f40f216f10deeefaa2",
+            "path": ".github/workflows/lifecycle-validation.yml"
+          },
+          {
+            "localExtension": false,
+            "sha256": "949883bf695aa2cccfba009cc743796fca28da43267e008824094556cf13aef2",
+            "path": "templates/agent-file-addendum.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "58d24573597933744a14f9b9c598fd2ed1e47aa36ecc291ec20365e32f1c9998",
+            "path": "templates/field-validation-summary.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "3bec18186e39747c5a71d486feda2e06148ebe0ea0e20f9ade7ea5030f74424c",
+            "path": "templates/intake-authoring-operation-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "8cfda1f09cf5a216caa3e34e5f049f6bcbe63c6f0a8ad6d6e5273d16b650bead",
+            "path": "templates/intake-authoring-policy-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "a1cc1f8379dc9e78b5e57f85a4c72e054072e2e40de4402d3004f386342955bc",
+            "path": "templates/intake-authoring-receipt-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "c93970426ef1d7c35e15c83b779a7249c5de98d0750e87651df23109c83efd64",
+            "path": "templates/intake-authoring-runbook-template.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "10e7ce5ea2ba241202f3671740f1016ceea454512d367fd222305375f0a44ad9",
+            "path": "templates/intake-authoring-series-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "22ed4de765599695c75d32d990882ccdf409e9c89ea6c5f950f1afc1e1b50bc4",
+            "path": "templates/intake-authoring-tombstone-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "83a825b53e477151252d7fb43b22f46e6ab0c7f7e9f746fc000062bbbd08f1ea",
+            "path": "templates/intake-governance-config-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "9143b1f48b2eaf8d33143b32ea8965c6cd8126271ca446d8cf35353ea91a8f55",
+            "path": "templates/intake-governance-migration-journal-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "57ccc4118e8a029c5a808c85a19f9120f111bc0e89a2c66dc7ce20e40c93716d",
+            "path": "templates/intake-template.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "0aec721f02f142e3d466337c62dc60a1e67d3a0e7f40e5fc17d97aeb3860fdcb",
+            "path": "templates/project-profile-template.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "c45bda4cae2ef9535de3927c6cb4fe0289564e2825c886bc1c96ad28e671f511",
+            "path": "commands/speckit.intake-create-status.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "ec50d2655d309abd24ba8f1df3e9cb3277ec8d00102729e96cb418be1b71cbee",
+            "path": "commands/speckit.intake-create.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "59eab66c917e13258c9c4448c35debbd4024c9f2897ecb4b8e10e83b5f9ab50c",
+            "path": "commands/speckit.intake-delete.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "7d1fef9c8b6b06427de5fc670a988795764cc641bf985e6604a55df03f70fef5",
+            "path": "commands/speckit.intake-read.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "df5608ae0d2c1378e2d700ce578c259b8904d0756c65638ee1467293ac56f0a0",
+            "path": "commands/speckit.intake-update.md"
+          }
+        ],
+        "enabled": true,
+        "priority": 64,
+        "id": "intake-authoring-governance",
+        "version": "0.3.2"
+      },
+      {
+        "files": [
+          {
+            "localExtension": false,
+            "sha256": "15d6155002ae45c30bf0add2d236ac02421024f8b1674a1449f4d7a292bc29dd",
+            "path": "LICENSE"
+          },
+          {
+            "localExtension": false,
+            "sha256": "95d4075edd760b4672d6bb799868ed81fac5e50c31f3def60e996073c8559a03",
+            "path": "model-routing.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "fd34ea0e30d2dc9ae4a6ad5863d582ef04645ba58382194f8edfd7d957d9445a",
+            "path": "preset.yml"
+          },
+          {
+            "localExtension": false,
+            "sha256": "676c7f2212b452cca81cd00d80a036e90b62d2bea362ccb9a76ce9420498896c",
+            "path": "README.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "9c4359e8d216c9d69bcd5934b7d5d9c7915cc1bebceb31ed868d024badd3cb58",
+            "path": "tests/test-intake-governance-config.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "89f93345d1bbb039bff5c3d05b7d0955f500071833eb6e079f5c5a4bbe35bccf",
+            "path": "tests/test-intake-review-validator.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "19a3a3e29b80128e59645d90ccd57c2f1a5f80151f11760de02a341874a06d62",
+            "path": "tests/test-secure-casetracker-field.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "e94d9be548cc47b0f55e5948501ea5e1db64d7f283f4561ca0be36e81a8a1ac9",
+            "path": "docs/completed-series-lifecycle.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "97242ad0f7afdbeca22e06f89458a54f6123a86f9cf12d6dc6b92c7a4129b479",
+            "path": "docs/field-validation-summary.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "e09b971a39b953941a1b72798f7fd4f2c8bcec23992935668f2e0a53f839c86e",
+            "path": "docs/README.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "21fff2a3d572e573a8385cbb72d10a04888ade0a96fe910d6e39403202797484",
+            "path": "docs/man/validate-intake-governance-config.1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "7b0ef40e2ca0b99d2d3007929de9a09e2706a60b2b7e1c069fb7e4ed8107277c",
+            "path": "docs/man/validate-intake-review-result.1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "c14349c5f03c67a04a78eab16d3876269e16b03911e7035fe2c4dbc87bcd3e22",
+            "path": "scripts/validate-intake-governance-config.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "5285b4e3ef3d2bed1af27d8b0803838668fa7e1897238840aad09ef4e6d2aabc",
+            "path": "scripts/validate-intake-governance-config.py"
+          },
+          {
+            "localExtension": false,
+            "sha256": "65883402020f36416c652437999cf646ead4eae1a40a73012db7d4136ac7cf3d",
+            "path": "scripts/validate-intake-governance-config.sh"
+          },
+          {
+            "localExtension": false,
+            "sha256": "c94f3db6f5c8fe2f2237abafe6411484881bd404ee99311404c5558d17fff22e",
+            "path": "scripts/validate-intake-review-result.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "702313e7bc08df3be82b0adb2853c9ad11912db738c000debdc4ff8bb90896c7",
+            "path": "scripts/validate-intake-review-result.sh"
+          },
+          {
+            "localExtension": false,
+            "sha256": "28c6ab787cb451e163080bb5124cf6190e2826b278278e8e066fe63c32c66f60",
+            "path": ".github/workflows/lifecycle-validation.yml"
+          },
+          {
+            "localExtension": false,
+            "sha256": "4677916049dc523c0b7c1ab0b92d52c18fcb6c353a64b9e10b19ee74e81eb289",
+            "path": "templates/agent-file-addendum.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "d51c1d7b9befc3ee1dda11af62539939a89eb4b886f99fbe0a8c764189f8d374",
+            "path": "templates/field-validation-summary.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "bbd75818c3fe4c00d3f7f993cd45df7d15a16376e78505ab487b530f8f608da7",
+            "path": "templates/intake-review-checklist-template.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "fcf4fc8e732e8d949dffcfc08de97ef6dd6f2b9aa23e00c68dd2ea525d2b96e0",
+            "path": "templates/intake-review-policy-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "56ba03fa2103f4609cac75095f3d6b6b2a5742b4b03b4ea97dbb8731e8b5699d",
+            "path": "templates/intake-review-report-template.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "e8a19f68031ece33433a9feae1b44ea8f5c7fd688bdc17d91d72d8600f251105",
+            "path": "templates/intake-review-request-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "3ee730932e18ebebee723bd6f502b4078081d93b271e53aca6351784ecae7a0d",
+            "path": "templates/intake-review-result-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "909a18058737ba6e668c07155990b50046e39cf55be055b5ae7758f738a3d655",
+            "path": "templates/intake-review-runbook-template.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "1b66b457c90dac96691fe04753ce8c427263c4b12c099f0a104fe78e018020e7",
+            "path": "commands/speckit.intake-repair.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "6677ce67ab427de44f1c880d7d0423826378079135672b13d286660c7693dc0f",
+            "path": "commands/speckit.intake-review-status.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "0cc99a7c633a7bfb5714d063a7192e4c52a744fb4b5f9e26cb7aa7bf13254ce0",
+            "path": "commands/speckit.intake-review.md"
+          }
+        ],
+        "enabled": true,
+        "priority": 65,
+        "id": "intake-review-governance",
+        "version": "0.2.2"
+      },
+      {
+        "files": [
+          {
+            "localExtension": false,
+            "sha256": "15d6155002ae45c30bf0add2d236ac02421024f8b1674a1449f4d7a292bc29dd",
+            "path": "LICENSE"
+          },
+          {
+            "localExtension": false,
+            "sha256": "124635fdbfa2fc8a8a41cc4b78fbbc309cea214f5c9bd9094caceb363e771a78",
+            "path": "model-routing.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "585b59b1044dcff182b7d89399b2447b8437c72f712db258ef2f706b7404ca54",
+            "path": "preset.yml"
+          },
+          {
+            "localExtension": false,
+            "sha256": "2e72ac3702b8a0dd824364617a19d918419b4f932f0b1b48cbf43639749d139a",
+            "path": "README.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "3b7adc5c5a858d3f7a9f38ab7f433cfcfc32d27779dd4f69336044caa6f19f27",
+            "path": "tests/test-home-baseline-field.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "c7e848cf79d09f130ffae48f3a5cfc8d734440a68657c57f4d92fae2d5717894",
+            "path": "tests/test-intake-governance-config.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "1613cc06af74f12e82b5a524b058953a7f2c876af6d945b2573538dba7a413a1",
+            "path": "tests/test-intake-sequencing-validator.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "5af245fdde42674c0bf921fd7337e798ee7b5ce893fb2b8905c130a59bc25ab3",
+            "path": "docs/completed-series-lifecycle.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "fd72db78a147598209e7390fc0d8c5001c80f73de0000749fe540d61069a7997",
+            "path": "docs/field-validation-summary.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "8e6daec72c063383165f8151de24f0d3deadf4633d1270db79ef3e13df6d685f",
+            "path": "docs/README.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "4198a8121ce9cd0aec75fe9862a7fd397c453795ae07fc30030db0f79ce71270",
+            "path": "docs/man/validate-intake-governance-config.1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "51e921fe986cc5243d45bfd268821fd0c008d7a06b1199f4101ec78279c87ebe",
+            "path": "docs/man/validate-intake-series-manifest.1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "d7a686baf7eff16d27720cc140e8f09b26df1e77af262786a7b96806910835c4",
+            "path": "docs/man/validate-intake-series-receipt.1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "c14349c5f03c67a04a78eab16d3876269e16b03911e7035fe2c4dbc87bcd3e22",
+            "path": "scripts/validate-intake-governance-config.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "49b4fb75fbcb04591debb38ddfb895319137e8ff6ff659650bed0606db7a8589",
+            "path": "scripts/validate-intake-governance-config.py"
+          },
+          {
+            "localExtension": false,
+            "sha256": "65883402020f36416c652437999cf646ead4eae1a40a73012db7d4136ac7cf3d",
+            "path": "scripts/validate-intake-governance-config.sh"
+          },
+          {
+            "localExtension": false,
+            "sha256": "03e52d13276d44945dd21028a5822f004460cc920e80d22e0f06dbc300a53521",
+            "path": "scripts/validate-intake-series-manifest.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "ad3af65abf9d206647707b7f9cc12611a6aaa0323f4db00036db3f6b96b9d4cc",
+            "path": "scripts/validate-intake-series-manifest.sh"
+          },
+          {
+            "localExtension": false,
+            "sha256": "9950683043c0eab460b0f807576644d1ac7eae700839616c52e93ba6fb0eddaf",
+            "path": "scripts/validate-intake-series-receipt.ps1"
+          },
+          {
+            "localExtension": false,
+            "sha256": "dc06a6bb999413ff48cc267f589bd019fa64f45f531962b098fcfcbdf6559efb",
+            "path": "scripts/validate-intake-series-receipt.sh"
+          },
+          {
+            "localExtension": false,
+            "sha256": "d4627807c6cb1034862514c0b95c50ea17a7252c73a627f1e8494688f7d4c2df",
+            "path": "scripts/validate-intake-series.py"
+          },
+          {
+            "localExtension": false,
+            "sha256": "d9a5ea6303411d0d11c793aa7e1d94b708f67019826b77b6866c30064fb65817",
+            "path": ".github/workflows/lifecycle-validation.yml"
+          },
+          {
+            "localExtension": false,
+            "sha256": "030c09a7a56899a28b95504cf64af98c163eb67743b6c71c9eccb79bca4e0c3e",
+            "path": "templates/agent-file-addendum.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "703fabeb2fbc43045dcc0c5b09c07e0749fd7ef46c82d6014d4d4e81f33073aa",
+            "path": "templates/field-validation-summary.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "118f80b959e84b8f0e5f046347424e48c3be61b088e611b8fadddb6b6e63755e",
+            "path": "templates/intake-series-checklist-template.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "55c3e462ed5ee44f1086b526e16bb6d26b10fb8c47fe7008d8f607a15b65ba44",
+            "path": "templates/intake-series-idle-manifest-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "87be6594b32c92dc36b612bd6bf9af54efc705e467af145219180b477c3b5149",
+            "path": "templates/intake-series-manifest-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "c0dc3f41cda85792ed6e4aca91e947b9cbb2cbb26a7eee5e785b1aa794de50d0",
+            "path": "templates/intake-series-operation-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "0e453639ef2f6d00dafd75c31458cf6a3f6699e1d6ce8bc5f293e3fe00acbb3e",
+            "path": "templates/intake-series-order-template.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "c7362796774ec93414954a406d7a9651ef12d9c4bfa4432b1cf655786e2d0eec",
+            "path": "templates/intake-series-policy-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "f40214b69cff518043701cc8e3c10a12c2f173c5f7718e2495bd4f06bdf00a05",
+            "path": "templates/intake-series-receipt-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "6790311fb79d8a9ac48261616a1e5ece92e3a795a06637f9b89739f6e309903b",
+            "path": "templates/intake-series-runbook-template.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "c5cd4405da06ee93abd62e22af24feb1e773b4622b3b8a1e4dfa434140387bdf",
+            "path": "templates/intake-series-tombstone-template.json"
+          },
+          {
+            "localExtension": false,
+            "sha256": "ff5f492bed5cd6e04cd652c054b413e24d0f87a17fd6ea338ff21f8aa2995da9",
+            "path": "commands/speckit.intake-series-create.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "b43146371f78ee75612739f083545203cead8e3de226e3d99a31c7f97d1e8add",
+            "path": "commands/speckit.intake-series-delete.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "1616cde6881295d852040a2a4a207f84e65b683e7771ff162be267b2c5b5fb07",
+            "path": "commands/speckit.intake-series-next.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "0a2b590ab26a1ac585f4da5cb9ff5c00598be97ffa17376d3e3f1cf0c0c443c6",
+            "path": "commands/speckit.intake-series-read.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "89da998fafd86ce923d8c0278743fbe9a414bb9dcaffff4ff6ad514caf3926f8",
+            "path": "commands/speckit.intake-series-status.md"
+          },
+          {
+            "localExtension": false,
+            "sha256": "2aa7c1b25e9936fde93cea58b995c5be8e8ab1c3ae74c087e3f780a94eee61b2",
+            "path": "commands/speckit.intake-series-update.md"
+          }
+        ],
+        "enabled": true,
+        "priority": 66,
+        "id": "intake-sequencing-governance",
+        "version": "0.2.4"
+      }
+    ],
+    "readOnlyCheck": "Passed",
+    "configurationChecks": [],
+    "requiredNativeCi": "Pending",
+    "configurationAvailability": "NoProjectConfiguration",
+    "shells": [
+      "Bash",
+      "PowerShell"
+    ],
+    "platform": "macOS"
+  }
+}

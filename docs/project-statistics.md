@@ -23,6 +23,8 @@
 
 ---
 
+| 2026-09-13 | Intake-Lifecycle-Preset-Rollout / Intake lifecycle preset rollout | N/A | N/A | N/A | Vorhandene Authoring-/Review-/Sequencing-Presets auf 0.3.2/0.2.2/0.2.4 aktualisiert; optionale Profile und Dokumentation nachgefuehrt. Pruefnachweise in docs/maintenance/intake-lifecycle-fleet-rollout.json. / Update existing presets and profile references; preserve other presets and project extensions. |
+
 ## Gesamtstand des Repositories / Repository Snapshot
 
 Stand / As of: 2026-08-09 — *Erste Einträge nach dem initialen Arbeitspaket eintragen.*

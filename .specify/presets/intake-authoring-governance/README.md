@@ -55,7 +55,7 @@ and freshness without writing.*
 
 ```bash
 specify preset add \
-  --from https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/archive/refs/tags/v0.3.1.zip \
+  --from https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/archive/refs/tags/v0.3.2.zip \
   --priority 64
 specify preset list
 specify preset info intake-authoring-governance
@@ -324,7 +324,7 @@ beziehungsweise als `NeedsRepair`.
 
 `DirectoryStrict` prueft ein Verzeichnis, das nur aktive Intakes enthaelt.
 `SeriesManifest` bewahrt vorhandene flache oder gemischte Ablagen und verwendet
-die hashgebundene Zielmenge des Serienmanifests als aktiven Bestand. Beide Modi
+die hashgebundene Zielmenge des Serienmanifests getrennt vom physischen aktiven Bestand. Beide Modi
 berechnen Bestandszahlen; handgepflegte Zaehler sind keine Evidence.
 
 *Version 0.3.0 describes requirements collections with schema 2.0.
@@ -407,3 +407,69 @@ The validators grant no authoring, review, implementation, or remote authority.
 ## License
 
 MIT License. See `LICENSE`.
+
+## Abgeschlossene Serien / Completed Series
+
+`Completed`-Mitglieder liegen in der konfigurierten Archivsammlung. Noch
+nicht abgeschlossene Serienmitglieder liegen in der aktiven Sammlung;
+Backlog und History sind keine ausfuehrbaren Serienquellen. Eine laufende
+Serie darf archivierte Vorgaenger enthalten. Eine abgeschlossene Serie
+behaelt ihre Mitglieder und hat null `Eligible`-Ziele (`eligibleCandidate: N/A`).
+
+`activeIntakeCount` zaehlt die physischen passenden Dateien direkt in der
+aktiven Sammlung; das zusaetzliche Feld `activeSeriesTargetCount` zaehlt nur
+aktive Serienmitglieder. `seriesTargetCount` umfasst auch archivierte Mitglieder.
+`SeriesManifest` erlaubt eigenstaendige aktive Intakes ausserhalb der Serie.
+Ein fehlendes leeres Aktivverzeichnis zaehlt dort als null; ein Dateipfad statt
+eines Verzeichnisses bleibt ungueltig. `DirectoryStrict` verlangt das aktive
+Verzeichnis und gleicht dessen Bestand mit den aktiven Serienmitgliedern ab.
+
+Die Pruefung meldet Status-/Ablagewidersprueche als `RIG017`, verschiebt aber
+keine Dateien. Eine Korrektur benoetigt einen eigenen Aenderungsauftrag.
+
+*Completed members belong to the configured archive. Non-completed members
+belong to the active collection; backlog and history are not executable
+sources. Active series may retain archived predecessors. Completed series
+retain all members and expose no eligible candidate. Physical active files,
+active series members, and all series members have separate counts.
+SeriesManifest permits standalone active intakes and an absent empty active
+directory. DirectoryStrict requires that directory and compares its contents
+with active series members. RIG017 reports lifecycle mismatches without moving
+files or granting repair authority.*
+
+Pruefnachweis und Release-Grenzen / Validation and release boundaries: [Lifecycle evidence](docs/completed-series-lifecycle.md).
+
+## Historische Authoring-Receipts / Historical Authoring Receipts
+
+Fehlt der urspruengliche aktive Zielpfad, prueft der Receipt-Validator die
+Konfiguration unter `requirements/intake-governance-config.json` und deren
+Serienmanifest. Genau ein abgeschlossenes Archivziel muss zu Name und
+normalisiertem Hash passen. Ein urspruengliches Standalone-Receipt darf seine
+vollstaendige `N/A`-Serienbindung behalten; eine deklarierte Serienbindung muss
+zum konfigurierten Manifest passen. Fremde Bindungen, mehrere Nachfolger,
+fehlende Dateien und Hashabweichungen werden abgelehnt (`RIG018`). Das Receipt
+und seine historischen Prompts werden nie umgeschrieben. Quellenpruefung und
+alle bisherigen Receipt-Pruefungen bleiben aktiv.
+
+Der interne Resolver `scripts/resolve-intake-archive-target.py` verwendet nur
+die Python-Standardbibliothek. Auch der PowerShell-Receipt-Wrapper benoetigt
+fuer diesen Archivfall `python3`, wie bereits die Konfigurationspruefung.
+Ohne Konfiguration gibt es keine automatische Archivsuche.
+
+*For a missing original active path, receipt validation requires the configured
+manifest and exactly one completed archive successor matching name and normalized
+hash. A historical standalone receipt retains its entirely N/A series binding;
+a declared binding must match the configured series. Invalid lineage or archive
+evidence fails with RIG018. Historical prompts and receipts remain unchanged;
+source and receipt validation still run. The internal resolver uses Python's
+standard library, including when called by PowerShell. Without collection
+configuration, no archive search is attempted.*
+
+Die gleiche eindeutige Archivpruefung gilt fuer fehlende Repository-Dateiquellen
+in historischen Receipts. Der gespeicherte Quellhash muss weiterhin stimmen;
+andere fehlende Quellen bleiben Fehler. `test-intake-authoring-lifecycle.ps1`
+prueft den gueltigen Quellenumzug und eine abweichende Quellhash-Bindung.
+
+*The same unique archive proof applies to missing repository file sources in
+historical receipts. The recorded source hash must still match; other missing
+sources remain errors. Lifecycle tests cover valid source archival and hash drift.*
