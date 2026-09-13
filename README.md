@@ -590,7 +590,7 @@ void TDrawBuffer::putChar(ushort indent, char c);
 ```c++
 ushort TDrawBuffer::moveStr( ushort indent, TStringView str, TColorAttr attr,
                              ushort maxStrWidth = USHRT_MAX, ushort strIndent = 0 ); // New
-ushort TDrawBuffer::moveCStr( ushort indent, TStringView str, TColorAttr attr, 
+ushort TDrawBuffer::moveCStr( ushort indent, TStringView str, TColorAttr attr,
                               ushort maxStrWidth = USHRT_MAX, ushort strIndent = 0 ); // New
 ```
 `str` is handled according to the rules exposed previously, and there are two new parameters:
@@ -1275,3 +1275,11 @@ terminal software. Start with this README, then run
 `cmake -S . -B build -DCMAKE_BUILD_TYPE=Release`, and enable tests only when
 GoogleTest is installed. Technical terms, states, and dependencies must remain
 understandable without a visual-only representation.*
+
+<!-- BEGIN spec-kit-diagrams-completion -->
+## Diagramme und Ergebnisberichte / Diagrams and outcome reports
+
+[Mermaid- und Abschlussbericht-Regeln](docs/spec-kit-diagrams-and-completion-reports.md)
+führen vom neuen Lastenheft zum belegten Feature-Ergebnisbericht. / The linked
+rules explain accessible intake diagrams and evidence-based feature reports.
+<!-- END spec-kit-diagrams-completion -->
