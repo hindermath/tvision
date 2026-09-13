@@ -278,7 +278,7 @@ try {
 
     Write-Utf8Text -Path $TargetPath -Text (New-BlockedIntake)
     $Receipt.target.normalizedSha256 = Get-NormalizedHash $TargetPath
-    Write-Utf8Text -Path $SourcePath -Text 'github_pat_ABCDEFGHIJKLMNOPQRSTUVWXYZ123456'
+    Write-Utf8Text -Path $SourcePath -Text ('github_' + 'pat_' + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456')
     $Receipt.sources[0].normalizedSha256 = Get-NormalizedHash $SourcePath
     Write-Utf8Text -Path $ReceiptPath -Text ($Receipt | ConvertTo-Json -Depth 20)
     Invoke-ReceiptValidators -Receipt $ReceiptPath -Repo $TempRoot -ExpectedExit 2 -Case 'secret source'
