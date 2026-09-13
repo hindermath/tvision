@@ -29,6 +29,7 @@ Change their respective canonical source first, then propagate the result.*
 | `.specify/presets/autonomous-run-governance/tests/test-model-routing.ps1` | `.specify` |
 | `.specify/presets/autonomous-run-governance/tests/test-model-routing.sh` | `.specify` |
 | `.specify/presets/intake-authoring-governance/scripts/resolve-intake-archive-target.py` | `.specify` |
+| `.specify/presets/intake-authoring-governance/scripts/resolve-intake-repository-file.py` | `.specify` |
 | `.specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-artifact.ps1` | `.specify` |
 | `.specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-artifact.sh` | `.specify` |
 | `.specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.ps1` | `.specify` |
@@ -39,6 +40,7 @@ Change their respective canonical source first, then propagate the result.*
 | `.specify/presets/intake-authoring-governance/tests/test-intake-authoring-lifecycle.ps1` | `.specify` |
 | `.specify/presets/intake-authoring-governance/tests/test-intake-authoring-validator.ps1` | `.specify` |
 | `.specify/presets/intake-authoring-governance/tests/test-intake-governance-config.ps1` | `.specify` |
+| `.specify/presets/intake-authoring-governance/tests/test-template-integrity.ps1` | `.specify` |
 | `.specify/presets/intake-review-governance/scripts/validate-intake-governance-config.ps1` | `.specify` |
 | `.specify/presets/intake-review-governance/scripts/validate-intake-governance-config.py` | `.specify` |
 | `.specify/presets/intake-review-governance/scripts/validate-intake-governance-config.sh` | `.specify` |
@@ -58,6 +60,7 @@ Change their respective canonical source first, then propagate the result.*
 | `.specify/presets/intake-sequencing-governance/tests/test-home-baseline-field.ps1` | `.specify` |
 | `.specify/presets/intake-sequencing-governance/tests/test-intake-governance-config.ps1` | `.specify` |
 | `.specify/presets/intake-sequencing-governance/tests/test-intake-sequencing-validator.ps1` | `.specify` |
+| `.specify/presets/intake-sequencing-governance/tests/test-template-integrity.ps1` | `.specify` |
 | `.specify/presets/model-routing-governance/scripts/resolve-model-routing.ps1` | `.specify` |
 | `.specify/presets/model-routing-governance/scripts/resolve-model-routing.sh` | `.specify` |
 | `.specify/presets/model-routing-governance/tests/test-model-routing-discovery.ps1` | `.specify` |
