@@ -1,5 +1,9 @@
+<!-- Mermaid/report Sync Impact 2026-09-13: 1.20.4 -> 1.21.0 (minor: new mandatory governance).
+Added: Mermaid and feature completion reports. Removed: none. Updated: agent guidance, intake profile,
+spec/plan/tasks templates and completion-report-template.md. No deferred placeholders. /
+Neue Pflichten, keine entfernten Regeln; abhaengige Vorlagen synchron gepflegt. -->
 <!--
-Sync Impact Report
+Historical Sync Impact Report (superseded by the 2026-09-13 Mermaid/report amendment)
 Version change: 1.20.3 -> 1.20.4
 Modified principles:
 - Spec Kit preset governance: pin autonomous-run-governance v0.4.4 and require exact staged-candidate validation.
@@ -19,7 +23,7 @@ Follow-up TODOs:
 - None.
 -->
 
-# Constitution v1.20.4
+# Constitution v1.21.0
 
 # home-baseline Constitution
 
@@ -1146,8 +1150,42 @@ Community/catalog coordination is tracked in `github/spec-kit#2362`.
 `.github/copilot-instructions.md` for per-agent operational guidance. This
 constitution is the authoritative policy layer above all agent-specific files.
 
-**Version**: 1.20.4 | **Ratified**: 2026-03-31 | **Last Amended**: 2026-09-12
+**Version**: 1.21.0 | **Ratified**: 2026-03-31 | **Last Amended**: 2026-09-13
 
 <!-- EN: constitution.md placeholder
 [DE-Zusammenfassung: constitution.md beschreibt die Prinzipien und Standards für alle home-baseline Workspaces.]
 -->
+
+<!-- BEGIN spec-kit-diagrams-completion -->
+## Mermaid und Spec-Kit-Abschlussbericht / Mermaid and Spec Kit completion report
+
+Neue Lastenhefte enthalten bei hilfreichen Abläufen, Zuständen oder Abhängigkeiten
+lesbaren Mermaid-Quelltext im Markdown und eine gleichwertige Textalternative.
+Bei einfachen Inhalten die Nichtanwendung kurz begründen. Diagramme bilden die
+verbindlichen Text-/Manifestquellen ab; Farbe allein trägt keine Bedeutung.
+Nach jedem vollständig abgeschlossenen Spec-Kit-Feature-Lauf den vollständigen
+Ergebnisbericht im Chat anzeigen und im Feature-Verzeichnis als
+`completion-report.md` versionieren. Einzelne Planungs-/Status-/Review-Kommandos
+lösen keinen solchen Bericht aus; blockierte oder pausierte Läufe als
+Zwischenbericht kennzeichnen. Vorlage: `.specify/templates/completion-report-template.md`;
+Regel: `docs/spec-kit-diagrams-and-completion-reports.md`.
+Ergebnis, Tests, Dokumentation, Git-gebundene Umfangszahlen, Verlauf und Restpunkte
+belegen. Programmlogik von generierter Evidence, Git-Wandzeit von aktiver
+Arbeitszeit und bestandene von ausgefallenen Prüfungen unterscheiden. Finale
+Merge-/Sync-Evidence im Chat und bestehenden Closeout-Nachweis ergänzen; keine
+zusätzlichen Commits allein für selbstreferenzielle Berichts-/Statistikwerte.
+Diese Projektregel und lokale Vorlagen bei Spec-Kit-Updates erhalten.
+
+*New intakes use readable Mermaid Markdown and equivalent text alternatives for
+useful workflows, states or dependencies; justify omission for simple content.
+Diagrams reflect authoritative text/manifests and never rely on color alone.
+After each completed feature run, show the full outcome report in chat and
+version completion-report.md in the feature directory using the shared template
+and rule above. Individual planning/status/review commands do not trigger it;
+paused/blocked runs receive interim reports. Evidence outcomes, tests, docs,
+Git-bound counts, delivery history and remaining work. Distinguish code from
+volume generated as evidence, elapsed from active time, and passed from failed
+checks. Add final merge/sync proof in chat and existing closeout evidence, without
+commits solely for self-referential counts or IDs. Preserve local rules/templates
+across Spec Kit updates.*
+<!-- END spec-kit-diagrams-completion -->
