@@ -41,6 +41,16 @@ Stand / As of: 2026-08-09 — *Erste Einträge nach dem initialen Arbeitspaket e
 
 ---
 
+### 2026-09-19 - OpenCode-Pfadmigration / OpenCode path migration
+
+41 Befehlsdateien unter `.opencode/command/` vereinheitlicht; Inhalte
+hashgeprüft, Manifestpfade und Ignore-Regeln angepasst. Drei Paritätstests
+bestanden. Documentation Impact: UpdateRequired.
+[Nachweis / Evidence](maintenance/opencode-path-migration-20260919.md).
+
+*Migrated 41 commands to the singular path with hash verification,
+manifest and ignore alignment. Three parity tests passed.*
+
 ## Statistikprofil-1-Archiv / Statistics Profile 1 Archive
 *Wird nach dem ersten dokumentierten Arbeitspaket befüllt.*
 *To be filled after the first documented work package.*

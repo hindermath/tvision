@@ -100,6 +100,12 @@
   and which manual/Thorsten-Solo baseline applies.
 - **Agent guidance parity**: State whether `AGENTS.md`, `CLAUDE.md`,
   `GEMINI.md`, and `.github/copilot-instructions.md` are affected together.
+- **macOS-first platform evidence**: Name the local macOS safe-mode command.
+  If a native Linux or Windows host is unavailable, plan an isolated native
+  Linux container or narrowly scoped native Linux/Windows CI. Bind exact
+  commit, command, runner/platform, exit code, payload SHA-256, decision
+  SHA-256, and zero-write values. State which partial proofs cannot establish
+  a full regression pass.
 - **Documentation Impact**: Select exactly one of `UpdateRequired`,
   `NoUpdateRequired`, `GeneratedUpdate`, or `FollowUp`. Identify source of
   truth, owner, affected documents, generated derivations, validation, and

@@ -97,8 +97,8 @@ scripts/**/*.py[cod]
 
 !.opencode/
 .opencode/*
-!.opencode/commands/
-!.opencode/commands/**
+!.opencode/command/
+!.opencode/command/**
 .opencode/node_modules/
 
 # Created by https://www.toptal.com/developers/gitignore/api/c++,cmake,clion+all,visualstudiocode,visualstudio,ninja,xcode,macos,linux,windows
