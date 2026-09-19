@@ -152,6 +152,12 @@
   re-evaluation trigger.
   `FollowUp` also requires owner, risk, due date, re-evaluation trigger,
   evidence, and scope rationale.
+- **CR-014**: Platform-dependent evidence MUST follow the agent-neutral
+  macOS-first contract: local matching safe mode first; isolated native Linux
+  container or narrowly scoped native Linux CI when no Linux host exists;
+  narrowly scoped native Windows CI when no Windows host exists; exact commit,
+  command, runner/platform, exit code, payload SHA-256, decision SHA-256, and
+  zero-write binding. A partial proof MUST NOT imply a full regression pass.
 
 ### Key Entities *(include if feature involves data)*
 

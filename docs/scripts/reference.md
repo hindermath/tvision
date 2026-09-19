@@ -178,7 +178,7 @@ pwsh -NoProfile -File scripts/maintain-agentic-winget-apps.ps1 -WhatIf  # falls 
 ### `scripts/maintain-agentic-workspace.ps1`
 
 - **Rolle / Role:** oeffentliches Kommando / public command
-- **Kurzbeschreibung / Summary:** Orchestrates repository and agentic toolchain maintenance on Windows.
+- **Kurzbeschreibung / Summary:** Wartet Workspace/Toolchain und führt Stage B sicher aus. / Maintains the workspace/toolchain and safely runs Stage B.
 - **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
 - **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
 
@@ -190,7 +190,7 @@ pwsh -NoProfile -File scripts/maintain-agentic-workspace.ps1 -WhatIf  # falls Su
 ### `scripts/maintain-agentic-workspace.sh`
 
 - **Rolle / Role:** oeffentliches Kommando / public command
-- **Kurzbeschreibung / Summary:** Orchestrate repository and agentic toolchain maintenance on macOS/Linux.
+- **Kurzbeschreibung / Summary:** Wartet Workspace/Toolchain und führt Stage B sicher aus. / Maintains the workspace/toolchain and safely runs Stage B.
 - **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
 - **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
 
@@ -742,7 +742,7 @@ python3 scripts/tests/test_maintenance_tui_wrappers.py --help
 ### `scripts/tests/test_spec_kit_agent_surface_parity.py`
 
 - **Rolle / Role:** oeffentliches Kommando / public command
-- **Kurzbeschreibung / Summary:** Siehe Quelltext und Hilfe. / See source and help.
+- **Kurzbeschreibung / Summary:** The tracked OpenCode contract uses the singular ``command`` path.
 - **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
 - **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
 
