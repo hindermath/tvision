@@ -157,7 +157,8 @@ function ConvertTo-HBMarkdown {
         if ($items.Count -eq 0) { continue }
         $null = $reference.AppendLine("## $($category.titleDe) / $($category.titleEn)")
         $null = $reference.AppendLine()
-        $null = $reference.AppendLine("$($category.purposeDe)  ")
+        $null = $reference.AppendLine("$($category.purposeDe)")
+        $null = $reference.AppendLine()
         $null = $reference.AppendLine("*$($category.purposeEn)*")
         $null = $reference.AppendLine()
         foreach ($item in $items) {

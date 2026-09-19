@@ -1283,3 +1283,13 @@ understandable without a visual-only representation.*
 führen vom neuen Lastenheft zum belegten Feature-Ergebnisbericht. / The linked
 rules explain accessible intake diagrams and evidence-based feature reports.
 <!-- END spec-kit-diagrams-completion -->
+
+### Reproduzierbare Projekttransparenz / Reproducible project transparency
+
+Die [bisherige Projektstatistik](docs/project-statistics.md) bleibt kanonisch.
+Der [getrennte Statistik-Kontext](docs/project-statistics/README.md) dokumentiert
+reproduzierbare Git-Messungen; siehe [Rollout und Abnahme](docs/maintenance/project-statistics-rollout-v010.md).
+Keine Bewertung von Personen, Lernleistung, Sicherheit oder KI-Produktivitaet.
+
+The existing statistics remain authoritative. The separate context documents
+reproducible Git measurements, not personal performance, learning, security or AI productivity.
