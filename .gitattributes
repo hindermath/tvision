@@ -12,3 +12,7 @@ specs/intake-authoring-archive/**/target.md -whitespace
 # gitignore.io macOS requires literal CR bytes for the Finder Icon filename.
 # gitignore.io macOS benoetigt echte CR-Bytes fuer den Finder-Dateinamen Icon.
 .gitignore whitespace=-blank-at-eol
+
+# Byte-bound rollout inputs retain LF also on Windows.
+scripts/config/spec-kit-project-statistics-governance-presets.json text eol=lf
+.specify/presets/secure-development-assurance-governance/** text eol=lf

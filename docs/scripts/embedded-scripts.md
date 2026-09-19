@@ -75,6 +75,15 @@ Change their respective canonical source first, then propagate the result.*
 | `.specify/presets/parallel-autonomous-run-governance/tests/test-consolidation-v2.ps1` | `.specify` |
 | `.specify/presets/parallel-autonomous-run-governance/tests/test-coordinator.ps1` | `.specify` |
 | `.specify/presets/parallel-autonomous-run-governance/tests/test-native-agent-campaigns.ps1` | `.specify` |
+| `.specify/presets/project-statistics-governance/scripts/lib/profile-helpers.ps1` | `.specify` |
+| `.specify/presets/project-statistics-governance/scripts/project-statistics.ps1` | `.specify` |
+| `.specify/presets/project-statistics-governance/scripts/project-statistics.sh` | `.specify` |
+| `.specify/presets/project-statistics-governance/tests/test-installed-preset.ps1` | `.specify` |
+| `.specify/presets/project-statistics-governance/tests/test-project-statistics.ps1` | `.specify` |
+| `.specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.ps1` | `.specify` |
+| `.specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.sh` | `.specify` |
+| `.specify/presets/secure-development-assurance-governance/tests/test-installed-surfaces.ps1` | `.specify` |
+| `.specify/presets/secure-development-assurance-governance/tests/test-secure-development-assurance.ps1` | `.specify` |
 | `.specify/scripts/bash/check-prerequisites.sh` | `.specify` |
 | `.specify/scripts/bash/common.sh` | `.specify` |
 | `.specify/scripts/bash/create-new-feature.sh` | `.specify` |

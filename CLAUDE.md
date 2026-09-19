@@ -295,3 +295,30 @@ checks. Add final merge/sync proof in chat and existing closeout evidence, witho
 commits solely for self-referential counts or IDs. Preserve local rules/templates
 across Spec Kit updates.*
 <!-- END spec-kit-diagrams-completion -->
+
+<!-- project-statistics-rollout:begin -->
+## Statistik-Preset und Pflege / Statistics preset and maintenance
+
+Das aktuelle Projektprofil ist `project-statistics-fourteen-governance-presets`:
+bestehende 12er-Basis plus Assurance v0.1.3 bei Prioritaet 15 und Statistik
+v0.1.0 bei Prioritaet 90. Dieser Projektvertrag hat Vorrang vor alten Profilangaben. Globale Defaults
+bleiben erhalten; die operative lokale Zuordnung folgt erst nach Lieferung.
+`docs/project-statistics/config.json` steuert den getrennten UTC-/52-Wochen-Kontext.
+Profil 2 bleibt kanonisch; Referenzmodelle im neuen Kontext bleiben aus.
+Nach abgeschlossenem Feature/Implementierungsabschnitt Inhalte zuerst committen,
+Update ausdruecklich beauftragen und vorab im Dry-Run pruefen. Beide Statistiken
+aus derselben Inhaltsrevision pflegen, Ausgaben committen und lesend verifizieren.
+Keine Personen-, Lernleistungs-, Qualitaets-, Sicherheits- oder KI-Produktivitaetsbewertung.
+Bedienung: `docs/project-statistics/README.md`; Quellen und Abnahme:
+`docs/maintenance/project-statistics-rollout-v010.md`. Kein automatischer
+Spec-Kit-Lauf und keine Commit-/Push-/Merge- oder menschliche Freigabe durch das Preset.
+
+The current profile adds assurance v0.1.3 at priority 15 and statistics v0.1.0
+at priority 90 to the unchanged twelve-preset base. This overrides older profile guidance. Preserve global defaults and defer operational assignment
+until delivery. Keep legacy Profile 2 authoritative; use the separate UTC context
+with reference models disabled. After feature/implementation completion, commit
+content first, preview an expressly authorized update, render both contexts,
+commit outputs and verify read-only status. Statistics do not rate people,
+learning, quality, security or AI productivity. See the repository-relative
+usage and rollout records. Installation grants no feature or delivery authority.
+<!-- project-statistics-rollout:end -->

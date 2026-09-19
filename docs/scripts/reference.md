@@ -5,11 +5,12 @@
 > Generated from `scripts/config/script-catalog.json` and the Git index. Do not edit manually.
 
 Stand / Updated: 2026-07-28
-Kanonische Skriptdateien / Canonical script files: 131
+Kanonische Skriptdateien / Canonical script files: 132
 
 ## Workspace-Lebenszyklus / Workspace lifecycle
 
-Erstellt, migriert, synchronisiert oder entfernt verwaltete Arbeitsumgebungen.  
+Erstellt, migriert, synchronisiert oder entfernt verwaltete Arbeitsumgebungen.
+
 *Creates, migrates, synchronizes, or removes managed workspaces.*
 
 ### `scripts/bootstrap-project.ps1`
@@ -134,7 +135,8 @@ bash scripts/teardown-workspace.sh --dry-run  # falls angeboten / when supported
 
 ## Wartung und Toolchain / Maintenance and toolchain
 
-Prueft und wartet die plattformgerechte Entwicklungs- und Agenten-Toolchain.  
+Prueft und wartet die plattformgerechte Entwicklungs- und Agenten-Toolchain.
+
 *Checks and maintains the platform-specific development and agent toolchain.*
 
 ### `scripts/invoke-psscriptanalyzer.ps1`
@@ -259,7 +261,8 @@ bash scripts/propagate-agentic-toolchain-maintenance.sh --dry-run  # falls angeb
 
 ## Governance und Spec Kit / Governance and Spec Kit
 
-Installiert und prueft Spec-Kit-, Constitution- und Repository-Governance.  
+Installiert und prueft Spec-Kit-, Constitution- und Repository-Governance.
+
 *Installs and checks Spec Kit, constitution, and repository governance.*
 
 ### `scripts/check-gsdb-self-assessment.ps1`
@@ -408,7 +411,8 @@ bash scripts/update-spec-kit.sh --dry-run  # falls angeboten / when supported
 
 ## Sicherheit und Audit / Security and audit
 
-Prueft Geheimnisse, Agentenaenderungen und sichere Entwicklungsartefakte.  
+Prueft Geheimnisse, Agentenaenderungen und sichere Entwicklungsartefakte.
+
 *Checks secrets, agent changes, and secure-development artifacts.*
 
 ### `scripts/audit-agent-changes.ps1`
@@ -557,7 +561,8 @@ bash scripts/scan-agent-secrets.sh --dry-run  # falls angeboten / when supported
 
 ## Qualitaetspruefungen / Quality checks
 
-Fuehrt reproduzierbare Repository-, Paket- und Git-Hook-Pruefungen aus.  
+Fuehrt reproduzierbare Repository-, Paket- und Git-Hook-Pruefungen aus.
+
 *Runs reproducible repository, package, and Git-hook checks.*
 
 ### `scripts/check-homogeneity.ps1`
@@ -780,7 +785,8 @@ python3 scripts/tests/test_workspace_storage_maintenance.py --help
 
 ## Statistik / Statistics
 
-Initialisiert, rendert und testet das ASCII-Statistikprofil.  
+Initialisiert, rendert und testet das ASCII-Statistikprofil.
+
 *Initializes, renders, and tests the ASCII statistics profile.*
 
 ### `scripts/init-stats.ps1`
@@ -805,6 +811,18 @@ pwsh -NoProfile -File scripts/init-stats.ps1 -WhatIf  # falls SupportsShouldProc
 ```text
 bash scripts/init-stats.sh --help
 bash scripts/init-stats.sh --dry-run  # falls angeboten / when supported
+```
+
+### `scripts/prove-project-statistics-context.ps1`
+
+- **Rolle / Role:** oeffentliches Kommando / public command
+- **Kurzbeschreibung / Summary:** Prueft den gelieferten Statistik-Kontext / Verifies the delivered statistics context.
+- **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
+- **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
+
+```text
+Get-Help ./scripts/prove-project-statistics-context.ps1 -Full
+pwsh -NoProfile -File scripts/prove-project-statistics-context.ps1 -WhatIf  # falls SupportsShouldProcess angeboten wird / when supported
 ```
 
 ### `scripts/render-project-statistics.ps1`
@@ -845,7 +863,8 @@ pwsh -NoProfile -File scripts/test-render-project-statistics.ps1 -WhatIf  # fall
 
 ## Lernreihen / Learning series
 
-Prueft, paketiert und pflegt bilinguale Lernreihenartefakte.  
+Prueft, paketiert und pflegt bilinguale Lernreihenartefakte.
+
 *Checks, packages, and maintains bilingual learning-series artifacts.*
 
 ### `scripts/package-learning-series.ps1`
@@ -946,7 +965,8 @@ bash scripts/rename-lastenheft.sh --dry-run  # falls angeboten / when supported
 
 ## Agenten-Einrichtung / Agent setup
 
-Erzeugt sichere, plattformgerechte lokale Einstellungen fuer KI-Agenten.  
+Erzeugt sichere, plattformgerechte lokale Einstellungen fuer KI-Agenten.
+
 *Creates secure, platform-appropriate local settings for AI agents.*
 
 ### `scripts/setup-antigravity-settings.ps1`
@@ -1047,7 +1067,8 @@ bash scripts/setup-copilot-settings.sh --dry-run  # falls angeboten / when suppo
 
 ## Git und Hosting / Git and hosting
 
-Konfiguriert Git-Identitaet und Hosting-spezifische Release-Automation.  
+Konfiguriert Git-Identitaet und Hosting-spezifische Release-Automation.
+
 *Configures Git identity and hosting-specific release automation.*
 
 ### `scripts/setup-git-identity.ps1`
@@ -1100,7 +1121,8 @@ bash scripts/setup-gitlab-release.sh --dry-run  # falls angeboten / when support
 
 ## Plattformtests / Platform tests
 
-Fuehrt den dokumentierten Plattformtest aus und publiziert dessen Ergebnis.  
+Fuehrt den dokumentierten Plattformtest aus und publiziert dessen Ergebnis.
+
 *Runs the documented platform test and publishes its result.*
 
 ### `scripts/linux-test.sh`
@@ -1141,7 +1163,8 @@ pwsh -NoProfile -File scripts/windows-test.ps1 -WhatIf  # falls SupportsShouldPr
 
 ## Interne Bibliotheken / Internal libraries
 
-Stellt wiederverwendbare interne Funktionen fuer die oeffentlichen Skripte bereit.  
+Stellt wiederverwendbare interne Funktionen fuer die oeffentlichen Skripte bereit.
+
 *Provides reusable internal functions for public scripts.*
 
 ### `scripts/lib/agentic_workspace_fleet.py`
@@ -1494,7 +1517,8 @@ Do not invoke directly; it is loaded by public scripts.
 
 ## Ausfuehrbare Vorlagen / Executable templates
 
-Dient als ausfuehrbare Vorlage, die durch Setup-Werkzeuge installiert wird.  
+Dient als ausfuehrbare Vorlage, die durch Setup-Werkzeuge installiert wird.
+
 *Acts as an executable template installed by setup tools.*
 
 ### `scripts/templates/antigravity-statusline.ps1`
@@ -1523,7 +1547,8 @@ Do not invoke directly; it is loaded by public scripts.
 
 ## Level-0-Quellmigration / Level 0 source migration
 
-Prueft und migriert den dauerhaften Level-0-Checkout ohne Verlust lokaler Konfiguration.  
+Prueft und migriert den dauerhaften Level-0-Checkout ohne Verlust lokaler Konfiguration.
+
 *Checks and migrates the permanent Level 0 checkout without losing local configuration.*
 
 ### `scripts/migrate-level0-source-checkout.ps1`
@@ -1552,7 +1577,8 @@ bash scripts/migrate-level0-source-checkout.sh --dry-run  # falls angeboten / wh
 
 ## Skriptdokumentation / Script documentation
 
-Validiert den Skriptbestand und erzeugt die zentrale Referenz.  
+Validiert den Skriptbestand und erzeugt die zentrale Referenz.
+
 *Validates the script inventory and renders the central reference.*
 
 ### `scripts/render-script-reference.ps1`

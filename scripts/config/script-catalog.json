@@ -48,7 +48,7 @@
       "id": "statistics",
       "titleDe": "Statistik",
       "titleEn": "Statistics",
-      "patterns": ["init-stats.*", "render-project-statistics.*", "test-render-project-statistics.ps1"],
+      "patterns": ["init-stats.*", "render-project-statistics.*", "test-render-project-statistics.ps1", "prove-project-statistics-context.ps1"],
       "purposeDe": "Initialisiert, rendert und testet das ASCII-Statistikprofil.",
       "purposeEn": "Initializes, renders, and tests the ASCII statistics profile."
     },
