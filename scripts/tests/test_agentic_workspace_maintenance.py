@@ -486,12 +486,15 @@ class AgenticWorkspaceMaintenanceTests(unittest.TestCase):
         for prohibited in (
             'run_git(repository, "commit"',
             'run_git(repository, "push"',
-            'run_git(repository, "merge"',
             'run_git(repository, "checkout"',
             'run_git(repository, "switch"',
             '"pr", "create"',
         ):
             self.assertNotIn(prohibited, engine)
+        # Local fast-forward applies an already fetched immutable commit;
+        # ordinary merges and provider delivery remain outside maintenance.
+        merge_calls = [line.strip() for line in engine.splitlines() if 'run_git(repository, "merge"' in line]
+        self.assertEqual(merge_calls, ['result = run_git(repository, "merge", "--ff-only", expected, check=False)'])
         bash = (REPOSITORY / "scripts" / "maintain-agentic-workspace.sh").read_text(
             encoding="utf-8"
         )
