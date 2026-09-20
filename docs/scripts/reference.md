@@ -1469,7 +1469,7 @@ Do not invoke directly; it is loaded by public scripts.
 ### `scripts/lib/maintenance_container_worker.py`
 
 - **Rolle / Role:** intern oder installiert / internal or installed
-- **Kurzbeschreibung / Summary:** The temporary registry is always writable; only an approved
+- **Kurzbeschreibung / Summary:** The leaf worker is a dedicated, single-threaded process. Its children
 - **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
 - **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
 
