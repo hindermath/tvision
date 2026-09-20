@@ -731,7 +731,7 @@ python3 scripts/tests/test_maintenance_contracts.py --help
 ### `scripts/tests/test_maintenance_execution_context.py`
 
 - **Rolle / Role:** oeffentliches Kommando / public command
-- **Kurzbeschreibung / Summary:** Siehe Quelltext und Hilfe. / See source and help.
+- **Kurzbeschreibung / Summary:** Consumer packages deliberately omit the Level-0 orchestration manifest and
 - **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
 - **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
 
