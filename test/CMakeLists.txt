@@ -3,7 +3,8 @@ if (TV_BUILD_TESTS)
 
     add_executable(${PROJECT_NAME}-test ${TEST_SRC})
 
-    target_compile_features(${PROJECT_NAME}-test PRIVATE cxx_std_14)
+    # Latest versions of GoogleTest require at least C++17.
+    target_compile_features(${PROJECT_NAME}-test PRIVATE cxx_std_17)
     target_include_directories(${PROJECT_NAME}-test PRIVATE "${CMAKE_CURRENT_LIST_DIR}")
 
     tv_add_private_includes(${PROJECT_NAME}-test)
