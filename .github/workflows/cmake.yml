@@ -113,7 +113,7 @@ jobs:
       run: cmake --build . --config Debug --target tvision -- -p:UseMultiToolTask=true -p:CL_MPcount=$(nproc)
 
     - name: Upload Examples
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v7.0.2
       with:
         name: examples-x86
         path: |
@@ -122,7 +122,7 @@ jobs:
           Release/tvhc.exe
 
     - name: Upload Library
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v7.0.2
       with:
         name: library-x86
         path: |
@@ -155,7 +155,7 @@ jobs:
       run: cmake --build . --config Debug --target tvision -- -p:UseMultiToolTask=true -p:CL_MPcount=$(nproc)
 
     - name: Upload Examples
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v7.0.2
       with:
         name: examples-x64
         path: |
@@ -164,7 +164,7 @@ jobs:
           Release/tvhc.exe
 
     - name: Upload Library
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v7.0.2
       with:
         name: library-x64
         path: |
@@ -212,7 +212,7 @@ jobs:
         /c/bc45/bin/make.exe -DDOS32
 
     - name: Upload Examples
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v7.0.2
       with:
         name: examples-dpmi32
         path: |
@@ -221,7 +221,7 @@ jobs:
           examples/tvhc/tvhc.EXE
 
     - name: Upload Library
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v7.0.2
       with:
         name: library-dpmi32
         path: |
@@ -263,7 +263,7 @@ jobs:
         dosemu -n -t -ks -f dosemu.conf --Fdrive_c "$PWD" -E 'C:\run.bat'
 
     - name: Upload Examples
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v7.0.2
       with:
         name: examples-dos
         path: |
@@ -272,7 +272,7 @@ jobs:
           examples/tvhc/tvhc.exe
 
     - name: Upload Library
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@v7.0.2
       with:
         name: library-dos
         path: |
