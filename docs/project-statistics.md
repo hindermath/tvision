@@ -130,6 +130,26 @@ that work package.*
 - Distribution und Home-Sync / Distribution and home sync: repository-spezifische `sourceOnly`-Artefakte; kein Home-Sync, keine Toolchain- oder Binaerdistribution.
 - Re-Evaluation / Re-evaluation: beim Abschluss der aktiven Beispiel-/Dokumentationsserie, Drift offizieller Open-Watcom-Snapshots oder ausdruecklichem Auftrag fuer Review beziehungsweise operative Sequenzierung.
 
+### 2026-11-03 - Dependabot-Wartung / Dependabot maintenance
+
+DE: Branch `codex/dependabot-maintenance-20261103`, Arbeitsfenster 2026-11-03.
+Repository-spezifische Versions-/Sicherheitsgruppen und zweisprachige
+Wartungshinweise ergaenzt. Kein Produktions- oder Testcode geaendert;
+Konfigurations-/Dokumentationsumfang ist im PR-Diff belegt. Profil 2 wird
+aus der committed Inhaltsrevision gerendert; bestehende Referenzen bleiben.
+YAML/Schema, Manifestabdeckung, Policy, Dokumentation, Liefermenge und
+Secret-Scan bestanden. Hosted-Checks werden am PR verfolgt. Keine Pakete
+aktualisiert; Git-basierte Statistik misst keine KI-Zeitersparnis.
+
+EN: Branch `codex/dependabot-maintenance-20261103`, work window 2026-11-03.
+Adds repository-specific version/security groups and bilingual maintenance
+guidance. No production or test code changed; the PR diff records the exact
+configuration/documentation scope. Profile 2 is rendered from the committed
+content revision with existing references. YAML/schema, manifest coverage,
+policy, documentation, delivery scope and secret scan passed. Hosted checks
+are tracked on the PR. No packages updated; Git statistics do not measure
+AI time savings.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
@@ -140,27 +160,27 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 239550 lines |
-| Textdateien / Text files | 1399 |
-| Beobachtbarer Zeitraum / Observable period | 2025-11-09..2026-11-01 |
-| Aktivtage / Active days | 35 |
-| Relevante Commits / Relevant commits | 91 |
-| Zeilen je Aktivtag / Lines per active day | 6844.3 |
+| Textbasis / Text base | 239676 lines |
+| Textdateien / Text files | 1402 |
+| Beobachtbarer Zeitraum / Observable period | 2025-11-09..2026-11-03 |
+| Aktivtage / Active days | 36 |
+| Relevante Commits / Relevant commits | 93 |
+| Zeilen je Aktivtag / Lines per active day | 6657.7 |
 | Peak-Tag im Fenster / Peak day in window | 2026-08-09 / 133528 |
 | Peak-Woche im Fenster / Peak week in window | 2026-08-09 / 153139 |
 | Laengste Serie / Longest streak | 9 days |
-| Speedup vs. 80 lines/day | 85.6x |
-| Speedup vs. 80 lines/day | 85.6x |
-| Methodik / Methodology | v2; source `b5fc1e50dcc2` |
+| Speedup vs. 80 lines/day | 83.2x |
+| Speedup vs. 80 lines/day | 83.2x |
+| Methodik / Methodology | v2; source `ebb48b7de71b` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#####...............]  25.3% | 60539
 Tests                           [#...................]   4.6% | 11047
-Dokumentation / Documentation   [#########...........]  45.8% | 109620
+Dokumentation / Documentation   [#########...........]  45.8% | 109679
 Skripte / Scripts               [####................]  19.9% | 47576
-Konfiguration / Configuration   [#...................]   3.4% | 8034
+Konfiguration / Configuration   [#...................]   3.4% | 8101
 Daten und Medien / Data and media [....................]   0.0% | 0
 Sonstiger Text / Other text     [#...................]   1.1% | 2734
 ```
@@ -185,8 +205,8 @@ Sa/Sa  0 0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
 ```text
 Wochen / Weeks 27..52 | 2026-05-10..2026-11-07
 So/Su  2 0 0 0 0 0 0 0 0 0 0 0 0 4 4 0 0 0 4 4 0 0 0 0 0 0
-Mo/Mo  0 0 0 0 0 0 0 0 4 0 0 0 0 2 3 0 0 0 0 0 0 0 0 0 0 -
-Di/Tu  1 0 0 0 0 0 0 0 0 0 0 0 0 4 0 0 2 0 0 0 0 0 0 0 0 -
+Mo/Mo  0 0 0 0 0 0 0 0 4 0 0 0 0 2 3 0 0 0 0 0 0 0 0 0 0 0
+Di/Tu  1 0 0 0 0 0 0 0 0 0 0 0 0 4 0 0 2 0 0 0 0 0 0 0 0 2
 Mi/We  0 0 0 0 0 0 0 0 0 0 0 0 0 4 2 2 0 0 0 0 0 0 0 0 0 -
 Do/Th  0 0 0 0 0 0 0 0 0 0 0 0 0 4 1 1 0 0 2 0 0 0 0 0 0 -
 Fr/Fr  0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 1 0 0 1 0 0 0 -
@@ -274,8 +294,8 @@ Es liegen keine belastbaren Phasendaten vor. Deshalb zeigt dieses Diagramm Monat
 
 ```text
 Scale: 0..100x
-80 lines/day       [#################...] 85.6x
-80 lines/day       [#################...] 85.6x
+80 lines/day       [#################...] 83.2x
+80 lines/day       [#################...] 83.2x
 ```
 
 Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen Referenzen. Sie messen keine Arbeitszeit.
@@ -288,7 +308,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..10000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 80
-Visible repository [##############......] 6844.3
+Visible repository [#############.......] 6657.7
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -297,9 +317,9 @@ Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schre
 
 ### Textalternative / Text Alternative
 
-DE: Das Fenster beginnt am 2025-11-09 und endet am 2026-11-01. Es enthaelt 35 aktive und 323 inaktive vergangene Tage. Peak-Tag: 2026-08-09 / 133528. Peak-Woche: 2026-08-09 / 153139. Laengste Serie: 9 Tage (2026-08-09..2026-08-17).
+DE: Das Fenster beginnt am 2025-11-09 und endet am 2026-11-03. Es enthaelt 36 aktive und 324 inaktive vergangene Tage. Peak-Tag: 2026-08-09 / 133528. Peak-Woche: 2026-08-09 / 153139. Laengste Serie: 9 Tage (2026-08-09..2026-08-17).
 
-*EN: The window starts on 2025-11-09 and ends on 2026-11-01. It contains 35 active and 323 inactive elapsed days. Peak day: 2026-08-09 / 133528. Peak week: 2026-08-09 / 153139. Longest streak: 9 days (2026-08-09..2026-08-17).*
+*EN: The window starts on 2025-11-09 and ends on 2026-11-03. It contains 36 active and 324 inactive elapsed days. Peak day: 2026-08-09 / 133528. Peak week: 2026-08-09 / 153139. Longest streak: 9 days (2026-08-09..2026-08-17).*
 
 | Monat / Month | Geaenderte Textzeilen / Changed text lines |
 |---|---:|
@@ -314,6 +334,6 @@ DE: Das Fenster beginnt am 2025-11-09 und endet am 2026-11-01. Es enthaelt 35 ak
 | 2026-08 | 157441 |
 | 2026-09 | 21068 |
 | 2026-10 | 8 |
-| 2026-11 | 0 |
+| 2026-11 | 130 |
 
 <!-- project-statistics-v2:end -->
