@@ -57,3 +57,18 @@ Nachweis / evidence: YAML round-trip, Dependabot schema and manifest coverage ch
 hosted checks are recorded on the configuration PR before merge.
 Risiko / risk: update proposals still require compatibility and security review.
 Neu pruefen bei / reevaluate on: new manifests, moved paths, changed pins or maintenance ownership.
+
+## PR #31: technische Wartung / Technical maintenance
+
+DE: Die fuer diesen Abhaengigkeits-PR erforderlichen CI-/Test-Anpassungen
+erhalten Versionsbindung, Sicherheitspruefungen und Plattform-Gates. Die
+konkrete Reparatur und technische Evidence stehen im PR; keine Paketmigration
+aus einem anderen zurueckgestellten PR wird uebernommen. Owner: Repository-
+Maintainer. Source-only, kein Home-Sync. Bei Manifest-, Pin- oder Workflow-
+Aenderungen erneut pruefen.
+
+EN: CI/test repairs needed for this dependency PR retain version binding,
+security checks and platform gates. The PR records the specific repair and
+technical evidence; it does not adopt a migration from another deferred PR.
+Owner: repository maintainer. Source-only, no Home sync. Re-evaluate after
+manifest, pin or workflow changes.
