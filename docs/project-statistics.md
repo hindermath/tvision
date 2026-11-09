@@ -150,6 +150,22 @@ policy, documentation, delivery scope and secret scan passed. Hosted checks
 are tracked on the PR. No packages updated; Git statistics do not measure
 AI time savings.
 
+### 2026-11-09 - Dependabot PR #31 / Dependabot maintenance
+
+DE: Branch codex/dependabot-repair-20261109-tvision--31; sichtbares Wartungsfenster 09.11.2026, keine
+Stoppuhrmessung. chore(deps): bump astral-sh/setup-uv from 6.8.0 to 10.3.3. Dokumentationsentscheidung: UpdateRequired
+fuer die technische Aenderung; GeneratedUpdate fuer beide vorhandenen
+Statistikprofile. Bestehende Referenzwerte bleiben erhalten. Die beobachtete
+Liefermenge ist keine Messung von Lernleistung oder KI-Zeitersparnis.
+Aktuelle Head-/Plattform-Pruefungen sind vor dem Merge erforderlich.
+Owner: Repository-Maintainer; Source-only, kein Home-Sync.
+
+EN: Branch codex/dependabot-repair-20261109-tvision--31; observable maintenance window 9 November 2026,
+not stopwatch time. chore(deps): bump astral-sh/setup-uv from 6.8.0 to 10.3.3. Documentation impact: UpdateRequired for
+the technical change; GeneratedUpdate for the existing statistics profiles.
+Existing references remain unchanged. Delivery volume is not a measurement
+of learning outcomes or AI time savings. Current head/platform checks are
+required before merge. Owner: repository maintainer; source-only, no Home sync.
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
