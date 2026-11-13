@@ -38,6 +38,18 @@
       "path": "scripts/check-homogeneity.ps1",
       "reason": "Preserve the existing project-specific memory-patch adapter, which invokes the tracked-only, target-only-commit helper. Canonical shell copies must not replace this previously delivered security boundary.",
       "evidence": "https://github.com/hindermath/agent-operations-cockpit/blob/21efd0733a8f34b02974e709191d0cc381d8dd5d/scripts/check-homogeneity.ps1"
+    },
+    {
+      "repositoryPath": "RiderProjects/TinyPl0",
+      "path": "scripts/maintain-agentic-brew-apps.sh",
+      "reason": "Preserve TinyPl0 explicit opt-in for alternate executable registries; the delivered project authority gate must not be replaced by generic maintenance copies.",
+      "evidence": "https://github.com/hindermath/TinyPl0/blob/2eb2c8d7a26eb27d4ffac99e137db6ba885fb614/scripts/maintain-agentic-brew-apps.sh"
+    },
+    {
+      "repositoryPath": "RiderProjects/TinyPl0",
+      "path": "scripts/maintain-agentic-winget-apps.ps1",
+      "reason": "Preserve TinyPl0 explicit opt-in for alternate executable registries; the delivered project authority gate must not be replaced by generic maintenance copies.",
+      "evidence": "https://github.com/hindermath/TinyPl0/blob/2eb2c8d7a26eb27d4ffac99e137db6ba885fb614/scripts/maintain-agentic-winget-apps.ps1"
     }
   ],
   "files": [

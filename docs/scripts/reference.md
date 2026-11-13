@@ -5,7 +5,7 @@
 > Generated from `scripts/config/script-catalog.json` and the Git index. Do not edit manually.
 
 Stand / Updated: 2026-07-28
-Kanonische Skriptdateien / Canonical script files: 135
+Kanonische Skriptdateien / Canonical script files: 142
 
 ## Workspace-Lebenszyklus / Workspace lifecycle
 
@@ -264,6 +264,30 @@ bash scripts/propagate-agentic-toolchain-maintenance.sh --dry-run  # falls angeb
 Installiert und prueft Spec-Kit-, Constitution- und Repository-Governance.
 
 *Installs and checks Spec Kit, constitution, and repository governance.*
+
+### `scripts/adapters/invoke-harness-with-result.ps1`
+
+- **Rolle / Role:** oeffentliches Kommando / public command
+- **Kurzbeschreibung / Summary:** Runs a harness and persists its structured standard output atomically.
+- **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
+- **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
+
+```text
+Get-Help ./scripts/adapters/invoke-harness-with-result.ps1 -Full
+pwsh -NoProfile -File scripts/adapters/invoke-harness-with-result.ps1 -WhatIf  # falls SupportsShouldProcess angeboten wird / when supported
+```
+
+### `scripts/adapters/new-harnesses.ps1`
+
+- **Rolle / Role:** oeffentliches Kommando / public command
+- **Kurzbeschreibung / Summary:** DE: Additive Modelladapter. EN: Additive model adapters.
+- **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
+- **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
+
+```text
+Get-Help ./scripts/adapters/new-harnesses.ps1 -Full
+pwsh -NoProfile -File scripts/adapters/new-harnesses.ps1 -WhatIf  # falls SupportsShouldProcess angeboten wird / when supported
+```
 
 ### `scripts/check-gsdb-self-assessment.ps1`
 
@@ -739,6 +763,17 @@ python3 scripts/tests/test_maintenance_contracts.py --help
 python3 scripts/tests/test_maintenance_execution_context.py --help
 ```
 
+### `scripts/tests/test_maintenance_git_bundle.py`
+
+- **Rolle / Role:** oeffentliches Kommando / public command
+- **Kurzbeschreibung / Summary:** Siehe Quelltext und Hilfe. / See source and help.
+- **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
+- **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
+
+```text
+python3 scripts/tests/test_maintenance_git_bundle.py --help
+```
+
 ### `scripts/tests/test_maintenance_tui_wrappers.py`
 
 - **Rolle / Role:** oeffentliches Kommando / public command
@@ -750,10 +785,21 @@ python3 scripts/tests/test_maintenance_execution_context.py --help
 python3 scripts/tests/test_maintenance_tui_wrappers.py --help
 ```
 
+### `scripts/tests/test_msl_toolchains.py`
+
+- **Rolle / Role:** oeffentliches Kommando / public command
+- **Kurzbeschreibung / Summary:** Siehe Quelltext und Hilfe. / See source and help.
+- **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
+- **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
+
+```text
+python3 scripts/tests/test_msl_toolchains.py --help
+```
+
 ### `scripts/tests/test_spec_kit_agent_surface_parity.py`
 
 - **Rolle / Role:** oeffentliches Kommando / public command
-- **Kurzbeschreibung / Summary:** The tracked OpenCode contract uses the singular ``command`` path.
+- **Kurzbeschreibung / Summary:** DE: Prueft Release-Quellen, hashgebundene Installation und Agentenparitaet.
 - **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
 - **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
 
@@ -792,6 +838,18 @@ python3 scripts/tests/test_windows_maintenance_hardening.py --help
 
 ```text
 python3 scripts/tests/test_workspace_storage_maintenance.py --help
+```
+
+### `scripts/tests/test-model-routing-installation.ps1`
+
+- **Rolle / Role:** oeffentliches Kommando / public command
+- **Kurzbeschreibung / Summary:** DE: Installiertes Model Routing und Root-Einstiege pruefen.
+- **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
+- **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
+
+```text
+Get-Help ./scripts/tests/test-model-routing-installation.ps1 -Full
+pwsh -NoProfile -File scripts/tests/test-model-routing-installation.ps1 -WhatIf  # falls SupportsShouldProcess angeboten wird / when supported
 ```
 
 ## Statistik / Statistics
@@ -1454,6 +1512,18 @@ Nicht direkt aufrufen; wird von oeffentlichen Skripten geladen.
 Do not invoke directly; it is loaded by public scripts.
 ```
 
+### `scripts/lib/invoke-msl-toolchains.ps1`
+
+- **Rolle / Role:** intern oder installiert / internal or installed
+- **Kurzbeschreibung / Summary:** Interner MSL-Treiber fuer beide Paketpfleger.
+- **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
+- **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
+
+```text
+Nicht direkt aufrufen; wird von oeffentlichen Skripten geladen.
+Do not invoke directly; it is loaded by public scripts.
+```
+
 ### `scripts/lib/linux-maintenance-hardening.py`
 
 - **Rolle / Role:** intern oder installiert / internal or installed
@@ -1482,6 +1552,18 @@ Do not invoke directly; it is loaded by public scripts.
 
 - **Rolle / Role:** intern oder installiert / internal or installed
 - **Kurzbeschreibung / Summary:** Siehe Quelltext und Hilfe. / See source and help.
+- **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
+- **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
+
+```text
+Nicht direkt aufrufen; wird von oeffentlichen Skripten geladen.
+Do not invoke directly; it is loaded by public scripts.
+```
+
+### `scripts/lib/maintenance_git_bundle.py`
+
+- **Rolle / Role:** intern oder installiert / internal or installed
+- **Kurzbeschreibung / Summary:** Derive the allowlist from the reviewed fleet, not from remote.get-url.
 - **Voraussetzungen / Prerequisites:** passende Shell; weitere Anforderungen stehen in `--help` oder `Get-Help`.
 - **Nebenwirkungen / Side effects:** zuerst Check-, Dry-Run- oder WhatIf-Modus verwenden, sofern angeboten.
 
