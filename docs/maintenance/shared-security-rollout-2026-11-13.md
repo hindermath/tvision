@@ -1,0 +1,130 @@
+# Gemeinsame Sicherheitswartung / Shared security maintenance
+
+## Deutsch
+
+Dieses Repository erhaelt die vierzehn bereits installierten Presets als neue, unveraenderlich veroeffentlichte Patch-Versionen. Preset-IDs, Prioritaeten, Projekt-Templates, Produktcode und bestehende Lifecycle-Zustaende bleiben erhalten. Die [Quellenbindung](preset-source-lock.json) enthaelt echte Tags, Commits und ZIP-SHA-256-Werte; die [Installationsbindung](preset-installed-lock.json) bindet den tatsaechlichen lokalen Payload. Installation startet keine Spec-Kit-Features oder Modellaufrufe.
+
+Die kanonische Level-0-Integration ist [Home Baseline PR 373](https://github.com/hindermath/home-baseline/pull/373); die gemeinsame Berechtigungskorrektur ist [PR 372](https://github.com/hindermath/home-baseline/pull/372). Nur die beauftragten neun Level-2-Ziele erhalten diesen Rollout. Keine Level-1-Verteilung, neue Risikoakzeptanz oder automatische Alert-Verwerfung.
+
+Die vorhandenen gemeinsamen Workflows erhalten explizit lesenden Repository-Zugriff. Wo gitleaks-action bereits PR-Reviewkommentare erzeugt, bleibt dafuer nur das Recht `pull-requests: write` im betreffenden Job erhalten. Das erlaubt keine Schreibzugriffe auf Repository-Inhalte. Bestehende Projekt-Workflows ausserhalb dieser gemeinsamen Komponenten bleiben getrennt zu bewerten.
+
+## English
+
+This repository receives new immutable patch releases for its fourteen already installed presets. Preset IDs, priorities, project templates, product code and lifecycle states remain. The [source binding](preset-source-lock.json) records real tags, commits and ZIP SHA-256 values; the separate [installed binding](preset-installed-lock.json) records the actual payload. Installation starts no Spec Kit features or model calls.
+
+Canonical Level-0 integration is [Home Baseline PR 373](https://github.com/hindermath/home-baseline/pull/373); [PR 372](https://github.com/hindermath/home-baseline/pull/372) provides the shared permission correction. Only the nine authorised Level-2 targets receive this rollout. No Level-1 distribution, new risk acceptance or automatic alert dismissal.
+
+Shared workflows receive explicit read-only repository access. Existing gitleaks-action PR review comments retain only job-scoped `pull-requests: write`, without repository content writes. Project-specific workflows outside these common components require separate assessment.
+
+## Geaenderte gemeinsame Workflows / Changed shared workflows
+
+- `.github/workflows/homogeneity-check.yml`
+
+## Pruefgrenzen / Validation boundaries
+
+DE: Der Worktree bleibt waehrend der Pruefung unveraendert; Inhalte bleiben nicht vertrauenswuerdig. Die bestehende CLI-Resolver-/Registrar-API stellt die drei vorhandenen Claude-Wrapper aus dem vollstaendigen Stack wieder her; OpenCode-Namespace und Modelleinstellungen bleiben erhalten. CodeQL-Erfolg bedeutet keine Befundfreiheit und deckt Bash, PowerShell oder Assembly nicht ab. Keine praktische Screenreader-/Braille-Abnahme oder pauschale WCAG-Konformitaet behauptet.
+
+EN: The worktree stays unchanged during checks; its contents remain untrusted. Existing CLI resolver/registrar APIs restore the three existing Claude wrappers from the complete stack; the OpenCode namespace and model settings remain. CodeQL success is no finding-free claim and does not cover Bash, PowerShell or Assembly. No practical screen-reader/Braille acceptance or blanket WCAG conformance is claimed.
+
+Documentation Impact: UpdateRequired. Owner: Thorsten Hindermann. Audience: maintainers and security reviewers. Reader path: this record -> source and installed locks -> source PRs and native/CodeQL evidence. Canonical sources: published preset repositories and Level-0 managed-file manifest. Document class: active semantic/security evidence; German first, equivalent English; CEFR B2 and applicable WCAG 2.2 AA. Distribution: this repository only; no local Home sync. Re-evaluate after archive, version, permission or generated-surface drift.
+
+### Integrationsnachweis / Integration evidence
+
+Die aktuelle Paketpruefung verwendet einen neuen Installationsnachweis fuer den veroeffentlichten Stand; der alte v0.1.0-Nachweis bleibt unveraendert. Verteilte Wartungstests werden an ihre vorhandenen kanonischen Quellen angeglichen. Die Vorschau prueft Schreibfreiheit; der getrennte Schreibtest verwirft weiterhin Pfad-Ausbrueche.
+
+The current package proof uses a successor installation receipt for the published version; the historical v0.1.0 receipt is unchanged. Distributed maintenance tests follow their existing canonical sources. Preview checks that no writes occur; the separate writing test still rejects path escapes.
+
+DE: Zwei neu hinzugekommene Tests der zentralen Level-0-Fleet-Topologie werden nicht in Verbraucher uebernommen, deren bisherige Tests diese Topologie nicht voraussetzen. Projektspezifische Fleet-Register bleiben erhalten; die gemeinsamen Engine- und Sicherheitsvertraege werden weiter geprueft.
+
+EN: Two newly introduced checks of the central Level-0 fleet topology are not copied into consumers whose previous tests did not require that topology. Project-specific fleet registries remain; shared engine and security contracts continue to be checked.
+
+## Intake-Authoring-Folgekorrektur 0.3.14
+
+DE: Die aktuelle Installation verwendet Intake Authoring **0.3.14** aus
+[Preset-PR 28](https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/pull/28)
+und [Release v0.3.14](https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/releases/tag/v0.3.14).
+Alle 72 Archivdateien wurden gegen den Tag-Commit geprüft. Die Folgekorrektur
+ordnet ein archiviertes Standalone-Intake außerhalb einer unabhängigen Serie
+nur bei eindeutigem Namen, Hash und physischer Verzeichnisbindung zu.
+Seriengebundene Intakes behalten ihre Manifestgrenze. Die anderen 13 Versionen
+und sämtliche Prioritäten bleiben erhalten. Aktuelle Level-0-Bindung:
+[PR 374](https://github.com/hindermath/home-baseline/pull/374).
+Die frühere Freigabe zum manuellen Schließen von Fehlalarmen gilt nur für
+explizit genehmigte IDs bzw. drei bytegebundene Signaturen mit erneut geprüftem
+Datenfluss; alle Abweichungen bleiben offen. Keine allgemeine Risikoannahme.
+
+## Intake Authoring follow-up 0.3.14
+
+EN: The current installation uses Intake Authoring **0.3.14** from
+[preset PR 28](https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/pull/28)
+and [release v0.3.14](https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/releases/tag/v0.3.14).
+All 72 archive files were checked against the tag commit. The follow-up resolves
+an archived standalone intake outside an unrelated series only with a unique
+name, hash and physical directory binding. Series members retain their manifest
+boundary. The other 13 versions and all priorities remain. Current Level-0 binding:
+[PR 374](https://github.com/hindermath/home-baseline/pull/374).
+Manual false-positive closure applies only to explicitly approved IDs or three
+byte-bound signatures with a renewed dataflow review; deviations remain open.
+No general risk acceptance is inferred.
+
+## Paketgrenzen und bestehende Projektanpassungen / Package boundaries
+
+DE: Verbraucher behalten ihre Paketklasse. Ein in diesem Rollout zusätzlich
+kopierter Level-0-Orchestrierungsmarker wird aus den sieben bisherigen
+Verbraucherpaketen entfernt. Damit bleiben deren vorhandene zentrale
+Integrationstests korrekt der Level-0-Quelle zugeordnet; portable Unit- und
+Projektprüfungen bleiben aktiv. Die zwei bereits vollständigen Quellkopien
+behalten ihre projektspezifische Fleet-Inventur und deren ursprüngliche exakte
+Kardinalitätsprüfung. Neu versehentlich mitkopierte Tests einer nicht gelieferten
+Level-0-Editor-Guidance werden nicht als Projektanforderung eingeführt.
+AOC behält seine bereits gelieferte sichere Memory-Patch-Anbindung; zwei
+kanonische Ausnahmen verhindern deren Überschreiben. Keine Testausnahme
+ersetzt eine erforderliche technische Prüfung oder akzeptiert ein Risiko.
+
+EN: Consumers retain their package class. A Level-0 orchestration marker added
+by this rollout is removed from the seven existing consumer packages. Their
+existing central integration tests remain correctly assigned to the Level-0
+source; portable unit and project checks remain active. The two already complete
+source copies retain their project fleet inventory and original exact cardinality
+checks. Accidentally copied tests for undelivered Level-0 editor guidance do not
+become new project requirements. AOC retains its previously delivered secure
+memory-patch adapter; two canonical exceptions prevent overwriting it. No test
+exception replaces a required technical check or accepts risk.
+
+## Native Paketverträglichkeit / Native package compatibility
+
+DE: Verteilte Manpages verweisen auf die kanonischen öffentlichen
+Level-0-Dokumente. TinyPl0 behält seine bestehende Freigabegrenze für externe
+CLI-Registries. Der bereits vorhandene benannte absdd-CI-Einstieg prüft weiter
+getrennt Quellen- und Installations-Lock. TuiVisions neue historische
+Eingabekopien verwenden kürzere relative Pfade für Windows; Bytes und Hashes
+bleiben unverändert. Bestehende technische Prüfungen bleiben verbindlich.
+
+EN: Distributed manuals link canonical public Level-0 documentation. TinyPl0
+retains its existing authority boundary for external CLI registries. The
+existing named absdd CI entry point still checks separate source and installed
+locks. TuiVision's new historical input copies use shorter relative paths for
+Windows; their bytes and hashes remain unchanged. Existing technical checks
+remain mandatory.
+
+## Vollstaendiger Preset-Payload / Complete preset payload
+
+DE: Die `project-statistics-governance`-Installation enthaelt sechs
+`fixtures.log`-Nachweise. tvisions Ignore-Regel hatte diese vorhandenen
+Release-Dateien aus dem Git-Commit ausgeschlossen. Genau diese sechs
+unveraenderten Dateien sind nun getrackt; der vorhandene Installations-Lock
+bleibt bytegleich. Der CI-Bindungstest prueft weiter alle 117 Paketdateien.
+
+EN: The `project-statistics-governance` installation includes six
+`fixtures.log` evidence files. tvision's ignore rule had excluded these
+existing release files from the Git commit. These exact six unchanged files
+are now tracked; the installed-state lock remains byte-identical. CI still
+checks all 117 package files.
+
+## npm-Agent-Proben / npm agent probes
+
+DE: Die beiden kanonischen Wartungsskripte pruefen npm-Agent-Befehle und Argumente jetzt vor jeder Ausfuehrung gegen den Codevertrag. Eine abgelehnte Probe startet keine Installation. Die allgemeine Prozesshilfe bleibt fuer andere vorgesehene Pruefungen erhalten.
+
+EN: Both canonical maintenance scripts now check npm agent commands and arguments against the code contract before execution. A rejected probe cannot start an installation. The general process helper remains available for other intended checks.
+
+Die Quellgrenze und ihre Negativtests / The source boundary and negative tests: [Level-0-Nachweis / Level 0 record](https://github.com/hindermath/home-baseline/blob/main/docs/maintenance/npm-agent-probe-authorization-2026-11-13.md). Andere Registry-Felder bleiben getrennt zu pruefen / Other registry fields remain a separate review area.

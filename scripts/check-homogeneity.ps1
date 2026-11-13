@@ -27,6 +27,7 @@ $requiredHgFunctions = @(
     'Invoke-HgCheckDeps',
     'Invoke-HgCheckHook',
     'Invoke-HgCheckSpeckit',
+    'Add-HgPatchContentSafely',
     'Invoke-HgScan',
     'Invoke-HgScanFileSecrets',
     'Invoke-HgWriteStats'
@@ -77,29 +78,105 @@ if (-not (Get-Command rg -ErrorAction SilentlyContinue)) {
 }
 
 # ─── Apply-Patch Mode ────────────────────────────────────────────────────────
+function Resolve-SafePatchTarget {
+    param([string]$RequestedPath)
+
+    if ([string]::IsNullOrWhiteSpace($RequestedPath) -or $RequestedPath -match '[\x00-\x1f]') {
+        throw 'Patch target is empty or contains control characters.'
+    }
+    $candidate = if ([IO.Path]::IsPathRooted($RequestedPath)) {
+        $RequestedPath
+    } else {
+        Join-Path $TargetDir $RequestedPath
+    }
+    $root = [IO.Path]::GetFullPath($TargetDir).TrimEnd(
+        [IO.Path]::DirectorySeparatorChar,
+        [IO.Path]::AltDirectorySeparatorChar
+    )
+    $target = [IO.Path]::GetFullPath($candidate)
+    $prefix = $root + [IO.Path]::DirectorySeparatorChar
+    $comparison = if ($IsWindows) { [StringComparison]::OrdinalIgnoreCase } else { [StringComparison]::Ordinal }
+    if (-not $target.StartsWith($prefix, $comparison)) {
+        throw 'Patch target must remain inside the selected target directory.'
+    }
+
+    $relative = [IO.Path]::GetRelativePath($root, $target)
+    $normalizedRelative = $relative.Replace('\', '/')
+    if ($normalizedRelative -notmatch '(^|/)(AGENTS|CLAUDE|GEMINI|README|constitution)\.md$' `
+        -and $normalizedRelative -notmatch '(^|/)\.github/copilot-instructions\.md$' `
+        -and $normalizedRelative -notmatch '(^|/)\.github/agents/copilot-instructions\.md$' `
+        -and $normalizedRelative -notmatch '(^|/)\.specify/memory/constitution\.md$') {
+        throw 'Patch target is outside the managed documentation allowlist.'
+    }
+    $current = $root
+    foreach ($component in @($relative -split '[\\/]' | Where-Object { $_ })) {
+        $current = Join-Path $current $component
+        $item = Get-Item -LiteralPath $current -Force -ErrorAction SilentlyContinue
+        if (-not $item) { throw 'Patch target must be an existing regular file.' }
+        if ($item.LinkType) { throw 'Patch target path must not contain a symbolic link.' }
+    }
+    if (-not (Test-Path -LiteralPath $target -PathType Leaf)) {
+        throw 'Patch target must be an existing regular file.'
+    }
+    $target
+}
+
 if ($ApplyPatch) {
     if (-not (Test-Path -LiteralPath $ApplyPatch -PathType Leaf)) {
         Write-Error "FATAL: patch file not found: $ApplyPatch"
         exit 2
     }
     $content = Get-Content -LiteralPath $ApplyPatch
+    $patchEntries = [System.Collections.Generic.List[object]]::new()
+    $targetFile = ''
+    foreach ($line in $content) {
+        if ($line -match '### Target: (.+)') {
+            try {
+                $targetFile = Resolve-SafePatchTarget -RequestedPath $Matches[1]
+            } catch {
+                Write-Error "FATAL: $($_.Exception.Message)"
+                exit 2
+            }
+        }
+        if ($line -match '^\+\+\+ (.+)') {
+            if (-not $targetFile) {
+                Write-Error 'FATAL: patch content has no validated target'
+                exit 2
+            }
+            $patchEntries.Add([pscustomobject]@{ Target = $targetFile; Content = $Matches[1] })
+        }
+    }
     Write-Host "Patch-Datei: $ApplyPatch"
     Write-Host ""
     Write-Host "Vorgeschlagene Aenderungen:"
-    $content | Select-String '^\#\#|^- |^\*\*' | Select-Object -First 30 | ForEach-Object { Write-Host $_.Line }
+    foreach ($entry in $patchEntries) {
+        Write-Host "  $($entry.Target) <- $($entry.Content)"
+    }
     Write-Host ""
+
+    if ($DryRun) {
+        Write-Host 'DRY-RUN: Patch wurde nicht angewendet / patch was not applied.'
+        exit 0
+    }
 
     $answer = if ($Yes) { 'j' } else { Read-Host "Patch anwenden? [j/N]" }
     if ($answer -match '^[jJyY]') {
-        $patchCount = 0
-        $targetFile = ''
-        foreach ($line in $content) {
-            if ($line -match '### Target: (.+)') { $targetFile = $Matches[1] }
-            if ($line -match '^\+\+\+ (.+)' -and $targetFile) {
-                Add-Content -Path $targetFile -Value $Matches[1]
-                $patchCount++
+        foreach ($entry in $patchEntries) {
+            $revalidated = Resolve-SafePatchTarget -RequestedPath $entry.Target
+            if ($revalidated -cne $entry.Target) {
+                Write-Error 'FATAL: patch target changed after validation'
+                exit 2
             }
         }
+        foreach ($entry in $patchEntries) {
+            try {
+                Add-HgPatchContentSafely -Root $TargetDir -Target $entry.Target -Content $entry.Content
+            } catch {
+                Write-Error "FATAL: $($_.Exception.Message)"
+                exit 2
+            }
+        }
+        $patchCount = $patchEntries.Count
         git -C $TargetDir add -A 2>$null
         git -C $TargetDir commit -m "chore: apply memory-patch -- $patchCount entries updated" 2>$null
         Write-Host "Patch angewendet: $patchCount Eintraege, git-Commit erstellt."
@@ -292,7 +369,8 @@ function Check-StatisticsProfile {
 
     $ledger = Join-Path $Dir 'docs/project-statistics.md'
     $config = Join-Path $Dir 'docs/project-statistics.config.json'
-    $renderer = Join-Path $Dir 'scripts/render-project-statistics.ps1'
+    $targetRenderer = Join-Path $Dir 'scripts/render-project-statistics.ps1'
+    $renderer = Join-Path $ScriptDir 'render-project-statistics.ps1'
     if (-not (Test-Path -LiteralPath $ledger -PathType Leaf)) {
         return
     }
@@ -301,7 +379,7 @@ function Check-StatisticsProfile {
             'ASCII Statistics Profile 2 configuration missing' $Dir
         return
     }
-    if (-not (Test-Path -LiteralPath $renderer -PathType Leaf)) {
+    if (-not (Test-Path -LiteralPath $targetRenderer -PathType Leaf)) {
         Emit-Result 'FAIL' 'scripts/render-project-statistics.ps1' `
             'ASCII Statistics Profile 2 renderer missing' $Dir
         return
@@ -366,14 +444,20 @@ function Check-AntigravityIntegration {
     }
 
     $gitignore = Join-Path $Dir '.gitignore'
-    $content = if (Test-Path -LiteralPath $gitignore -PathType Leaf) {
-        Get-Content -LiteralPath $gitignore -Raw
-    } else {
-        ''
+    $policyEffective = $false
+    if (Test-Path -LiteralPath $gitignore -PathType Leaf) {
+        $privateIgnored = $true
+        foreach ($privatePath in @('.agents/private-state.json', '.agents/mcp_config.json', '.agents/runtime/session.json')) {
+            & git -C $Dir check-ignore -q --no-index -- $privatePath
+            if ($LASTEXITCODE -ne 0) { $privateIgnored = $false }
+        }
+        & git -C $Dir check-ignore -q --no-index -- '.agents/skills/speckit-probe/SKILL.md'
+        $skillVisible = $LASTEXITCODE -eq 1
+        $trackedAgents = @(& git -C $Dir ls-files -- '.agents')
+        $trackingValid = $LASTEXITCODE -eq 0 -and @($trackedAgents | Where-Object { $_ -notlike '.agents/skills/*' }).Count -eq 0
+        $policyEffective = $privateIgnored -and $skillVisible -and $trackingValid
     }
-    if ($content.Contains('.agents/*') -and
-        $content.Contains('!.agents/skills/') -and
-        $content.Contains('!.agents/skills/**')) {
+    if ($policyEffective) {
         Emit-Result 'PASS' '.gitignore' 'surgical .agents skills allowlist' $Dir
     } else {
         Emit-Result 'FAIL' '.gitignore' 'surgical .agents skills allowlist missing' $Dir
@@ -472,8 +556,9 @@ foreach ($entry in $scanResults) {
         } else {
             Emit-Result 'WARN' 'scripts/hooks/pre-push' 'canonical hook missing' $dir
         }
-        $scriptReference = Join-Path $dir 'scripts/render-script-reference.ps1'
-        if (Test-Path -LiteralPath $scriptReference -PathType Leaf) {
+        $targetScriptReference = Join-Path $dir 'scripts/render-script-reference.ps1'
+        if (Test-Path -LiteralPath $targetScriptReference -PathType Leaf) {
+            $scriptReference = Join-Path $ScriptDir 'render-script-reference.ps1'
             & $scriptReference -Repo $dir -CheckOnly *> $null
             if ($LASTEXITCODE -eq 0) {
                 Emit-Result 'PASS' 'docs/scripts/reference.md' `

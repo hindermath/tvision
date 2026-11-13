@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0",
+  "platforms": ["macos", "linux", "windows"],
+  "fieldOrder": ["Profil / Profile", "Entscheidung / Decision", "Status", "Blocker", "Naechste Aktion / Next action", "Gate-Set-Hash", "Evidence-Ziel / Evidence target"],
+  "cases": [
+    {"fixtureId": "spaces", "value": " path with spaces/file.txt", "expected": " path with spaces/file.txt"},
+    {"fixtureId": "leading-dash", "value": "-unsafe", "blocked": true},
+    {"fixtureId": "metacharacters", "value": "folder/a;literal.txt", "expected": "folder/a;literal.txt"},
+    {"fixtureId": "unicode", "value": "docs/überblick.md", "expected": "docs/überblick.md"},
+    {"fixtureId": "newline", "value": "bad\npath", "blocked": true},
+    {"fixtureId": "nul", "value": "bad\u0000path", "blocked": true}
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "unknownGateId": "missing-gate",
+  "unknownProductJobId": "missing-product-job",
+  "secondPathContracts": true,
+  "extraProfileField": "not-allowed",
+  "unsafeValues": [
+    "../escape",
+    "/absolute",
+    "line\nbreak",
+    "carriage\rreturn",
+    "nul\u0000byte",
+    "-leading-option"
+  ],
+  "denormalizedProfileMismatch": {
+    "assignment": "private-product",
+    "inventory": "public-product"
+  }
+}

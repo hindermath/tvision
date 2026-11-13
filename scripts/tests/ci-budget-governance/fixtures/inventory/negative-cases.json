@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0",
+  "baseFixture": "fleet-valid.json",
+  "cases": [
+    {"fixtureId": "missing", "operation": "remove", "repositoryId": "tvision"},
+    {"fixtureId": "unknown", "operation": "add", "repositoryId": "unknown-repository"},
+    {"fixtureId": "duplicate", "operation": "duplicate", "repositoryId": "cc65"},
+    {"fixtureId": "collection", "operation": "add", "repositoryId": "spec-kit-preset-projects"},
+    {"fixtureId": "level0-duplicate", "operation": "duplicate", "repositoryId": "home-baseline"},
+    {"fixtureId": "visibility", "operation": "replace", "repositoryId": "home-baseline", "field": "visibility", "value": "private"},
+    {"fixtureId": "profile-id", "operation": "replace", "repositoryId": "home-baseline", "field": "profileId", "value": "private-product"}
+  ]
+}

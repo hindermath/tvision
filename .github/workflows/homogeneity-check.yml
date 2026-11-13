@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [main, master]
 
+# DE: Nur lesender Checkout; unbenannte Token-Rechte bleiben gesperrt.
+# EN: Read-only checkout; unspecified token permissions remain disabled.
+permissions:
+  contents: read
+
 jobs:
   homogeneity:
     runs-on: ubuntu-latest

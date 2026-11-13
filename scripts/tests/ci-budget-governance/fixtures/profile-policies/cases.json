@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0",
+  "cases": [
+    {"fixtureId": "secure-casetracker-six", "productJobs": ["casetracker-csharp", "casetracker-go", "casetracker-java", "casetracker-python", "casetracker-rust", "casetracker-swift"]},
+    {"fixtureId": "swift-pr-linux", "repositoryId": "secure-casetracker-swift", "event": "pull_request", "runner": "ubuntu-latest"},
+    {"fixtureId": "swift-weekly-macos", "repositoryId": "secure-casetracker-swift", "event": "schedule", "runner": "macos-latest"},
+    {"fixtureId": "private-release-please", "events": ["schedule", "workflow_dispatch"]},
+    {"fixtureId": "public-canaries", "repositoryIds": ["agent-operations-cockpit", "home-baseline", "tui-vision"]},
+    {"fixtureId": "public-product", "gateDecision": "PublicCI"},
+    {"fixtureId": "public-presets", "repositoryCount": 12, "gateDecision": "FleetPipeline"}
+  ]
+}
