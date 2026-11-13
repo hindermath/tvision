@@ -10,7 +10,12 @@ CLI_REGISTRY="$REPO_ROOT/scripts/config/required-cli-tools-registry.json"
 NPM_AGENT_REGISTRY="$REPO_ROOT/scripts/config/npm-agent-cli-registry.json"
 POWERSHELL_MODULE_REGISTRY="$REPO_ROOT/scripts/config/powershell-modules-registry.json"
 LINUX_HARDENING="$REPO_ROOT/scripts/lib/linux-maintenance-hardening.py"
+APPROVED_SPEC_KIT_REVISION="464d57fe30c72e9a88d279cc49834539ec989c03"
+APPROVED_SPEC_KIT_SOURCE="git+https://github.com/github/spec-kit.git@${APPROVED_SPEC_KIT_REVISION}"
+APPROVED_ANTIGRAVITY_URL="https://antigravity.google/cli/install.sh"
+APPROVED_ANTIGRAVITY_SHA256="ee1ea43ce4e9e56356c4ab6dad907ef357ae4bdfcaadb682735909fb57c9c640"
 DRY_RUN=0
+MSL_ONLY=0
 COMPARE_ONLY=0
 SKIP_UPGRADE=0
 INCLUDE_OPTIONAL=0
@@ -35,6 +40,7 @@ Verwendung / Usage: maintain-agentic-brew-apps.sh [OPTIONEN / OPTIONS]
 Optionen / Options:
   --dry-run             Paketaktionen nur anzeigen / preview package actions
   --compare-only        Nur Registry vergleichen / compare registry only
+  --msl-only            Nur sechs MSL-Toolchains / only the six MSL toolchains
   --registry PATH       Alternative Paket-Registry / alternative package registry
   --cli-registry PATH   Alternative Required-CLI-Registry
   --vscode-registry PATH
@@ -67,6 +73,9 @@ while [ "$#" -gt 0 ]; do
       ;;
     --compare-only)
       COMPARE_ONLY=1
+      ;;
+    --msl-only)
+      MSL_ONLY=1
       ;;
     --registry)
       if [ "$#" -lt 2 ] || [ -z "${2:-}" ]; then
@@ -147,6 +156,31 @@ while [ "$#" -gt 0 ]; do
   shift
 done
 
+if [ "$MSL_ONLY" -eq 1 ]; then
+  if ! command -v pwsh >/dev/null 2>&1; then
+    printf '%s\n' 'Fehler: PowerShell 7 (pwsh) fehlt fuer die gemeinsame MSL-Pruefung / PowerShell 7 is required.' >&2
+    if [ -n "$RESULT_FILE" ]; then
+      msl_mode=update
+      [ "$DRY_RUN" -eq 0 ] || msl_mode=dry-run
+      [ "$COMPARE_ONLY" -eq 0 ] || msl_mode=compare-only
+      mkdir -p -- "$(dirname -- "$RESULT_FILE")"
+      msl_temporary="$(mktemp "${RESULT_FILE}.msl.XXXXXX")"
+      printf '{"schemaVersion":"1.0","platform":"%s","mode":"%s","overallStatus":"FAILED","exitCode":2,"items":[],"remainingRequired":["msl-engine"],"optionalDrift":[],"nextAction":"PowerShell 7 installieren / install PowerShell 7.","failureClass":"MslEngineUnavailable"}\n' \
+        "$(uname -s)" "$msl_mode" > "$msl_temporary"
+      mv -- "$msl_temporary" "$RESULT_FILE"
+    fi
+    exit 2
+  fi
+  msl_args=(-NoProfile -File "$SCRIPT_DIR/lib/invoke-msl-toolchains.ps1"
+    -Registry "$CLI_REGISTRY" -PackageRegistry "$REGISTRY")
+  [ "$DRY_RUN" -eq 0 ] || msl_args+=(-WhatIf)
+  [ "$COMPARE_ONLY" -eq 0 ] || msl_args+=(-CompareOnly)
+  [ "$SKIP_UPGRADE" -eq 0 ] || msl_args+=(-SkipUpgrade)
+  [ "$ALLOW_ADMIN_PROMPTS" -eq 0 ] || msl_args+=(-AllowAdminPrompts)
+  [ -z "$RESULT_FILE" ] || msl_args+=(-ResultFile "$RESULT_FILE")
+  exec pwsh "${msl_args[@]}"
+fi
+
 if [ ! -f "$REGISTRY" ]; then
   echo "Fehler: Registry nicht gefunden: $REGISTRY" >&2
   exit 1
@@ -183,6 +217,12 @@ fi
 }
 
 OS_NAME="$(uname -s)"
+if [ "$OS_NAME" = "Linux" ] && ! command -v brew >/dev/null 2>&1; then
+  # Distro Cargo may be in /usr/bin while cargo install writes to a user bin.
+  # Appending preserves the existing toolchain preference and enables later probes.
+  PATH="$PATH:${CARGO_INSTALL_ROOT:-${CARGO_HOME:-$HOME/.cargo}}/bin"
+  export PATH
+fi
 WORK_DIR="$(mktemp -d)"
 RESULT_ROWS="$WORK_DIR/registry-item-results.tsv"
 ATTEMPTS_FILE="$WORK_DIR/attempts.tsv"
@@ -451,6 +491,9 @@ with open(registry_path, encoding="utf-8") as handle:
     data = json.load(handle)
 
 for item in data.get("tools", []):
+    # MSL commands and companions are evaluated together by the shared engine.
+    if data.get("mslToolchains") and item.get("mslToolchain"):
+        continue
     if scope != "all" and item.get("scope", "required") != scope:
         continue
     if os_name not in item.get("platforms", []):
@@ -470,6 +513,40 @@ for item in data.get("tools", []):
             ]
         )
     )
+PY
+}
+
+validate_cli_probe_contract() {
+  local id="$1"
+  local command_name="$2"
+  local args_json="$3"
+  python3 - "$id" "$command_name" "$args_json" <<'PY'
+import json
+import sys
+
+item_id, command_name, args_json = sys.argv[1:4]
+approved = {
+    "pandoc": ("pandoc", ["--version"]), "typst": ("typst", ["--version"]),
+    "tinymist": ("tinymist", ["--version"]),
+    "bash": ("bash", ["--noprofile", "--norc", "-c", "printf '%s\\n' \"$BASH_VERSION\"; (( BASH_VERSINFO[0] >= 5 ))"]),
+    "dotnet": ("dotnet", ["--version"]), "go": ("go", ["version"]),
+    "java": ("java", ["-version"]), "javac": ("javac", ["-version"]),
+    "python3": ("python3", ["--version"]), "python": ("python", ["--version"]),
+    "cargo": ("cargo", ["--version"]), "rustc": ("rustc", ["--version"]),
+    "swift": ("swift", ["--version"]), "syft": ("syft", ["version"]),
+    "lychee": ("lychee", ["--version"]), "specify": ("specify", ["--version"]),
+    "codex": ("codex", ["--version"]), "claude": ("claude", ["--version"]),
+    "antigravity": ("agy", ["--version"]), "copilot": ("copilot", ["--version"]),
+}
+expected = approved.get(item_id)
+if expected is None:
+    raise SystemExit(1)
+try:
+    arguments = json.loads(args_json)
+except (TypeError, ValueError):
+    raise SystemExit(1)
+if command_name != expected[0] or arguments != expected[1]:
+    raise SystemExit(1)
 PY
 }
 
@@ -541,10 +618,14 @@ try:
     data = json.load(sys.stdin)
 except (json.JSONDecodeError, TypeError, UnicodeDecodeError):
     data = {"formulae": []}
+with open(sys.argv[1], encoding="utf-8") as handle:
+    registry_names = {item["name"] for item in json.load(handle).get("formulae", [])}
 for formula in data.get("formulae", []):
     if any(item.get("installed_on_request") for item in formula.get("installed", [])):
-        print(formula["full_name"])
-'
+        aliases = set(formula.get("aliases", [])) | {formula["full_name"], formula.get("name", "")}
+        matched = sorted(aliases & registry_names)
+        print(matched[0] if matched else formula["full_name"])
+' "$REGISTRY"
 }
 
 installed_casks() {
@@ -670,7 +751,7 @@ with open(sys.argv[1], encoding="utf-8") as handle:
     registry = json.load(handle)
 for item in registry.get("tools", []):
     if item.get("id") == "swift":
-        print(item.get("install", {}).get("linux", {}).get("swiftVersion", ""))
+        print("" if registry.get("mslToolchains") else item.get("install", {}).get("linux", {}).get("swiftVersion", ""))
         break
 PY
     )"
@@ -829,10 +910,46 @@ install_cli_tool() {
   local arg
 
   case "$manager" in
+    cargo)
+      # Package managers own macOS and Homebrew installs. Cargo is only the
+      # Linux fallback; --locked retains upstream's dependency resolution.
+      if [ "$OS_NAME" != "Linux" ] || command -v brew >/dev/null 2>&1; then
+        log "MISSING cli tool: $id (Paketmanager-Installation pruefen / check package-manager installation)"
+        return 0
+      fi
+      while IFS= read -r arg; do
+        install_args+=("$arg")
+      done < <(json_array_items "$install_args_json")
+      log "INSTALL cli tool: $id (locked Cargo build)"
+      mark_attempt cli "$id"
+      if [ "$DRY_RUN" -eq 1 ] || command -v cargo >/dev/null 2>&1; then
+        if ! run_cmd cargo "${install_args[@]}" </dev/null; then
+          mark_failed_attempt cli "$id"
+        fi
+        hash -r
+      else
+        log "SKIP cli tool install: $id (cargo fehlt / cargo missing)"
+        mark_failed_attempt cli "$id"
+      fi
+      ;;
     uv)
       while IFS= read -r arg; do
         install_args+=("$arg")
       done < <(json_array_items "$install_args_json")
+      local -a approved_uv_args=(tool install specify-cli --from "$APPROVED_SPEC_KIT_SOURCE")
+      if [ "$id" != "specify" ] || [ "${#install_args[@]}" -ne "${#approved_uv_args[@]}" ]; then
+        log "SKIP cli tool install: $id (nicht autorisierter uv-Installationsvertrag)"
+        mark_failed_attempt cli "$id"
+        return 0
+      fi
+      local index
+      for index in "${!approved_uv_args[@]}"; do
+        if [ "${install_args[$index]}" != "${approved_uv_args[$index]}" ]; then
+          log "SKIP cli tool install: $id (Spec-Kit-Quelle ist nicht commitgebunden)"
+          mark_failed_attempt cli "$id"
+          return 0
+        fi
+      done
       log "INSTALL cli tool: $id"
       mark_attempt cli "$id"
       if [ "$DRY_RUN" -eq 1 ] || command -v uv >/dev/null 2>&1; then
@@ -849,8 +966,10 @@ install_cli_tool() {
         log "MISSING cli tool: $id (vendor installer is Linux-only)"
         return 0
       fi
-      if [ -z "$install_url" ] || [ -z "$install_sha256" ] || [ "$interpreter" != "bash" ]; then
-        log "SKIP cli tool install: $id (ungueltige vendor-script Registrydaten)"
+      if [ "$id" != "antigravity" ] || [ "$install_url" != "$APPROVED_ANTIGRAVITY_URL" ] || \
+          [ "$install_sha256" != "$APPROVED_ANTIGRAVITY_SHA256" ] || [ "$interpreter" != "bash" ]; then
+        log "SKIP cli tool install: $id (vendor-script nicht durch Code-Policy autorisiert)"
+        mark_failed_attempt cli "$id"
         return 0
       fi
       log "INSTALL cli tool: $id (verified vendor script)"
@@ -882,7 +1001,7 @@ install_cli_tool() {
         mark_failed_attempt cli "$id"
         return 0
       fi
-      if [ "$actual_sha256" != "$install_sha256" ]; then
+      if [ "$actual_sha256" != "$APPROVED_ANTIGRAVITY_SHA256" ]; then
         rm -f -- "$installer"
         log "SKIP cli tool install: $id (Installer-Pruefsumme geaendert; Registry zuerst pruefen)"
         mark_failed_attempt cli "$id"
@@ -911,6 +1030,11 @@ install_cli_tools() {
   while IFS=$'\t' read -r -u 3 id command_name args_json manager install_args_json install_url install_sha256 interpreter; do
     [ -n "$id" ] || continue
     validate_item_id "$id"
+    if ! validate_cli_probe_contract "$id" "$command_name" "$args_json"; then
+      log "SKIP cli tool probe: $id (nicht durch Code-Policy autorisiert)"
+      mark_failed_attempt cli "$id"
+      continue
+    fi
     if cli_tool_available "$id" "$command_name" "$args_json"; then
       log "OK cli tool: $id"
     else
@@ -955,7 +1079,13 @@ compare_cli_scope() {
     [ -n "$id" ] || continue
     attempted=false
     was_attempted cli "$id" && attempted=true
-    if cli_tool_available "$id" "$command_name" "$args_json"; then
+    if ! validate_cli_probe_contract "$id" "$command_name" "$args_json"; then
+      CURRENT_PROBE_STATUS="CapabilityBlocked"
+      CURRENT_PROBE_EVIDENCE="Probe ist nicht durch die Code-Policy autorisiert."
+      CURRENT_PROBE_NEXT_ACTION="CLI-Registry an den kanonischen Probevertrag angleichen."
+      missing="${missing}${id}"$'\n'
+      final_status="Failed"
+    elif cli_tool_available "$id" "$command_name" "$args_json"; then
       final_status="Present"
       [ "$attempted" = true ] && final_status="Installed"
     else
@@ -1471,6 +1601,32 @@ fi
 
 maintain_powershell_modules
 
+# One shared version contract complements the legacy availability probes.
+# Alternative fixture registries without MSL metadata keep their old contract.
+msl_result="$WORK_DIR/msl-result.json"
+msl_status=0
+msl_expected=0
+if python3 - "$CLI_REGISTRY" <<'PY'
+import json, sys
+with open(sys.argv[1], encoding="utf-8") as handle:
+    sys.exit(0 if json.load(handle).get("mslToolchains") else 1)
+PY
+then
+  msl_expected=1
+  msl_args=(-NoProfile -File "$SCRIPT_DIR/lib/invoke-msl-toolchains.ps1"
+    -Registry "$CLI_REGISTRY" -PackageRegistry "$REGISTRY" -ResultFile "$msl_result")
+  [ "$DRY_RUN" -eq 0 ] || msl_args+=(-WhatIf)
+  [ "$COMPARE_ONLY" -eq 0 ] || msl_args+=(-CompareOnly)
+  [ "$SKIP_UPGRADE" -eq 0 ] || msl_args+=(-SkipUpgrade)
+  [ "$ALLOW_ADMIN_PROMPTS" -eq 0 ] || msl_args+=(-AllowAdminPrompts)
+  if command -v pwsh >/dev/null 2>&1; then
+    pwsh "${msl_args[@]}" || msl_status=$?
+  else
+    log "Fehler: PowerShell 7 fehlt fuer die MSL-Pruefung / PowerShell 7 is required for MSL checks."
+    msl_status=2
+  fi
+fi
+
 result_mode="update"
 [ "$DRY_RUN" -eq 1 ] && result_mode="dry-run"
 [ "$COMPARE_ONLY" -eq 1 ] && result_mode="compare-only"
@@ -1481,6 +1637,31 @@ python3 "$LINUX_HARDENING" summarize-results \
   --output "$RESULT_FILE" \
   --platform "$OS_NAME" \
   --mode "$result_mode" > "$summary_output" || result_status=$?
+if [ -f "$msl_result" ]; then
+  python3 - "$RESULT_FILE" "$msl_result" <<'PY'
+import json, os, sys
+target, msl_path = sys.argv[1:]
+with open(target, encoding="utf-8") as handle:
+    result = json.load(handle)
+with open(msl_path, encoding="utf-8") as handle:
+    msl = json.load(handle)
+result["mslToolchains"] = msl["mslToolchains"]
+result["remainingRequired"] += ["msl:" + item for item in msl["remainingRequired"]]
+result["exitCode"] = max(result["exitCode"], msl["exitCode"])
+if result["exitCode"]:
+    result["overallStatus"] = "FAILED" if result["exitCode"] == 2 else "PARTIAL"
+    result["nextAction"] = "Offene Toolchain-Befunde beheben / resolve toolchain findings."
+temporary = target + ".msl.tmp"
+with open(temporary, "w", encoding="utf-8") as handle:
+    json.dump(result, handle, ensure_ascii=False, indent=2)
+    handle.write("\n")
+os.replace(temporary, target)
+PY
+  [ "$msl_status" -le "$result_status" ] || result_status="$msl_status"
+elif [ "$msl_expected" -eq 1 ]; then
+  publish_failure_result "MslResultMissing"
+  result_status=2
+fi
 if python3 "$LINUX_HARDENING" inspect-result --input "$RESULT_FILE" >/dev/null; then
   RESULT_PUBLISHED=1
 else

@@ -23,12 +23,12 @@ jobs:
       matrix:
         # Keep the expensive cross-platform canary on the three public reference
         # repositories. Distributed/private fleet copies use Linux continuously.
-        os: ${{ fromJSON(contains(fromJSON('["hindermath/home-baseline","hindermath/agent-operations-cockpit","hindermath/TuiVision"]'), github.repository) && '["ubuntu-22.04","macos-14","windows-2022"]' || '["ubuntu-22.04"]') }}
+        os: ${{ fromJSON(contains(fromJSON('["hindermath/home-baseline","hindermath/agent-operations-cockpit","hindermath/TuiVision"]'), github.repository) && '["ubuntu-22.04","macos-15","windows-2022"]' || '["ubuntu-22.04"]') }}
     timeout-minutes: 10
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Install required PowerShell modules
         shell: pwsh
