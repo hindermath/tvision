@@ -37,3 +37,32 @@ The current package proof uses a successor installation receipt for the publishe
 DE: Zwei neu hinzugekommene Tests der zentralen Level-0-Fleet-Topologie werden nicht in Verbraucher uebernommen, deren bisherige Tests diese Topologie nicht voraussetzen. Projektspezifische Fleet-Register bleiben erhalten; die gemeinsamen Engine- und Sicherheitsvertraege werden weiter geprueft.
 
 EN: Two newly introduced checks of the central Level-0 fleet topology are not copied into consumers whose previous tests did not require that topology. Project-specific fleet registries remain; shared engine and security contracts continue to be checked.
+
+## Intake-Authoring-Folgekorrektur 0.3.14
+
+DE: Die aktuelle Installation verwendet Intake Authoring **0.3.14** aus
+[Preset-PR 28](https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/pull/28)
+und [Release v0.3.14](https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/releases/tag/v0.3.14).
+Alle 72 Archivdateien wurden gegen den Tag-Commit geprüft. Die Folgekorrektur
+ordnet ein archiviertes Standalone-Intake außerhalb einer unabhängigen Serie
+nur bei eindeutigem Namen, Hash und physischer Verzeichnisbindung zu.
+Seriengebundene Intakes behalten ihre Manifestgrenze. Die anderen 13 Versionen
+und sämtliche Prioritäten bleiben erhalten. Aktuelle Level-0-Bindung:
+[PR 374](https://github.com/hindermath/home-baseline/pull/374).
+Die frühere Freigabe zum manuellen Schließen von Fehlalarmen gilt nur für
+explizit genehmigte IDs bzw. drei bytegebundene Signaturen mit erneut geprüftem
+Datenfluss; alle Abweichungen bleiben offen. Keine allgemeine Risikoannahme.
+
+## Intake Authoring follow-up 0.3.14
+
+EN: The current installation uses Intake Authoring **0.3.14** from
+[preset PR 28](https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/pull/28)
+and [release v0.3.14](https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/releases/tag/v0.3.14).
+All 72 archive files were checked against the tag commit. The follow-up resolves
+an archived standalone intake outside an unrelated series only with a unique
+name, hash and physical directory binding. Series members retain their manifest
+boundary. The other 13 versions and all priorities remain. Current Level-0 binding:
+[PR 374](https://github.com/hindermath/home-baseline/pull/374).
+Manual false-positive closure applies only to explicitly approved IDs or three
+byte-bound signatures with a renewed dataflow review; deviations remain open.
+No general risk acceptance is inferred.
