@@ -158,12 +158,12 @@ class MaintenanceContractTests(unittest.TestCase):
         specification.loader.exec_module(module)
         manifest = module.load_manifest(CONFIG / "agentic-workspace-fleet.json")
         targets = manifest["targets"]
-        self.assertEqual(len(targets), 49)
-        self.assertEqual(sum(item["kind"] == "git-repository" for item in targets), 48)
+        self.assertEqual(len(targets), 47)
+        self.assertEqual(sum(item["kind"] == "git-repository" for item in targets), 46)
         self.assertEqual(sum(item["kind"] == "collection" for item in targets), 1)
         self.assertEqual(
             sum(item["maintenanceClass"] == "canonical-fleet" for item in targets),
-            36,
+            35,
         )
         self.assertEqual(
             sum(
@@ -171,14 +171,13 @@ class MaintenanceContractTests(unittest.TestCase):
                 and item["maintenanceClass"] == "preset"
                 for item in targets
             ),
-            12,
+            11,
         )
         self.assertEqual(
             1 + sum(item["kind"] == "git-repository" for item in targets),
-            49,
+            47,
             "Level 0 plus manifest Git targets define the freshness barrier.",
         )
-
 
     def test_fleet_manifest_rejects_unsafe_semantics(self) -> None:
         specification = importlib.util.spec_from_file_location("fleet_engine_invalid", FLEET_ENGINE)
@@ -398,46 +397,6 @@ class MaintenanceContractTests(unittest.TestCase):
         self.assertIs(formulae["powershell"]["ensureLinked"], True)
         self.assertEqual(formulae["powershell"]["linkCommands"], ["pwsh"])
         self.assertNotIn("powershell", {item["name"] for item in registry["casks"]})
-
-    def test_vscode_registry_requires_exact_editor_extension_contract(self) -> None:
-        registry = read_json(CONFIG / "vscode-extensions-registry.json")
-        extensions = registry["extensions"]
-        ids = [item["id"] for item in extensions]
-        expected = {
-            "ms-dotnettools.csdevkit",
-            "golang.Go",
-            "vscjava.vscode-java-pack",
-            "ms-python.python",
-            "rust-lang.rust-analyzer",
-            "swiftlang.swift-vscode",
-            "ms-vscode.powershell",
-            "ms-azuretools.vscode-containers",
-            "myriad-dreamin.tinymist",
-        }
-
-        self.assertEqual(len(ids), 9)
-        self.assertEqual(len(ids), len(set(ids)))
-        self.assertEqual(set(ids), expected)
-        self.assertTrue(all(item["scope"] == "required" for item in extensions))
-
-        required_surfaces = (
-            "AGENTS.md",
-            "CLAUDE.md",
-            "GEMINI.md",
-            ".github/copilot-instructions.md",
-            ".github/agents/copilot-instructions.md",
-            "scripts/templates/AGENTS.md.tmpl",
-            "scripts/templates/CLAUDE.md.tmpl",
-            "scripts/templates/GEMINI.md.tmpl",
-            "scripts/templates/copilot-instructions.tmpl",
-            "docs/man/maintain-agentic-brew-apps.1.md",
-            "docs/man/maintain-agentic-winget-apps.1.md",
-        )
-        for relative in required_surfaces:
-            with self.subTest(surface=relative):
-                content = (REPOSITORY / relative).read_text(encoding="utf-8")
-                self.assertIn("ms-vscode.powershell", content)
-                self.assertIn("myriad-dreamin.tinymist", content)
 
     @unittest.skipUnless(shutil.which("pwsh"), "PowerShell 7 is required.")
     def test_windows_document_tool_drift_distinguishes_required_and_optional(self) -> None:

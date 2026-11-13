@@ -26,6 +26,18 @@
       "repositoryPath": "container-images/absdd-image-sandbox",
       "reason": "The sandbox registry retains the Swift version pinned by its Dockerfile; host latest-stable must not replace that image-bound Linux install target. Other registry fields follow the reviewed canonical update.",
       "path": "scripts/config/required-cli-tools-registry.json"
+    },
+    {
+      "repositoryPath": "RiderProjects/AgentOperationsCockpit",
+      "path": "scripts/check-homogeneity.sh",
+      "reason": "Preserve the existing project-specific memory-patch adapter, which invokes the tracked-only, target-only-commit helper. Canonical shell copies must not replace this previously delivered security boundary.",
+      "evidence": "https://github.com/hindermath/agent-operations-cockpit/blob/21efd0733a8f34b02974e709191d0cc381d8dd5d/scripts/check-homogeneity.sh"
+    },
+    {
+      "repositoryPath": "RiderProjects/AgentOperationsCockpit",
+      "path": "scripts/check-homogeneity.ps1",
+      "reason": "Preserve the existing project-specific memory-patch adapter, which invokes the tracked-only, target-only-commit helper. Canonical shell copies must not replace this previously delivered security boundary.",
+      "evidence": "https://github.com/hindermath/agent-operations-cockpit/blob/21efd0733a8f34b02974e709191d0cc381d8dd5d/scripts/check-homogeneity.ps1"
     }
   ],
   "files": [
