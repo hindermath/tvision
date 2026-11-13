@@ -179,35 +179,6 @@ class MaintenanceContractTests(unittest.TestCase):
             "Level 0 plus manifest Git targets define the freshness barrier.",
         )
 
-    def test_fleet_preset_repositories_match_managed_twelve_preset_profile(self) -> None:
-        manifest = read_json(CONFIG / "agentic-workspace-fleet.json")
-        profile = read_json(CONFIG / "spec-kit-model-routing-governance-presets.json")
-
-        collection = next(
-            item for item in manifest["targets"] if item["id"] == "spec-kit-preset-projects"
-        )
-        self.assertEqual(collection["kind"], "collection")
-        self.assertEqual(collection["path"], "SpecKitPresetProjects")
-        self.assertEqual(collection["memberDiscovery"], "declared-targets")
-
-        preset_targets = [
-            item
-            for item in manifest["targets"]
-            if item["kind"] == "git-repository"
-            and item["maintenanceClass"] == "preset"
-            and item["active"]
-        ]
-        declared_remotes = {item["remote"].removesuffix(".git") for item in preset_targets}
-        managed_remotes = {item["repository"].removesuffix(".git") for item in profile["presets"]}
-        declared_paths = {item["path"] for item in preset_targets}
-        managed_paths = {
-            f'{collection["path"]}/{item["repository"].removesuffix(".git").rsplit("/", 1)[-1]}'
-            for item in profile["presets"]
-        }
-
-        self.assertEqual(len(profile["presets"]), 12)
-        self.assertEqual(declared_remotes, managed_remotes)
-        self.assertEqual(declared_paths, managed_paths)
 
     def test_fleet_manifest_rejects_unsafe_semantics(self) -> None:
         specification = importlib.util.spec_from_file_location("fleet_engine_invalid", FLEET_ENGINE)

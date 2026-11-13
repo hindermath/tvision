@@ -33,3 +33,7 @@ Documentation Impact: UpdateRequired. Owner: Thorsten Hindermann. Audience: main
 Die aktuelle Paketpruefung verwendet einen neuen Installationsnachweis fuer den veroeffentlichten Stand; der alte v0.1.0-Nachweis bleibt unveraendert. Verteilte Wartungstests werden an ihre vorhandenen kanonischen Quellen angeglichen. Die Vorschau prueft Schreibfreiheit; der getrennte Schreibtest verwirft weiterhin Pfad-Ausbrueche.
 
 The current package proof uses a successor installation receipt for the published version; the historical v0.1.0 receipt is unchanged. Distributed maintenance tests follow their existing canonical sources. Preview checks that no writes occur; the separate writing test still rejects path escapes.
+
+DE: Zwei neu hinzugekommene Tests der zentralen Level-0-Fleet-Topologie werden nicht in Verbraucher uebernommen, deren bisherige Tests diese Topologie nicht voraussetzen. Projektspezifische Fleet-Register bleiben erhalten; die gemeinsamen Engine- und Sicherheitsvertraege werden weiter geprueft.
+
+EN: Two newly introduced checks of the central Level-0 fleet topology are not copied into consumers whose previous tests did not require that topology. Project-specific fleet registries remain; shared engine and security contracts continue to be checked.
