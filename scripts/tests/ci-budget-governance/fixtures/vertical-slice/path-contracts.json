@@ -1,0 +1,12 @@
+{
+  "schemaVersion":"1.0",
+  "registryVersion":"1.0.0",
+  "pathContracts":[
+    {"pathContractId":"slice-build","category":"build","includePatterns":["scripts/**"],"excludePatterns":[],"gateIds":["build-contract"]},
+    {"pathContractId":"slice-security","category":"security","includePatterns":["scripts/**"],"excludePatterns":[],"gateIds":["security-contract"]},
+    {"pathContractId":"slice-governance","category":"governance","includePatterns":["specs/**"],"excludePatterns":[],"gateIds":["security-contract"]},
+    {"pathContractId":"slice-dependency","category":"dependency","includePatterns":["scripts/config/**"],"excludePatterns":[],"gateIds":["security-contract"]},
+    {"pathContractId":"slice-product","category":"product","includePatterns":["product/**"],"excludePatterns":[],"gateIds":["build-contract"],"productJobId":"casetracker-csharp"},
+    {"pathContractId":"slice-documentation","category":"documentation","includePatterns":["docs/**"],"excludePatterns":[],"gateIds":["build-contract"]}
+  ]
+}

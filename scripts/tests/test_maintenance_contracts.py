@@ -44,6 +44,34 @@ def preset_helper_source() -> str:
 
 
 class MaintenanceContractTests(unittest.TestCase):
+    @unittest.skipIf(os.name == "nt", "Native Windows uses PowerShell 7")
+    def test_required_bash_probe_rejects_old_shell(self) -> None:
+        tool = next(t for t in read_json(CONFIG / "required-cli-tools-registry.json")["tools"] if t["id"] == "bash")
+        self.assertEqual(tool["platforms"], ["Darwin", "Linux"])
+        current = shutil.which("bash")
+        if current is None:
+            self.skipTest("Bash unavailable on this platform")
+        for shell in dict.fromkeys([current, "/bin/bash"]):
+            if not Path(shell).exists():
+                continue
+            version = subprocess.check_output([shell, "--noprofile", "--norc", "-c", "printf '%s' \"$BASH_VERSION\""], text=True)
+            result = subprocess.run([shell, *tool["args"]], capture_output=True, text=True)
+            self.assertEqual(result.returncode == 0, int(version.split(".")[0]) >= 5)
+            self.assertEqual(result.stdout.strip(), version)
+
+    def test_ci_gate_wrapper_contract_is_cross_platform_and_fail_closed(self) -> None:
+        bash_source = (REPOSITORY / "scripts/maintain-agentic-workspace.sh").read_text(encoding="utf-8")
+        powershell_source = (REPOSITORY / "scripts/maintain-agentic-workspace.ps1").read_text(encoding="utf-8")
+        self.assertIn("--ci-gate", bash_source)
+        self.assertIn("--dry-run", bash_source)
+        self.assertIn("-CiGate", powershell_source)
+        self.assertIn("-WhatIf", powershell_source)
+        self.assertIn("function Invoke-HBAgenticWorkspaceMaintenance", powershell_source)
+        self.assertIn("$ciExitCode = $LASTEXITCODE", powershell_source)
+        self.assertIn("exit $ciExitCode", powershell_source)
+        self.assertNotIn("Invoke-Expression", powershell_source)
+        self.assertNotIn("eval ", bash_source)
+
     def test_network_attempt_contract_distinguishes_success_failure_and_timeout(self) -> None:
         specification = importlib.util.spec_from_file_location(
             "fleet_engine_attempts", FLEET_ENGINE
@@ -130,12 +158,12 @@ class MaintenanceContractTests(unittest.TestCase):
         specification.loader.exec_module(module)
         manifest = module.load_manifest(CONFIG / "agentic-workspace-fleet.json")
         targets = manifest["targets"]
-        self.assertEqual(len(targets), 47)
-        self.assertEqual(sum(item["kind"] == "git-repository" for item in targets), 46)
+        self.assertEqual(len(targets), 49)
+        self.assertEqual(sum(item["kind"] == "git-repository" for item in targets), 48)
         self.assertEqual(sum(item["kind"] == "collection" for item in targets), 1)
         self.assertEqual(
             sum(item["maintenanceClass"] == "canonical-fleet" for item in targets),
-            35,
+            36,
         )
         self.assertEqual(
             sum(
@@ -143,13 +171,43 @@ class MaintenanceContractTests(unittest.TestCase):
                 and item["maintenanceClass"] == "preset"
                 for item in targets
             ),
-            11,
+            12,
         )
         self.assertEqual(
             1 + sum(item["kind"] == "git-repository" for item in targets),
-            47,
+            49,
             "Level 0 plus manifest Git targets define the freshness barrier.",
         )
+
+    def test_fleet_preset_repositories_match_managed_twelve_preset_profile(self) -> None:
+        manifest = read_json(CONFIG / "agentic-workspace-fleet.json")
+        profile = read_json(CONFIG / "spec-kit-model-routing-governance-presets.json")
+
+        collection = next(
+            item for item in manifest["targets"] if item["id"] == "spec-kit-preset-projects"
+        )
+        self.assertEqual(collection["kind"], "collection")
+        self.assertEqual(collection["path"], "SpecKitPresetProjects")
+        self.assertEqual(collection["memberDiscovery"], "declared-targets")
+
+        preset_targets = [
+            item
+            for item in manifest["targets"]
+            if item["kind"] == "git-repository"
+            and item["maintenanceClass"] == "preset"
+            and item["active"]
+        ]
+        declared_remotes = {item["remote"].removesuffix(".git") for item in preset_targets}
+        managed_remotes = {item["repository"].removesuffix(".git") for item in profile["presets"]}
+        declared_paths = {item["path"] for item in preset_targets}
+        managed_paths = {
+            f'{collection["path"]}/{item["repository"].removesuffix(".git").rsplit("/", 1)[-1]}'
+            for item in profile["presets"]
+        }
+
+        self.assertEqual(len(profile["presets"]), 12)
+        self.assertEqual(declared_remotes, managed_remotes)
+        self.assertEqual(declared_paths, managed_paths)
 
     def test_fleet_manifest_rejects_unsafe_semantics(self) -> None:
         specification = importlib.util.spec_from_file_location("fleet_engine_invalid", FLEET_ENGINE)
@@ -202,6 +260,7 @@ class MaintenanceContractTests(unittest.TestCase):
             "intake-authoring-ten-governance-presets": 10,
             "intake-sequencing-eleven-governance-presets": 11,
             "model-routing-twelve-governance-presets": 12,
+            "secure-development-assurance-thirteen-governance-presets": 13,
         }
         self.assertEqual(catalog["defaultProfile"], "standard-eight-governance-presets")
         self.assertIsNone(catalog["profiles"]["none"]["presetConfig"])
@@ -369,6 +428,115 @@ class MaintenanceContractTests(unittest.TestCase):
         self.assertEqual(formulae["powershell"]["linkCommands"], ["pwsh"])
         self.assertNotIn("powershell", {item["name"] for item in registry["casks"]})
 
+    def test_vscode_registry_requires_exact_editor_extension_contract(self) -> None:
+        registry = read_json(CONFIG / "vscode-extensions-registry.json")
+        extensions = registry["extensions"]
+        ids = [item["id"] for item in extensions]
+        expected = {
+            "ms-dotnettools.csdevkit",
+            "golang.Go",
+            "vscjava.vscode-java-pack",
+            "ms-python.python",
+            "rust-lang.rust-analyzer",
+            "swiftlang.swift-vscode",
+            "ms-vscode.powershell",
+            "ms-azuretools.vscode-containers",
+            "myriad-dreamin.tinymist",
+        }
+
+        self.assertEqual(len(ids), 9)
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertEqual(set(ids), expected)
+        self.assertTrue(all(item["scope"] == "required" for item in extensions))
+
+        required_surfaces = (
+            "AGENTS.md",
+            "CLAUDE.md",
+            "GEMINI.md",
+            ".github/copilot-instructions.md",
+            ".github/agents/copilot-instructions.md",
+            "scripts/templates/AGENTS.md.tmpl",
+            "scripts/templates/CLAUDE.md.tmpl",
+            "scripts/templates/GEMINI.md.tmpl",
+            "scripts/templates/copilot-instructions.tmpl",
+            "docs/man/maintain-agentic-brew-apps.1.md",
+            "docs/man/maintain-agentic-winget-apps.1.md",
+        )
+        for relative in required_surfaces:
+            with self.subTest(surface=relative):
+                content = (REPOSITORY / relative).read_text(encoding="utf-8")
+                self.assertIn("ms-vscode.powershell", content)
+                self.assertIn("myriad-dreamin.tinymist", content)
+
+    @unittest.skipUnless(shutil.which("pwsh"), "PowerShell 7 is required.")
+    def test_windows_document_tool_drift_distinguishes_required_and_optional(self) -> None:
+        # Load the actual Windows comparison functions without invoking WinGet.
+        # This portable proof complements native Windows process/install tests.
+        source = REPOSITORY / "scripts/maintain-agentic-winget-apps.ps1"
+        command = f"""
+$ErrorActionPreference='Stop'
+Set-StrictMode -Version Latest
+$ast=[Management.Automation.Language.Parser]::ParseFile('{source}',[ref]$null,[ref]$null)
+$ast.FindAll({{param($node) $node -is [Management.Automation.Language.FunctionDefinitionAst] -and
+    $node.Name -in @('Get-HBCLITools','Compare-HBCLIScope','Compare-HBVSCodeRegistry')}},$false) |
+    ForEach-Object {{ . ([scriptblock]::Create($_.Extent.Text)) }}
+$cliRegistryData=Get-Content '{CONFIG / 'required-cli-tools-registry.json'}' -Raw | ConvertFrom-Json
+function Test-HBCLITool {{ param($Tool) return ($Tool.id -notin $script:missingTools) }}
+foreach ($case in @(
+    @{{scope='required'; missing=@('pandoc'); failed=$true}},
+    @{{scope='required'; missing=@('typst'); failed=$true}},
+    @{{scope='optional'; missing=@('tinymist'); failed=$false}},
+    @{{scope='required'; missing=@(); failed=$false}}
+)) {{
+    $script:RequiredDrift=$false; $script:missingTools=$case.missing
+    Compare-HBCLIScope -Scope $case.scope -Label 'fixture'
+    if ($script:RequiredDrift -ne $case.failed) {{ throw 'CLI drift scope mismatch' }}
+}}
+$SkipVSCodeExtensions=$false; $VSCodeRegistry='fixture'; $allVSCodeExtensionIds=@('myriad-dreamin.tinymist','fixture.optional')
+$vscodeRegistryData=[pscustomobject]@{{extensions=@(
+    [pscustomobject]@{{id='myriad-dreamin.tinymist';scope='required'}},
+    [pscustomobject]@{{id='fixture.optional';scope='optional'}}
+); deprecatedExtensions=@()}}
+function Get-HBVSCodeCli {{ return $script:fixtureCli }}
+function Get-HBVSCodeInstalledExtensionIds {{ param($Cli) return $script:fixtureInstalled }}
+foreach ($case in @(
+    @{{cli='fixture'; installed=@(); failed=$true}},
+    @{{cli='fixture'; installed=@('myriad-dreamin.tinymist'); failed=$false}},
+    @{{cli=$null; installed=@(); failed=$true}}
+)) {{
+    $script:RequiredDrift=$false; $script:fixtureCli=$case.cli; $script:fixtureInstalled=$case.installed
+    Compare-HBVSCodeRegistry
+    if ($script:RequiredDrift -ne $case.failed) {{ throw 'Extension drift scope mismatch' }}
+}}
+$script:RequiredDrift=$false; $SkipVSCodeExtensions=$true
+Compare-HBVSCodeRegistry
+if ($script:RequiredDrift) {{ throw 'Skipped extension check leaked drift' }}
+Write-Output 'PASS'
+"""
+        completed = subprocess.run(["pwsh", "-NoProfile", "-Command", command],
+            capture_output=True, text=True, timeout=30)
+        self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
+        self.assertIn("PASS", completed.stdout)
+
+    def test_document_tools_have_matching_package_and_cli_scopes(self) -> None:
+        brew = read_json(CONFIG / "brew-apps-registry.json")
+        formulae = {item["name"]: item["scope"] for item in brew["formulae"]}
+        apt = {item["name"]: item["scope"] for item in brew["aptFallback"]["packages"]}
+        windows = {item["id"]: item["scope"] for item in read_json(CONFIG / "winget-apps-registry.json")["packages"]}
+        cli = {item["id"]: item for item in read_json(CONFIG / "required-cli-tools-registry.json")["tools"]}
+        for name, package, scope in (
+            ("pandoc", "JohnMacFarlane.Pandoc", "required"),
+            ("typst", "Typst.Typst", "required"),
+            ("tinymist", "Myriad-Dreamin.Tinymist", "optional"),
+        ):
+            with self.subTest(tool=name):
+                self.assertEqual(formulae[name], scope)
+                self.assertEqual(windows[package], scope)
+                self.assertEqual(cli[name]["scope"], scope)
+                self.assertEqual(set(cli[name]["platforms"]), {"Darwin", "Linux", "Windows"})
+                self.assertEqual(cli[name]["args"], ["--version"])
+        self.assertEqual(apt["pandoc"], "required")
+
     def test_required_cli_registry_and_swift_platform_contract_are_closed(self) -> None:
         registry = read_json(CONFIG / "required-cli-tools-registry.json")
         tools = registry["tools"]
@@ -383,12 +551,32 @@ class MaintenanceContractTests(unittest.TestCase):
             self.assertTrue(item["command"])
             self.assertIsInstance(item["args"], list)
 
+        approved_spec_kit_revision = "464d57fe30c72e9a88d279cc49834539ec989c03"
+        approved_spec_kit_source = (
+            "git+https://github.com/github/spec-kit.git@" + approved_spec_kit_revision
+        )
+        specify = next(item for item in tools if item["id"] == "specify")
+        self.assertEqual(
+            specify["install"]["arguments"],
+            ["tool", "install", "specify-cli", "--from", approved_spec_kit_source],
+        )
+        self.assertEqual(
+            registry["policy"]["specKitInstallCommand"],
+            "uv tool install specify-cli --from " + approved_spec_kit_source,
+        )
+        bash_maintainer = (REPOSITORY / "scripts/maintain-agentic-brew-apps.sh").read_text(encoding="utf-8")
+        windows_maintainer = (REPOSITORY / "scripts/maintain-agentic-winget-apps.ps1").read_text(encoding="utf-8")
+        for source in (bash_maintainer, windows_maintainer):
+            self.assertIn(approved_spec_kit_revision, source)
+
         swift = next(item for item in tools if item["id"] == "swift")
         install = swift["install"]
         self.assertEqual(install["manager"], "swiftly")
         linux = install["linux"]
         self.assertEqual(linux["swiftlyVersion"], "1.1.2")
-        self.assertEqual(linux["swiftVersion"], "6.3.3")
+        self.assertEqual(linux["swiftVersion"], "latest-stable")
+        self.assertEqual({item["id"] for item in registry["mslToolchains"]},
+                         {"dotnet", "go", "java", "python", "rust", "swift"})
         self.assertEqual(
             linux["profiles"],
             {
@@ -527,6 +715,12 @@ class MaintenanceContractTests(unittest.TestCase):
                 cwd=repository,
                 text=True,
             )
+            preset_helpers = preset_helper_source().replace(
+                '--owner-pid "$$" \\\n',
+                '--owner-pid "$$" \\\n'
+                '      --owner-process-identity fixture-owner-process \\\n',
+                1,
+            )
             harness = f"""set -euo pipefail
 SOURCE_ROOT=/not-the-fixture
 HOME_DIR={shlex.quote(str(home))}
@@ -543,7 +737,7 @@ PRESET_VALIDATION_TARGET=''
 PRESET_VALIDATION_ISOLATED=0
 warn() {{ :; }}
 info() {{ :; }}
-{preset_helper_source()}
+{preset_helpers}
 prepare_preset_validation_target {shlex.quote(str(repository))}
 [ "$PRESET_VALIDATION_ISOLATED" -eq 1 ]
 [ -f "$PRESET_VALIDATION_TARGET/.specify/presets/.registry" ]
@@ -672,6 +866,8 @@ prepare_preset_validation_target {shlex.quote(str(repository))}
             )
             registry_directory = home / ".home-baseline"
             registry_directory.mkdir()
+            workspace = home / "workspace"
+            workspace.mkdir()
             (registry_directory / "level2-repository-registry.json").write_text(
                 json.dumps(
                     {
@@ -691,7 +887,7 @@ prepare_preset_validation_target {shlex.quote(str(repository))}
                     "bash",
                     str(REPOSITORY / "scripts" / "bootstrap-project.sh"),
                     "Fixture",
-                    str(home / "workspace"),
+                    str(workspace),
                     "--no-remote",
                     "--preview",
                 ],
@@ -707,7 +903,8 @@ prepare_preset_validation_target {shlex.quote(str(repository))}
                 "intake-sequencing-eleven-governance-presets",
                 completed.stdout,
             )
-            self.assertFalse((home / "workspace").exists())
+            self.assertTrue(workspace.is_dir())
+            self.assertFalse((workspace / "Fixture").exists())
 
     @unittest.skipIf(os.name == "nt", "The Bash bootstrap contract test runs on macOS and Linux.")
     def test_bash_bootstrap_rejects_missing_or_ambiguous_constitution_version(self) -> None:
@@ -718,6 +915,8 @@ prepare_preset_validation_target {shlex.quote(str(repository))}
             with self.subTest(content=content), tempfile.TemporaryDirectory() as directory:
                 home = Path(directory)
                 (home / "constitution.md").write_text(content, encoding="utf-8")
+                workspace = home / "workspace"
+                workspace.mkdir()
                 environment = os.environ.copy()
                 environment["HOME"] = str(home)
                 completed = subprocess.run(
@@ -725,7 +924,7 @@ prepare_preset_validation_target {shlex.quote(str(repository))}
                         "bash",
                         str(REPOSITORY / "scripts" / "bootstrap-project.sh"),
                         "Fixture",
-                        str(home / "workspace"),
+                        str(workspace),
                         "--no-remote",
                         "--preview",
                     ],
@@ -737,7 +936,8 @@ prepare_preset_validation_target {shlex.quote(str(repository))}
                 )
                 self.assertNotEqual(completed.returncode, 0, completed.stdout)
                 self.assertIn("genau einmal", completed.stdout)
-                self.assertFalse((home / "workspace").exists())
+                self.assertTrue(workspace.is_dir())
+                self.assertFalse((workspace / "Fixture").exists())
 
     @unittest.skipIf(os.name == "nt", "The Bash registration test runs on macOS and Linux.")
     def test_bash_registration_dry_run_creates_no_registry_directory(self) -> None:
@@ -832,6 +1032,8 @@ prepare_preset_validation_target {shlex.quote(str(repository))}
             )
             registry_directory = home / ".home-baseline"
             registry_directory.mkdir()
+            workspace = home / "workspace"
+            workspace.mkdir()
             registry = registry_directory / "level2-repository-registry.json"
             registry.write_text(
                 json.dumps(
@@ -855,7 +1057,7 @@ prepare_preset_validation_target {shlex.quote(str(repository))}
                     "-ProjectName",
                     "Fixture",
                     "-TargetWorkspace",
-                    str(home / "workspace"),
+                    str(workspace),
                     "-NoRemote",
                     "-PresetProfile",
                     "intake-sequencing-eleven-governance-presets",
@@ -873,7 +1075,8 @@ prepare_preset_validation_target {shlex.quote(str(repository))}
                 "intake-sequencing-eleven-governance-presets",
                 preview.stdout,
             )
-            self.assertFalse((home / "workspace").exists())
+            self.assertTrue(workspace.is_dir())
+            self.assertFalse((workspace / "Fixture").exists())
 
             dry_run_registry = home / "dry-run" / "nested" / "registry.json"
             dry_run_repository = home / "DryRunProjects" / "Fixture"

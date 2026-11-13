@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "1.0",
+  "fixtureClock": "2026-08-20T00:00:00Z",
+  "cases": [
+    {"fixtureId": "zero", "repositoryIds": []},
+    {"fixtureId": "one", "repositoryIds": ["home-baseline"]},
+    {"fixtureId": "multiple", "repositoryIds": ["home-baseline", "agent-operations-cockpit", "tui-vision"]},
+    {"fixtureId": "full-48", "baseFixture": "../inventory/fleet-valid.json", "repositoryCount": 48}
+  ],
+  "forbiddenOperations": ["POST", "PUT", "PATCH", "DELETE", "commit", "push", "merge", "home-sync", "G4"]
+}
