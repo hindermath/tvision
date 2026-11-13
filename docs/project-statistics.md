@@ -207,6 +207,14 @@ EN: Distributed maintenance scripts bound npm agent probes before execution. Tin
 
 Documentation Impact: UpdateRequired; [Nachweis / evidence](maintenance/shared-security-rollout-2026-11-13.md).
 
+### 2026-11-13 — Vollstaendiger Preset-Payload / Complete preset payload
+
+DE: Sechs durch die Ignore-Regel ausgelassene, unveraenderte Release-Logs sind nun getrackt; der vorhandene Installations-Lock bindet alle 117 Dateien. Kein neuer Spec-Kit-Lauf.
+
+EN: Six unchanged release logs previously omitted by the ignore rule are now tracked; the existing installed-state lock binds all 117 files. No new Spec Kit run.
+
+Documentation Impact: UpdateRequired; [Nachweis / evidence](maintenance/shared-security-rollout-2026-11-13.md).
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->

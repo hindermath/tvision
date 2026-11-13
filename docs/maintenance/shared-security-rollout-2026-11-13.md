@@ -107,6 +107,20 @@ locks. TuiVision's new historical input copies use shorter relative paths for
 Windows; their bytes and hashes remain unchanged. Existing technical checks
 remain mandatory.
 
+## Vollstaendiger Preset-Payload / Complete preset payload
+
+DE: Die `project-statistics-governance`-Installation enthaelt sechs
+`fixtures.log`-Nachweise. tvisions Ignore-Regel hatte diese vorhandenen
+Release-Dateien aus dem Git-Commit ausgeschlossen. Genau diese sechs
+unveraenderten Dateien sind nun getrackt; der vorhandene Installations-Lock
+bleibt bytegleich. Der CI-Bindungstest prueft weiter alle 117 Paketdateien.
+
+EN: The `project-statistics-governance` installation includes six
+`fixtures.log` evidence files. tvision's ignore rule had excluded these
+existing release files from the Git commit. These exact six unchanged files
+are now tracked; the installed-state lock remains byte-identical. CI still
+checks all 117 package files.
+
 ## npm-Agent-Proben / npm agent probes
 
 DE: Die beiden kanonischen Wartungsskripte pruefen npm-Agent-Befehle und Argumente jetzt vor jeder Ausfuehrung gegen den Codevertrag. Eine abgelehnte Probe startet keine Installation. Die allgemeine Prozesshilfe bleibt fuer andere vorgesehene Pruefungen erhalten.
