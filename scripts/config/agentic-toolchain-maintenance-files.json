@@ -1,8 +1,14 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-08-09",
+  "updated": "2026-11-13",
   "description": "Canonical files propagated from Level-0 to existing Level-1 and Level-2 repositories.",
   "exceptions": [
+    {
+      "repositoryPath": "RiderProjects/Show-CommandTui400",
+      "path": "scripts/invoke-psscriptanalyzer.ps1",
+      "reason": "Preserve the existing exact-rule and exact-variable treatment of two synthetic LH-01 session probes. Archived proof bytes stay unchanged; all other global-variable findings remain errors.",
+      "evidence": "https://github.com/hindermath/Show-CommandTui400/blob/418a5686cec94db635b59da6db3562d2a29e27da/scripts/invoke-psscriptanalyzer.ps1"
+    },
     {
       "repositoryPath": "RiderProjects/TuiVision",
       "path": "scripts/lib/maintenance-tui/src/HomeBaseline.MaintenanceTui/HomeBaseline.MaintenanceTui.csproj",
@@ -14,15 +20,109 @@
       "path": "scripts/lib/maintenance-tui/tests/HomeBaseline.MaintenanceTui.Tests/HomeBaseline.MaintenanceTui.Tests.csproj",
       "reason": "TuiVision enforces CS1591 for its public API; the distributed maintenance tests are operational tooling outside that API contract.",
       "evidence": "https://github.com/hindermath/TuiVision/pull/133"
+    },
+    {
+      "evidence": "https://github.com/hindermath/absdd-image-sandbox/blob/9ca5aec38f5005502ac2253b95d9485ac0383792/Dockerfile",
+      "repositoryPath": "container-images/absdd-image-sandbox",
+      "reason": "The sandbox registry retains the Swift version pinned by its Dockerfile; host latest-stable must not replace that image-bound Linux install target. Other registry fields follow the reviewed canonical update.",
+      "path": "scripts/config/required-cli-tools-registry.json"
+    },
+    {
+      "repositoryPath": "RiderProjects/AgentOperationsCockpit",
+      "path": "scripts/check-homogeneity.sh",
+      "reason": "Preserve the existing project-specific memory-patch adapter, which invokes the tracked-only, target-only-commit helper. Canonical shell copies must not replace this previously delivered security boundary.",
+      "evidence": "https://github.com/hindermath/agent-operations-cockpit/blob/21efd0733a8f34b02974e709191d0cc381d8dd5d/scripts/check-homogeneity.sh"
+    },
+    {
+      "repositoryPath": "RiderProjects/AgentOperationsCockpit",
+      "path": "scripts/check-homogeneity.ps1",
+      "reason": "Preserve the existing project-specific memory-patch adapter, which invokes the tracked-only, target-only-commit helper. Canonical shell copies must not replace this previously delivered security boundary.",
+      "evidence": "https://github.com/hindermath/agent-operations-cockpit/blob/21efd0733a8f34b02974e709191d0cc381d8dd5d/scripts/check-homogeneity.ps1"
+    },
+    {
+      "repositoryPath": "RiderProjects/TinyPl0",
+      "path": "scripts/maintain-agentic-brew-apps.sh",
+      "reason": "Preserve TinyPl0 explicit opt-in for alternate executable registries; the delivered project authority gate must not be replaced by generic maintenance copies.",
+      "evidence": "https://github.com/hindermath/TinyPl0/blob/2eb2c8d7a26eb27d4ffac99e137db6ba885fb614/scripts/maintain-agentic-brew-apps.sh"
+    },
+    {
+      "repositoryPath": "RiderProjects/TinyPl0",
+      "path": "scripts/maintain-agentic-winget-apps.ps1",
+      "reason": "Preserve TinyPl0 explicit opt-in for alternate executable registries; the delivered project authority gate must not be replaced by generic maintenance copies.",
+      "evidence": "https://github.com/hindermath/TinyPl0/blob/2eb2c8d7a26eb27d4ffac99e137db6ba885fb614/scripts/maintain-agentic-winget-apps.ps1"
     }
   ],
   "files": [
+    {
+      "path": "scripts/templates/ci-budget-governance/private-governance-minimal-gate.yml",
+      "executable": false
+    },
+    {
+      "path": "scripts/templates/ci-budget-governance/private-governance-ruleset.json",
+      "executable": false
+    },
+    {
+      "path": "scripts/lib/msl-toolchains.psm1",
+      "executable": false
+    },
+    {
+      "path": "scripts/lib/invoke-msl-toolchains.ps1",
+      "executable": false
+    },
+    {
+      "path": "scripts/tests/test_msl_toolchains.py",
+      "executable": false
+    },
+    {
+      "path": "scripts/lib/maintenance_execution_context.py",
+      "executable": false
+    },
+    {
+      "path": "scripts/lib/maintenance_container_worker.py",
+      "executable": false
+    },
+    {
+      "path": "scripts/lib/maintenance_git_bundle.py",
+      "executable": false
+    },
+    {
+      "path": "scripts/tests/test_maintenance_git_bundle.py",
+      "executable": false
+    },
+    {
+      "path": "scripts/config/maintenance-execution-contexts.json",
+      "executable": false
+    },
+    {
+      "path": "scripts/tests/test_maintenance_execution_context.py",
+      "executable": false
+    },
     {
       "path": "scripts/maintain-agentic-workspace.sh",
       "executable": true
     },
     {
       "path": "scripts/maintain-agentic-workspace.ps1",
+      "executable": false
+    },
+    {
+      "path": "scripts/maintain-workspace-storage.sh",
+      "executable": true
+    },
+    {
+      "path": "scripts/maintain-workspace-storage.ps1",
+      "executable": false
+    },
+    {
+      "path": "scripts/lib/workspace_storage_maintenance.py",
+      "executable": true
+    },
+    {
+      "path": "scripts/config/workspace-storage-maintenance.json",
+      "executable": false
+    },
+    {
+      "path": "scripts/tests/test_workspace_storage_maintenance.py",
       "executable": false
     },
     {
@@ -47,6 +147,18 @@
     },
     {
       "path": "scripts/tests/test_maintenance_tui_wrappers.py",
+      "executable": false
+    },
+    {
+      "path": "scripts/tests/test_feature_020_documentation_architecture.py",
+      "executable": false
+    },
+    {
+      "path": "scripts/tests/test_spec_kit_agent_surface_parity.py",
+      "executable": false
+    },
+    {
+      "path": "scripts/tests/test_linux_maintenance_hardening.py",
       "executable": false
     },
     {
@@ -238,6 +350,10 @@
       "executable": false
     },
     {
+      "path": "docs/man/maintain-workspace-storage.1.md",
+      "executable": false
+    },
+    {
       "path": "docs/man/resolve-model-routing.1.md",
       "executable": false
     },
@@ -351,6 +467,10 @@
     },
     {
       "path": "scripts/init-stats.ps1",
+      "executable": false
+    },
+    {
+      "path": "scripts/lib/managed-file-hardening.psm1",
       "executable": false
     },
     {
@@ -494,6 +614,14 @@
       "executable": false
     },
     {
+      "path": "scripts/config/spec-kit-secure-development-assurance-governance-presets.json",
+      "executable": false
+    },
+    {
+      "path": "scripts/config/spec-kit-project-statistics-governance-presets.json",
+      "executable": false
+    },
+    {
       "path": "scripts/config/spec-kit-preset-profiles.json",
       "executable": false
     },
@@ -575,6 +703,26 @@
     },
     {
       "path": "docs/documentation-governance.md",
+      "executable": false
+    },
+    {
+      "path": "scripts/adapters/new-harnesses.ps1",
+      "executable": false
+    },
+    {
+      "path": "scripts/adapters/discover-sdk.mjs",
+      "executable": false
+    },
+    {
+      "path": "scripts/adapters/selection-policy.json",
+      "executable": false
+    },
+    {
+      "path": "scripts/tests/test-model-routing-installation.ps1",
+      "executable": false
+    },
+    {
+      "path": "scripts/adapters/invoke-harness-with-result.ps1",
       "executable": false
     }
   ]

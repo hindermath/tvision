@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "1.0",
+  "cases": [
+    {"fixtureId": "hook-bypassed", "mutation": "hookRequiredForServerEnforcement", "value": true},
+    {"fixtureId": "zero-status", "mutation": "requiredStatusChecks", "value": []},
+    {"fixtureId": "multiple-status", "mutation": "requiredStatusChecks", "value": ["a", "b"]},
+    {"fixtureId": "too-broad", "mutation": "pathDependent", "value": false},
+    {"fixtureId": "full-build", "mutation": "fullBuild", "value": true},
+    {"fixtureId": "main-push", "mutation": "triggers", "value": ["push"]},
+    {"fixtureId": "direct-write", "mutation": "blockedWritePaths", "value": ["api", "web"]},
+    {"fixtureId": "web-write", "mutation": "blockedWritePaths", "value": ["api", "direct"]},
+    {"fixtureId": "api-write", "mutation": "blockedWritePaths", "value": ["direct", "web"]}
+  ]
+}

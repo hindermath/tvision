@@ -1,11 +1,53 @@
 ---
 name: speckit-tasks
-description: 'Spec-kit workflow command: speckit-tasks'
+description: Generate an actionable, dependency-ordered tasks.md for the feature based
+  on available design artifacts.
 compatibility: Requires spec-kit project structure with .specify/ directory
 metadata:
   author: github-spec-kit
-  source: agent-parity-governance:commands/speckit.tasks.md
+  source: security-governance v0.7.5:speckit.tasks.md
 ---
+
+Before continuing, apply the Security Governance preset:
+
+- convert MSL applicability and justification needs into explicit tasks
+- convert security obligations into explicit tasks
+- include evidence-production tasks under `docs/security/`
+- avoid leaving secure-development work as undocumented assumptions
+
+Before continuing, apply the Architecture Governance preset:
+
+- convert architecture obligations into explicit tasks
+- include `docs/security/` evidence updates
+- add BSI C3A cloud autonomy applicability tasks when cloud services or
+  provider-dependent deployments are in scope
+- do not leave threat-modeling or ADR work implicit
+
+Before continuing, apply the iSAQB Architecture Governance preset:
+
+- convert architecture goals, quality scenarios, views, ADRs, risks, and
+  technical debt into explicit tasks
+- include concrete evidence-production tasks under `docs/architecture/`
+- add architecture-review tasks for significant structure, interface,
+  runtime, or deployment changes
+- if security-relevant architecture is affected, include the corresponding
+  secure-architecture tasks from `architecture-governance`
+
+Before continuing, apply the A11Y Governance preset:
+
+- convert accessibility expectations into explicit tasks
+- convert bilingual delivery work into explicit tasks
+- do not leave A11Y or language review implicit
+
+Before continuing, apply the Cross-Platform Governance preset:
+
+- add explicit tasks for both `*.sh` and `*.ps1` variants in the same
+  change
+- add tasks for the Unix man-page and the bilingual PowerShell help
+  block
+- add a task to expose the PowerShell variant as a Cmdlet with an
+  approved `Verb-Noun` name
+- add a parity-verification task using the script-parity checklist
 
 Before continuing, apply the Agent Parity Governance preset:
 
@@ -15,10 +57,400 @@ Before continuing, apply the Agent Parity Governance preset:
   local constitution mirror
 - add a parity-verification task using the agent-parity checklist
 
-{CORE_TEMPLATE}
+
+## User Input
+
+```text
+$ARGUMENTS
+```
+
+You **MUST** consider the user input before proceeding (if not empty).
+
+## Pre-Execution Checks
+
+**Check for extension hooks (before tasks generation)**:
+- Check if `.specify/extensions.yml` exists in the project root.
+- If it exists, read it and look for entries under the `hooks.before_tasks` key
+- If the YAML cannot be parsed or is invalid, skip hook checking silently and continue normally
+- Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
+- For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
+  - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
+  - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
+- For each executable hook, output the following based on its `optional` flag:
+  - **Optional hook** (`optional: true`):
+    ```
+    ## Extension Hooks
+
+    **Optional Pre-Hook**: {extension}
+    Command: `/{command}`
+    Description: {description}
+
+    Prompt: {prompt}
+    To execute: `/{command}`
+    ```
+  - **Mandatory hook** (`optional: false`):
+    ```
+    ## Extension Hooks
+
+    **Automatic Pre-Hook**: {extension}
+    Executing: `/{command}`
+    EXECUTE_COMMAND: {command}
+
+    Wait for the result of the hook command before proceeding to the Outline.
+    ```
+    After emitting the block above you MUST actually invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
+- If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
+
+## Outline
+
+1. **Setup**: Run `.specify/scripts/bash/setup-tasks.sh --json` from repo root and parse FEATURE_DIR, TASKS_TEMPLATE, and AVAILABLE_DOCS list. `FEATURE_DIR` and `TASKS_TEMPLATE` must be absolute paths when provided. `AVAILABLE_DOCS` is a list of document names/relative paths available under `FEATURE_DIR` (for example `research.md` or `contracts/`). For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
+
+2. **Load design documents**: Read from FEATURE_DIR:
+   - **Required**: plan.md (tech stack, libraries, structure), spec.md (user stories with priorities)
+   - **Optional**: data-model.md (entities), contracts/ (interface contracts), research.md (decisions), quickstart.md (test scenarios)
+   - **IF EXISTS**: Load `.specify/memory/constitution.md` for project principles and governance constraints
+   - Note: Not all projects have all documents. Generate tasks based on what's available.
+
+3. **Execute task generation workflow**:
+   - Load plan.md and extract tech stack, libraries, project structure
+   - Load spec.md and extract user stories with their priorities (P1, P2, P3, etc.)
+   - If data-model.md exists: Extract entities and map to user stories
+   - If contracts/ exists: Map interface contracts to user stories
+   - If research.md exists: Extract decisions for setup tasks
+   - Generate tasks organized by user story (see Task Generation Rules below)
+   - Generate dependency graph showing user story completion order
+   - Create parallel execution examples per user story
+   - Validate task completeness (each user story has all needed tasks, independently testable)
+
+4. **Generate tasks.md**: Read the tasks template from TASKS_TEMPLATE (from the JSON output above) and use it as structure. If TASKS_TEMPLATE is empty, fall back to `.specify/templates/tasks-template.md`. Fill with:
+   - Correct feature name from plan.md
+   - Phase 1: Setup tasks (project initialization)
+   - Phase 2: Foundational tasks (blocking prerequisites for all user stories)
+   - Phase 3+: One phase per user story (in priority order from spec.md)
+   - Each phase includes: story goal, independent test criteria, tests (if requested), implementation tasks
+   - Final Phase: Polish & cross-cutting concerns
+   - All tasks must follow the strict checklist format (see Task Generation Rules below)
+   - Clear file paths for each task
+   - Dependencies section showing story completion order
+   - Parallel execution examples per story
+   - Implementation strategy section (MVP first, incremental delivery)
+
+## Mandatory Post-Execution Hooks
+
+**You MUST complete this section before reporting completion to the user.**
+
+Check if `.specify/extensions.yml` exists in the project root.
+- If it does not exist, or no hooks are registered under `hooks.after_tasks`, skip to the Completion Report.
+- If it exists, read it and look for entries under the `hooks.after_tasks` key.
+- If the YAML cannot be parsed or is invalid, skip hook checking silently and continue to the Completion Report.
+- Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
+- For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
+  - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
+  - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
+- For each executable hook, output the following based on its `optional` flag:
+  - **Mandatory hook** (`optional: false`) — **You MUST emit `EXECUTE_COMMAND:` for each mandatory hook**:
+    ```
+    ## Extension Hooks
+
+    **Automatic Hook**: {extension}
+    Executing: `/{command}`
+    EXECUTE_COMMAND: {command}
+    ```
+    After emitting the block above you MUST actually invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
+  - **Optional hook** (`optional: true`):
+    ```
+    ## Extension Hooks
+
+    **Optional Hook**: {extension}
+    Command: `/{command}`
+    Description: {description}
+
+    Prompt: {prompt}
+    To execute: `/{command}`
+    ```
+
+## Completion Report
+
+Output path to generated tasks.md and summary:
+- Total task count
+- Task count per user story
+- Parallel opportunities identified
+- Independent test criteria for each story
+- Suggested MVP scope (typically just User Story 1)
+- Format validation: Confirm ALL tasks follow the checklist format (checkbox, ID, labels, file paths)
+
+Context for task generation: $ARGUMENTS
+
+The tasks.md should be immediately executable - each task must be specific enough that an LLM can complete it without additional context.
+
+## Task Generation Rules
+
+**CRITICAL**: Tasks MUST be organized by user story to enable independent implementation and testing.
+
+**Tests are OPTIONAL**: Only generate test tasks if explicitly requested in the feature specification or if user requests TDD approach.
+
+### Checklist Format (REQUIRED)
+
+Every task MUST strictly follow this format:
+
+```text
+- [ ] [TaskID] [P?] [Story?] Description with file path
+```
+
+**Format Components**:
+
+1. **Checkbox**: ALWAYS start with `- [ ]` (markdown checkbox)
+2. **Task ID**: Sequential number (T001, T002, T003...) in execution order
+3. **[P] marker**: Include ONLY if task is parallelizable (different files, no dependencies on incomplete tasks)
+4. **[Story] label**: REQUIRED for user story phase tasks only
+   - Format: [US1], [US2], [US3], etc. (maps to user stories from spec.md)
+   - Setup phase: NO story label
+   - Foundational phase: NO story label
+   - User Story phases: MUST have story label
+   - Polish phase: NO story label
+5. **Description**: Clear action with exact file path
+
+**Examples**:
+
+- ✅ CORRECT: `- [ ] T001 Create project structure per implementation plan`
+- ✅ CORRECT: `- [ ] T005 [P] Implement authentication middleware in src/middleware/auth.py`
+- ✅ CORRECT: `- [ ] T012 [P] [US1] Create User model in src/models/user.py`
+- ✅ CORRECT: `- [ ] T014 [US1] Implement UserService in src/services/user_service.py`
+- ❌ WRONG: `- [ ] Create User model` (missing ID and Story label)
+- ❌ WRONG: `T001 [US1] Create model` (missing checkbox)
+- ❌ WRONG: `- [ ] [US1] Create User model` (missing Task ID)
+- ❌ WRONG: `- [ ] T001 [US1] Create model` (missing file path)
+
+### Task Organization
+
+1. **From User Stories (spec.md)** - PRIMARY ORGANIZATION:
+   - Each user story (P1, P2, P3...) gets its own phase
+   - Map all related components to their story:
+     - Models needed for that story
+     - Services needed for that story
+     - Interfaces/UI needed for that story
+     - If tests requested: Tests specific to that story
+   - Mark story dependencies (most stories should be independent)
+
+2. **From Contracts**:
+   - Map each interface contract → to the user story it serves
+   - If tests requested: Each interface contract → contract test task [P] before implementation in that story's phase
+
+3. **From Data Model**:
+   - Map each entity to the user story(ies) that need it
+   - If entity serves multiple stories: Put in earliest story or Setup phase
+   - Relationships → service layer tasks in appropriate story phase
+
+4. **From Setup/Infrastructure**:
+   - Shared infrastructure → Setup phase (Phase 1)
+   - Foundational/blocking tasks → Foundational phase (Phase 2)
+   - Story-specific setup → within that story's phase
+
+### Phase Structure
+
+- **Phase 1**: Setup (project initialization)
+- **Phase 2**: Foundational (blocking prerequisites - MUST complete before user stories)
+- **Phase 3+**: User Stories in priority order (P1, P2, P3...)
+  - Within each story: Tests (if requested) → Models → Services → Endpoints → Integration
+  - Each phase should be a complete, independently testable increment
+- **Final Phase**: Polish & Cross-Cutting Concerns
+
+## Done When
+
+- [ ] tasks.md generated with all phases, task IDs, and file paths
+- [ ] Extension hooks dispatched or skipped according to the rules in Mandatory Post-Execution Hooks above
+- [ ] Completion reported to user with task count, story breakdown, and MVP scope
+
 
 Audit-ready evidence requirement:
 
 - Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
 - If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
 - If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+## Nutzungshilfe / Reader help
+
+DE: Gemeinsame Regeln auf tatsächlich gepflegten Agentenflächen inhaltlich gleich halten. Diese Command-Erklärung ändert keine Berechtigungen oder Voraussetzungen.
+Die bestehenden technischen Feldnamen und Statuswerte nicht übersetzen oder
+nur zum Bestehen eines Tests verändern. Einführung, Begriffe, Beispiel,
+Ergebnis und Fehlerhilfe stehen im [deutschen Leserpfad](https://github.com/hindermath/spec-kit-preset-agent-parity-governance/blob/main/docs/user-guide.md).
+
+EN: Keep shared rules semantically equivalent across actually maintained agent surfaces. This command explanation changes no authority or prerequisites.
+Keep technical field names and states unchanged; never alter them just to pass.
+See the [English reader path](https://github.com/hindermath/spec-kit-preset-agent-parity-governance/blob/main/docs/user-guide.EN.md)
+for introduction, terms, example, result and troubleshooting.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+## Nutzungshilfe / Reader help
+
+DE: Dieselbe fachliche Funktion auf benannten Plattformen prüfen, ohne nicht ausgeführte Tests zu behaupten. Diese Command-Erklärung ändert keine Berechtigungen oder Voraussetzungen.
+Die bestehenden technischen Feldnamen und Statuswerte nicht übersetzen oder
+nur zum Bestehen eines Tests verändern. Einführung, Begriffe, Beispiel,
+Ergebnis und Fehlerhilfe stehen im [deutschen Leserpfad](https://github.com/hindermath/spec-kit-preset-cross-platform-governance/blob/main/docs/user-guide.md).
+
+EN: Check the same functional behaviour on named platforms without claiming unperformed tests. This command explanation changes no authority or prerequisites.
+Keep technical field names and states unchanged; never alter them just to pass.
+See the [English reader path](https://github.com/hindermath/spec-kit-preset-cross-platform-governance/blob/main/docs/user-guide.EN.md)
+for introduction, terms, example, result and troubleshooting.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+## Nutzungshilfe / Reader help
+
+DE: Nutzbare Oberflächen und verständliche zweisprachige Dokumentation von Anfang an einplanen. Diese Command-Erklärung ändert keine Berechtigungen oder Voraussetzungen.
+Die bestehenden technischen Feldnamen und Statuswerte nicht übersetzen oder
+nur zum Bestehen eines Tests verändern. Einführung, Begriffe, Beispiel,
+Ergebnis und Fehlerhilfe stehen im [deutschen Leserpfad](https://github.com/hindermath/spec-kit-preset-a11y-governance/blob/main/docs/user-guide.md).
+
+EN: Plan usable interfaces and understandable bilingual documentation from the start. This command explanation changes no authority or prerequisites.
+Keep technical field names and states unchanged; never alter them just to pass.
+See the [English reader path](https://github.com/hindermath/spec-kit-preset-a11y-governance/blob/main/docs/user-guide.EN.md)
+for introduction, terms, example, result and troubleshooting.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+## Nutzungshilfe / Reader help
+
+DE: Systemaufbau und Architekturentscheidungen mit wenigen passenden Vorlagen erklären. Diese Command-Erklärung ändert keine Berechtigungen oder Voraussetzungen.
+Die bestehenden technischen Feldnamen und Statuswerte nicht übersetzen oder
+nur zum Bestehen eines Tests verändern. Einführung, Begriffe, Beispiel,
+Ergebnis und Fehlerhilfe stehen im [deutschen Leserpfad](https://github.com/hindermath/spec-kit-preset-isaqb-architecture-governance/blob/main/docs/user-guide.md).
+
+EN: Explain system structure and architecture decisions with a few suitable templates. This command explanation changes no authority or prerequisites.
+Keep technical field names and states unchanged; never alter them just to pass.
+See the [English reader path](https://github.com/hindermath/spec-kit-preset-isaqb-architecture-governance/blob/main/docs/user-guide.EN.md)
+for introduction, terms, example, result and troubleshooting.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+## C3A-/C5-Evidence-Vertrag / C3A/C5 evidence contract
+
+DE: Bei anwendbarem C3A alle 30 Gruppen aus `c3a-criteria-catalog` v1.0
+sichtbar halten; je ausgewaehltem C-/AC-Identifier Evidence und Variante mit
+Begruendung erfassen. SI ist Erlaeuterung, kein bestandener Kontrollpunkt.
+N/A braucht Begruendung; Open braucht Grund, Owner, Aktion und Wiedervorlage.
+Providerbehauptungen von unabhaengiger Pruefung und Kundenpflichten trennen.
+C5 Typ 1 ist zeitpunktbezogen und kein Wirksamkeitsnachweis ueber einen
+Zeitraum. Typ 2 braucht Pruefzeitraum und Wirksamkeitsbewertung; Unknown bleibt
+eine offene Luecke. C5 erfuellt C3A nicht automatisch. Keine Evidence erfinden,
+kein Audit oder Zertifikat behaupten und historische Nachweise nicht umschreiben.
+
+EN: For applicable C3A, retain all 30 groups from `c3a-criteria-catalog` v1.0;
+record exact selected C/AC IDs, variant rationale and attributable evidence.
+SI informs interpretation, not another passed control. N/A requires rationale;
+Open requires reason, owner, action and reevaluation. Distinguish provider
+claims, independent review and customer responsibilities. C5 Type 1 is
+point-in-time assurance, not sustained operating effectiveness. Type 2 requires
+audit period and effectiveness assessment; Unknown remains an open gap.
+C5 does not automatically satisfy C3A. Do not fabricate evidence, claim an
+audit/certification or rewrite historical records.
+
+## Datenschutz und regulatorische Architektur / Privacy and regulatory architecture
+
+DE: Die projektspezifische Anwendbarkeit von DS-GVO, KI-VO, CRA, NIS2 und
+DORA wird durch Security-Evidence gefuehrt; hier keine zweite Rechtsentscheidung
+erfinden. Bei installiertem Security-Preset dessen Detailvorlagen nutzen,
+sonst gleichwertige projektgefuehrte Nachweise verlinken. Beispielprogramm,
+Entwicklungswerkzeuge und Organisation getrennt betrachten; AI-SBOM: N/A
+und Ausbildungszweck sind keine allgemeine regulatorische Ausnahme.
+Privacy by Design/Default: Datenminimierung, Zweck, Empfaenger, Regionen,
+Speicherbegrenzung, Loeschung und Betroffenenrechte in Datenfluessen abbilden.
+KI-Tool-/Produktgrenzen, Prompt-, Logging- und Telemetriepfade pruefen.
+NIS2-/DORA-relevante Dienstleisterabhaengigkeit, getestete Wiederherstellung,
+Verfuegbarkeit, Konzentrationsrisiko und Exit-Faehigkeit rollenbezogen planen.
+C3A/C5-Nachweise ersetzen keinen Datenschutz-, NIS2- oder DORA-Nachweis.
+EN: Project Security evidence owns GDPR, AI Act, CRA, NIS2 and DORA
+applicability; do not create a competing legal decision. Use Security detail
+templates when installed, otherwise equivalent project-owned records.
+Assess sample product, development tools and organisation separately;
+AI-SBOM: N/A and education are not blanket regulatory exemptions.
+Map privacy by design/default, minimisation, purpose, recipients, regions,
+retention, deletion and subject rights to data flows. Review AI/tool boundaries
+and prompt/log/telemetry paths. Plan role-specific supplier dependencies,
+tested recovery, availability, concentration risk and exit capability for
+NIS2/DORA-related scope. C3A/C5 evidence does not replace regulatory evidence.
+
+- Applicability record / exact scope / owner / review date:
+- Personal-data inventory / synthetic-data decision:
+- Data flow / purpose / trust boundary / receiver / region:
+- Retention / deletion / defaults / subject-rights interface:
+- AI/tool usage boundary / prompt and logging safeguards:
+- Supplier dependency / tested recovery / exit / concentration risk:
+- Legal Open finding / qualified reviewer / next action / due date:
+
+## Nutzungshilfe / Reader help
+
+DE: Sicherheitsentscheidungen zur Systemstruktur nachvollziehbar machen, getrennt von der codebezogenen Security-Prüfung. Diese Command-Erklärung ändert keine Berechtigungen oder Voraussetzungen.
+Die bestehenden technischen Feldnamen und Statuswerte nicht übersetzen oder
+nur zum Bestehen eines Tests verändern. Einführung, Begriffe, Beispiel,
+Ergebnis und Fehlerhilfe stehen im [deutschen Leserpfad](https://github.com/hindermath/spec-kit-preset-architecture-governance/blob/main/docs/user-guide.md).
+
+EN: Make system-structure security decisions traceable, separately from code-level security verification. This command explanation changes no authority or prerequisites.
+Keep technical field names and states unchanged; never alter them just to pass.
+See the [English reader path](https://github.com/hindermath/spec-kit-preset-architecture-governance/blob/main/docs/user-guide.EN.md)
+for introduction, terms, example, result and troubleshooting.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+## Regulatorischer Evidence-Vertrag / Regulatory evidence contract
+
+DE: DS-GVO, KI-VO, CRA, NIS2 und DORA getrennt fuer Beispielprogramm,
+Entwicklungswerkzeuge und nutzende Organisation pruefen. Rechtliche Rollen,
+Land, datierte Rechtsquelle und Anwendungszeitpunkt nennen; direkte Pflichten
+von vertraglichen Kunden-/Lieferkettenanforderungen trennen. Unbekannt bleibt
+Open mit Owner, Aktion und Frist. N/A braucht Begruendung und Trigger.
+AI-SBOM: N/A entscheidet nicht ueber DS-GVO oder KI-VO. Ausbildung ist keine
+allgemeine Ausnahme. Security fuehrt die Anwendbarkeit; Architecture
+referenziert diese Entscheidung fuer Datenfluesse, Schutz und Resilienz.
+Technische Pruefung ist keine Rechtsfreigabe. Historische Evidence erhalten.
+EN: Assess GDPR, AI Act, CRA, NIS2 and DORA separately for the sample product,
+development tooling and operating organisation. Record roles, jurisdiction,
+dated legal source and application date; separate direct and contractual
+duties. Unknown remains Open with owner, action and due date; N/A needs
+rationale and trigger. AI-SBOM: N/A does not decide GDPR/AI Act applicability.
+Education is not a blanket exemption. Security owns applicability;
+Architecture links decisions to data flows, safeguards and resilience.
+Technical validation grants no legal approval; preserve historical evidence.
+
+Use regulatory-applicability-template as the index and link
+gdpr-applicability-template, ai-act-applicability-template,
+cra-applicability-template, nis2-applicability-template and
+dora-applicability-template where relevant. An unfilled record is not evidence.
+
+## Nutzungshilfe / Reader help
+
+DE: Sichere Entwicklung planen und begründen, ohne eine bestandene Sicherheitsprüfung vorzutäuschen. Diese Command-Erklärung ändert keine Berechtigungen oder Voraussetzungen.
+Die bestehenden technischen Feldnamen und Statuswerte nicht übersetzen oder
+nur zum Bestehen eines Tests verändern. Einführung, Begriffe, Beispiel,
+Ergebnis und Fehlerhilfe stehen im [deutschen Leserpfad](https://github.com/hindermath/spec-kit-preset-security-governance/blob/main/docs/user-guide.md).
+
+EN: Plan and explain secure development without claiming a passed security assessment. This command explanation changes no authority or prerequisites.
+Keep technical field names and states unchanged; never alter them just to pass.
+See the [English reader path](https://github.com/hindermath/spec-kit-preset-security-governance/blob/main/docs/user-guide.EN.md)
+for introduction, terms, example, result and troubleshooting.

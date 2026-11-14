@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0",
+  "cases": [
+    {"fixtureId": "documentation-only", "paths": ["docs/guide.md"], "expectedCategories": ["documentation"]},
+    {"fixtureId": "build", "paths": ["src/App.csproj"], "expectedCategories": ["build"]},
+    {"fixtureId": "security", "paths": ["scripts/hooks/pre-push"], "expectedCategories": ["security"]},
+    {"fixtureId": "governance", "paths": ["constitution.md"], "expectedCategories": ["governance"]},
+    {"fixtureId": "dependency", "paths": ["src/package-lock.json"], "expectedCategories": ["dependency"]},
+    {"fixtureId": "product", "paths": ["SecureCaseTrackerProjects/SecureCaseTracker-Rust/src/main.rs"], "expectedCategories": ["product"]},
+    {"fixtureId": "multiple", "paths": ["docs/security/threat-model.md", "scripts/hooks/pre-push"], "expectedCategories": ["documentation", "security"]}
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion":"1.0",
+  "registryVersion":"1.0.0",
+  "level0Self":{"repositoryId":"home-baseline","remoteResolution":"executing-level0-configured-origin"},
+  "fleetManifestPath":"scripts/config/agentic-workspace-fleet.json",
+  "profiles":[
+    {"profileId":"public-canary","displayName":"Public Canary","requiredVisibility":"public","gateSetId":"vertical-slice-gates","workflowPolicyId":"public-canary-policy","budgetClass":"public"},
+    {"profileId":"public-product","displayName":"Public Product","requiredVisibility":"public","gateSetId":"vertical-slice-gates","workflowPolicyId":"public-product-policy","budgetClass":"public"},
+    {"profileId":"private-product","displayName":"Private Product","requiredVisibility":"private","gateSetId":"vertical-slice-gates","workflowPolicyId":"private-product-policy","budgetClass":"private-demand"},
+    {"profileId":"private-governance-scaffold","displayName":"Private Governance/Scaffold","requiredVisibility":"private","gateSetId":"vertical-slice-gates","workflowPolicyId":"private-governance-policy","budgetClass":"private-recurring"},
+    {"profileId":"public-preset","displayName":"Public Preset","requiredVisibility":"public","gateSetId":"vertical-slice-gates","workflowPolicyId":"public-preset-policy","budgetClass":"no-repository-workflow"}
+  ],
+  "assignments":[{"repositoryId":"private-governance-fixture","profileId":"private-governance-scaffold","rationale":"Representative private governance vertical slice."}],
+  "gateSets":[{"gateSetId":"vertical-slice-gates","version":"1.0.0","gates":[
+    {"order":1,"gateId":"build-contract","executable":"python3","arguments":["-c","print('vertical-slice-one')"],"workingDirectory":".","timeoutSeconds":30},
+    {"order":2,"gateId":"security-contract","executable":"python3","arguments":["-c","print('vertical-slice-two')"],"workingDirectory":".","timeoutSeconds":30}
+  ]}],
+  "budgetAssumptions":{"weeksPerMonthNumerator":52,"weeksPerMonthDenominator":12,"privateMonthlyBudgetMinutes":3000,"privateMonthlyTargetExclusiveMinutes":500,"recurringPrivateJobsPerWeekReference":22}
+}

@@ -1,0 +1,343 @@
+{
+  "schemaVersion": "1.0",
+  "sourceRevision": "fixture-full-48-v1",
+  "observedAt": "2026-08-20T00:00:00Z",
+  "repositories": [
+    {
+      "repositoryId": "absdd-image-sandbox",
+      "remoteIdentity": "https://github.com/hindermath/absdd-image-sandbox",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "agent-operations-cockpit",
+      "remoteIdentity": "https://github.com/hindermath/agent-operations-cockpit",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "c64-projects",
+      "remoteIdentity": "https://github.com/hindermath/c64-baseline",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "cc65",
+      "remoteIdentity": "https://github.com/hindermath/cc65",
+      "visibility": "public",
+      "defaultBranch": "master",
+      "workflows": []
+    },
+    {
+      "repositoryId": "clion-projects",
+      "remoteIdentity": "https://github.com/hindermath/clion-baseline",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "container-images",
+      "remoteIdentity": "https://github.com/hindermath/container-images",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "datagrip-projects",
+      "remoteIdentity": "https://github.com/hindermath/datagrip-baseline",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "home-baseline",
+      "remoteIdentity": "https://github.com/hindermath/home-baseline",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "inventar-db",
+      "remoteIdentity": "https://github.com/hindermath/InventarDb",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "inventar-worker-service",
+      "remoteIdentity": "https://github.com/hindermath/InventarWorkerService",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "preset-a11y",
+      "remoteIdentity": "https://github.com/hindermath/spec-kit-preset-a11y-governance",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "preset-agent-parity",
+      "remoteIdentity": "https://github.com/hindermath/spec-kit-preset-agent-parity-governance",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "preset-architecture",
+      "remoteIdentity": "https://github.com/hindermath/spec-kit-preset-architecture-governance",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "preset-autonomous",
+      "remoteIdentity": "https://github.com/hindermath/spec-kit-preset-autonomous-run-governance",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "preset-cross-platform",
+      "remoteIdentity": "https://github.com/hindermath/spec-kit-preset-cross-platform-governance",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "preset-intake-authoring",
+      "remoteIdentity": "https://github.com/hindermath/spec-kit-preset-intake-authoring-governance",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "preset-intake-review",
+      "remoteIdentity": "https://github.com/hindermath/spec-kit-preset-intake-review-governance",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "preset-intake-sequencing",
+      "remoteIdentity": "https://github.com/hindermath/spec-kit-preset-intake-sequencing-governance",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "preset-isaqb",
+      "remoteIdentity": "https://github.com/hindermath/spec-kit-preset-isaqb-architecture-governance",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "preset-model-routing",
+      "remoteIdentity": "https://github.com/hindermath/spec-kit-preset-model-routing-governance",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "preset-parallel-autonomous",
+      "remoteIdentity": "https://github.com/hindermath/spec-kit-preset-parallel-autonomous-run-governance",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "preset-security",
+      "remoteIdentity": "https://github.com/hindermath/spec-kit-preset-security-governance",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "rider-projects",
+      "remoteIdentity": "https://github.com/hindermath/rider-baseline",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-casetracker-baseline",
+      "remoteIdentity": "https://github.com/hindermath/secure-casetracker-baseline",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-casetracker-csharp",
+      "remoteIdentity": "https://github.com/hindermath/securecasetracker-csharp",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-casetracker-go",
+      "remoteIdentity": "https://github.com/hindermath/securecasetracker-go",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-casetracker-java",
+      "remoteIdentity": "https://github.com/hindermath/securecasetracker-java",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-casetracker-python",
+      "remoteIdentity": "https://github.com/hindermath/securecasetracker-python",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-casetracker-rust",
+      "remoteIdentity": "https://github.com/hindermath/securecasetracker-rust",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-casetracker-swift",
+      "remoteIdentity": "https://github.com/hindermath/securecasetracker-swift",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-orderdesk-csharp",
+      "remoteIdentity": "https://github.com/hindermath/secureorderdesk-csharp",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-orderdesk-go",
+      "remoteIdentity": "https://github.com/hindermath/secureorderdesk-go",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-orderdesk-java",
+      "remoteIdentity": "https://github.com/hindermath/secureorderdesk-java",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-orderdesk-projects",
+      "remoteIdentity": "https://github.com/hindermath/secure-orderdesk-baseline",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-orderdesk-python",
+      "remoteIdentity": "https://github.com/hindermath/secureorderdesk-python",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-orderdesk-rust",
+      "remoteIdentity": "https://github.com/hindermath/secureorderdesk-rust",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-orderdesk-swift",
+      "remoteIdentity": "https://github.com/hindermath/secureorderdesk-swift",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-service-harvester-csharp",
+      "remoteIdentity": "https://github.com/hindermath/secureserviceharvester-csharp",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-service-harvester-go",
+      "remoteIdentity": "https://github.com/hindermath/secureserviceharvester-go",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-service-harvester-java",
+      "remoteIdentity": "https://github.com/hindermath/secureserviceharvester-java",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-service-harvester-projects",
+      "remoteIdentity": "https://github.com/hindermath/secure-serviceharvester",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-service-harvester-python",
+      "remoteIdentity": "https://github.com/hindermath/secureserviceharvester-python",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-service-harvester-rust",
+      "remoteIdentity": "https://github.com/hindermath/secureserviceharvester-rust",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "secure-service-harvester-swift",
+      "remoteIdentity": "https://github.com/hindermath/secureserviceharvester-swift",
+      "visibility": "private",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "tiny-calc",
+      "remoteIdentity": "https://github.com/hindermath/TinyCalc",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "tiny-pl0",
+      "remoteIdentity": "https://github.com/hindermath/TinyPl0",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "tui-vision",
+      "remoteIdentity": "https://github.com/hindermath/TuiVision",
+      "visibility": "public",
+      "defaultBranch": "main",
+      "workflows": []
+    },
+    {
+      "repositoryId": "tvision",
+      "remoteIdentity": "https://github.com/hindermath/tvision",
+      "visibility": "public",
+      "defaultBranch": "master",
+      "workflows": []
+    }
+  ]
+}
