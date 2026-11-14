@@ -20,6 +20,7 @@
 #define Uses_ipstream
 #define Uses_TVMemMgr
 #include <tvision/tv.h>
+#include <stdlib.h>
 
 TView *TheTopView = 0;
 TGroup* ownerGroup = 0;
@@ -287,7 +288,16 @@ void TGroup::getBuffer() noexcept
     if( (state & sfExposed) != 0 )
         if( (options & ofBuffered) != 0 )
             {
-            int sz = max(size.x * size.y * sizeof(TScreenCell), 0);
+            size_t sz = 0;
+            if (size.x > 0 && size.y > 0)
+                {
+                if ((size_t) size.x > (size_t) -1 / (size_t) size.y)
+                    abort();
+                sz = (size_t) size.x * (size_t) size.y;
+                if (sz > (size_t) -1 / sizeof(TScreenCell))
+                    abort();
+                sz *= sizeof(TScreenCell);
+                }
             TVMemMgr::reallocateDiscardable( (void *&)buffer, sz );
 #ifndef __BORLANDC__
             // An uninitialized screen buffer is harmless in MS-DOS, since the worst

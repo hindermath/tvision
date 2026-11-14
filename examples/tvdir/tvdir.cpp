@@ -175,7 +175,7 @@ public:
 
 void TFilePane::draw() {
     TDrawBuffer dBuf;
-    short i;
+    int i;
     for (i=0;i<size.y;i++) {
       dBuf.moveChar(0, ' ', getColor(0x0101), (short)size.x );
       if ((fileCount==0)&&(i==0))

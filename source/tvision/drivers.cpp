@@ -171,7 +171,7 @@ ushort TDrawBuffer::moveCStr( ushort indent, TStringView str, TAttrPair attrs,
 {
     if (indent >= capacity || str.size() == 0 || maxStrWidth == 0)
         return 0;
-    if (indent + maxStrWidth < indent || indent + maxStrWidth >= capacity)
+    if (maxStrWidth > capacity - indent)
         maxStrWidth = capacity - indent;
     // The following conditions are now true:
     // * indent + maxStrWidth <= capacity
@@ -312,7 +312,7 @@ ushort TDrawBuffer::moveStr( ushort indent, TStringView str, TColorAttr attr,
 {
     if (indent >= capacity || str.size() == 0 || maxStrWidth == 0)
         return 0;
-    if (indent + maxStrWidth < indent || indent + maxStrWidth >= capacity)
+    if (maxStrWidth > capacity - indent)
         maxStrWidth = capacity - indent;
     // The following conditions are now true:
     // * indent + maxStrWidth <= capacity

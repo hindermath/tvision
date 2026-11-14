@@ -176,7 +176,7 @@ void historyAdd( uchar id, TStringView str ) noexcept
 const char *historyStr( uchar id, int index ) noexcept
 {
     startId( id );
-    for( short i = 0; i <= index; i++ )
+    for( int i = 0; i <= index; i++ )
         advanceStringPointer();
     if( curRec != 0 )
         return curRec->str;

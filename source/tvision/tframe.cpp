@@ -35,7 +35,8 @@ TFrame::TFrame( const TRect& bounds ) noexcept : TView( bounds )
 void TFrame::draw()
 {
     TAttrPair cFrame, cTitle;
-    short  f, i, l, width;
+    short  f, l, width;
+    int i;
     TDrawBuffer b;
 
     if( (state & sfDragging) != 0 )
