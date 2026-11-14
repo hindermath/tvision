@@ -5,6 +5,7 @@
 #include <internal/platform.h>
 #include <internal/codepage.h>
 #include <chrono>
+#include <stdlib.h>
 
 #ifdef _MSC_VER
 #define __builtin_expect(x, y) x
@@ -36,10 +37,15 @@ TScreenCell *DisplayBuffer::reloadScreenInfo(DisplayAdapter &display) noexcept
 
 void DisplayBuffer::resizeBuffer() noexcept
 {
+    if (size.x > 0 && size.y > 0 &&
+        (size_t) size.x > (size_t) -1 / (size_t) size.y)
+        abort();
+    size_t cellCount = size.x > 0 && size.y > 0 ?
+        (size_t) size.x * (size_t) size.y : 0;
     for (auto *buf : {&buffer, &flushBuffer})
     {
         buf->resize(0);
-        buf->resize(size.x*size.y); // Zero-initialized.
+        buf->resize(cellCount); // Zero-initialized.
     }
 
     rowDamage.resize(0);

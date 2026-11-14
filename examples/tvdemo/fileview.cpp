@@ -61,7 +61,7 @@ void TFileViewer::draw()
     char *p;
 
     TColorAttr c =  getColor(1);
-    for( short i = 0; i < size.y; i++ )
+    for( int i = 0; i < size.y; i++ )
         {
         TDrawBuffer b;
         b.moveChar( 0, ' ', c, (short)size.x );

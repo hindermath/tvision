@@ -41,8 +41,12 @@ void TDrawSurface::resize(TPoint aSize)
 {
     if (aSize.x > 0 && aSize.y > 0)
     {
-        size_t newLength = aSize.x*aSize.y;
-        size_t sz = newLength*sizeof(TScreenCell);
+        if ((size_t) aSize.x > (size_t) -1 / (size_t) aSize.y)
+            abort();
+        size_t newLength = (size_t) aSize.x * (size_t) aSize.y;
+        if (newLength > (size_t) -1 / sizeof(TScreenCell))
+            abort();
+        size_t sz = newLength * sizeof(TScreenCell);
         void _FAR *newData;
         if (newLength <= dataLength)
             newData = ::realloc(data, sz);

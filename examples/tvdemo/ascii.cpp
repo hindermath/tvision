@@ -80,10 +80,10 @@ void TTable::draw()
     TDrawBuffer buf;
     TColorAttr  color = getColor(6);
 
-    for(ushort y = 0; y <= size.y-1; y++)
+    for(int y = 0; y <= size.y-1; y++)
     {
         buf.moveChar(0, ' ', color, (short)size.x );
-        for(ushort x = 0; x <= size.x-1; x++)
+        for(int x = 0; x <= size.x-1; x++)
             buf.moveChar(x, (ushort)(32*y+x), color, (ushort)1 );
         writeLine(0, y, (short)size.x, (ushort)1, buf);
     }
