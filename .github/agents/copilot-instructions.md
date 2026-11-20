@@ -1,5 +1,13 @@
 # GitHub Copilot Agent Instructions — tvision
 
+## Einstieg und Detailregeln / Entry point and detailed rules
+
+DE: Lies die Projektkonstitution und vor der Arbeit die [Detailregeln](../../docs/agent-guidance.md)
+für deine Aufgabe. Sie ergänzen die verbindlichen Arbeits-, Sicherheits-, Prüf- und Freigaberegeln.
+
+EN: Read the project constitution and the relevant [detailed rules](../../docs/agent-guidance.md)
+before working. They supplement the binding work, security, verification and approval rules.
+
 Diese Agentenfläche ergänzt [die allgemeinen Copilot-Anweisungen](../copilot-instructions.md).
 Sie hält die projektspezifischen Fakten für agentische Aufgaben kurz und
 textorientiert fest.
