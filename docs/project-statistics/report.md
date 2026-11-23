@@ -11,13 +11,13 @@ Git-bound inventory and activity; not a measure of quality, learning performance
 | --- | --- |
 | Textdateien / Text files | 1923 |
 | Textzeilen / Text lines | 293522 |
-| Aktivtage / Active days | 39 |
-| Stichtag / As of | 2026-11-20 |
-| Fensterbeginn / Window start | 2025-11-23 |
+| Aktivtage / Active days | 40 |
+| Stichtag / As of | 2026-11-23 |
+| Fensterbeginn / Window start | 2025-11-30 |
 | Zeitzone / Time zone | UTC |
 
 Quellrevision / Source revision:
-c89dae654c378e6d6dbf6e1abf9528afc771854c
+e7052efd00aed5f9c54896a580e16a8850983a48
 
 ### Artefakte / Artifacts
 
@@ -38,25 +38,25 @@ EN: Cells show gross changes per day, not hours. Exact daily values follow.
 0=0; 1=1..79; 2=80..399; 3=400..1599; 4=1600+; -=zukuenftig/future
 
 ```text
-Wochen / Weeks 01..26 | 2025-11-23..2026-05-23
-So/Su  0 0 3 0 2 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-Mo/Mo  0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-Di/Tu  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+Wochen / Weeks 01..26 | 2025-11-30..2026-05-30
+So/Su  0 3 0 2 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Mo/Mo  0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Di/Tu  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0
 Mi/We  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-Do/Th  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0
-Fr/Fr  0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-Sa/Sa  0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 2 0 0
+Do/Th  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0
+Fr/Fr  0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Sa/Sa  0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 2 0 0 0
 ```
 
 ```text
-Wochen / Weeks 27..52 | 2026-05-24..2026-11-21
-So/Su  0 0 0 0 0 0 0 0 0 0 0 4 0 0 0 0 4 3 0 0 0 0 0 0 0 0
-Mo/Mo  0 0 0 0 0 0 4 0 0 0 0 2 3 0 0 0 0 0 0 0 0 0 0 0 2 0
-Di/Tu  0 0 0 0 0 0 0 0 0 0 0 4 0 0 2 0 0 0 0 0 0 0 0 3 0 0
-Mi/We  0 0 0 0 0 0 0 0 0 0 0 4 2 2 0 0 1 0 0 0 0 0 0 0 0 0
-Do/Th  0 0 0 0 0 0 0 0 0 0 0 4 0 1 0 0 2 0 0 0 0 0 0 0 2 0
-Fr/Fr  0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 1 0 0 1 0 0 0 0 4 3
-Sa/Sa  0 0 0 0 0 0 0 0 0 0 0 4 3 0 0 3 4 2 0 0 0 0 0 0 1 -
+Wochen / Weeks 27..52 | 2026-05-31..2026-11-28
+So/Su  0 0 0 0 0 0 0 0 0 0 4 0 0 0 0 4 3 0 0 0 0 0 0 0 0 0
+Mo/Mo  0 0 0 0 0 4 0 0 0 0 2 3 0 0 0 0 0 0 0 0 0 0 0 2 0 1
+Di/Tu  0 0 0 0 0 0 0 0 0 0 4 0 0 2 0 0 0 0 0 0 0 0 3 0 0 -
+Mi/We  0 0 0 0 0 0 0 0 0 0 4 2 2 0 0 1 0 0 0 0 0 0 0 0 0 -
+Do/Th  0 0 0 0 0 0 0 0 0 0 4 0 1 0 0 2 0 0 0 0 0 0 0 2 0 -
+Fr/Fr  0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 1 0 0 1 0 0 0 0 4 3 -
+Sa/Sa  0 0 0 0 0 0 0 0 0 0 4 3 0 0 3 4 2 0 0 0 0 0 0 1 0 -
 ```
 
 | Datum / Date | Hinzu / Added | Entfernt / Removed |
@@ -100,6 +100,7 @@ Sa/Sa  0 0 0 0 0 0 0 0 0 0 0 4 3 0 0 3 4 2 0 0 0 0 0 0 1 -
 | 2026-11-13 | 56040 | 2396 |
 | 2026-11-14 | 35 | 13 |
 | 2026-11-20 | 123 | 300 |
+| 2026-11-23 | 1 | 1 |
 
 ### Abdeckung / Coverage
 
